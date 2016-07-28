@@ -1,0 +1,9 @@
+D:\projects\isogame\Visual\VisualConsole\bin\Debug\VisualConsole.dll
+D:\projects\isogame\Visual\VisualConsole\bin\Debug\VisualConsole.pdb
+D:\projects\isogame\Visual\VisualConsole\obj\Debug\VisualConsole.dll
+D:\projects\isogame\Visual\VisualConsole\obj\Debug\VisualConsole.pdb
+D:\projects\isogame\Visual\VisualConsole\bin\Debug\VectorNet.dll
+D:\projects\isogame\Visual\VisualConsole\bin\Debug\EnumerableExtensions.dll
+D:\projects\isogame\Visual\VisualConsole\bin\Debug\VectorNet.pdb
+D:\projects\isogame\Visual\VisualConsole\bin\Debug\EnumerableExtensions.pdb
+D:\projects\isogame\Visual\VisualConsole\obj\Debug\VisualConsole.csprojResolveAssemblyReference.cache

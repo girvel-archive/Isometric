@@ -1,0 +1,17 @@
+D:\projects\isogame\Visual\VisualServer\bin\Debug\VisualServer.dll
+D:\projects\isogame\Visual\VisualServer\bin\Debug\VisualServer.pdb
+D:\projects\isogame\Visual\VisualServer\bin\Debug\CommandInterface.dll
+D:\projects\isogame\Visual\VisualServer\bin\Debug\GameBasics.dll
+D:\projects\isogame\Visual\VisualServer\bin\Debug\CommandInterface.pdb
+D:\projects\isogame\Visual\VisualServer\bin\Debug\GameBasics.pdb
+D:\projects\isogame\Visual\VisualServer\obj\Debug\VisualServer.csprojResolveAssemblyReference.cache
+D:\projects\isogame\Visual\VisualServer\obj\Debug\VisualServer.dll
+D:\projects\isogame\Visual\VisualServer\obj\Debug\VisualServer.pdb
+D:\projects\isogame\Visual\VisualServer\bin\Debug\CompressedStructures.dll
+D:\projects\isogame\Visual\VisualServer\bin\Debug\CompressedStructures.pdb
+D:\projects\isogame\Visual\VisualServer\bin\Debug\VisualConsole.dll
+D:\projects\isogame\Visual\VisualServer\bin\Debug\VisualConsole.pdb
+D:\projects\isogame\Visual\VisualServer\bin\Debug\VectorNet.dll
+D:\projects\isogame\Visual\VisualServer\bin\Debug\EnumerableExtensions.dll
+D:\projects\isogame\Visual\VisualServer\bin\Debug\VectorNet.pdb
+D:\projects\isogame\Visual\VisualServer\bin\Debug\EnumerableExtensions.pdb

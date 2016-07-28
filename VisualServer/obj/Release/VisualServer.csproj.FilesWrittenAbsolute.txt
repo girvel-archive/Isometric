@@ -1,0 +1,17 @@
+/media/nik/Doc/projects/isogame/Visual/VisualServer/obj/Release/.NETFramework,Version=v4.5.AssemblyAttribute.cs
+/media/nik/Doc/projects/isogame/Visual/VisualServer/bin/Release/VisualServer.dll.mdb
+/media/nik/Doc/projects/isogame/Visual/VisualServer/bin/Release/VisualServer.dll
+/media/nik/Doc/projects/isogame/Visual/VisualServer/obj/Release/VisualServer.dll
+/media/nik/Doc/projects/isogame/Visual/VisualServer/obj/Release/VisualServer.dll.mdb
+/media/nik/Doc/projects/isogame/Visual/VisualServer/bin/Release/CommandInterface.dll
+/media/nik/Doc/projects/isogame/Visual/VisualServer/bin/Release/CommandInterface.dll.mdb
+/media/nik/Doc/projects/isogame/Visual/VisualServer/bin/Release/CompressedStructures.dll
+/media/nik/Doc/projects/isogame/Visual/VisualServer/bin/Release/CompressedStructures.dll.mdb
+/media/nik/Doc/projects/isogame/Visual/VisualServer/bin/Release/GameBasics.dll
+/media/nik/Doc/projects/isogame/Visual/VisualServer/bin/Release/GameBasics.dll.mdb
+/media/nik/Doc/projects/isogame/Visual/VisualServer/bin/Release/VectorNet.dll
+/media/nik/Doc/projects/isogame/Visual/VisualServer/bin/Release/VectorNet.dll.mdb
+/media/nik/Doc/projects/isogame/Visual/VisualServer/bin/Release/VisualConsole.dll
+/media/nik/Doc/projects/isogame/Visual/VisualServer/bin/Release/VisualConsole.dll.mdb
+/media/nik/Doc/projects/isogame/Visual/VisualServer/bin/Release/EnumerableExtensions.dll
+/media/nik/Doc/projects/isogame/Visual/VisualServer/bin/Release/EnumerableExtensions.dll.mdb

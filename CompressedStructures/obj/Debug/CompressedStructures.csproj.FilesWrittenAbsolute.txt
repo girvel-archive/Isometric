@@ -1,0 +1,12 @@
+/media/nik/Doc/projects/isogame/Visual/CompressedStructures/bin/Debug/CompressedStructures.dll
+/media/nik/Doc/projects/isogame/Visual/CompressedStructures/obj/Debug/CompressedStructures.dll
+/media/nik/Doc/projects/isogame/Visual/CompressedStructures/bin/Debug/CommandInterface.dll
+/media/nik/Doc/projects/isogame/Visual/CompressedStructures/bin/Debug/VectorNet.dll
+/media/nik/Doc/projects/isogame/Visual/CompressedStructures/bin/Debug/EnumerableExtensions.dll
+/media/nik/Doc/projects/isogame/Visual/CompressedStructures/obj/Debug/.NETFramework,Version=v4.5.1.AssemblyAttribute.cs
+/media/nik/Doc/projects/isogame/Visual/CompressedStructures/bin/Debug/CompressedStructures.dll.mdb
+/media/nik/Doc/projects/isogame/Visual/CompressedStructures/obj/Debug/CompressedStructures.dll.mdb
+/media/nik/Doc/projects/isogame/Visual/CompressedStructures/bin/Debug/CommandInterface.dll.mdb
+/media/nik/Doc/projects/isogame/Visual/CompressedStructures/bin/Debug/VectorNet.dll.mdb
+/media/nik/Doc/projects/isogame/Visual/CompressedStructures/bin/Debug/EnumerableExtensions.dll.mdb
+/media/nik/Doc/projects/isogame/Visual/CompressedStructures/obj/Debug/.NETFramework,Version=v4.5.AssemblyAttribute.cs

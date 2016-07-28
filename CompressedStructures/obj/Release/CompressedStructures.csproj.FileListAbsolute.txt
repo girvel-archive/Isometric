@@ -1,0 +1,11 @@
+D:\projects\isogame\Visual\CompressedStructures\obj\Release\CompressedStructures.csprojResolveAssemblyReference.cache
+D:\projects\isogame\Visual\CompressedStructures\bin\Release\CompressedStructures.dll
+D:\projects\isogame\Visual\CompressedStructures\bin\Release\CompressedStructures.pdb
+D:\projects\isogame\Visual\CompressedStructures\obj\Release\CompressedStructures.dll
+D:\projects\isogame\Visual\CompressedStructures\obj\Release\CompressedStructures.pdb
+D:\projects\isogame\Visual\CompressedStructures\bin\Release\CommandInterface.dll
+D:\projects\isogame\Visual\CompressedStructures\bin\Release\CommandInterface.pdb
+D:\projects\isogame\Visual\CompressedStructures\bin\Release\VectorNet.dll
+D:\projects\isogame\Visual\CompressedStructures\bin\Release\EnumerableExtensions.dll
+D:\projects\isogame\Visual\CompressedStructures\bin\Release\VectorNet.pdb
+D:\projects\isogame\Visual\CompressedStructures\bin\Release\EnumerableExtensions.pdb

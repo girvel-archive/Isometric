@@ -1,0 +1,28 @@
+﻿<Properties StartupItem="VisualClient/VisualClient.csproj">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="VisualConsole/ConsoleUIHelper.cs">
+    <Files>
+      <File FileName="VisualClient/ConsoleHelper.cs" Line="1" Column="1" />
+      <File FileName="VisualClient/Program.cs" Line="73" Column="1" />
+      <File FileName="VisualClient/Log.cs" Line="1" Column="1" />
+      <File FileName="VisualConsole/ConsoleUIHelper.cs" Line="19" Column="5" />
+      <File FileName="VisualConsole/OutputDiv.cs" Line="1" Column="1" />
+      <File FileName="VisualServer/Connection.cs" Line="1" Column="1" />
+      <File FileName="VisualServer/LogType.cs" Line="1" Column="1" />
+      <File FileName="VisualClient/LogMessage.cs" Line="1" Column="1" />
+      <File FileName="VisualConsole/IConsolePoint.cs" Line="11" Column="36" />
+      <File FileName="VisualConsole/IGridWritable.cs" Line="13" Column="56" />
+      <File FileName="VisualConsole/ConsoleUI.cs" Line="52" Column="8" />
+      <File FileName="CommandInterface/Interface.cs" Line="24" Column="13" />
+      <File FileName="VisualConsole/UIMode.cs" Line="6" Column="3" />
+      <File FileName="VisualServer/Server.cs" Line="14" Column="1" NotebookId="1" />
+      <File FileName="VisualServer/Account.cs" Line="1" Column="1" NotebookId="1" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore>
+      <Breakpoint file="/media/nik/Doc/projects/isogame/Visual/VisualClient/Program.cs" line="94" column="41" />
+    </BreakpointStore>
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+</Properties>

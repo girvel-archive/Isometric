@@ -1,0 +1,6 @@
+/media/nik/Doc/projects/isogame/Visual/CommandInterface/bin/Debug/CommandInterface.dll
+/media/nik/Doc/projects/isogame/Visual/CommandInterface/obj/Debug/CommandInterface.dll
+/media/nik/Doc/projects/isogame/Visual/CommandInterface/obj/Debug/.NETFramework,Version=v4.5.1.AssemblyAttribute.cs
+/media/nik/Doc/projects/isogame/Visual/CommandInterface/bin/Debug/CommandInterface.dll.mdb
+/media/nik/Doc/projects/isogame/Visual/CommandInterface/obj/Debug/CommandInterface.dll.mdb
+/media/nik/Doc/projects/isogame/Visual/CommandInterface/obj/Debug/.NETFramework,Version=v4.5.AssemblyAttribute.cs

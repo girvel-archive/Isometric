@@ -1,0 +1,14 @@
+D:\projects\isogame\Visual\GameEditor\bin\Release\GameEditor.exe.config
+D:\projects\isogame\Visual\GameEditor\bin\Release\GameEditor.exe
+D:\projects\isogame\Visual\GameEditor\bin\Release\GameEditor.pdb
+D:\projects\isogame\Visual\GameEditor\obj\Release\GameEditor.csprojResolveAssemblyReference.cache
+D:\projects\isogame\Visual\GameEditor\obj\Release\MainWindow.g.cs
+D:\projects\isogame\Visual\GameEditor\obj\Release\App.g.cs
+D:\projects\isogame\Visual\GameEditor\obj\Release\GameEditor_MarkupCompile.cache
+D:\projects\isogame\Visual\GameEditor\obj\Release\GameEditor_MarkupCompile.lref
+D:\projects\isogame\Visual\GameEditor\obj\Release\MainWindow.baml
+D:\projects\isogame\Visual\GameEditor\obj\Release\GameEditor.g.resources
+D:\projects\isogame\Visual\GameEditor\obj\Release\GameEditor.Properties.Resources.resources
+D:\projects\isogame\Visual\GameEditor\obj\Release\GameEditor.csproj.GenerateResource.Cache
+D:\projects\isogame\Visual\GameEditor\obj\Release\GameEditor.exe
+D:\projects\isogame\Visual\GameEditor\obj\Release\GameEditor.pdb

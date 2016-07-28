@@ -1,0 +1,14 @@
+/media/nik/Doc/projects/isogame/Visual/CommandTester/obj/Release/.NETFramework,Version=v4.5.AssemblyAttribute.cs
+/media/nik/Doc/projects/isogame/Visual/CommandTester/bin/Release/CommandTester.exe.config
+/media/nik/Doc/projects/isogame/Visual/CommandTester/bin/Release/CommandTester.exe.mdb
+/media/nik/Doc/projects/isogame/Visual/CommandTester/bin/Release/CommandTester.exe
+/media/nik/Doc/projects/isogame/Visual/CommandTester/obj/Release/CommandTester.exe
+/media/nik/Doc/projects/isogame/Visual/CommandTester/obj/Release/CommandTester.exe.mdb
+/media/nik/Doc/projects/isogame/Visual/CommandTester/bin/Release/CommandInterface.dll
+/media/nik/Doc/projects/isogame/Visual/CommandTester/bin/Release/CommandInterface.dll.mdb
+/media/nik/Doc/projects/isogame/Visual/CommandTester/bin/Release/CompressedStructures.dll
+/media/nik/Doc/projects/isogame/Visual/CommandTester/bin/Release/CompressedStructures.dll.mdb
+/media/nik/Doc/projects/isogame/Visual/CommandTester/bin/Release/VectorNet.dll
+/media/nik/Doc/projects/isogame/Visual/CommandTester/bin/Release/VectorNet.dll.mdb
+/media/nik/Doc/projects/isogame/Visual/CommandTester/bin/Release/EnumerableExtensions.dll
+/media/nik/Doc/projects/isogame/Visual/CommandTester/bin/Release/EnumerableExtensions.dll.mdb

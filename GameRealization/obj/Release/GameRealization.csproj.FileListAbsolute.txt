@@ -1,0 +1,17 @@
+D:\projects\isogame\Visual\GameRealization\obj\Release\GameRealization.csprojResolveAssemblyReference.cache
+D:\projects\isogame\Visual\GameRealization\bin\Release\GameRealization.dll
+D:\projects\isogame\Visual\GameRealization\bin\Release\GameRealization.pdb
+D:\projects\isogame\Visual\GameRealization\bin\Release\GameBasics.dll
+D:\projects\isogame\Visual\GameRealization\bin\Release\GameBasics.pdb
+D:\projects\isogame\Visual\GameRealization\obj\Release\GameRealization.dll
+D:\projects\isogame\Visual\GameRealization\obj\Release\GameRealization.pdb
+D:\projects\isogame\Visual\GameRealization\bin\Release\CompressedStructures.dll
+D:\projects\isogame\Visual\GameRealization\bin\Release\CompressedStructures.pdb
+D:\projects\isogame\Visual\GameRealization\bin\Release\CommandInterface.dll
+D:\projects\isogame\Visual\GameRealization\bin\Release\CommandInterface.pdb
+D:\projects\isogame\Visual\GameRealization\bin\Release\VectorNet.dll
+D:\projects\isogame\Visual\GameRealization\bin\Release\VisualConsole.dll
+D:\projects\isogame\Visual\GameRealization\bin\Release\EnumerableExtensions.dll
+D:\projects\isogame\Visual\GameRealization\bin\Release\VectorNet.pdb
+D:\projects\isogame\Visual\GameRealization\bin\Release\VisualConsole.pdb
+D:\projects\isogame\Visual\GameRealization\bin\Release\EnumerableExtensions.pdb

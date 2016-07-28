@@ -1,0 +1,17 @@
+/media/nik/Doc/projects/isogame/Visual/GameRealization/obj/Debug/.NETFramework,Version=v4.5.AssemblyAttribute.cs
+/media/nik/Doc/projects/isogame/Visual/GameRealization/obj/Debug/GameRealization.dll
+/media/nik/Doc/projects/isogame/Visual/GameRealization/bin/Debug/CompressedStructures.dll
+/media/nik/Doc/projects/isogame/Visual/GameRealization/bin/Debug/CompressedStructures.dll.mdb
+/media/nik/Doc/projects/isogame/Visual/GameRealization/bin/Debug/GameBasics.dll
+/media/nik/Doc/projects/isogame/Visual/GameRealization/bin/Debug/GameBasics.dll.mdb
+/media/nik/Doc/projects/isogame/Visual/GameRealization/bin/Debug/VectorNet.dll
+/media/nik/Doc/projects/isogame/Visual/GameRealization/bin/Debug/VectorNet.dll.mdb
+/media/nik/Doc/projects/isogame/Visual/GameRealization/bin/Debug/VisualConsole.dll
+/media/nik/Doc/projects/isogame/Visual/GameRealization/bin/Debug/VisualConsole.dll.mdb
+/media/nik/Doc/projects/isogame/Visual/GameRealization/bin/Debug/CommandInterface.dll
+/media/nik/Doc/projects/isogame/Visual/GameRealization/bin/Debug/CommandInterface.dll.mdb
+/media/nik/Doc/projects/isogame/Visual/GameRealization/bin/Debug/EnumerableExtensions.dll
+/media/nik/Doc/projects/isogame/Visual/GameRealization/bin/Debug/EnumerableExtensions.dll.mdb
+/media/nik/Doc/projects/isogame/Visual/GameRealization/bin/Debug/GameRealization.dll.mdb
+/media/nik/Doc/projects/isogame/Visual/GameRealization/bin/Debug/GameRealization.dll
+/media/nik/Doc/projects/isogame/Visual/GameRealization/obj/Debug/GameRealization.dll.mdb

@@ -1,0 +1,17 @@
+/media/nik/Doc/projects/isogame/Visual/GameRealization/obj/Release/.NETFramework,Version=v4.5.AssemblyAttribute.cs
+/media/nik/Doc/projects/isogame/Visual/GameRealization/bin/Release/GameRealization.dll.mdb
+/media/nik/Doc/projects/isogame/Visual/GameRealization/bin/Release/GameRealization.dll
+/media/nik/Doc/projects/isogame/Visual/GameRealization/obj/Release/GameRealization.dll
+/media/nik/Doc/projects/isogame/Visual/GameRealization/obj/Release/GameRealization.dll.mdb
+/media/nik/Doc/projects/isogame/Visual/GameRealization/bin/Release/CompressedStructures.dll
+/media/nik/Doc/projects/isogame/Visual/GameRealization/bin/Release/CompressedStructures.dll.mdb
+/media/nik/Doc/projects/isogame/Visual/GameRealization/bin/Release/GameBasics.dll
+/media/nik/Doc/projects/isogame/Visual/GameRealization/bin/Release/GameBasics.dll.mdb
+/media/nik/Doc/projects/isogame/Visual/GameRealization/bin/Release/VectorNet.dll
+/media/nik/Doc/projects/isogame/Visual/GameRealization/bin/Release/VectorNet.dll.mdb
+/media/nik/Doc/projects/isogame/Visual/GameRealization/bin/Release/VisualConsole.dll
+/media/nik/Doc/projects/isogame/Visual/GameRealization/bin/Release/VisualConsole.dll.mdb
+/media/nik/Doc/projects/isogame/Visual/GameRealization/bin/Release/CommandInterface.dll
+/media/nik/Doc/projects/isogame/Visual/GameRealization/bin/Release/CommandInterface.dll.mdb
+/media/nik/Doc/projects/isogame/Visual/GameRealization/bin/Release/EnumerableExtensions.dll
+/media/nik/Doc/projects/isogame/Visual/GameRealization/bin/Release/EnumerableExtensions.dll.mdb

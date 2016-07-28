@@ -1,0 +1,14 @@
+D:\projects\isogame\Visual\CommandTester\bin\Release\CommandTester.exe.config
+D:\projects\isogame\Visual\CommandTester\bin\Release\CommandTester.exe
+D:\projects\isogame\Visual\CommandTester\bin\Release\CommandTester.pdb
+D:\projects\isogame\Visual\CommandTester\bin\Release\CommandInterface.dll
+D:\projects\isogame\Visual\CommandTester\bin\Release\CommandInterface.pdb
+D:\projects\isogame\Visual\CommandTester\obj\Release\CommandTester.csprojResolveAssemblyReference.cache
+D:\projects\isogame\Visual\CommandTester\obj\Release\CommandTester.exe
+D:\projects\isogame\Visual\CommandTester\obj\Release\CommandTester.pdb
+D:\projects\isogame\Visual\CommandTester\bin\Release\CompressedStructures.dll
+D:\projects\isogame\Visual\CommandTester\bin\Release\CompressedStructures.pdb
+D:\projects\isogame\Visual\CommandTester\bin\Release\VectorNet.dll
+D:\projects\isogame\Visual\CommandTester\bin\Release\EnumerableExtensions.dll
+D:\projects\isogame\Visual\CommandTester\bin\Release\VectorNet.pdb
+D:\projects\isogame\Visual\CommandTester\bin\Release\EnumerableExtensions.pdb
