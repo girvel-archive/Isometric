@@ -37,6 +37,7 @@
     <Compile Include="LogException.cs" />
     <Compile Include="LogMessage.cs" />
     <Compile Include="Program.cs" />
+    <Compile Include="Modules\UIModule.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
@@ -60,5 +61,12 @@
       <Project>{9E79462D-FC84-4BF7-A345-E152B10B996A}</Project>
       <Name>GameRealization</Name>
     </ProjectReference>
+    <ProjectReference Include="..\CommandInterface\CommandInterface.csproj">
+      <Project>{78758BB4-3C86-4D57-B5A9-B3767BB42844}</Project>
+      <Name>CommandInterface</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Modules\" />
   </ItemGroup>
 </Project>

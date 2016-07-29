@@ -1,11 +1,11 @@
 /media/nik/Doc/projects/isogame/Visual/VisualConsole/obj/Debug/.NETFramework,Version=v4.5.AssemblyAttribute.cs
+/media/nik/Doc/projects/isogame/Visual/VisualConsole/bin/Debug/VisualConsole.dll.mdb
+/media/nik/Doc/projects/isogame/Visual/VisualConsole/bin/Debug/VisualConsole.dll
+/media/nik/Doc/projects/isogame/Visual/VisualConsole/obj/Debug/VisualConsole.dll
+/media/nik/Doc/projects/isogame/Visual/VisualConsole/obj/Debug/VisualConsole.dll.mdb
 /media/nik/Doc/projects/isogame/Visual/VisualConsole/bin/Debug/VectorNet.dll
 /media/nik/Doc/projects/isogame/Visual/VisualConsole/bin/Debug/VectorNet.dll.mdb
 /media/nik/Doc/projects/isogame/Visual/VisualConsole/bin/Debug/CommandInterface.dll
 /media/nik/Doc/projects/isogame/Visual/VisualConsole/bin/Debug/CommandInterface.dll.mdb
 /media/nik/Doc/projects/isogame/Visual/VisualConsole/bin/Debug/EnumerableExtensions.dll
 /media/nik/Doc/projects/isogame/Visual/VisualConsole/bin/Debug/EnumerableExtensions.dll.mdb
-/media/nik/Doc/projects/isogame/Visual/VisualConsole/bin/Debug/VisualConsole.dll.mdb
-/media/nik/Doc/projects/isogame/Visual/VisualConsole/bin/Debug/VisualConsole.dll
-/media/nik/Doc/projects/isogame/Visual/VisualConsole/obj/Debug/VisualConsole.dll
-/media/nik/Doc/projects/isogame/Visual/VisualConsole/obj/Debug/VisualConsole.dll.mdb

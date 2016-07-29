@@ -16,7 +16,7 @@ namespace VisualConsole
 
         public Interface<ConsoleUI> CommandInterface { get; set; }
 
-        public Dictionary<ConsoleKey, Action> KeyActions { get; set; }
+        public Dictionary<ConsoleKey, Action<ConsoleUI>> KeyActions { get; set; }
 
 
 
@@ -106,7 +106,8 @@ namespace VisualConsole
         }
 
         public ConsoleUI(
-            List<Command<ConsoleUI>> commands, Dictionary<ConsoleKey, Action> keyActions)
+            List<Command<ConsoleUI>> commands, 
+            Dictionary<ConsoleKey, Action<ConsoleUI>> keyActions)
         {
             CommandInterface = new Interface<ConsoleUI>(commands);
             KeyActions = keyActions;

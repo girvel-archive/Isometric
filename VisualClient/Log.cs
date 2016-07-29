@@ -13,6 +13,8 @@ namespace VisualClient
         public List<LogException> Exceptions = new List<LogException>();
         public List<Type> TypeBlackList = new List<Type>();
 
+
+
         public void Write(string message, LogType type)
         {
             Messages.Add(new LogMessage(DateTime.Now, message, type));
@@ -23,12 +25,11 @@ namespace VisualClient
             }
         }
         
-        public void Exception(Exception exception, bool user)
+        public void Exception(Exception exception)
         {
             Exceptions.Add(new LogException(DateTime.Now, exception));
 
-            if (!user 
-                && !BlackList.Contains(LogType.Exception)
+            if (!BlackList.Contains(LogType.Exception)
                 && !TypeBlackList.Contains(exception.GetType()))
             {
                 Console.WriteLine(exception.Message);

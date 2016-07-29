@@ -11,104 +11,13 @@ namespace VisualClient
 {
     public static class ConsoleHelper
     {
-        public static int PrevWidth = 23;
-        public static int PrevHeight = 80;
-
-        public static int Height = 23;
-        public static int Width = 80;
-        public static ConsoleUI Interface;
-
-        public static IntVector MainOutputAreaBegin => new IntVector(Width / 3 * 2 + 3, 1);
-
-        public static IntVector MainOutputAreaEnd => new IntVector(Width - 1, Height);
-
-        public static IntVector AdditionalOutputAreaBegin => new IntVector(1, 1);
-
-        public static IntVector AdditionalOutputAreaEnd => new IntVector(Width / 3 * 2, Height);
+        public static ConsoleUI UI { get; set; }
 
 
 
         static ConsoleHelper()
         {
-
-            Interface = new ConsoleUI(new List<ConsoleCommand> {
-                new ConsoleCommand(
-                    new [] {"new-acc", "na"},
-                    "creates new account",
-                    "@login,password,email,permission",
-                    _newAccount),
-
-                new ConsoleCommand(
-                    new [] {"view-accs", "va"},
-                    "views all accounts",
-                    "",
-                    _viewAccounts),
-
-                new ConsoleCommand(
-                    new [] {"clear", "cl"},
-                    "clears the console",
-                    "",
-                    _clear),
-
-                new ConsoleCommand(
-                    new [] {"size", "sz"},
-                    "sets the size of global output area",
-                    "@width,height",
-                    _setSize),
-
-                new ConsoleCommand(
-                    new [] {"size-get", "sg"},
-                    "gets the size of global output area",
-                    "",
-                    _getSize),
-
-                new ConsoleCommand(
-                    new [] {"frequency", "fq"},
-                    "sets the frequency of refreshing game output area",
-                    "@period",
-                    _setViewingFrequency),
-
-                new ConsoleCommand(
-                    new [] {"blist-add", "ba"},
-                    "adds type of log message to blacklist",
-                    "@type",
-                    _blackListAdd),
-
-                new ConsoleCommand(
-                    new [] {"blist-remove", "br"},
-                    "removes type of log message from blacklist",
-                    "@type",
-                    _blackListRemove),
-
-                new ConsoleCommand(
-                    new [] {"save", "sv"},
-                    "saves current session",
-                    "",
-                    _save),
-
-                new ConsoleCommand(
-                    new[] {"open", "on"},
-                    "opens new session from file",
-                    "",
-                    _open),
-                #if !DEBUG
-                new ConsoleCommand(
-                new[] {"blist-add-type", "bat"},
-                "adds type of exception to blacklist",
-                "@type",
-                _blackListAddType),
-
-                new ConsoleCommand(
-                new[] {"blist-remove-type", "brt"},
-                "removes exception type from blacklist",
-                "@type",
-                _blackListRemoveType),
-                #endif
-            },
-                new OutputDiv(
-                    MainOutputAreaBegin,
-                    MainOutputAreaEnd,
-                    null, ">>"));
+            
         }
 
         public static void Init()
