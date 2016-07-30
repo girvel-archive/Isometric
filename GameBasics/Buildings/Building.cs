@@ -21,7 +21,7 @@ namespace GameBasics.Buildings {
         public Dictionary<ResourceType, int> Resources { get; set; }
 
         ConsoleColor IConsolePoint.Color => Pattern.Color;
-        char IConsolePoint.Symbol => Pattern.Symbol;
+        char IConsolePoint.Character => Pattern.Character;
 
 
 
@@ -34,17 +34,17 @@ namespace GameBasics.Buildings {
 
             InitFromPattern(pattern);
 
-            if (!Owner?.Buildings?.Contains(this) ?? false)
+            if (!Owner?.OwnedBuildings?.Contains(this) ?? false)
             {
-                Owner.Buildings.Add(this);
+                Owner.OwnedBuildings.Add(this);
             }
         }
 
         ~Building()
         {
-            if (Owner?.Buildings?.Contains(this) ?? false)
+            if (Owner?.OwnedBuildings?.Contains(this) ?? false)
             {
-                Owner.Buildings.Remove(this);
+                Owner.OwnedBuildings.Remove(this);
             }
         }
 
@@ -75,14 +75,14 @@ namespace GameBasics.Buildings {
                 throw new PatternChangeConditionException();
             }
 
-            if (Pattern.NeedResources.Any(resourcePair => Owner.Resources.Resource[resourcePair.Key] < resourcePair.Value))
+            if (Pattern.NeedResources.Any(resourcePair => Owner.CurrentResources.Resource[resourcePair.Key] < resourcePair.Value))
             {
                 throw new ResourcesException();
             }
 
             foreach (var resourcePair in Pattern.NeedResources)
             {
-                Owner.Resources.Resource[resourcePair.Key] -= resourcePair.Value;
+                Owner.CurrentResources.Resource[resourcePair.Key] -= resourcePair.Value;
             }
 
             InitFromPattern(target);

@@ -9,20 +9,19 @@ using VisualConsole;
 namespace GameBasics
 {
     [Serializable]
-    public class Territory : IGridWritable, IConsolePoint, IRefreshable, IEnumerable<Building>
+    public class Territory : IConsolePoint, IRefreshable, IEnumerable<Building>
     {
-        // TODO not abstract territory
-        public Building this [IntVector position] {
+        public Building this[IntVector position] {
             get { return Buildings[position.X, position.Y]; }
             set { Buildings[position.X, position.Y] = value; }
         }
 
-        public Building this [int x, int y] {
+        public Building this[int x, int y] {
             get { return Buildings[x, y]; }
             set { Buildings[x, y] = value; }
         }
 
-        protected Building[,] Buildings = new Building[Size, Size];
+        public Building[,] Buildings = new Building[Size, Size];
 
 
 
@@ -39,7 +38,7 @@ namespace GameBasics
 
 
 
-        char IConsolePoint.Symbol => Pattern.Symbol;
+        char IConsolePoint.Character => Pattern.Character;
         ConsoleColor IConsolePoint.Color => Pattern.Color;
 
 
@@ -53,10 +52,6 @@ namespace GameBasics
 
 
 
-        IConsolePoint IGridWritable.this[IntVector position] => this[position];
-
-
-
         public Territory(
             TerritoryPattern pattern, TerritoryType type, World parent, int seed)
         {
@@ -64,7 +59,7 @@ namespace GameBasics
             Type = type;
             ParentWorld = parent;
             Seed = seed;
-            Random = new Random(Seed);
+            this.Random = new Random(Seed);
 
             Pattern.Generate(this, Random.Next());
         }

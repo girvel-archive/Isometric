@@ -45,7 +45,7 @@ namespace GameBasics.PlayerClasses {
                 return;
 
             CurrentResearch.ProgressPointsNow += 
-                Owner.Resources.LastIncrease[ResourceType.Progress] * RefreshHelper.RefreshPeriodDays;
+                Owner.CurrentResources.LastIncrease[ResourceType.Progress] * RefreshHelper.RefreshPeriodDays;
 
             if (CurrentResearch.Ready)
             {

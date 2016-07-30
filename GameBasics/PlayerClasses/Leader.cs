@@ -18,7 +18,7 @@ namespace GameBasics.PlayerClasses
                 "Mark"
             };
 
-            public static string RandomName => Names[BasicsHelper.MainRandom.Next(Names.Length)];
+            public static string RandomName => Names[GameRandom.Instance.Next(Names.Length)];
         }
 
 
@@ -37,7 +37,7 @@ namespace GameBasics.PlayerClasses
         {
             Owner = owner;
             Name = NameHelper.RandomName;
-            AgeYears = BasicsHelper.MainRandom.Next(20) + 15;
+            AgeYears = GameRandom.Instance.Next(20) + 15;
         }
 
 

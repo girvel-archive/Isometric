@@ -15,6 +15,8 @@ namespace GameBasics.PlayerClasses
 
 
 
+        public Resources() {}
+
         public Resources(Player owner)
         {
             Owner = owner;

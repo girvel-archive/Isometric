@@ -21,7 +21,7 @@ namespace VisualClient
 
             if (!BlackList.Contains(type))
             {
-                Console.WriteLine(message.Split('\n'));
+                Console.WriteLine(message);
             }
         }
         

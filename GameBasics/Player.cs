@@ -21,14 +21,14 @@ namespace GameBasics
 
 
 
-        public static readonly Player Nature = new Player("nature");
-        public static readonly Player Enemy = new Player("enemy");
+        public static Player Nature { get; }
+        public static Player Enemy { get; }
 
         public string Name { get; private set; }
 
-        public List<Building> Buildings { get; }
+        public List<Building> OwnedBuildings { get; }
         public Leader MainLeader { get; set; }
-        public Resources Resources { get; }
+        public Resources CurrentResources { get; }
 
         public Territory Territory { get; }
         public World World { get; }
@@ -41,34 +41,42 @@ namespace GameBasics
         public const int StartWood = 1000;
         public const int StartMeat = 600;
         public const int StartGold = 1000;
+        // TODO to GameValues
 
 
+        static Player()
+        {
+            Nature = new Player("nature");
+            Enemy = new Player("enemy");
+        }
 
         public Player(string name, World world, Game currentGame) : this(name)
         {
-            Game = currentGame;
-            World = world;
-            Territory = World.NewPlayerTerritory(this);
-        }
+            this.Game = currentGame;
+            this.World = world;
+            this.Territory = World.NewPlayerTerritory(this);
 
-        protected Player(string name)
-        {
-            Name = name;
-            Buildings = new List<Building>();
-            Resources = new Resources(this) {
+            CurrentResources = new Resources() {
                 Resource = {
-                    [ResourceType.Wood] = StartWood,
-                    [ResourceType.Meat] = StartMeat,
-                    [ResourceType.Gold] = StartGold,
+                    // TODO enable
+//                    [ResourceType.Wood] = GameValues.Instance.StartWood,
+//                    [ResourceType.Meat] = GameValues.Instance.StartMeat,
+//                    [ResourceType.Gold] = GameValues.Instance.StartGold,
                 }
             };
+        }
+
+        private Player(string name)
+        {
+            Name = name;
+            OwnedBuildings = new List<Building>();
         }
 
 
         public void Refresh()
         {
             MainLeader.Refresh();
-            Resources.Refresh();
+            CurrentResources.Refresh();
 
             try
             {

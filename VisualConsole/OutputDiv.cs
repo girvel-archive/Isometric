@@ -115,7 +115,7 @@ namespace VisualConsole
                                 || Output.Last().Substring(0, Prefix.Length) != Prefix)
                                 && Console.CursorLeft - Begin.X >= 0))
                             try {
-                                DeleteSymbols();
+                                DeleteCharacters();
                             }
                             catch (ArgumentOutOfRangeException) {}
                         else
@@ -202,7 +202,7 @@ namespace VisualConsole
                 ConsoleColor.Gray);
         }
 
-        private void DeleteSymbols(int n = 1) {
+        private void DeleteCharacters(int n = 1) {
             if (n == 0) return;
             var len = Output.Last().Length;
             if (n < 0 || n > len) throw new ArgumentOutOfRangeException();

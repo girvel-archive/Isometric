@@ -11,9 +11,10 @@
     <AssemblyName>VisualConsole</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <UseMSBuildEngine>False</UseMSBuildEngine>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
+    <DebugCharacters>true</DebugCharacters>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>bin\Debug\</OutputPath>
@@ -63,6 +64,10 @@
     <ProjectReference Include="..\CommandInterface\CommandInterface.csproj">
       <Project>{78758BB4-3C86-4D57-B5A9-B3767BB42844}</Project>
       <Name>CommandInterface</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SingleClass\SingleClass.csproj">
+      <Project>{0E663A64-2B8A-49D4-B415-E101E2AE11A7}</Project>
+      <Name>SingleClass</Name>
     </ProjectReference>
   </ItemGroup>
 </Project>

@@ -2,26 +2,41 @@
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.Workbench ActiveDocument="SingleClass/Singleton.cs">
     <Files>
-      <File FileName="VisualClient/ConsoleHelper.cs" Line="20" Column="13" />
-      <File FileName="VisualClient/Program.cs" Line="53" Column="29" />
-      <File FileName="VisualClient/Log.cs" Line="17" Column="9" />
-      <File FileName="VisualConsole/ConsoleUIHelper.cs" Line="81" Column="39" />
+      <File FileName="VisualClient/ConsoleHelper.cs" Line="1" Column="1" />
+      <File FileName="VisualClient/Program.cs" Line="1" Column="1" />
+      <File FileName="VisualClient/Log.cs" Line="1" Column="1" />
+      <File FileName="VisualConsole/ConsoleUIHelper.cs" Line="1" Column="1" />
       <File FileName="VisualConsole/OutputDiv.cs" Line="1" Column="1" />
       <File FileName="VisualServer/Connection.cs" Line="1" Column="1" />
       <File FileName="VisualServer/LogType.cs" Line="1" Column="1" />
-      <File FileName="VisualClient/LogMessage.cs" Line="14" Column="1" />
-      <File FileName="VisualConsole/IConsolePoint.cs" Line="11" Column="36" />
-      <File FileName="VisualConsole/ConsoleUI.cs" Line="108" Column="26" />
-      <File FileName="CommandInterface/Interface.cs" Line="29" Column="13" />
-      <File FileName="VisualConsole/UIMode.cs" Line="6" Column="6" />
-      <File FileName="VisualConsole/ConsolePoint.cs" Line="8" Column="43" />
+      <File FileName="VisualClient/LogMessage.cs" Line="1" Column="1" />
+      <File FileName="VisualConsole/IConsolePoint.cs" Line="1" Column="1" />
+      <File FileName="VisualConsole/ConsoleUI.cs" Line="1" Column="1" />
+      <File FileName="CommandInterface/Interface.cs" Line="1" Column="1" />
+      <File FileName="VisualConsole/UIMode.cs" Line="1" Column="1" />
+      <File FileName="VisualConsole/ConsolePoint.cs" Line="1" Column="1" />
       <File FileName="VisualClient/LogException.cs" Line="1" Column="1" />
       <File FileName="CommandInterface/Command.cs" Line="1" Column="1" />
-      <File FileName="VisualServer/ILog.cs" Line="6" Column="6" />
-      <File FileName="VisualClient/Modules/UIModule.cs" Line="1" Column="1" />
-      <File FileName="SingleClass/Singleton.cs" Line="11" Column="1" />
-      <File FileName="VisualServer/Server.cs" Line="14" Column="1" NotebookId="1" />
-      <File FileName="VisualServer/Account.cs" Line="1" Column="1" NotebookId="1" />
+      <File FileName="VisualServer/ILog.cs" Line="1" Column="1" />
+      <File FileName="SingleClass/Singleton.cs" Line="14" Column="18" />
+      <File FileName="VisualServer/Server.cs" Line="1" Column="1" />
+      <File FileName="VisualServer/Account.cs" Line="1" Column="1" />
+      <File FileName="GameBasics/GameValues.cs" Line="1" Column="1" />
+      <File FileName="GameBasics/Game.cs" Line="1" Column="1" />
+      <File FileName="GameBasics/GameRandom.cs" Line="1" Column="1" />
+      <File FileName="GameBasics/GameBasics.csproj" Line="1" Column="1" />
+      <File FileName="GameBasics/PlayerClasses/Leader.cs" Line="1" Column="1" />
+      <File FileName="GameRealization/TerritoryPatterns.cs" Line="1" Column="1" />
+      <File FileName="GameRealization/TerritoryRealization.cs" Line="1" Column="1" />
+      <File FileName="GameRealization/WorldRealization.cs" Line="1" Column="1" />
+      <File FileName="GameBasics/Territory.cs" Line="1" Column="1" />
+      <File FileName="GameBasics/RefreshHelper.cs" Line="1" Column="1" />
+      <File FileName="GameBasics/Buildings/Building.cs" Line="1" Column="1" />
+      <File FileName="GameBasics/World.cs" Line="1" Column="1" />
+      <File FileName="GameBasics/Buildings/BuildingPattern.cs" Line="1" Column="1" />
+      <File FileName="GameBasics/Player.cs" Line="1" Column="1" />
+      <File FileName="GameBasics/PlayerClasses/Resources.cs" Line="1" Column="1" />
+      <File FileName="VisualClient/Singletons/SingleUI.cs" Line="72" Column="45" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

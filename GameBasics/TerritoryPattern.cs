@@ -5,7 +5,7 @@ namespace GameBasics
     [Serializable]
     public class TerritoryPattern
     {
-        public char Symbol { get; set; }
+        public char Character { get; set; }
         public ConsoleColor Color { get; set; }
 
         public Action<Territory, int> Generate { get; set; } 
@@ -26,13 +26,13 @@ namespace GameBasics
         }
 
         public TerritoryPattern(
-            char symbol, 
+            char Character, 
             ConsoleColor color, 
             Action<Territory, int> generate, 
             Action<Territory, Player> generateVillage)
             : this()
         {
-            Symbol = symbol;
+            Character = Character;
             Color = color;
             Generate = generate;
             GenerateVillage = generateVillage;

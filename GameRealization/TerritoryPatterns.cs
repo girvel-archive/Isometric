@@ -34,8 +34,8 @@ namespace GameRealization
             for (var i = 0; i < Territory.VillageHouses; i++)
             {
                 var randomPosition = new IntVector(
-                    BasicsHelper.MainRandom.Next(territory.SizeX),
-                    BasicsHelper.MainRandom.Next(territory.SizeY));
+                    GameRandom.Instance.Next(territory.SizeX),
+                    GameRandom.Instance.Next(territory.SizeY));
 
                 if (territory[randomPosition]?.Pattern 
                     != PatternsRealization.WoodHouse)

@@ -184,17 +184,16 @@ namespace VisualServer
         private void _sendResources(object sender, Player.RefreshEventArgs args)
         {
             Send("r@" + new CommonResources(
-                new Dictionary<ResourceType, int>(args.Owner.Resources.Resource),
-                new Dictionary<ResourceType, int>(args.Owner.Resources.LastIncrease))
+                new Dictionary<ResourceType, int>(args.Owner.CurrentResources.Resource),
+                new Dictionary<ResourceType, int>(args.Owner.CurrentResources.LastIncrease))
                     .GetString);
         }
 
         private void _getTerritory(string[] args, NetArgs netArgs)
         {
-            netArgs.CurrentSocket.Send(Encoding.ASCII.GetBytes(
-                $"st@{new object[] { Territory.Size, Territory.Size }.ToArgumentType()}," +
+            Send("st@" + new object[] { Territory.Size, Territory.Size }.ToArgumentType() + "," +
                     Account.Player.Territory
-                        .Select(b => b.Pattern.Symbol.ToString()).Aggregate((s, b) => s + b)));
+                        .Select(b => b.Pattern.Character.ToString()).Aggregate((s, b) => s + b));
         }
 
         // @building
@@ -210,7 +209,7 @@ namespace VisualServer
                 netArgs.CurrentSocket.Send(Encoding.ASCII.GetBytes("sba@" +
                     player.Game.BuildingGraph.Find(pattern)[0].Children.Select(
                         c => new CommonBuildingAction(
-                            player.Resources.Enough(c.Value.NeedResources),
+                            player.CurrentResources.Enough(c.Value.NeedResources),
                             $"Upgrade to {c.Value.Name}")).ToArgumentList(e => e.GetString)));
             }
             catch (IndexOutOfRangeException) {}

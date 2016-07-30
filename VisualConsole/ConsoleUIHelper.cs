@@ -1,13 +1,14 @@
 ﻿using System;
 using VectorNet;
+using SingleClass;
 
 namespace VisualConsole {
-    public static class ConsoleUIHelper {
+    public class ConsoleUIHelper : Singleton<ConsoleUIHelper> {
         private static readonly object Lock = new object();
 
 
 
-        public static void Write(
+        public void Write(
             string line, int x, int y, ConsoleColor color, bool saveColor = true) 
         {
             lock (Lock) 
@@ -29,7 +30,7 @@ namespace VisualConsole {
             }
         }
 
-        public static void WriteMessage(
+        public void WriteMessage(
             string message, ConsoleColor color, bool saveColor = true)
         {
             lock (Lock) 
@@ -50,7 +51,7 @@ namespace VisualConsole {
             }
         }
 
-        public static void WriteGrid(
+        public void WriteGrid(
             IConsolePoint[,] grid, 
             IntVector begin, 
             IntVector end, 
@@ -88,7 +89,7 @@ namespace VisualConsole {
 
 
 
-        public static void Write(
+        public void Write(
             string line, IntVector position, ConsoleColor color, bool saveColor = false) 
         {
             Write(line, position.X, position.Y, color, saveColor);

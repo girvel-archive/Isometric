@@ -33,7 +33,7 @@ namespace VisualConsole
                             y + WriteSubjectOffset.Y)];
 
                         ConsoleWriteHelper.Write(
-                            currentSubject.Symbol.ToString(), 
+                            currentSubject.Character.ToString(), 
                             Begin.X + x, 
                             Begin.Y + y,
                             currentSubject.Color);

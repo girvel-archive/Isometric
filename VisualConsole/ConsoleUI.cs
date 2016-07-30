@@ -22,7 +22,7 @@ namespace VisualConsole
 
         #region Grid 
 
-        public IConsolePoint[,] Grid { get; set; }
+        public Func<IConsolePoint[,]> GetGrid { get; set; }
 
         public IntVector GridOffset 
         { 
@@ -35,8 +35,8 @@ namespace VisualConsole
                 if (CanMoveOutside
                     || ( value.X > 0
                         && value.Y > 0
-                        && value.X < Grid.GetLength(0) - GridSize.X
-                        && value.Y < Grid.GetLength(1) - GridSize.Y ))
+                        && value.X < GetGrid().GetLength(0) - GridSize.X
+                        && value.Y < GetGrid().GetLength(1) - GridSize.Y ))
                 {
                     _gridOffset = value;
                 }
@@ -106,9 +106,11 @@ namespace VisualConsole
         }
 
         public ConsoleUI(
+            Func<IConsolePoint[,]> getGrid,
             List<Command<ConsoleUI>> commands, 
             Dictionary<ConsoleKey, Action<ConsoleUI>> keyActions)
         {
+            GetGrid = getGrid;
             CommandInterface = new Interface<ConsoleUI>(commands);
             KeyActions = keyActions;
         }
@@ -135,8 +137,8 @@ namespace VisualConsole
         {
             Console.Clear();
 
-            ConsoleUIHelper.WriteGrid(
-                Grid, GridBeginPosition, GridEndPosition, GridOffset, DefaultFiller);
+            ConsoleUIHelper.Instance.WriteGrid(
+                GetGrid(), GridBeginPosition, GridEndPosition, GridOffset, DefaultFiller);
         }
 
         private void MessagesStep()
@@ -145,7 +147,7 @@ namespace VisualConsole
             {
                 Console.WriteLine();
 
-                ConsoleUIHelper.WriteMessage(
+                ConsoleUIHelper.Instance.WriteMessage(
                     new string('-', Console.BufferWidth),
                     ConsoleColor.DarkGray);
                 
@@ -155,7 +157,7 @@ namespace VisualConsole
             }
             catch (ArgumentException)
             {
-                ConsoleUIHelper.WriteMessage(
+                ConsoleUIHelper.Instance.WriteMessage(
                     WrongCommandMessage, ConsoleColor.DarkYellow);
             }
         }

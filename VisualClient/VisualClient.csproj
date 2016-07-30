@@ -8,9 +8,10 @@
     <RootNamespace>VisualClient</RootNamespace>
     <AssemblyName>VisualClient</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <UseMSBuildEngine>False</UseMSBuildEngine>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
+    <DebugCharacters>true</DebugCharacters>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>bin\Debug</OutputPath>
@@ -37,7 +38,7 @@
     <Compile Include="LogException.cs" />
     <Compile Include="LogMessage.cs" />
     <Compile Include="Program.cs" />
-    <Compile Include="Modules\UIModule.cs" />
+    <Compile Include="Singletons\SingleUI.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
@@ -67,6 +68,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Modules\" />
+    <Folder Include="Singletons\" />
   </ItemGroup>
 </Project>

@@ -16,8 +16,8 @@ namespace GameRealization
             Territory terr;
             do
             {
-                randx = BasicsHelper.MainRandom.Next(Size);
-                randy = BasicsHelper.MainRandom.Next(Size);
+                randx = GameRandom.Instance.Next(Size);
+                randy = GameRandom.Instance.Next(Size);
                 terr = Territories[randx, randy];
             }
             while (terr != null && terr.Type == TerritoryType.PlayerVillage);
@@ -26,7 +26,7 @@ namespace GameRealization
                 TerritoryPatterns.Forest, 
                 TerritoryType.PlayerVillage, 
                 this, 
-                BasicsHelper.MainRandom.Next());
+                GameRandom.Instance.Next());
             
             newForest.Pattern.GenerateVillage(newForest, player);
 

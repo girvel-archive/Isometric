@@ -104,31 +104,31 @@ namespace CommandInterface
             var braces = 0;
             for (var i = 0; i < str.Length; i++)
             {
-                var symbol = str[i];
-                var prevSymbol = i == 0 ? '\0' : str[i - 1];
+                var Character = str[i];
+                var prevCharacter = i == 0 ? '\0' : str[i - 1];
 
-                if (OpeningBraces.Contains(symbol)
-                    && prevSymbol != ignore)
+                if (OpeningBraces.Contains(Character)
+                    && prevCharacter != ignore)
                 {
                     braces++;
                 }
-                else if (ClosingBraces.Contains(symbol)
-                    && prevSymbol != ignore)
+                else if (ClosingBraces.Contains(Character)
+                    && prevCharacter != ignore)
                 {
                     braces--;
                 }
 
-                if (symbol == separator
+                if (Character == separator
                     && braces == 0
-                    && prevSymbol != ignore)
+                    && prevCharacter != ignore)
                 {
                     result.Add(convertFromArgument(currentElement));
                     currentElement = "";
                 }
                 else
                 {
-                    if (!replaceIgnore || symbol != ignore || prevSymbol == ignore)
-                        currentElement += symbol;
+                    if (!replaceIgnore || Character != ignore || prevCharacter == ignore)
+                        currentElement += Character;
                 }
             }
             result.Add(convertFromArgument(currentElement));
@@ -179,7 +179,7 @@ namespace CommandInterface
         private static string _toArgument(this string str)
         {
             return new[] { ",", ";", ":", "|", "[", "]", "(", ")" }.Aggregate(
-                str, (current, reservedSymbol) => current.Replace(reservedSymbol, "\\" + reservedSymbol));
+                str, (current, reservedCharacter) => current.Replace(reservedCharacter, "\\" + reservedCharacter));
         }
 
         public static string ToArgumentType(this IEnumerable<object> elements, Func<object, string> convertToArgument)

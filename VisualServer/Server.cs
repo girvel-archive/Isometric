@@ -204,7 +204,7 @@ namespace VisualServer
 
         private void _emailSendNumbers(string[] args, NetArgs netArgs)
         {
-            var numbers = BasicsHelper.MainRandom.Next(10000, 99999);
+            var numbers = GameRandom.Instance.Next(10000, 99999);
             // TODO checking email using
             new SmtpClient {
                 Host = SmtpHost,

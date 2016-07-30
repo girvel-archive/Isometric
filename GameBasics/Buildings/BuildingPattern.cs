@@ -10,7 +10,7 @@ namespace GameBasics.Buildings
         // TODO графику отдельно
         public string Name { get; set; }
         public ConsoleColor Color { get; set; }
-        public char Symbol { get; set; }
+        public char Character { get; set; }
         public Action<Building> RefreshAction { get; set; } = args => { };
 
         public Func<BuildingPattern, Building, bool> ChangeCondition { get; set; } 
@@ -26,12 +26,12 @@ namespace GameBasics.Buildings
         public BuildingPattern(
             string name, 
             ConsoleColor color, 
-            char symbol, 
+            char Character, 
             int peopleMax, 
             BuildingType type,
             Dictionary<ResourceType, int> resources,
             Dictionary<ResourceType, int> needResources)
-            : this(name, color, symbol, needResources, needResources, type)
+            : this(name, color, Character, needResources, needResources, type)
         {
             PeopleMax = peopleMax;
             Resources = resources;
@@ -40,14 +40,14 @@ namespace GameBasics.Buildings
         public BuildingPattern(
             string name,
             ConsoleColor color,
-            char symbol,
+            char character,
             Dictionary<ResourceType, int> resources,
             Dictionary<ResourceType, int> needResources,
             BuildingType type = BuildingType.Nature)
         {
             Name = name;
             Color = color;
-            Symbol = symbol;
+            Character = character;
             Resources = resources;
             NeedResources = needResources;
             Type = type;

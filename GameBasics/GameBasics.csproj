@@ -13,7 +13,7 @@
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
+    <DebugCharacters>true</DebugCharacters>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>bin\Debug\</OutputPath>
@@ -30,7 +30,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Testing|AnyCPU'">
-    <DebugSymbols>true</DebugSymbols>
+    <DebugCharacters>true</DebugCharacters>
     <OutputPath>bin\Testing\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <DebugType>full</DebugType>
@@ -51,7 +51,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BasicsHelper.cs" />
     <Compile Include="Buildings\Building.cs" />
     <Compile Include="Buildings\BuildingPattern.cs" />
     <Compile Include="Buildings\BuildingType.cs" />
@@ -73,6 +72,8 @@
     <Compile Include="TerritoryType.cs" />
     <Compile Include="World.cs" />
     <Compile Include="TerritoryPattern.cs" />
+    <Compile Include="GameValues.cs" />
+    <Compile Include="GameRandom.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CompressedStructures\CompressedStructures.csproj">
@@ -86,6 +87,10 @@
     <ProjectReference Include="..\VectorNet\VectorNet.csproj">
       <Project>{E9DD0F81-D1FB-44BD-ADE2-F1A80FEC431A}</Project>
       <Name>VectorNet</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SingleClass\SingleClass.csproj">
+      <Project>{0E663A64-2B8A-49D4-B415-E101E2AE11A7}</Project>
+      <Name>SingleClass</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

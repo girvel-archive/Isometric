@@ -25,8 +25,8 @@ namespace GameRealization
         {
             for (var i = 0; i < Territory.VillageHouses; i++)
             {
-                var randx = BasicsHelper.MainRandom.Next(args.Territory.SizeX);
-                var randy = BasicsHelper.MainRandom.Next(args.Territory.SizeY);
+				var randx = GameRandom.Instance.Next(args.Territory.SizeX);
+				var randy = GameRandom.Instance.Next(args.Territory.SizeY);
 
                 if (args.Territory[randx, randy].Pattern != PatternsRealization.WoodHouse)
                 {
