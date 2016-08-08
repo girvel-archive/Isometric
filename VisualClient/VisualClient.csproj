@@ -30,6 +30,15 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="VectorNet">
+      <HintPath>..\..\..\tools\VectorNet\bin\Release\VectorNet.dll</HintPath>
+    </Reference>
+    <Reference Include="CommandInterface">
+      <HintPath>..\..\..\tools\CommandInterface\bin\Release\CommandInterface.dll</HintPath>
+    </Reference>
+    <Reference Include="VisualConsole">
+      <HintPath>..\..\..\tools\VisualConsole\bin\Release\VisualConsole.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -42,29 +51,17 @@
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
-    <ProjectReference Include="..\VectorNet\VectorNet.csproj">
-      <Project>{E9DD0F81-D1FB-44BD-ADE2-F1A80FEC431A}</Project>
-      <Name>VectorNet</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\VisualConsole\VisualConsole.csproj">
-      <Project>{D828A948-9224-418E-A805-439DD27463B5}</Project>
-      <Name>VisualConsole</Name>
-    </ProjectReference>
     <ProjectReference Include="..\VisualServer\VisualServer.csproj">
       <Project>{DCAE2467-5ADF-4B9F-AAD6-E2323F50D94C}</Project>
       <Name>VisualServer</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\GameBasics\GameBasics.csproj">
-      <Project>{57A7C47B-2A72-437B-8506-7A2D4B547C5B}</Project>
-      <Name>GameBasics</Name>
     </ProjectReference>
     <ProjectReference Include="..\GameRealization\GameRealization.csproj">
       <Project>{9E79462D-FC84-4BF7-A345-E152B10B996A}</Project>
       <Name>GameRealization</Name>
     </ProjectReference>
-    <ProjectReference Include="..\CommandInterface\CommandInterface.csproj">
-      <Project>{78758BB4-3C86-4D57-B5A9-B3767BB42844}</Project>
-      <Name>CommandInterface</Name>
+    <ProjectReference Include="..\GameCore\GameCore.csproj">
+      <Project>{5E853DD8-DDC3-4F8C-9966-52CA5881CBCE}</Project>
+      <Name>GameCore</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

@@ -1,4 +1,0 @@
-D:\projects\isogame\Visual\EnumerableExtensions\bin\Debug\EnumerableExtensions.dll
-D:\projects\isogame\Visual\EnumerableExtensions\bin\Debug\EnumerableExtensions.pdb
-D:\projects\isogame\Visual\EnumerableExtensions\obj\Debug\EnumerableExtensions.dll
-D:\projects\isogame\Visual\EnumerableExtensions\obj\Debug\EnumerableExtensions.pdb

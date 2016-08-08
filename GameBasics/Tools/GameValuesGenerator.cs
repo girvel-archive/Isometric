@@ -2,11 +2,9 @@
 
 namespace GameBasics
 {
-    public class GameValuesGenerator
-	{
-        public GameValuesGenerator ()
-		{
-		}
-	}
+    public abstract class GameValuesGenerator : Singleton<GameValuesGenerator>
+    {
+        public abstract GameValues Generate();
+    }
 }
 

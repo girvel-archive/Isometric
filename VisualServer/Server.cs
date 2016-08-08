@@ -43,7 +43,7 @@ namespace VisualServer
 
 
         public int ServerPort { get; set; } = 8005;
-        public string ServerAddress { get; set; } = "192.168.0.100";
+        public string ServerAddress { get; set; } = "176.151.11.21";
 
         public List<Account> Accounts { get; set; }
         public ILog MainLog { get; set; }
@@ -113,6 +113,7 @@ namespace VisualServer
                 MainLog?.Write("Format exception!", LogType.User);
                 return;
             }
+
             _listenSocket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Unspecified);
 
             _listenSocket.Bind(ipPoint);

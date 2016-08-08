@@ -1,5 +1,0 @@
-D:\projects\isogame\Visual\CommandInterface\bin\Release\CommandInterface.dll
-D:\projects\isogame\Visual\CommandInterface\bin\Release\CommandInterface.pdb
-D:\projects\isogame\Visual\CommandInterface\obj\Release\CommandInterface.dll
-D:\projects\isogame\Visual\CommandInterface\obj\Release\CommandInterface.pdb
-D:\projects\isogame\Visual\CommandInterface\obj\Release\CommandInterface.csprojResolveAssemblyReference.cache

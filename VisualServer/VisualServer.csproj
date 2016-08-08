@@ -53,6 +53,15 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
+    <Reference Include="CommandInterface">
+      <HintPath>..\..\..\tools\CommandInterface\bin\Release\CommandInterface.dll</HintPath>
+    </Reference>
+    <Reference Include="VectorNet">
+      <HintPath>..\..\..\tools\VectorNet\bin\Release\VectorNet.dll</HintPath>
+    </Reference>
+    <Reference Include="VisualConsole">
+      <HintPath>..\..\..\tools\VisualConsole\bin\Release\VisualConsole.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Account.cs" />
@@ -64,10 +73,6 @@
     <Compile Include="Server.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\CommandInterface\CommandInterface.csproj">
-      <Project>{78758BB4-3C86-4D57-B5A9-B3767BB42844}</Project>
-      <Name>CommandInterface</Name>
-    </ProjectReference>
     <ProjectReference Include="..\CompressedStructures\CompressedStructures.csproj">
       <Project>{64EE5B69-4B32-4080-82A7-9E5F419DAFAA}</Project>
       <Name>CompressedStructures</Name>
@@ -75,18 +80,6 @@
     <ProjectReference Include="..\GameBasics\GameBasics.csproj">
       <Project>{57A7C47B-2A72-437B-8506-7A2D4B547C5B}</Project>
       <Name>GameBasics</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\VisualConsole\VisualConsole.csproj">
-      <Project>{D828A948-9224-418E-A805-439DD27463B5}</Project>
-      <Name>VisualConsole</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\VectorNet\VectorNet.csproj">
-      <Project>{E9DD0F81-D1FB-44BD-ADE2-F1A80FEC431A}</Project>
-      <Name>VectorNet</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\SingleClass\SingleClass.csproj">
-      <Project>{0E663A64-2B8A-49D4-B415-E101E2AE11A7}</Project>
-      <Name>SingleClass</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -11,6 +11,7 @@
     <AssemblyName>GameBasics</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <UseMSBuildEngine>False</UseMSBuildEngine>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugCharacters>true</DebugCharacters>
@@ -49,6 +50,9 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
+    <Reference Include="VectorNet">
+      <HintPath>..\..\..\tools\VectorNet\bin\Release\VectorNet.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Buildings\Building.cs" />
@@ -72,26 +76,8 @@
     <Compile Include="TerritoryType.cs" />
     <Compile Include="World.cs" />
     <Compile Include="TerritoryPattern.cs" />
-    <Compile Include="GameValues.cs" />
-    <Compile Include="GameRandom.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\CompressedStructures\CompressedStructures.csproj">
-      <Project>{64EE5B69-4B32-4080-82A7-9E5F419DAFAA}</Project>
-      <Name>CompressedStructures</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\VisualConsole\VisualConsole.csproj">
-      <Project>{D828A948-9224-418E-A805-439DD27463B5}</Project>
-      <Name>VisualConsole</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\VectorNet\VectorNet.csproj">
-      <Project>{E9DD0F81-D1FB-44BD-ADE2-F1A80FEC431A}</Project>
-      <Name>VectorNet</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\SingleClass\SingleClass.csproj">
-      <Project>{0E663A64-2B8A-49D4-B415-E101E2AE11A7}</Project>
-      <Name>SingleClass</Name>
-    </ProjectReference>
+    <Compile Include="Tools\GameRandom.cs" />
+    <Compile Include="Tools\GameValues.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
@@ -101,4 +87,7 @@
   <Target Name="AfterBuild">
   </Target>
   -->
+  <ItemGroup>
+    <Folder Include="Tools\" />
+  </ItemGroup>
 </Project>

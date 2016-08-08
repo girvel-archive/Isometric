@@ -1,42 +1,53 @@
 ﻿<Properties StartupItem="VisualClient/VisualClient.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="SingleClass/Singleton.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="CompressedStructures/ResourceType.cs">
     <Files>
-      <File FileName="VisualClient/ConsoleHelper.cs" Line="1" Column="1" />
+      <File FileName="VisualClient/ConsoleHelper.cs" Line="6" Column="20" />
       <File FileName="VisualClient/Program.cs" Line="1" Column="1" />
       <File FileName="VisualClient/Log.cs" Line="1" Column="1" />
-      <File FileName="VisualConsole/ConsoleUIHelper.cs" Line="1" Column="1" />
-      <File FileName="VisualConsole/OutputDiv.cs" Line="1" Column="1" />
       <File FileName="VisualServer/Connection.cs" Line="1" Column="1" />
       <File FileName="VisualServer/LogType.cs" Line="1" Column="1" />
       <File FileName="VisualClient/LogMessage.cs" Line="1" Column="1" />
-      <File FileName="VisualConsole/IConsolePoint.cs" Line="1" Column="1" />
-      <File FileName="VisualConsole/ConsoleUI.cs" Line="1" Column="1" />
-      <File FileName="CommandInterface/Interface.cs" Line="1" Column="1" />
-      <File FileName="VisualConsole/UIMode.cs" Line="1" Column="1" />
-      <File FileName="VisualConsole/ConsolePoint.cs" Line="1" Column="1" />
       <File FileName="VisualClient/LogException.cs" Line="1" Column="1" />
-      <File FileName="CommandInterface/Command.cs" Line="1" Column="1" />
       <File FileName="VisualServer/ILog.cs" Line="1" Column="1" />
-      <File FileName="SingleClass/Singleton.cs" Line="14" Column="18" />
       <File FileName="VisualServer/Server.cs" Line="1" Column="1" />
       <File FileName="VisualServer/Account.cs" Line="1" Column="1" />
-      <File FileName="GameBasics/GameValues.cs" Line="1" Column="1" />
       <File FileName="GameBasics/Game.cs" Line="1" Column="1" />
-      <File FileName="GameBasics/GameRandom.cs" Line="1" Column="1" />
       <File FileName="GameBasics/GameBasics.csproj" Line="1" Column="1" />
       <File FileName="GameBasics/PlayerClasses/Leader.cs" Line="1" Column="1" />
-      <File FileName="GameRealization/TerritoryPatterns.cs" Line="1" Column="1" />
       <File FileName="GameRealization/TerritoryRealization.cs" Line="1" Column="1" />
-      <File FileName="GameRealization/WorldRealization.cs" Line="1" Column="1" />
-      <File FileName="GameBasics/Territory.cs" Line="1" Column="1" />
+      <File FileName="GameBasics/Territory.cs" Line="39" Column="23" />
       <File FileName="GameBasics/RefreshHelper.cs" Line="1" Column="1" />
       <File FileName="GameBasics/Buildings/Building.cs" Line="1" Column="1" />
       <File FileName="GameBasics/World.cs" Line="1" Column="1" />
       <File FileName="GameBasics/Buildings/BuildingPattern.cs" Line="1" Column="1" />
       <File FileName="GameBasics/Player.cs" Line="1" Column="1" />
       <File FileName="GameBasics/PlayerClasses/Resources.cs" Line="1" Column="1" />
-      <File FileName="VisualClient/Singletons/SingleUI.cs" Line="72" Column="45" />
+      <File FileName="VisualClient/Singletons/SingleUI.cs" Line="1" Column="1" />
+      <File FileName="GameBasics/Tools/GameValues.cs" Line="1" Column="1" />
+      <File FileName="GameRealization/Main/GameRealization.cs" Line="1" Column="1" />
+      <File FileName="GameRealization/Main/GameValuesRealization.cs" Line="1" Column="1" />
+      <File FileName="GameRealization/Main/PatternsRealization.cs" Line="1" Column="1" />
+      <File FileName="GameRealization/Main/TerritoryPatterns.cs" Line="1" Column="1" />
+      <File FileName="GameRealization/Main/WorldRealization.cs" Line="1" Column="1" />
+      <File FileName="GameBasics/IRefreshable.cs" Line="1" Column="1" />
+      <File FileName="GameBasics/ProgramVersion.cs" Line="1" Column="1" />
+      <File FileName="GameBasics/TerritoryPattern.cs" Line="1" Column="1" />
+      <File FileName="GameBasics/TerritoryType.cs" Line="1" Column="1" />
+      <File FileName="GameBasics/Tools/GameRandom.cs" Line="1" Column="1" />
+      <File FileName="GameBasics/Structures/Graph.cs" Line="1" Column="1" />
+      <File FileName="GameBasics/Structures/GraphNode.cs" Line="1" Column="1" />
+      <File FileName="GameBasics/Properties/AssemblyInfo.cs" Line="1" Column="1" />
+      <File FileName="GameBasics/PlayerClasses/ProgressElement.cs" Line="1" Column="1" />
+      <File FileName="GameBasics/PlayerClasses/ProgressGraph.cs" Line="1" Column="1" />
+      <File FileName="GameBasics/PlayerClasses/ResourcesException.cs" Line="1" Column="1" />
+      <File FileName="GameBasics/Buildings/BuildingType.cs" Line="1" Column="1" />
+      <File FileName="GameBasics/Buildings/PatternChangeConditionException.cs" Line="1" Column="1" />
+      <File FileName="CompressedStructures/CommonAccount.cs" Line="1" Column="1" />
+      <File FileName="CompressedStructures/CommonBuilding.cs" Line="1" Column="1" />
+      <File FileName="CompressedStructures/CommonBuildingAction.cs" Line="1" Column="1" />
+      <File FileName="CompressedStructures/ICompressable.cs" Line="1" Column="1" />
+      <File FileName="CompressedStructures/ResourceType.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

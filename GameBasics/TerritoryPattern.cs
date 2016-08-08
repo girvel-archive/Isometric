@@ -14,7 +14,7 @@ namespace GameBasics
 
 
 
-        private TerritoryPattern()
+        public TerritoryPattern()
         {
             Refresh = territory =>
             {

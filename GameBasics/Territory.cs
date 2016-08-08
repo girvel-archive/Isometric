@@ -4,12 +4,11 @@ using System.Collections.Generic;
 using System.Linq;
 using GameBasics.Buildings;
 using VectorNet;
-using VisualConsole;
 
 namespace GameBasics
 {
     [Serializable]
-    public class Territory : IConsolePoint, IRefreshable, IEnumerable<Building>
+    public class Territory : IRefreshable, IEnumerable<Building>
     {
         public Building this[IntVector position] {
             get { return Buildings[position.X, position.Y]; }
@@ -37,7 +36,7 @@ namespace GameBasics
         public TerritoryPattern Pattern { get; set; }
 
 
-
+        // TODO delete
         char IConsolePoint.Character => Pattern.Character;
         ConsoleColor IConsolePoint.Color => Pattern.Color;
 

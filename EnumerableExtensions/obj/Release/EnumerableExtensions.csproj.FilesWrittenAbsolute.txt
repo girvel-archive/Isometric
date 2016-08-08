@@ -1,5 +1,0 @@
-/media/nik/Doc/projects/isogame/Visual/EnumerableExtensions/obj/Release/.NETFramework,Version=v4.5.AssemblyAttribute.cs
-/media/nik/Doc/projects/isogame/Visual/EnumerableExtensions/bin/Release/EnumerableExtensions.dll.mdb
-/media/nik/Doc/projects/isogame/Visual/EnumerableExtensions/bin/Release/EnumerableExtensions.dll
-/media/nik/Doc/projects/isogame/Visual/EnumerableExtensions/obj/Release/EnumerableExtensions.dll
-/media/nik/Doc/projects/isogame/Visual/EnumerableExtensions/obj/Release/EnumerableExtensions.dll.mdb

@@ -1,7 +1,0 @@
-D:\projects\isogame\Visual\VectorNet\bin\Debug\VectorNet.dll
-D:\projects\isogame\Visual\VectorNet\bin\Debug\VectorNet.pdb
-D:\projects\isogame\Visual\VectorNet\obj\Debug\VectorNet.csprojResolveAssemblyReference.cache
-D:\projects\isogame\Visual\VectorNet\obj\Debug\VectorNet.dll
-D:\projects\isogame\Visual\VectorNet\obj\Debug\VectorNet.pdb
-D:\projects\isogame\Visual\VectorNet\bin\Debug\EnumerableExtensions.dll
-D:\projects\isogame\Visual\VectorNet\bin\Debug\EnumerableExtensions.pdb

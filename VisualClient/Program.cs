@@ -8,6 +8,8 @@ using GameBasics;
 using VisualServer;
 using VisualConsole;
 using CommandInterface;
+using GameRealization.Main;
+using VisualClient.Singletons;
 
 namespace VisualClient
 {
@@ -23,7 +25,7 @@ namespace VisualClient
             RefreshThread,
             SavingThread;
 
-        public static Server MainServer;
+        public static Server MainServer; // TODO server singleton
 
         public static Territory Territory { get; set; }
         public static Game Game { get; set; }
@@ -125,7 +127,8 @@ namespace VisualClient
 
                     MainLog = (Log) serializer.Deserialize(logStream);
                 }
-                //              CheckVersion();
+                CheckVersion();
+
                 MainLog.Write("Saves file opened", LogType.User);
                 // TODO enable checkVersion()
             }
@@ -185,7 +188,7 @@ namespace VisualClient
 
                 if (!successful)
                 {
-                    Game = new GameRealization.GameRealization(MainRandom.Next());
+                    Game = new GameRealization.Main.GameRealization(MainRandom.Next());
                     MainServer = new Server(MainLog, Game.World, Game);
 
                     Territory = MainServer.Accounts.Find(a => a.Login == "usr")
@@ -217,8 +220,8 @@ namespace VisualClient
 
                 // Threads:
 
-                NetThread = new Thread(MainServer.ServerLoop);
-                NetThread.Start();
+//                NetThread = new Thread(MainServer.ServerLoop);
+//                NetThread.Start();
 
                 RefreshThread = new Thread(Game.RefreshLoop);
                 RefreshThread.Start();

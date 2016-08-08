@@ -17,7 +17,7 @@ namespace GameBasics
                 Winter,
                 Spring,
                 Summer,
-                Autumn
+                Autumn,
             }
 
 
@@ -105,7 +105,7 @@ namespace GameBasics
 
         public void Refresh()
         {
-            foreach (var terra in Territories.Cast<Territory>().Where(terra => terra != null))
+            foreach (var terra in Territories.Where(terra => terra != null))
             {
                 terra.Refresh();
             }

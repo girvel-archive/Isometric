@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{5E853DD8-DDC3-4F8C-9966-52CA5881CBCE}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>GameCore</RootNamespace>
+    <AssemblyName>GameCore</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <UseMSBuildEngine>False</UseMSBuildEngine>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug</OutputPath>
+    <DefineConstants>DEBUG;</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>full</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="VectorNet">
+      <HintPath>..\..\..\tools\VectorNet\bin\Release\VectorNet.dll</HintPath>
+    </Reference>
+    <Reference Include="EnumerableExtensions">
+      <HintPath>..\..\..\tools\EnumerableExtensions\bin\Release\EnumerableExtensions.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Modules\GlobalData.cs" />
+    <Compile Include="Modules\SingleRandom.cs" />
+    <Compile Include="Structures\LazyArray.cs" />
+    <Compile Include="Modules\WorldModule\Buildings\Building.cs" />
+    <Compile Include="Modules\WorldModule\Buildings\BuildingPattern.cs" />
+    <Compile Include="Modules\WorldModule\Buildings\BuildingType.cs" />
+    <Compile Include="Modules\WorldModule\Interfaces\IRefreshable.cs" />
+    <Compile Include="Modules\PlayerModule\Player.cs" />
+    <Compile Include="Structures\Graph.cs" />
+    <Compile Include="Structures\GraphNode.cs" />
+    <Compile Include="Modules\BuildingGraph.cs" />
+    <Compile Include="Modules\PlayerModule\Resources.cs" />
+    <Compile Include="Modules\WorldModule\Land\Territory.cs" />
+    <Compile Include="Modules\WorldModule\Land\TerritoryGenerationType.cs" />
+    <Compile Include="Modules\WorldModule\Land\TerritoryPattern.cs" />
+    <Compile Include="Modules\TimeModule\GameDate.cs" />
+    <Compile Include="Modules\TimeModule\GameSeason.cs" />
+    <Compile Include="Modules\TickModule\IIndependentChanging.cs" />
+    <Compile Include="Modules\TimeModule\GameDateManager.cs" />
+    <Compile Include="Modules\WorldModule\World.cs" />
+    <Compile Include="Modules\TickModule\ClocksManager.cs" />
+    <Compile Include="Modules\TickModule\IResourcesBonusChanging.cs" />
+    <Compile Include="Modules\TickModule\IResourcesChanging.cs" />
+    <Compile Include="Modules\PlayerModule\Leaders\Leader.cs" />
+    <Compile Include="Modules\PlayerModule\Leaders\LeaderPattern.cs" />
+    <Compile Include="Modules\PlayerModule\Leaders\Name.cs" />
+    <Compile Include="Modules\PlayerModule\Leaders\NamesGenerator.cs" />
+    <Compile Include="Extensions\DelegateExtensions.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <ItemGroup>
+    <Folder Include="Modules\" />
+    <Folder Include="Structures\" />
+    <Folder Include="Modules\WorldModule\" />
+    <Folder Include="Modules\WorldModule\Buildings\" />
+    <Folder Include="Modules\WorldModule\Interfaces\" />
+    <Folder Include="Modules\PlayerModule\" />
+    <Folder Include="Extensions\" />
+    <Folder Include="Modules\WorldModule\Land\" />
+    <Folder Include="Modules\TickModule\" />
+    <Folder Include="Modules\PlayerModule\Leaders\" />
+  </ItemGroup>
+</Project>

@@ -3,27 +3,17 @@ using SingleClass;
 
 namespace GameBasics
 {
-    public abstract class GameValues
+    public class GameValues
 	{
-        private static GameValues _instance;
-        public static GameValues Instance {
-            get {
-                if (_instance == null)
-                {
-                    _instance = GameValuesGenerator.Instance.Generate();
-                }
-
-                return _instance;
-            }
-        }
+        public static GameValues Instance { get; set; }
 
 
 
-        public abstract int StartWood { get; }
+        public int StartWood { get; set; }
 
-        public abstract int StartMeat { get; }
+        public int StartMeat { get; set; }
 
-        public abstract int StartGold { get; }
+        public int StartGold { get; set; }
 	}
 }
 

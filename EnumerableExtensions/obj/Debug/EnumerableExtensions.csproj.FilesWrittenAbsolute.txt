@@ -1,6 +1,0 @@
-/media/nik/Doc/projects/isogame/Visual/EnumerableExtensions/bin/Debug/EnumerableExtensions.dll
-/media/nik/Doc/projects/isogame/Visual/EnumerableExtensions/obj/Debug/EnumerableExtensions.dll
-/media/nik/Doc/projects/isogame/Visual/EnumerableExtensions/obj/Debug/.NETFramework,Version=v4.5.1.AssemblyAttribute.cs
-/media/nik/Doc/projects/isogame/Visual/EnumerableExtensions/bin/Debug/EnumerableExtensions.dll.mdb
-/media/nik/Doc/projects/isogame/Visual/EnumerableExtensions/obj/Debug/EnumerableExtensions.dll.mdb
-/media/nik/Doc/projects/isogame/Visual/EnumerableExtensions/obj/Debug/.NETFramework,Version=v4.5.AssemblyAttribute.cs
