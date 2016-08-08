@@ -59,11 +59,10 @@
     <Compile Include="PlayerClasses\Leaders\ResourceLeader.cs" />
     <Compile Include="PlayerClasses\ProgressElements\Hunting.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Main\GameRealization.cs" />
-    <Compile Include="Main\GameValuesRealization.cs" />
     <Compile Include="Main\PatternsRealization.cs" />
     <Compile Include="Main\TerritoryPatterns.cs" />
     <Compile Include="Main\WorldRealization.cs" />
+    <Compile Include="Main\GlobalDataRealization.cs" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />

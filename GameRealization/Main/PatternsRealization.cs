@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using CompressedStructures;
-using GameBasics.Buildings;
+using GameCore.Modules.WorldModule.Buildings;
 
 namespace GameRealization.Main
 {

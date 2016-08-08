@@ -4,6 +4,8 @@ using GameCore.Modules.TimeModule;
 
 namespace GameCore.Modules.PlayerModule.Leaders
 {
+    // TODO leader dna
+
 	[Serializable]
 	public class Leader : IIndependentChanging, IResourcesBonusChanging
 	{
@@ -46,7 +48,10 @@ namespace GameCore.Modules.PlayerModule.Leaders
 		{
 			Age += GlobalData.Instance.DaysInTick;
 
-			if (Age > 
+            if (Age > AgeMax)
+            {
+                Die();
+            }
 		}
 
 		#endregion

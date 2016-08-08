@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using GameCore.Modules.PlayerModule;
 
 namespace GameCore.Modules.WorldModule.Buildings
 {
@@ -7,23 +8,24 @@ namespace GameCore.Modules.WorldModule.Buildings
 	public class BuildingPattern
 	{
 		// TODO графику отдельно
-		public Action<Building> RefreshAction { get; set; } = args => { };
+		public Action<Building> TickIndependentAction { get; set; } = args => { };
+        public Func<Building, Resources> TickResourcesAction { get; set; } = args => { };
+        public Func<Building, Resources, Resources> TickResourcesBonusAction { get; set; } = args => { };
+
 
 		public Func<BuildingPattern, Building, bool> ChangeCondition { get; set; } 
-		public Dictionary<ResourceType, int> NeedResources { get; set; } 
+		public Resources NeedResources { get; set; } 
 
 		public BuildingType Type { get; set; }
 
-		public Dictionary<ResourceType, int> Resources { get; set; }
+		public Resources Resources { get; set; }
 
 
 
 		public BuildingPattern() {}
 
 		public BuildingPattern(
-			Dictionary<ResourceType, int> resources,
-			Dictionary<ResourceType, int> needResources,
-			BuildingType type = BuildingType.Nature)
+			Resources resources, Resources needResources, BuildingType type = BuildingType.Nature)
 		{
 			Resources = resources;
 			NeedResources = needResources;

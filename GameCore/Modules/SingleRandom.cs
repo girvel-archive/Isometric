@@ -1,5 +1,6 @@
 ﻿using System;
 using GameCore.Modules.TimeModule;
+using VectorNet;
 
 namespace GameCore.Modules
 {
@@ -57,6 +58,28 @@ namespace GameCore.Modules
 					max.TotalDays));
 		}
 
+        public static IntVector Next(IntVector min, IntVector max)
+        {
+#if DEBUG
+            if (min.Dimensions != max.Dimensions)
+            {
+                throw new ArgumentException("min and max vectors have different numbers of dimensions");
+            }
+#endif
+            IntVector result;
+            for (var i = 0; i < min.Dimensions; i++)
+            {
+#if DEBUG
+                if (min[i] > max[i])
+                {
+                    throw new ArgumentException($"min[{i}] is bigger than max[{i}]");
+                }
+#endif
+                result[i] = Instance.Next(min[i], max[i]);
+            }
+        }
+
+        public static IntVector Next(IntVector max) => Next(new IntVector(), max);
 	}
 }
 

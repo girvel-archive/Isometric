@@ -1,6 +1,8 @@
 ﻿using System;
 using GameCore.Modules.PlayerModule;
 using GameCore.Modules.TimeModule;
+using VectorNet;
+using GameCore.Extensions;
 
 namespace GameCore.Modules
 {
@@ -26,7 +28,12 @@ namespace GameCore.Modules
 				}
 				else
 				{
-					throw new ArgumentException("GlobalData.Instance is already set");
+                    var ex = new ArgumentException("GlobalData.Instance is already set");
+#if DEBUG
+					throw ex;
+#else
+                    OnUnknownException(_instance, new DelegateExtensions.ExceptionEventArgs(ex));
+#endif
 				}
 			}
 		}
@@ -38,20 +45,20 @@ namespace GameCore.Modules
 		public Resources DefaultPlayerResources;
 
 		public short TerritorySize;
+        public IntVector TerritoryVectorSize { get; private set; }
 
 
 
-		// FIXME Отделить реализацию GlobalData
-		public byte DaysInMonth = 60;
-		public byte DaysInWeek = 6;
-		public byte MonthsInYear = 6;
+		public byte DaysInMonth;
+		public byte DaysInWeek;
+		public byte MonthsInYear;
 
-		public short DaysInSeason = 90;
+        public short DaysInSeason { get; private set; }
 
-		public short DaysInYear = DaysInMonth * MonthsInYear;
-		public double WeeksInYear = DaysInYear / DaysInWeek;
+        public short DaysInYear { get; private set; }
+        public double WeeksInYear { get; private set; }
 
-		public short DaysInTick = 60;
+		public short DaysInTick;
 
 
 
@@ -60,6 +67,22 @@ namespace GameCore.Modules
 			MaximalNewLeaderAge,
 			MinimalLeaderLifeDuration,
 			MaximalLeaderLifeDuration;
+
+
+
+        public event EventHandler<DelegateExtensions.ExceptionEventArgs> OnUnknownException;
+
+
+
+        public void RefreshValues()
+        {
+            TerritoryVectorSize = new IntVector(TerritorySize, TerritorySize);
+
+            DaysInYear = DaysInMonth * MonthsInYear;
+            WeeksInYear = DaysInYear / DaysInWeek;
+
+            DaysInSeason = DaysInYear / typeof(GameSeason).GetEnumValues().Length;
+        }
 	}
 }
 

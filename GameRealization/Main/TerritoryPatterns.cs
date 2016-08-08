@@ -1,10 +1,11 @@
 ﻿using System;
-using GameBasics;
-using GameBasics.Buildings;
 using VectorNet;
-using VisualConsole;
 using System.Collections.Generic;
 using System.Linq;
+using GameCore.Modules.WorldModule.Land;
+using GameCore.Modules.WorldModule.Buildings;
+using GameCore.Modules.PlayerModule;
+using GameCore.Modules;
 
 namespace GameRealization.Main
 {
@@ -33,18 +34,13 @@ namespace GameRealization.Main
         {
             for (var i = 0; i < Territory.VillageHouses; i++)
             {
-                var randomPosition = new IntVector(
-                    GameRandom.Instance.Next(territory.SizeX),
-                    GameRandom.Instance.Next(territory.SizeY));
+                var randomPosition = SingleRandom.Next(GlobalData.Instance.TerritoryVectorSize);
 
                 if (territory[randomPosition]?.Pattern 
                     != PatternsRealization.WoodHouse)
                 {
                     territory[randomPosition] = new Building(
-                        randomPosition, 
-                        player, 
-                        territory, 
-                        PatternsRealization.WoodHouse);
+                        randomPosition, player, territory, PatternsRealization.WoodHouse);
                 }
             }
         }
@@ -56,9 +52,9 @@ namespace GameRealization.Main
         {
             var random = new Random(seed);
 
-            for (var y = 0; y < territory.SizeX; y++)
+            for (var y = 0; y < GlobalData.Instance.TerritorySize; y++)
             {
-                for (var x = 0; x < territory.SizeY; x++)
+                for (var x = 0; x < GlobalData.Instance.TerritorySize; x++)
                 {
                     var pos = new IntVector(x, y); 
 

@@ -1,11 +1,15 @@
 ﻿using System;
 using VectorNet;
 using GameCore.Modules.WorldModule.Interfaces;
+using GameCore.Modules.PlayerModule;
+using GameCore.Modules.WorldModule.Land;
+using System.Collections.Generic;
+using GameCore.Modules.TickModule;
 
 namespace GameCore.Modules.WorldModule.Buildings
 {
 	[Serializable]
-	public class Building : IRefreshable
+    public class Building : IIndependentChanging, IResourcesChanging, IResourcesBonusChanging
 	{
 		public BuildingPattern Pattern { get; set; }
 
@@ -46,43 +50,21 @@ namespace GameCore.Modules.WorldModule.Buildings
 
 
 
-		public void Refresh()
-		{
-			Pattern.RefreshAction?.Invoke(this);
-		}
-
-		public void TryUpgrade(BuildingPattern target)
+        public bool TryUpgrade(BuildingPattern target)
 		{
 			var foundedObjects = Owner.Game.BuildingGraph.Find(Pattern);
 
-			if (foundedObjects.Length > 1)
-			{ 
-				// TODO replace by bool field
-				throw new Exception("building graph can't contain one object twice");
-			}
-
-			if (!foundedObjects[0].IsParentOf(target))
+			if (!foundedObjects[0].IsParentOf(target)
+                || !target.ChangeCondition?.Invoke(Pattern, this) ?? false
+                || target.NeedResources.AllNotLessThan(Owner.CurrentResources))
 			{
 				return false;
 			}
 
-			if (!Pattern.ChangeCondition?.Invoke(Pattern, this) ?? false)
-			{
-				return false;
-			}
-
-			if (Pattern.NeedResources.Any(
-				resourcePair => Owner.CurrentResources.Resource[resourcePair.Key] < resourcePair.Value))
-			{
-				return false; // TODO определение причины на стороне клиента
-			}
-
-			foreach (var resourcePair in Pattern.NeedResources)
-			{
-				Owner.CurrentResources.Resource[resourcePair.Key] -= resourcePair.Value;
-			}
-
+            Owner.CurrentResources -= target.NeedResources;
 			InitFromPattern(target);
+
+            return true;
 		}
 
 
@@ -91,6 +73,27 @@ namespace GameCore.Modules.WorldModule.Buildings
 		{
 			Resources = new Dictionary<ResourceType, int>(Pattern.Resources);
 		}
+
+
+
+        #region Interfaces
+
+        void IIndependentChanging.Tick()
+        {
+            Pattern.TickIndependentAction?.Invoke(this);
+        }
+
+        Resources IResourcesChanging.Tick()
+        {
+            return Pattern.TickResourcesAction(this);
+        }
+
+        void IResourcesBonusChanging.Tick(ref Resources resources)
+        {
+            resources = Pattern.TickResourcesBonusAction(this, resources);
+        }
+
+        #endregion
 	}
 }
 

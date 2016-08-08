@@ -67,6 +67,7 @@
     <Compile Include="Modules\PlayerModule\Leaders\Name.cs" />
     <Compile Include="Modules\PlayerModule\Leaders\NamesGenerator.cs" />
     <Compile Include="Extensions\DelegateExtensions.cs" />
+    <Compile Include="Modules\ResourceType.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

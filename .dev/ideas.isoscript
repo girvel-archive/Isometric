@@ -1,0 +1,8 @@
+# Comment
+
+# Log writing:
+
+log.write("something happened")
+
+# To C#:
+# Log.Instance.Write("something happened");
