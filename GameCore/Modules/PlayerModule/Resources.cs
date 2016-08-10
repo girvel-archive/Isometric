@@ -77,6 +77,8 @@ namespace GameCore.Modules.PlayerModule
 			int wood = 0, 
 			int people = 0)
 		{
+            ResourcesArray = new int[typeof(ResourceType).GetEnumValues().Length];
+
 			Gold = gold;
 			Meat = meat;
 			Corn = corn;

@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CompressedStructures", "CompressedStructures\CompressedStructures.csproj", "{64EE5B69-4B32-4080-82A7-9E5F419DAFAA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameBasics", "GameBasics\GameBasics.csproj", "{57A7C47B-2A72-437B-8506-7A2D4B547C5B}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameCore", "GameCore\GameCore.csproj", "{5E853DD8-DDC3-4F8C-9966-52CA5881CBCE}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameRealization", "GameRealization\GameRealization.csproj", "{9E79462D-FC84-4BF7-A345-E152B10B996A}"
@@ -20,12 +18,6 @@ Global
 		Testing|Any CPU = Testing|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{57A7C47B-2A72-437B-8506-7A2D4B547C5B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{57A7C47B-2A72-437B-8506-7A2D4B547C5B}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{57A7C47B-2A72-437B-8506-7A2D4B547C5B}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{57A7C47B-2A72-437B-8506-7A2D4B547C5B}.Release|Any CPU.Build.0 = Release|Any CPU
-		{57A7C47B-2A72-437B-8506-7A2D4B547C5B}.Testing|Any CPU.ActiveCfg = Testing|Any CPU
-		{57A7C47B-2A72-437B-8506-7A2D4B547C5B}.Testing|Any CPU.Build.0 = Testing|Any CPU
 		{5E853DD8-DDC3-4F8C-9966-52CA5881CBCE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{5E853DD8-DDC3-4F8C-9966-52CA5881CBCE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5E853DD8-DDC3-4F8C-9966-52CA5881CBCE}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -60,7 +52,7 @@ Global
 	GlobalSection(MonoDevelopProperties) = preSolution
 		Policies = $0
 		$0.DotNetNamingPolicy = $1
-		$1.DirectoryNamespaceAssociation = None
+		$1.DirectoryNamespaceAssociation = PrefixedHierarchical
 		$1.ResourceNamePolicy = FileFormatDefault
 		$0.TextStylePolicy = $2
 		$2.FileWidth = 120

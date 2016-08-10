@@ -19,7 +19,7 @@ namespace GameCore.Modules.WorldModule.Buildings
 
 		public int PeopleNow { get; set; }
 
-		public Dictionary<ResourceType, int> Resources { get; set; }
+		public Resources Resources { get; set; }
 
 
 
@@ -52,10 +52,10 @@ namespace GameCore.Modules.WorldModule.Buildings
 
         public bool TryUpgrade(BuildingPattern target)
 		{
-			var foundedObjects = Owner.Game.BuildingGraph.Find(Pattern);
+            var foundedObjects = BuildingGraph.Instance.Find(Pattern);
 
 			if (!foundedObjects[0].IsParentOf(target)
-                || !target.ChangeCondition?.Invoke(Pattern, this) ?? false
+                || (!target.ChangeCondition?.Invoke(Pattern, this) ?? false)
                 || target.NeedResources.AllNotLessThan(Owner.CurrentResources))
 			{
 				return false;
@@ -71,7 +71,7 @@ namespace GameCore.Modules.WorldModule.Buildings
 
 		protected void InitFromPattern(BuildingPattern pattern)
 		{
-			Resources = new Dictionary<ResourceType, int>(Pattern.Resources);
+			Resources = Pattern.Resources;
 		}
 
 
@@ -85,12 +85,12 @@ namespace GameCore.Modules.WorldModule.Buildings
 
         Resources IResourcesChanging.Tick()
         {
-            return Pattern.TickResourcesAction(this);
+            return Pattern.TickResourcesAction?.Invoke(this) ?? new Resources();
         }
 
         void IResourcesBonusChanging.Tick(ref Resources resources)
         {
-            resources = Pattern.TickResourcesBonusAction(this, resources);
+            Pattern.TickResourcesBonusAction?.Invoke(this, ref resources);
         }
 
         #endregion

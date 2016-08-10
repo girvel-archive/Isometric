@@ -1,4 +1,6 @@
 ﻿using System;
+using GameCore.Modules.PlayerModule;
+using GameCore.Modules.TickModule;
 
 namespace GameCore.Modules.WorldModule.Land
 {
@@ -12,7 +14,7 @@ namespace GameCore.Modules.WorldModule.Land
 
 		public Action<Territory, Player> GenerateVillage { get; set; }
 
-		public Action<Territory> Refresh { get; set; }
+		public Action<Territory> Tick { get; set; }
 
 
 
@@ -23,11 +25,11 @@ namespace GameCore.Modules.WorldModule.Land
 			Action<Territory, Player> generateVillage)
 			: this()
 		{
-			Refresh = territory =>
+			Tick = territory =>
 			{
-				foreach (var building in territory)
+                foreach (IIndependentChanging building in territory.BuildingGrid)
 				{
-					building.Refresh();
+					building.Tick();
 				}
 			};
 

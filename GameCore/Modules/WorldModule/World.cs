@@ -3,12 +3,48 @@ using GameCore.Structures;
 using GameCore.Modules.WorldModule;
 using GameCore.Modules.PlayerModule;
 using VectorNet;
+using GameCore.Modules.WorldModule.Land;
 
 namespace GameCore.Modules.WorldModule
 {
 	[Serializable]
 	public class World
 	{
+        #region Data singleton
+
+        [Obsolete("using backing field")]
+        private static WorldData _data;
+
+        #pragma warning disable 0618
+
+        public static WorldData Data {
+            get {
+                if (_data == null)
+                {
+                    _data = new WorldData();
+                }
+
+                return _data;
+            }
+
+            set {
+                #if DEBUG
+                if (_data != null)
+                {
+                    throw new ArgumentException("Data is already set");
+                }
+                #endif
+
+                _data = value;
+            }
+        }
+
+        #pragma warning restore 0618
+
+        #endregion
+
+
+
 		#region Singleton-part
 
 		private static World _instance;
@@ -26,8 +62,8 @@ namespace GameCore.Modules.WorldModule
 		private World() 
 		{
 			LandGrid = new LazyArray<Territory>(
-				GlobalData.Instance.TerritorySize,
-				GlobalData.Instance.TerritorySize,
+				Data.TerritorySize,
+				Data.TerritorySize,
 				_generateTerritory);
 		}
 
@@ -39,9 +75,9 @@ namespace GameCore.Modules.WorldModule
 
 
 
-		public static Func<Player, Territory> NewPlayerTerritory { get; set; }
+		public Func<Player, Territory> NewPlayerTerritory { get; set; }
 
-		private static Func<IntVector, Territory> _generateTerritory { get; set; }
+		private Func<IntVector, Territory> _generateTerritory { get; set; }
 	}
 }
 

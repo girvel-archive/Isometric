@@ -7,11 +7,14 @@ namespace GameCore.Modules.WorldModule.Buildings
 	[Serializable]
 	public class BuildingPattern
 	{
-		// TODO графику отдельно
-		public Action<Building> TickIndependentAction { get; set; } = args => { };
-        public Func<Building, Resources> TickResourcesAction { get; set; } = args => { };
-        public Func<Building, Resources, Resources> TickResourcesBonusAction { get; set; } = args => { };
+        public delegate void BonusTickAction(Building building, ref Resources resources);
 
+		// TODO графику отдельно
+		public Action<Building> TickIndependentAction { get; set; }
+
+        public Func<Building, Resources> TickResourcesAction { get; set; }
+
+        public BonusTickAction TickResourcesBonusAction { get; set; }
 
 		public Func<BuildingPattern, Building, bool> ChangeCondition { get; set; } 
 		public Resources NeedResources { get; set; } 
@@ -22,6 +25,7 @@ namespace GameCore.Modules.WorldModule.Buildings
 
 
 
+        [Obsolete("using serialization ctor", true)]
 		public BuildingPattern() {}
 
 		public BuildingPattern(

@@ -47,7 +47,7 @@ namespace GameRealization.Main
                 BuildingType.Building,
                 new Dictionary<ResourceType, int>(), 
                 new Dictionary<ResourceType, int>()) {
-                    RefreshAction = args => { },
+                    TickIndependentAction = args => { },
                 };
 
             WoodHouse2 = new BuildingPattern(
@@ -55,7 +55,7 @@ namespace GameRealization.Main
                 BuildingType.Building,
                 new Dictionary<ResourceType, int>(),
                 new Dictionary<ResourceType, int>()) {
-                    RefreshAction = args => { },
+                    TickIndependentAction = args => { },
                 };
         }
     }

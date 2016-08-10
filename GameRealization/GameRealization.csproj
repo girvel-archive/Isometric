@@ -63,6 +63,10 @@
     <Compile Include="Main\TerritoryPatterns.cs" />
     <Compile Include="Main\WorldRealization.cs" />
     <Compile Include="Main\GlobalDataRealization.cs" />
+    <Compile Include="Modules\DataRealization\TimeDataRealization.cs" />
+    <Compile Include="Modules\DataRealization\TickDataRealization.cs" />
+    <Compile Include="Modules\DataRealization\PlayerDataRealization.cs" />
+    <Compile Include="Modules\DataRealization\WorldDataRealization.cs" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
@@ -77,6 +81,8 @@
   -->
   <ItemGroup>
     <Folder Include="Main\" />
+    <Folder Include="Modules\" />
+    <Folder Include="Modules\DataRealization\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CompressedStructures\CompressedStructures.csproj">

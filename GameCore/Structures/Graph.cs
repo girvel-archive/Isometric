@@ -21,7 +21,7 @@ namespace GameBasics.Structures
             }
         }
 
-		public GraphNode<T>[] GetNodes => _nodes.ToArray();
+        public GraphNode<T>[] NodesCopy => _nodes.ToArray();
 
 		private List<GraphNode<T>> _nodes = new List<GraphNode<T>>();
         private GraphNode<T> _root;
@@ -31,6 +31,7 @@ namespace GameBasics.Structures
 		/// <summary>
 		/// Serialization ctor. Don't use it in code!
 		/// </summary>
+        [Obsolete("using serialization ctor", true)]
 		public Graph() {}
 
 		public Graph(bool checkIdentity)
@@ -68,11 +69,16 @@ namespace GameBasics.Structures
                     select node).ToArray();
         } 
 
-		public bool TryAddNode(GraphNode<T> node)
+        /// <summary>
+        /// Tries to add node to node list;
+        /// </summary>
+        /// <returns><c>true</c>, if add node was tryed, <c>false</c> if list already contains it.</returns>
+        /// <param name="item">new item</param>
+		public bool TryAddNode(GraphNode<T> item)
 		{
-			if (!_nodes.Contains(node))
+            if (!_nodes.Contains(item))
 			{
-				_nodes.Add(node);
+                _nodes.Add(item);
 				return true;
 			}
 

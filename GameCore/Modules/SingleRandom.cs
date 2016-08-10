@@ -53,7 +53,7 @@ namespace GameCore.Modules
 		public static GameDate Next(GameDate min, GameDate max)
 		{
 			return new GameDate(
-				Instance.Next(
+                Instance.Next(
 					min.TotalDays,
 					max.TotalDays));
 		}
@@ -66,7 +66,7 @@ namespace GameCore.Modules
                 throw new ArgumentException("min and max vectors have different numbers of dimensions");
             }
 #endif
-            IntVector result;
+            IntVector result = new IntVector(min.Coordinates);
             for (var i = 0; i < min.Dimensions; i++)
             {
 #if DEBUG
@@ -77,6 +77,8 @@ namespace GameCore.Modules
 #endif
                 result[i] = Instance.Next(min[i], max[i]);
             }
+
+            return result;
         }
 
         public static IntVector Next(IntVector max) => Next(new IntVector(), max);

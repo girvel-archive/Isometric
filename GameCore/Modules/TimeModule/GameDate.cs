@@ -5,19 +5,54 @@ namespace GameCore.Modules.TimeModule
 	[Serializable]
 	public struct GameDate
 	{
-		public long TotalDays;
+        #region Data singleton
 
-		public int Year => Math.Floor((double)TotalDay / GlobalData.Instance.DaysInYear);
+        [Obsolete("using backing field")]
+        private static TimeData _data;
 
-		public int TotalMonth => Math.Floor((double)TotalDay / GlobalData.Instance.DaysInMonth);
+        #pragma warning disable 0618
 
-		public int Month => TotalMonth % GlobalData.Instance.MonthsInYear;
+        public static TimeData Data {
+            get {
+                if (_data == null)
+                {
+                    _data = new TimeData();
+                }
 
-		public int TotalWeek => Math.Floor((double)TotalDay / GlobalData.Instance.DaysInWeek);
+                return _data;
+            }
 
-		public int Week => TotalWeek % GlobalData.Instance.WeeksInYear;
+            set {
+                #if DEBUG
+                if (_data != null)
+                {
+                    throw new ArgumentException("Data is already set");
+                }
+                #endif
 
-		public GameSeason Season => Math.Floor((double)TotalDay / GlobalData.Instance.DaysInSeason);
+                _data = value;
+            }
+        }
+
+        #pragma warning restore 0618
+
+        #endregion
+
+
+
+		public int TotalDays;
+
+        public int Year => (int)Math.Floor((double)TotalDays / Data.DaysInYear);
+
+        public int TotalMonth => (int)Math.Floor((double)TotalDays / Data.DaysInMonth);
+
+        public int Month => (int)TotalMonth % Data.MonthsInYear;
+
+        public int TotalWeek => (int)Math.Floor((double)TotalDays / Data.DaysInWeek);
+
+        public int Week => TotalWeek % (int)Math.Floor(Data.WeeksInYear);
+
+        public GameSeason Season => (GameSeason)Math.Floor((double)TotalDays / Data.DaysInSeason);
 
 
 

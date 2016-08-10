@@ -3,6 +3,7 @@ using GameCore.Modules.PlayerModule;
 using GameCore.Modules.TimeModule;
 using VectorNet;
 using GameCore.Extensions;
+using GameCore.Modules.WorldModule.Buildings;
 
 namespace GameCore.Modules
 {
@@ -42,46 +43,12 @@ namespace GameCore.Modules
 
 
 
-		public Resources DefaultPlayerResources;
-
-		public short TerritorySize;
-        public IntVector TerritoryVectorSize { get; private set; }
-
-
-
-		public byte DaysInMonth;
-		public byte DaysInWeek;
-		public byte MonthsInYear;
-
-        public short DaysInSeason { get; private set; }
-
-        public short DaysInYear { get; private set; }
-        public double WeeksInYear { get; private set; }
-
-		public short DaysInTick;
-
-
-
-		public GameDate 
-			MinimalNewLeaderAge,
-			MaximalNewLeaderAge,
-			MinimalLeaderLifeDuration,
-			MaximalLeaderLifeDuration;
-
-
-
-        public event EventHandler<DelegateExtensions.ExceptionEventArgs> OnUnknownException;
+        public EventHandler<DelegateExtensions.ExceptionEventArgs> OnUnknownException;
 
 
 
         public void RefreshValues()
         {
-            TerritoryVectorSize = new IntVector(TerritorySize, TerritorySize);
-
-            DaysInYear = DaysInMonth * MonthsInYear;
-            WeeksInYear = DaysInYear / DaysInWeek;
-
-            DaysInSeason = DaysInYear / typeof(GameSeason).GetEnumValues().Length;
         }
 	}
 }

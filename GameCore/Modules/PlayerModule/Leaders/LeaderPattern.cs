@@ -5,13 +5,16 @@ namespace GameCore.Modules.PlayerModule.Leaders
 	[Serializable]
 	public class LeaderPattern
 	{
-		public Action<Leader> OnRefresh { get; set; }
+        public delegate void BonusResourcesTickAction(Leader leader, ref Resources resources);
+
+		public Action<Leader> Tick { get; set; }
+        public BonusResourcesTickAction BonusTick { get; set; }
 
 		public LeaderPattern() {}
 
-		public LeaderPattern(Action<Leader> onRefresh)
+		public LeaderPattern(Action<Leader> tick)
 		{
-			OnRefresh = onRefresh;
+			Tick = tick;
 		}
 	}
 }

@@ -14,7 +14,7 @@ namespace GameCore.Modules
 			get {
 				if (_instance == null)
 				{
-					_instance = new Graph<BuildingPattern>();
+					_instance = new Graph<BuildingPattern>(true);
 				}
 
 				return _instance;

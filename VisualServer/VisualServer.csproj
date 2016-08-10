@@ -77,10 +77,6 @@
       <Project>{64EE5B69-4B32-4080-82A7-9E5F419DAFAA}</Project>
       <Name>CompressedStructures</Name>
     </ProjectReference>
-    <ProjectReference Include="..\GameBasics\GameBasics.csproj">
-      <Project>{57A7C47B-2A72-437B-8506-7A2D4B547C5B}</Project>
-      <Name>GameBasics</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

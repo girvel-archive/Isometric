@@ -67,7 +67,11 @@
     <Compile Include="Modules\PlayerModule\Leaders\Name.cs" />
     <Compile Include="Modules\PlayerModule\Leaders\NamesGenerator.cs" />
     <Compile Include="Extensions\DelegateExtensions.cs" />
-    <Compile Include="Modules\ResourceType.cs" />
+    <Compile Include="Modules\WorldModule\WorldData.cs" />
+    <Compile Include="Modules\PlayerModule\PlayerData.cs" />
+    <Compile Include="Modules\PlayerModule\ResourceType.cs" />
+    <Compile Include="Modules\TimeModule\TimeData.cs" />
+    <Compile Include="Modules\TickModule\TickData.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
@@ -82,4 +86,13 @@
     <Folder Include="Modules\TickModule\" />
     <Folder Include="Modules\PlayerModule\Leaders\" />
   </ItemGroup>
+  <ProjectExtensions>
+    <MonoDevelop>
+      <Properties>
+        <Policies>
+          <DotNetNamingPolicy DirectoryNamespaceAssociation="PrefixedHierarchical" ResourceNamePolicy="FileFormatDefault" />
+        </Policies>
+      </Properties>
+    </MonoDevelop>
+  </ProjectExtensions>
 </Project>

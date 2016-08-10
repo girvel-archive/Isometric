@@ -27,12 +27,12 @@ namespace GameCore.Modules.PlayerModule.Leaders
 			this.Name = NamesGenerator.Instance.Generate();
 
 			Age = SingleRandom.Next(
-				GlobalData.Instance.MinimalNewLeaderAge,
-				GlobalData.Instance.MaximalNewLeaderAge);
+                Player.Data.MinimalNewLeaderAge,
+                Player.Data.MaximalNewLeaderAge);
 
 			AgeMax = Age + SingleRandom.Next(
-				GlobalData.Instance.MinimalLeaderLifeDuration,
-				GlobalData.Instance.MaximalLeaderLifeDuration);
+                Player.Data.MinimalLeaderLifeDuration,
+                Player.Data.MaximalLeaderLifeDuration);
 		}
 
 		public void Die()
@@ -46,13 +46,18 @@ namespace GameCore.Modules.PlayerModule.Leaders
 
 		void IIndependentChanging.Tick()
 		{
-			Age += GlobalData.Instance.DaysInTick;
+            Age += ClocksManager.Data.DaysInTick;
 
             if (Age > AgeMax)
             {
                 Die();
             }
 		}
+
+        void IResourcesBonusChanging.Tick(ref Resources resources)
+        {
+            Pattern.BonusTick(this, ref resources);
+        }
 
 		#endregion
 	}

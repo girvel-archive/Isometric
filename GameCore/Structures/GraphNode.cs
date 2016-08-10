@@ -14,8 +14,9 @@ namespace GameBasics.Structures
 
 
 		/// <summary>
-		/// Serialization ctor. Don't use it in code!
+		/// Serialization ctor.
 		/// </summary>
+        [Obsolete("Using serialization ctor", true)]
 		public GraphNode() {}
 
 		public GraphNode(T value, Graph<T> parentGraph)
@@ -29,10 +30,17 @@ namespace GameBasics.Structures
 
         public void Add(GraphNode<T> child)
         {
-            if (!ParentGraph.Nodes.Contains(child))
+            #if !DEBUG
+            ParentGraph.TryAddNode(child);
+            #else
+            if (!ParentGraph.TryAddNode(child)
+                && Children.Contains(child) 
+                && ParentGraph.CheckIdentity)
             {
-                ParentGraph.Nodes.Add(child);
+                throw new ArgumentException("Node already has this child");
             }
+            #endif
+
             Children.Add(child);
         }
 

@@ -11,6 +11,41 @@ namespace GameCore.Modules.PlayerModule
 	[Serializable]
 	public class Player : IIndependentChanging
 	{
+        #region Data singleton
+
+        [Obsolete("using backing field")]
+        private static PlayerData _data;
+
+        #pragma warning disable 618
+
+        public static PlayerData Data {
+            get {
+                if (_data == null)
+                {
+                    _data = new PlayerData();
+                }
+
+                return _data;
+            }
+
+            set {
+                #if DEBUG
+                if (_data != null)
+                {
+                    throw new ArgumentException("Data is already set");
+                }
+                #endif
+
+                _data = value;
+            }
+        }
+
+        #pragma warning restore 618
+
+        #endregion
+
+
+
 		public class RefreshEventArgs : EventArgs
 		{
 			public Player Owner { get; }
@@ -26,16 +61,17 @@ namespace GameCore.Modules.PlayerModule
 		public static Player Nature { get; }
 		public static Player Enemy { get; }
 
-		public string Name { get; private set; }
+        public string Name { get; set; }
 
 		public List<Building> OwnedBuildings { get; }
-		public Leader MainLeader { get; set; }
-		public Resources CurrentResources { get; }
 
-		public Territory Territory { get; }
+        // TODO Player's leader
+
+        public Resources CurrentResources { get; set; }
+
+        public Territory Territory { get; set; }
 
 		public event EventHandler<RefreshEventArgs> OnRefresh;
-		public event EventHandler<DelegateExtensions.ExceptionEventArgs> OnException;
 
 
 
@@ -62,7 +98,7 @@ namespace GameCore.Modules.PlayerModule
 
 			this.Territory = World.Instance.NewPlayerTerritory(this);
 
-			CurrentResources = GlobalData.Instance.DefaultPlayerResources;
+			CurrentResources = Data.DefaultPlayerResources;
 		}
 
 
@@ -74,7 +110,7 @@ namespace GameCore.Modules.PlayerModule
 				subject.Tick();
 			}
 
-			Resources resourcesDelta;
+            Resources resourcesDelta = new Resources();
 			foreach (var subject in ResourceSubjects)
 			{
 				resourcesDelta += subject.Tick();
@@ -85,7 +121,7 @@ namespace GameCore.Modules.PlayerModule
 				subject.Tick(ref resourcesDelta);
 			}
 
-			OnRefresh.SafeInvoke(this, new RefreshEventArgs(this), OnException);
+            OnRefresh.SafeInvoke(this, new RefreshEventArgs(this), GlobalData.Instance.OnUnknownException);
 		}
 	}
 }

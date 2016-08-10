@@ -37,13 +37,13 @@ namespace GameCore.Modules.TimeModule
 
 		public static GameDate CurrentDate => Instance.Current;
 
-		public GameDate Current { get; private set; }
+        private GameDate Current;
 
 
 
 		void IIndependentChanging.Tick()
 		{
-			Current.TotalDays += GlobalData.Instance.DaysInTick;
+            Current.TotalDays += ClocksManager.Data.DaysInTick;
 		}
 	}
 }

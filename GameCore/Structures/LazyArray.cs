@@ -51,7 +51,7 @@ namespace GameCore.Structures
 
 		#region Interfaces 
 
-		public int Count => _array.Count;
+		public int Count => _array.Length;
 
 		public bool IsSynchronized => _array.IsSynchronized;
 
@@ -74,9 +74,9 @@ namespace GameCore.Structures
 			return _array.Clone();
 		}
 
-		public void CopyTo(Array array, long index)
+		public void CopyTo(Array array, int index)
 		{
-			_array.CopyTo(array, index);
+            _array.CopyTo(array, (long)index);
 		}
 
 		#endregion
