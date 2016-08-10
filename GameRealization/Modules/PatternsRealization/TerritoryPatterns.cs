@@ -7,7 +7,7 @@ using GameCore.Modules.WorldModule.Buildings;
 using GameCore.Modules.PlayerModule;
 using GameCore.Modules;
 
-namespace GameRealization.Main
+namespace GameRealization.Modules.PatternsRealization
 {
     [Serializable]
     public static class TerritoryPatterns
@@ -23,7 +23,7 @@ namespace GameRealization.Main
                 (terr, seed) => _defaultGeneration(terr, seed, 
                     new Dictionary<int, BuildingPattern> 
                     {
-                        [1] = PatternsRealization.Forest,
+                        [1] = BuildingPatterns.Forest,
                     }),
                 _defaultVillageGeneration);
         }
@@ -37,10 +37,10 @@ namespace GameRealization.Main
                 var randomPosition = SingleRandom.Next(GlobalData.Instance.TerritoryVectorSize);
 
                 if (territory[randomPosition]?.Pattern 
-                    != PatternsRealization.WoodHouse)
+                    != BuildingPatterns.WoodHouse)
                 {
                     territory[randomPosition] = new Building(
-                        randomPosition, player, territory, PatternsRealization.WoodHouse);
+                        randomPosition, player, territory, BuildingPatterns.WoodHouse);
                 }
             }
         }

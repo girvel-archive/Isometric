@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace GameCore.Modules.PlayerModule
+namespace CommonStructures
 {
 	[Serializable]
 	public struct Resources
@@ -106,24 +106,26 @@ namespace GameCore.Modules.PlayerModule
 
 		public static Resources operator +(Resources r1, Resources r2)
 		{
-			return new Resources(
-				r1.Gold + r2.Gold,
-				r1.Meat + r2.Meat,
-				r1.Corn + r2.Corn,
-				r1.Stone + r2.Stone,
-				r1.Wood + r2.Wood,
-				r1.People + r2.People);
+            var result = new Resources();
+
+            for (var i = 0; i < result.ResourcesArray.Length; i++)
+            {
+                result.ResourcesArray[i] = r1.ResourcesArray[i] + r2.ResourcesArray[i];
+            }
+
+            return result;
 		}
 
 		public static Resources operator -(Resources r1, Resources r2)
 		{
-            return new Resources(
-                r1.Gold - r2.Gold,
-                r1.Meat - r2.Meat,
-                r1.Corn - r2.Corn,
-                r1.Stone - r2.Stone,
-                r1.Wood - r2.Wood,
-                r1.People - r2.People);
+            var result = new Resources();
+
+            for (var i = 0; i < result.ResourcesArray.Length; i++)
+            {
+                result.ResourcesArray[i] = r1.ResourcesArray[i] - r2.ResourcesArray[i];
+            }
+
+            return result;
         }
 	}
 }

@@ -1,28 +1,28 @@
 ﻿<Properties StartupItem="VisualClient/VisualClient.csproj" GitUserInfo="UsingGIT">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="GameRealization/Modules/DataRealization/TickDataRealization.cs">
+  <MonoDevelop.Ide.Workbench>
     <Files>
-      <File FileName="GameRealization/Modules/DataRealization/TimeDataRealization.cs" Line="18" Column="56" />
-      <File FileName="GameCore/Modules/TimeModule/TimeData.cs" Line="46" Column="56" />
-      <File FileName="GameRealization/Main/GlobalDataRealization.cs" Line="12" Column="13" />
-      <File FileName="GameCore/Modules/TickModule/TickData.cs" Line="44" Column="13" />
-      <File FileName="GameRealization/Modules/DataRealization/TickDataRealization.cs" Line="15" Column="56" />
-      <File FileName="GameRealization/Modules/DataRealization/PlayerDataRealization.cs" Line="1" Column="1" />
+      <File FileName="CompressedStructures/CommonResources.cs" Line="22" Column="53" />
+      <File FileName="GameCore/Modules/TickModule/IResourcesChanging.cs" Line="9" Column="7" />
+      <File FileName="GameCore/Modules/TickModule/IResourcesBonusChanging.cs" Line="9" Column="23" />
+      <File FileName="GameCore/Modules/TickModule/IIndependentChanging.cs" Line="1" Column="1" />
+      <File FileName="GameCore/Modules/TickModule/ClocksManager.cs" Line="9" Column="40" />
+      <File FileName="GameCore/Modules/WorldModule/Buildings/Building.cs" Line="87" Column="12" />
+      <File FileName="GameCore/Modules/WorldModule/Buildings/BuildingPattern.cs" Line="11" Column="74" />
+      <File FileName="GameCore/Modules/PlayerModule/Player.cs" Line="71" Column="20" />
+      <File FileName="GameCore/Modules/PlayerModule/Leaders/Leader.cs" Line="58" Column="50" />
+      <File FileName="GameCore/Modules/PlayerModule/Leaders/LeaderPattern.cs" Line="9" Column="80" />
+      <File FileName="GameCore/Modules/PlayerModule/PlayerData.cs" Line="14" Column="9" />
+      <File FileName="GameCore/Modules/TimeModule/GameDate.cs" Line="3" Column="38" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
           <Node name="Visual" expanded="True">
-            <Node name="GameBasics" expanded="True" />
-            <Node name="GameCore" expanded="True">
+            <Node name="CommonStructures" expanded="True" selected="True" />
+            <Node name="GameCore" expanded="True" />
+            <Node name="GameRealization" expanded="True">
               <Node name="Modules" expanded="True" />
-              <Node name="Structures" expanded="True" />
-            </Node>
-            <Node name="GameRealization" expanded="True" selected="True">
-              <Node name="Main" expanded="True" />
-              <Node name="Modules" expanded="True">
-                <Node name="DataRealization" expanded="True" />
-              </Node>
             </Node>
           </Node>
         </State>

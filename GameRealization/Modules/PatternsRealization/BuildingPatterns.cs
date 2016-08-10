@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using CompressedStructures;
 using GameCore.Modules.WorldModule.Buildings;
 
-namespace GameRealization.Main
+namespace GameRealization.Modules.PatternsRealization
 {
     [Serializable]
-    public static class PatternsRealization
+    public static class BuildingPatterns
     {
         public static BuildingPattern Plain { get; }
         public static BuildingPattern Rock { get; }
@@ -17,7 +17,7 @@ namespace GameRealization.Main
 
 
 
-        static PatternsRealization()
+        static BuildingPatterns()
         {
             Plain = new BuildingPattern(
                 "Plain", ConsoleColor.DarkGreen, '.',

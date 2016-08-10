@@ -55,18 +55,14 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="PlayerClasses\Leaders\MeatLeader.cs" />
-    <Compile Include="PlayerClasses\Leaders\ResourceLeader.cs" />
-    <Compile Include="PlayerClasses\ProgressElements\Hunting.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Main\PatternsRealization.cs" />
-    <Compile Include="Main\TerritoryPatterns.cs" />
-    <Compile Include="Main\WorldRealization.cs" />
-    <Compile Include="Main\GlobalDataRealization.cs" />
     <Compile Include="Modules\DataRealization\TimeDataRealization.cs" />
     <Compile Include="Modules\DataRealization\TickDataRealization.cs" />
     <Compile Include="Modules\DataRealization\PlayerDataRealization.cs" />
     <Compile Include="Modules\DataRealization\WorldDataRealization.cs" />
+    <Compile Include="Modules\DataRealization\GlobalDataRealization.cs" />
+    <Compile Include="Modules\PatternsRealization\BuildingPatterns.cs" />
+    <Compile Include="Modules\PatternsRealization\TerritoryPatterns.cs" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
@@ -80,18 +76,17 @@
   </Target>
   -->
   <ItemGroup>
-    <Folder Include="Main\" />
     <Folder Include="Modules\" />
     <Folder Include="Modules\DataRealization\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\CompressedStructures\CompressedStructures.csproj">
-      <Project>{64EE5B69-4B32-4080-82A7-9E5F419DAFAA}</Project>
-      <Name>CompressedStructures</Name>
-    </ProjectReference>
     <ProjectReference Include="..\GameCore\GameCore.csproj">
       <Project>{5E853DD8-DDC3-4F8C-9966-52CA5881CBCE}</Project>
       <Name>GameCore</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CompressedStructures\CommonStructures.csproj">
+      <Project>{64EE5B69-4B32-4080-82A7-9E5F419DAFAA}</Project>
+      <Name>CommonStructures</Name>
     </ProjectReference>
   </ItemGroup>
 </Project>

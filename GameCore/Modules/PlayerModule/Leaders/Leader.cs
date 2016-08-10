@@ -1,6 +1,7 @@
 ﻿using System;
 using GameCore.Modules.TickModule;
 using GameCore.Modules.TimeModule;
+using CompressedStructures;
 
 namespace GameCore.Modules.PlayerModule.Leaders
 {

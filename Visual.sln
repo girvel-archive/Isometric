@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CompressedStructures", "CompressedStructures\CompressedStructures.csproj", "{64EE5B69-4B32-4080-82A7-9E5F419DAFAA}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CommonStructures", "CompressedStructures\CommonStructures.csproj", "{64EE5B69-4B32-4080-82A7-9E5F419DAFAA}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameCore", "GameCore\GameCore.csproj", "{5E853DD8-DDC3-4F8C-9966-52CA5881CBCE}"
 EndProject

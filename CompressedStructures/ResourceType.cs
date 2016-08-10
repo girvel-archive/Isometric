@@ -1,16 +1,15 @@
 ﻿using System;
 
-namespace CompressedStructures
+namespace CommonStructures
 {
-    [Serializable]
-    public enum ResourceType
-    {
-        Wood,
+    public enum ResourceType : byte
+	{
+        Gold,
         Meat,
         Corn,
         Stone,
-        Gold,
-        Progress,
+        Wood,
         People,
-    }
+	}
 }
+

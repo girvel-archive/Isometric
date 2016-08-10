@@ -1,21 +1,14 @@
-﻿using CommandInterface;
-using System;
+﻿using System;
 using System.Text;
 using VectorNet;
 
-namespace CompressedStructures
+namespace CommonStructures
 {
     [Serializable]
-    public class CommonBuilding : ICompressable
+    public class CommonBuilding
     {
         public string Name { get; set; }
         public IntVector Position { get; set; }
-
-
-
-        public byte[] GetBytes => Encoding.ASCII.GetBytes(GetString);
-
-        public string GetString => $"[{Name};{Position.GetString}]";
 
 
 
@@ -25,19 +18,7 @@ namespace CompressedStructures
             Position = position;
         }
 
+        [Obsolete("using serialization ctor", true)]
         public CommonBuilding() { }
-
-
-
-        public static CommonBuilding GetFromBytes(byte[] bytes)
-            => GetFromString(Encoding.ASCII.GetString(bytes));
-
-        public static CommonBuilding GetFromString(string @string)
-        {
-            var data = @string.ParseType("[name;position]");
-            return new CommonBuilding(
-                data["name"],
-                IntVector.GetFromBytes(Encoding.ASCII.GetBytes(data["position"])));
-        }
     }
 }

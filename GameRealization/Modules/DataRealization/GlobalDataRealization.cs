@@ -2,7 +2,7 @@
 using GameCore.Modules;
 using GameCore.Modules.PlayerModule;
 
-namespace GameRealization.Main
+namespace GameRealization.Modules.DataRealization
 {
     public static class GlobalDataRealization
 	{

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using GameCore.Modules.PlayerModule;
+using CompressedStructures;
 
 namespace GameCore.Modules.WorldModule.Buildings
 {

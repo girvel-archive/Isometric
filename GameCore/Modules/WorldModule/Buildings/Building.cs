@@ -5,6 +5,7 @@ using GameCore.Modules.PlayerModule;
 using GameCore.Modules.WorldModule.Land;
 using System.Collections.Generic;
 using GameCore.Modules.TickModule;
+using CompressedStructures;
 
 namespace GameCore.Modules.WorldModule.Buildings
 {

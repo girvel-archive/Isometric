@@ -50,7 +50,6 @@
     <Compile Include="Structures\Graph.cs" />
     <Compile Include="Structures\GraphNode.cs" />
     <Compile Include="Modules\BuildingGraph.cs" />
-    <Compile Include="Modules\PlayerModule\Resources.cs" />
     <Compile Include="Modules\WorldModule\Land\Territory.cs" />
     <Compile Include="Modules\WorldModule\Land\TerritoryGenerationType.cs" />
     <Compile Include="Modules\WorldModule\Land\TerritoryPattern.cs" />
@@ -69,7 +68,6 @@
     <Compile Include="Extensions\DelegateExtensions.cs" />
     <Compile Include="Modules\WorldModule\WorldData.cs" />
     <Compile Include="Modules\PlayerModule\PlayerData.cs" />
-    <Compile Include="Modules\PlayerModule\ResourceType.cs" />
     <Compile Include="Modules\TimeModule\TimeData.cs" />
     <Compile Include="Modules\TickModule\TickData.cs" />
   </ItemGroup>
@@ -95,4 +93,10 @@
       </Properties>
     </MonoDevelop>
   </ProjectExtensions>
+  <ItemGroup>
+    <ProjectReference Include="..\CompressedStructures\CommonStructures.csproj">
+      <Project>{64EE5B69-4B32-4080-82A7-9E5F419DAFAA}</Project>
+      <Name>CommonStructures</Name>
+    </ProjectReference>
+  </ItemGroup>
 </Project>

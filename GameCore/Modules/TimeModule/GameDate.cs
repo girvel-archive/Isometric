@@ -2,6 +2,7 @@
 
 namespace GameCore.Modules.TimeModule
 {
+    // TODO 1.1 GameDate to common
 	[Serializable]
 	public struct GameDate
 	{

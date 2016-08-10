@@ -1,20 +1,13 @@
-﻿using CommandInterface;
-using System;
+﻿using System;
 using System.Text;
 
-namespace CompressedStructures
+namespace CommonStructures
 {
     [Serializable]
-    public class CommonBuildingAction : ICompressable
+    public class CommonBuildingAction
     {
         public bool Active { get; set; }
         public string Name { get; set; }
-
-
-
-        public byte[] GetBytes => Encoding.ASCII.GetBytes(GetString);
-
-        public string GetString => $"[{Active};{Name}]";
 
 
 
@@ -24,19 +17,7 @@ namespace CompressedStructures
             Name = name;
         }
 
+        [Obsolete("using serialization ctor", true)]
         public CommonBuildingAction() {}
-
-
-
-        public static CommonBuildingAction GetFromString(string @string)
-        {
-            var parts = @string.ParseType("[active;name]");
-            return new CommonBuildingAction(
-                bool.Parse(parts["active"]),
-                parts["name"]);
-        }
-
-        public static CommonBuildingAction GetFromBytes(byte[] bytes) 
-            => GetFromString(Encoding.ASCII.GetString(bytes));
     }
 }

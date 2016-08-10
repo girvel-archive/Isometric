@@ -1,21 +1,13 @@
 ﻿using System;
 using System.Text;
-using CommandInterface;
 
-namespace CompressedStructures
+namespace CommonStructures
 {
     [Serializable]
-    public class CommonAccount : ICompressable
+    public class CommonAccount
     {
         public string Email { get; set; }
         public string Password { get; set; }
-
-
-
-        public byte[] GetBytes // TODO to argumenttype
-            => Encoding.ASCII.GetBytes(GetString);
-
-        public string GetString => $"[{Email};{Password}]";
 
 
 
@@ -25,17 +17,7 @@ namespace CompressedStructures
             Password = password;
         }
 
+        [Obsolete("using serialization ctor", true)]
         public CommonAccount() {}
-
-
-
-        public static CommonAccount GetFromBytes(byte[] bytes)
-            => GetFromString(Encoding.ASCII.GetString(bytes));
-
-        public static CommonAccount GetFromString(string @string)
-        {
-            var splitedString = @string.ParseType("[email;password]");
-            return new CommonAccount(splitedString["email"], splitedString["password"]);
-        }
     }
 }

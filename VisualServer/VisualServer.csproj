@@ -73,9 +73,9 @@
     <Compile Include="Server.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\CompressedStructures\CompressedStructures.csproj">
+    <ProjectReference Include="..\CompressedStructures\CommonStructures.csproj">
       <Project>{64EE5B69-4B32-4080-82A7-9E5F419DAFAA}</Project>
-      <Name>CompressedStructures</Name>
+      <Name>CommonStructures</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
