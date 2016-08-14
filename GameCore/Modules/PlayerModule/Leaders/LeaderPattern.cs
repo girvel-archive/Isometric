@@ -1,5 +1,5 @@
 ﻿using System;
-using CompressedStructures;
+using CommonStructures;
 
 namespace GameCore.Modules.PlayerModule.Leaders
 {

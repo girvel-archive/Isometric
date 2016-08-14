@@ -1,6 +1,6 @@
 ﻿using System;
 using GameCore.Modules.PlayerModule;
-using CompressedStructures;
+using CommonStructures;
 
 namespace GameCore.Modules.TickModule
 {

@@ -5,8 +5,8 @@
 /media/nik/Doc/projects/isogame/Visual/VisualServer/obj/Release/VisualServer.dll.mdb
 /media/nik/Doc/projects/isogame/Visual/VisualServer/bin/Release/CommandInterface.dll
 /media/nik/Doc/projects/isogame/Visual/VisualServer/bin/Release/CommandInterface.dll.mdb
-/media/nik/Doc/projects/isogame/Visual/VisualServer/bin/Release/CompressedStructures.dll
-/media/nik/Doc/projects/isogame/Visual/VisualServer/bin/Release/CompressedStructures.dll.mdb
+/media/nik/Doc/projects/isogame/Visual/VisualServer/bin/Release/commonstructures.dll
+/media/nik/Doc/projects/isogame/Visual/VisualServer/bin/Release/commonstructures.dll.mdb
 /media/nik/Doc/projects/isogame/Visual/VisualServer/bin/Release/GameBasics.dll
 /media/nik/Doc/projects/isogame/Visual/VisualServer/bin/Release/GameBasics.dll.mdb
 /media/nik/Doc/projects/isogame/Visual/VisualServer/bin/Release/VectorNet.dll

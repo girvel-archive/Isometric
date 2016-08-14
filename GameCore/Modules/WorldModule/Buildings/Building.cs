@@ -5,7 +5,7 @@ using GameCore.Modules.PlayerModule;
 using GameCore.Modules.WorldModule.Land;
 using System.Collections.Generic;
 using GameCore.Modules.TickModule;
-using CompressedStructures;
+using CommonStructures;
 
 namespace GameCore.Modules.WorldModule.Buildings
 {
@@ -56,8 +56,8 @@ namespace GameCore.Modules.WorldModule.Buildings
             var foundedObjects = BuildingGraph.Instance.Find(Pattern);
 
 			if (!foundedObjects[0].IsParentOf(target)
-                || (!target.ChangeCondition?.Invoke(Pattern, this) ?? false)
-                || target.NeedResources.AllNotLessThan(Owner.CurrentResources))
+                || (!target.UpgradePossible?.Invoke(Pattern, this) ?? false)
+                || target.NeedResources.Enough(Owner.CurrentResources))
 			{
 				return false;
 			}

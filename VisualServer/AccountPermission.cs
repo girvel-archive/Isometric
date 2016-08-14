@@ -2,11 +2,10 @@
 
 namespace VisualServer
 {
-    [Serializable]
     public enum AccountPermission
     {
         User,
-        Admin
+        Admin,
     }
 }
 

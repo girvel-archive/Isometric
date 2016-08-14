@@ -1,6 +1,6 @@
 ﻿using System;
 using GameCore.Modules.TimeModule;
-using CompressedStructures;
+using CommonStructures;
 
 namespace GameCore.Modules.PlayerModule
 {

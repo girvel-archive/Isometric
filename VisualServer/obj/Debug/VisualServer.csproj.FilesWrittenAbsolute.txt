@@ -5,8 +5,8 @@
 /media/nik/Doc/projects/isogame/Visual/VisualServer/obj/Debug/VisualServer.dll.mdb
 /media/nik/Doc/projects/isogame/Visual/VisualServer/bin/Debug/CommandInterface.dll
 /media/nik/Doc/projects/isogame/Visual/VisualServer/bin/Debug/CommandInterface.dll.mdb
-/media/nik/Doc/projects/isogame/Visual/VisualServer/bin/Debug/CompressedStructures.dll
-/media/nik/Doc/projects/isogame/Visual/VisualServer/bin/Debug/CompressedStructures.dll.mdb
+/media/nik/Doc/projects/isogame/Visual/VisualServer/bin/Debug/commonstructures.dll
+/media/nik/Doc/projects/isogame/Visual/VisualServer/bin/Debug/commonstructures.dll.mdb
 /media/nik/Doc/projects/isogame/Visual/VisualServer/bin/Debug/GameBasics.dll
 /media/nik/Doc/projects/isogame/Visual/VisualServer/bin/Debug/GameBasics.dll.mdb
 /media/nik/Doc/projects/isogame/Visual/VisualServer/bin/Debug/VectorNet.dll

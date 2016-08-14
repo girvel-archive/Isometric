@@ -5,8 +5,14 @@ using System.Net.Sockets;
 using System.Text;
 using System.Threading;
 using CommandInterface;
-using CompressedStructures;
 using GameBasics;
+using VisualServer.Modules.SpamModule;
+using GameCore.Modules.PlayerModule;
+using CommonStructures;
+using BinarySerializationExtensions;
+using VisualServer.Extensions;
+using VectorNet;
+using GameCore.Modules;
 
 namespace VisualServer
 {
@@ -20,17 +26,21 @@ namespace VisualServer
             {
                 CurrentSocket = currentSocket;
             }
+
+            public void SendASCII(string message)
+            {
+                CurrentSocket.Send(Encoding.ASCII.GetBytes(message));
+            }
         }
 
 
 
         public bool Active { get; set; }
         
-        public Interface<NetArgs> Interface { get; set; }
+        public Interface<NetArgs, CommandResult> Interface { get; set; }
         public Thread MainThread { get; set; }
 
         public Socket MainSocket { get; set; }
-        public ILog MainLog { get; set; }
         public Server ParentServer { get; set; }
 
         public Account Account { get; set; }
@@ -41,42 +51,27 @@ namespace VisualServer
 
 
         public Connection(
-            Socket mainSocket, ILog mainLog, Account mainAccount, Server server)
+            Socket mainSocket, Account mainAccount, Server server)
         {
             MainSocket = mainSocket;
-            MainLog = mainLog;
             Account = mainAccount;
 
-            Interface = new Interface<NetArgs>(
-                new List<Command<NetArgs>> {
-                    new Command<NetArgs>(
-                        "gt",
-                        "(gt -> Get Territory) sends information " +
-                            "about current territory",
-                        "",
-                        _getTerritory),
+            Interface = new Interface<NetArgs, CommandResult>(
+                new Command<NetArgs, CommandResult>(
+                    "gt", new string[0],
+                    _getTerritory),
 
-                    new Command<NetArgs>(
-                        "gba",
-                        "(gba -> Get Building context Actions) sends information " +
-                            "about possible building context actions",
-                        "@building",
-                        _getBuildingContextActions),
-
-                    new Command<NetArgs>(
-                        "uba",
-                        "(uba -> Use Building context Action) uses building context action",
-                        "@action",
-                        _useBuildingContextActions),
-
-                    new Command<NetArgs>(
-                        "gr",
-                        "(gr -> Get Resources) sends current resources",
-                        "",
-                        (args, netArgs) => _sendResources(null, new Player.RefreshEventArgs(mainAccount.Player))
-                    ),
-                }
-            );
+                new Command<NetArgs, CommandResult>(
+                    "gba", new[] { "building" },
+                    _getBuildingContextActions),
+            
+                new Command<NetArgs, CommandResult>(
+                    "uba", new[] { "action" },
+                    _useBuildingContextActions),
+            
+                new Command<NetArgs, CommandResult>(
+                    "gr", new string[0],
+                    (args, netArgs) => _sendResources(null, new Player.RefreshEventArgs(mainAccount.Player))));
         }
 
         ~Connection()
@@ -126,7 +121,7 @@ namespace VisualServer
                     try
                     {
 #endif
-                    SpamCounter    = Math.Max(0, SpamCounter - 1);
+                    SpamCounter = Math.Max(0, SpamCounter - 1);
 
                     var currentStringBuilder = new StringBuilder();
                     var receivedData = new byte[256];
@@ -177,48 +172,57 @@ namespace VisualServer
             }
             catch (SocketException)
             {
-                MainLog?.Write($"End of {Account.Login}'s connection", LogType.Connection);
+                // FIXME OnConnectionEnd
+                // MainLog?.Write($"End of {Account.Login}'s connection", LogType.Connection);
             }
         }
 
-        private void _sendResources(object sender, Player.RefreshEventArgs args)
+        // FIXME using serialization
+        private CommandResult _sendResources(object sender, Player.RefreshEventArgs args)
         {
-            Send("r@" + new CommonResources(
-                new Dictionary<ResourceType, int>(args.Owner.CurrentResources.Resource),
-                new Dictionary<ResourceType, int>(args.Owner.CurrentResources.LastIncrease))
-                    .GetString);
+            // FIXME DebugCreateCommand -> CreateCommand
+            Send(this.Interface.DebugCreateCommand("r",
+                args.Owner.CurrentResources.SerializeToBytes().ToASCII()));
+            
+            return CommandResult.Successful;
         }
 
-        private void _getTerritory(string[] args, NetArgs netArgs)
+        private CommandResult _getTerritory(Dictionary<string, string> args, NetArgs netArgs)
         {
-            Send("st@" + new object[] { Territory.Size, Territory.Size }.ToArgumentType() + "," +
-                    Account.Player.Territory
-                        .Select(b => b.Pattern.Character.ToString()).Aggregate((s, b) => s + b));
+            // FIXME unity st@size,buildings -> st@common_territory
+            // FIXME DebugCreateCommand -> CreateCommand
+            Send(this.Interface.DebugCreateCommand("st",
+                    Account.Player.Territory.ToCommon()));
+
+            return CommandResult.Successful;
         }
 
         // @building
-        private void _getBuildingContextActions(string[] args, NetArgs netArgs)
+        private CommandResult _getBuildingContextActions(Dictionary<string, string> args, NetArgs netArgs)
         {
-            var p = CommonBuilding.GetFromString(args[0]).Position;
-            MainLog?.Write($"Position: ({p.X};{p.Y})", LogType.User);
-            var pattern = Account.Player.Territory[CommonBuilding.GetFromString(args[0]).Position].Pattern;
-            var player = Account.Player;
+            var position = Encoding.ASCII.GetBytes(args["building"]).ByteDeserialize<IntVector>();
+            var building = Account.Player.Territory[position];
+            var pattern = building.Pattern;
 
             try
             {
-                netArgs.CurrentSocket.Send(Encoding.ASCII.GetBytes("sba@" +
-                    player.Game.BuildingGraph.Find(pattern)[0].Children.Select(
+                // FIXME DebugCreateCommand -> CreateCommand
+                netArgs.SendASCII(this.Interface.DebugCreateCommand("sba",
+                    BuildingGraph.Instance.Find(pattern)[0].Children.Select(
                         c => new CommonBuildingAction(
-                            player.CurrentResources.Enough(c.Value.NeedResources),
-                            $"Upgrade to {c.Value.Name}")).ToArgumentList(e => e.GetString)));
+                            Account.Player.CurrentResources.Enough(c.Value.NeedResources)
+                            && c.Value.UpgradePossible(pattern, building),
+                            $"Upgrade to {c.Value.Name}")).SerializeToBytes()));
             }
             catch (IndexOutOfRangeException) {}
+
+            return CommandResult.Successful;
         }
 
         // @action
-        private void _useBuildingContextActions(string[] args, NetArgs netArgs)
+        private CommandResult _useBuildingContextActions(string[] args, NetArgs netArgs)
         {
-            
+            throw new NotImplementedException();
         }
     }
 }

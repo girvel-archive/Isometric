@@ -7,8 +7,8 @@ D:\projects\isogame\Visual\VisualServer\bin\Debug\GameBasics.pdb
 D:\projects\isogame\Visual\VisualServer\obj\Debug\VisualServer.csprojResolveAssemblyReference.cache
 D:\projects\isogame\Visual\VisualServer\obj\Debug\VisualServer.dll
 D:\projects\isogame\Visual\VisualServer\obj\Debug\VisualServer.pdb
-D:\projects\isogame\Visual\VisualServer\bin\Debug\CompressedStructures.dll
-D:\projects\isogame\Visual\VisualServer\bin\Debug\CompressedStructures.pdb
+D:\projects\isogame\Visual\VisualServer\bin\Debug\commonstructures.dll
+D:\projects\isogame\Visual\VisualServer\bin\Debug\commonstructures.pdb
 D:\projects\isogame\Visual\VisualServer\bin\Debug\VisualConsole.dll
 D:\projects\isogame\Visual\VisualServer\bin\Debug\VisualConsole.pdb
 D:\projects\isogame\Visual\VisualServer\bin\Debug\VectorNet.dll

@@ -1,36 +1,16 @@
 ﻿<Properties StartupItem="VisualClient/VisualClient.csproj" GitUserInfo="UsingGIT">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.Workbench ActiveDocument="VisualServer/Connection.cs">
     <Files>
-      <File FileName="CompressedStructures/CommonResources.cs" Line="22" Column="53" />
-      <File FileName="GameCore/Modules/TickModule/IResourcesChanging.cs" Line="9" Column="7" />
-      <File FileName="GameCore/Modules/TickModule/IResourcesBonusChanging.cs" Line="9" Column="23" />
-      <File FileName="GameCore/Modules/TickModule/IIndependentChanging.cs" Line="1" Column="1" />
-      <File FileName="GameCore/Modules/TickModule/ClocksManager.cs" Line="9" Column="40" />
-      <File FileName="GameCore/Modules/WorldModule/Buildings/Building.cs" Line="87" Column="12" />
-      <File FileName="GameCore/Modules/WorldModule/Buildings/BuildingPattern.cs" Line="11" Column="74" />
-      <File FileName="GameCore/Modules/PlayerModule/Player.cs" Line="71" Column="20" />
-      <File FileName="GameCore/Modules/PlayerModule/Leaders/Leader.cs" Line="58" Column="50" />
-      <File FileName="GameCore/Modules/PlayerModule/Leaders/LeaderPattern.cs" Line="9" Column="80" />
-      <File FileName="GameCore/Modules/PlayerModule/PlayerData.cs" Line="14" Column="9" />
-      <File FileName="GameCore/Modules/TimeModule/GameDate.cs" Line="3" Column="38" />
+      <File FileName="VisualServer/Connection.cs" Line="134" Column="21" />
+      <File FileName="VisualServer/Extensions/CommonExtensions.cs" Line="13" Column="10" />
     </Files>
-    <Pads>
-      <Pad Id="ProjectPad">
-        <State name="__root__">
-          <Node name="Visual" expanded="True">
-            <Node name="CommonStructures" expanded="True" selected="True" />
-            <Node name="GameCore" expanded="True" />
-            <Node name="GameRealization" expanded="True">
-              <Node name="Modules" expanded="True" />
-            </Node>
-          </Node>
-        </State>
-      </Pad>
-    </Pads>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
-    <BreakpointStore />
+    <BreakpointStore>
+      <RunToCursorBreakpoint file="/home/Nika/projs/isogame/IsometricServer/VisualServer/Connection.cs" line="204" column="66" />
+      <RunToCursorBreakpoint file="/home/Nika/projs/isogame/IsometricServer/VisualServer/Connection.cs" line="213" column="47" />
+    </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
 </Properties>

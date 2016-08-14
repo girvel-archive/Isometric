@@ -62,17 +62,34 @@
     <Reference Include="VisualConsole">
       <HintPath>..\..\..\tools\VisualConsole\bin\Release\VisualConsole.dll</HintPath>
     </Reference>
+    <Reference Include="BinarySerializationExtensions">
+      <HintPath>..\..\..\tools\BinarySerializationExtensions\BinarySerializationExtensions\bin\Release\BinarySerializationExtensions.dll</HintPath>
+    </Reference>
+    <Reference Include="MathExtensions">
+      <HintPath>..\..\..\tools\MathExtensions\MathExtensions\bin\Release\MathExtensions.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Account.cs" />
     <Compile Include="AccountPermission.cs" />
     <Compile Include="Connection.cs" />
-    <Compile Include="ILog.cs" />
-    <Compile Include="LogType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Server.cs" />
+    <Compile Include="Modules\SpamModule\CommandResult.cs" />
+    <Compile Include="Modules\SpamModule\FilterSubject.cs" />
+    <Compile Include="Modules\SpamModule\SpamFilterData.cs" />
+    <Compile Include="Modules\SpamModule\FilterResult.cs" />
+    <Compile Include="Modules\SmtpManager.cs" />
+    <Compile Include="Extensions\SocketExtensions.cs" />
+    <Compile Include="Extensions\BytesExtensions.cs" />
+    <Compile Include="Extensions\CommonExtensions.cs" />
+    <Compile Include="Extensions\ArrayExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\GameCore\GameCore.csproj">
+      <Project>{5E853DD8-DDC3-4F8C-9966-52CA5881CBCE}</Project>
+      <Name>GameCore</Name>
+    </ProjectReference>
     <ProjectReference Include="..\CompressedStructures\CommonStructures.csproj">
       <Project>{64EE5B69-4B32-4080-82A7-9E5F419DAFAA}</Project>
       <Name>CommonStructures</Name>
@@ -86,4 +103,9 @@
   <Target Name="AfterBuild">
   </Target>
   -->
+  <ItemGroup>
+    <Folder Include="Modules\" />
+    <Folder Include="Modules\SpamModule\" />
+    <Folder Include="Extensions\" />
+  </ItemGroup>
 </Project>

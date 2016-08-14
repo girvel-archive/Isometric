@@ -89,7 +89,7 @@ namespace CommonStructures
 
 
 
-        public bool AllNotLessThan(Resources resources)
+        public bool Enough(Resources resources)
         {
             for (var i = 0; i < ResourcesArray.Length; i++)
             {

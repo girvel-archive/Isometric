@@ -1,25 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Runtime.Serialization;
-using System.Runtime.Serialization.Formatters.Binary;
 using System.Threading;
-using GameBasics;
-using VisualServer;
-using VisualConsole;
-using CommandInterface;
-using GameRealization.Main;
-using VisualClient.Singletons;
 
 namespace VisualClient
 {
     internal static class Program
     {
-        public static ProgramVersion Version = ProgramVersion.Basic100;
-
-        public static Random MainRandom = new Random();
-        public static Log MainLog;
-
         public static Thread
             NetThread,
             RefreshThread,
@@ -28,7 +13,6 @@ namespace VisualClient
         public static Server MainServer; // TODO server singleton
 
         public static Territory Territory { get; set; }
-        public static Game Game { get; set; }
 
         public static int SavingPeriodMilliseconds { get; set; } = 60000;
 

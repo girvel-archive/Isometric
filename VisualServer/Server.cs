@@ -6,9 +6,12 @@ using System.Net.Mail;
 using System.Net.Sockets;
 using System.Text;
 using CommandInterface;
-using CompressedStructures;
-using GameBasics;
-using VisualClient;
+using CommonStructures;
+using BinarySerializationExtensions;
+using VisualServer.Modules.SpamModule;
+using GameCore.Modules;
+using VisualServer.Modules;
+using VisualServer.Extensions;
 
 
 
@@ -17,6 +20,8 @@ namespace VisualServer
     [Serializable]
     public class Server
     {
+        #region Args classes
+
         public class NetArgs
         {
             public Socket CurrentSocket { get; }
@@ -27,7 +32,27 @@ namespace VisualServer
                 CurrentSocket = currentSocket;
                 MainServer = mainServer;
             }
+
+            public void SendASCII(string message)
+            {
+                CurrentSocket.Send(Encoding.ASCII.GetBytes(message));
+            }
         }
+
+
+        public class LoginArgs : EventArgs
+        {
+            public string Email { get; }
+            public LoginResult Result { get; }
+
+            public LoginArgs(string email, LoginResult result)
+            {
+                Email = email;
+                Result = result;
+            }
+        }
+
+        #endregion
 
 
 
@@ -38,15 +63,15 @@ namespace VisualServer
         private Socket _listenSocket;
 
         [NonSerialized]
-        private Interface<NetArgs> Interface;
+        private Interface<NetArgs, CommandResult> Interface;
 
 
 
         public int ServerPort { get; set; } = 8005;
         public string ServerAddress { get; set; } = "176.151.11.21";
+        public Encoding Encoding { get; set; } = Encoding.ASCII;
 
-        public List<Account> Accounts { get; set; }
-        public ILog MainLog { get; set; }
+        public List<Account> Accounts { get; set; } = new List<Account>();
 
 
 
@@ -58,9 +83,11 @@ namespace VisualServer
         public const int SmtpPort = 465;
         public const bool SmtpEnableSsl = true;
 
-        public const string 
-            ServerEmail = "widauka@ya.ru",
-            ServerPassword = "SOWhatisitFF0912";
+
+
+        public event EventHandler<LoginArgs> OnLoginAttempt;
+        public event EventHandler OnFormatException;
+        public event EventHandler OnAcceptedConnection;
 
 
 
@@ -72,157 +99,155 @@ namespace VisualServer
         {
             CurrentConnections = new Dictionary<Account, Connection>();
 
-            Interface = new Interface<NetArgs>(
-                new List<Command<NetArgs>> {
-                    new Command<NetArgs>(
-                        "ln",
-                        "(ln -> LogiN) checks received login and password, " +
-                            "authorizes user",
-                        "@account",
-                        _login),
+            Interface = new Interface<NetArgs, CommandResult>(
+                new Command<NetArgs, CommandResult>(
+                    "login",
+                    new[] { "account" },
+                    _login),
 
-                    new Command<NetArgs>(
-                        "esn",
-                        "(esn -> Email Send Numbers) sends random numbers to user " +
-                            "email for signup",
-                        "@email",
-                        _emailSendNumbers),
-                });
-        }
+                new Command<NetArgs, CommandResult>(
+                    "esn",
+                    new[] { "email" },
+                    _emailSendNumbers));
 
-
-
-        public Server(ILog mainLog, World world, Game game) : this()
-        {
-            MainLog = mainLog;
+            #if DEBUG
             Accounts = new List<Account> {
-                new Account("main", "UI!@QWaszx", "widauka@ya.ru", AccountPermission.Admin, world, game),
-                new Account("usr", "1", "", AccountPermission.User, world, game)
+                new Account("usr", "1", "", AccountPermission.User)
             };
+            #endif
         }
+
+        public bool Init(string smtpEmail, string smtpPassword)
+        {
+            try
+            {
+                SmtpManager.SingleClient = new SmtpClient {
+                    Host = SmtpHost,
+                    Port = SmtpPort,
+                    EnableSsl = SmtpEnableSsl,
+                    Credentials = new NetworkCredential(
+                        smtpEmail.Split('@')[0],
+                        smtpPassword),
+                    DeliveryMethod = SmtpDeliveryMethod.Network,
+                };
+            }
+            catch (SmtpException)
+            {
+                return false;
+            }
+            return true;
+        }
+
+
 
         public void ServerLoop()
         {
-            IPEndPoint ipPoint;
-            try
+            IPAddress ip;
+
+            if (!IPAddress.TryParse(ServerAddress, out ip))
             {
-                ipPoint = new IPEndPoint(IPAddress.Parse(ServerAddress), ServerPort);
-            }
-            catch (FormatException)
-            {
-                MainLog?.Write("Format exception!", LogType.User);
+                OnFormatException?.Invoke(this, new EventArgs());
                 return;
             }
+
+            var ipPoint = new IPEndPoint(IPAddress.Parse(ServerAddress), ServerPort);
 
             _listenSocket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Unspecified);
 
             _listenSocket.Bind(ipPoint);
             _listenSocket.Listen(10); // TODO increase if there will be a lot of players
-            MainLog?.Write("Server launched. Waiting for connections...", LogType.User);
 
             while (true)
             {
-#if !DEBUG
+                #if !DEBUG
                 try
                 {
-#endif
-                    var acceptedConnection = _listenSocket.Accept();
-                    MainLog?.Write("Connection accepted", LogType.Connection);
+                #endif
 
-                    var currentStringBuilder = new StringBuilder();
-                    var receivedData = new byte[4096];
+                var socket = _listenSocket.Accept();
+                OnAcceptedConnection?.Invoke(this, new EventArgs());
 
-                    do
-                    {
-                        var bytes = acceptedConnection.Receive(receivedData);
-                        
-                        currentStringBuilder.Append(Encoding.ASCII.GetString(
-                            receivedData, 0, bytes));
-                    }
-                    while (acceptedConnection.Available > 0);
+                Interface.GetFunc(
+                    socket.ReceiveAll(this.Encoding), 
+                    new NetArgs(socket, this))();
 
-                    Interface.UseCommand(
-                        currentStringBuilder.ToString(), 
-                        new NetArgs(acceptedConnection, this));
-#if !DEBUG
+                // TODO 1.1 spamfilter using
+
+                #if !DEBUG
                 }
                 catch (Exception e)
                 {
                     MainLog?.Exception(e, false);
                 }
-#endif
+                #endif
             }
         }
 
-        public void CheckVersion(ProgramVersion version)
+        public void CheckVersion()
         {
 
         }
 
 
 
-        private void _login(string[] args, NetArgs netArgs)
+        private CommandResult _login(string[] args, NetArgs netArgs)
         {
-            var receivedAccount = CommonAccount.GetFromBytes(
-                Encoding.ASCII.GetBytes(args[0]));
-            
-            var suitableAccounts =
-                from a in netArgs.MainServer.Accounts
-                where a.Email == receivedAccount.Email &&
-                        a.Password == receivedAccount.Password
-                select a;
+            var receivedAccount = Encoding.ASCII.GetBytes(args[0]).ByteDeserialize<CommonAccount>();
 
-            if (suitableAccounts.First().PermanentlyBanned)
-            { 
-                MainLog.Write(
-                    "Unsuccessful attempt to enter by BANNED account data" +
-                        $"Email: {receivedAccount.Email}" +
-                        $"Password: {receivedAccount.Password}",
-                    LogType.Spam);
+            var suitableAccounts = netArgs.MainServer.Accounts.Where(
+                a => a.Email == receivedAccount.Email
+                && a.Password == receivedAccount.Password);
+
+            var successful = suitableAccounts.Any();
+            LoginResult result;
+
+            if (successful)
+            {
+                if (suitableAccounts.First())
+                { 
+                    result = LoginResult.Banned;
+                }
+                else
+                {
+                    result = LoginResult.Successful;
+                }
+
+                return;
+            }
+            else
+            {
+                result = LoginResult.Unsuccessful;
             }
 
-            var succesful = suitableAccounts.Any();
+            netArgs.SendASCII("ln-r@" + (byte)result);
 
-            netArgs.CurrentSocket.Send(Encoding.ASCII.GetBytes(
-                "ln-r@" + ( succesful ? "1" : "0" )));
+            OnLoginAttempt?.Invoke(this, new LoginArgs(receivedAccount.Email, result));
 
-            MainLog?.Write(
-                ( succesful ? "S" : "Uns" ) + $"uccesful attempt to enter" +
-                    $"\n\tEmail:    {receivedAccount.Email}" +
-                    $"\n\tPassword: {receivedAccount.Password}", 
-                LogType.Connection);
+            if (!successful)
+            {
+                return CommandResult.Unsuccessful;
+            }
 
-            if (!succesful) return;
+            var account = suitableAccounts.First();
 
             var newConnection = new Connection(
-                netArgs.CurrentSocket, MainLog, suitableAccounts.First(), this);
-            
-            netArgs.MainServer.CurrentConnections[suitableAccounts.First()]
-                = newConnection;
+                netArgs.CurrentSocket, account, this);
+
+            netArgs.MainServer.CurrentConnections[account]
+            = newConnection;
 
             newConnection.Start();
+
+            return CommandResult.Successful;
         }
 
-        private void _emailSendNumbers(string[] args, NetArgs netArgs)
+        private CommandResult _emailSendNumbers(string[] args, NetArgs netArgs)
         {
-            var numbers = GameRandom.Instance.Next(10000, 99999);
-            // TODO checking email using
-            new SmtpClient {
-                Host = SmtpHost,
-                Port = SmtpPort,
-                EnableSsl = SmtpEnableSsl,
-                Credentials = new NetworkCredential(
-                    ServerEmail.Split('@')[0],
-                    ServerPassword),
-                DeliveryMethod = SmtpDeliveryMethod.Network,
-            }.Send(
-                new MailMessage(
-                    "widauka@ya.ru",
-                    args[0].Replace("#", "@"),
-                    "Isometric kingdoms registration",
-                    "Numbers: " + numbers));
-            // TODO login or closing connection (if Exit button pressed)
-                 }
+            var numbers = SingleRandom.Instance.Next(10000, 99999);
+
+            SmtpManager.SendSignupMail
+            // FIXME _emailSendNumbers()
+        }
     }
 }
 

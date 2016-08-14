@@ -3,7 +3,7 @@ using VisualConsole;
 using CommandInterface;
 using System.Collections.Generic;
 
-namespace VisualClient.Singletons
+namespace VisualClient.Modules
 {
     public static class SingleUI
 	{

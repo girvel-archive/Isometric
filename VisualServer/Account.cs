@@ -1,5 +1,5 @@
 ﻿using System;
-using GameBasics;
+using GameCore.Modules.PlayerModule;
 
 namespace VisualServer
 {
@@ -16,24 +16,40 @@ namespace VisualServer
 
         public bool PermanentlyBanned { get; set; }
 
-        /// <summary>
-        /// Was last connection aborted because of spam
-        /// </summary>
+        public bool Banned {
+            get {
+                if (BannedFor == TimeSpan.Zero)
+                {
+                    return false;
+                }
+
+                if (BannedFrom + BannedFor < DateTime.Now)
+                {
+                    BannedFor = TimeSpan.Zero;
+                    return PermanentlyBanned;
+                }
+
+                return true;
+            }
+        }
+
         public int SpamErrorTimes { get; set; }
 
         public Player Player { get; set; }
-        // TODO normal territory generation
 
 
-        public Account(string login, string password, string email, AccountPermission permission, World world, Game game)
+
+        public Account(string login, string password, string email, AccountPermission permission)
         {
             Login = login;
             Password = password;
             Email = email;
             Permission = permission;
 
-            Player = new Player(login, world, game); // TODO choosing world
+            Player = new Player(login); // TODO choosing world
         }
+
+
 
         public void Ban(TimeSpan @for)
         {
