@@ -7,7 +7,7 @@ namespace GameRealization.Modules.DataRealization
 	{
         static WorldDataRealization ()
 		{
-            WorldData.Instance = new WorldData() 
+            World.Data = new WorldData() 
             {
                 TerritorySize = 32,
             };

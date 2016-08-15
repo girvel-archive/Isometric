@@ -51,7 +51,7 @@
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
     <Reference Include="VectorNet">
-      <HintPath>..\..\..\tools\VectorNet\bin\Release\VectorNet.dll</HintPath>
+      <HintPath>..\..\tools\VectorNet\bin\Release\VectorNet.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

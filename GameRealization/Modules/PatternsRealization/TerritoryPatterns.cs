@@ -19,12 +19,9 @@ namespace GameRealization.Modules.PatternsRealization
         static TerritoryPatterns()
         {
             Forest = new TerritoryPattern(
-                'f', ConsoleColor.DarkGreen, 
-                (terr, seed) => _defaultGeneration(terr, seed, 
-                    new Dictionary<int, BuildingPattern> 
-                    {
-                        [1] = BuildingPatterns.Forest,
-                    }),
+                (terr, seed) => _defaultGeneration(terr, seed, new Dictionary<int, BuildingPattern> { 
+                    [1] = BuildingPatterns.Forest 
+                }),
                 _defaultVillageGeneration);
         }
 

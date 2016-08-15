@@ -31,10 +31,10 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="VectorNet">
-      <HintPath>..\..\..\tools\VectorNet\bin\Release\VectorNet.dll</HintPath>
+      <HintPath>..\..\tools\VectorNet\bin\Release\VectorNet.dll</HintPath>
     </Reference>
     <Reference Include="EnumerableExtensions">
-      <HintPath>..\..\..\tools\EnumerableExtensions\bin\Release\EnumerableExtensions.dll</HintPath>
+      <HintPath>..\..\tools\EnumerableExtensions\bin\Release\EnumerableExtensions.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

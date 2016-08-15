@@ -7,7 +7,7 @@ namespace GameRealization.Modules.DataRealization
 	{
         static PlayerDataRealization ()
 		{
-            PlayerData.Instance = new PlayerData() 
+            Player.Data = new PlayerData() 
             {
                 MinimalNewLeaderAge = 15,
                 MaximalNewLeaderAge = 33,
@@ -17,7 +17,7 @@ namespace GameRealization.Modules.DataRealization
                 DefaultPlayerResources = new Resources(gold: 1000, meat: 1000, wood: 1000),
             };
 
-            PlayerData.Instance.RefreshDependentValues();
+            Player.Data.RefreshDependentValues();
 		}
 	}
 }

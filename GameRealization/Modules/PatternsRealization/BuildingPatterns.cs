@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using CompressedStructures;
+using CommonStructures;
 using GameCore.Modules.WorldModule.Buildings;
 
 namespace GameRealization.Modules.PatternsRealization
@@ -20,43 +20,35 @@ namespace GameRealization.Modules.PatternsRealization
         static BuildingPatterns()
         {
             Plain = new BuildingPattern(
-                "Plain", ConsoleColor.DarkGreen, '.',
-                new Dictionary<ResourceType, int>(),
-                new Dictionary<ResourceType, int>(),
+                "Plain",
+                new Resources(),
+                new Resources(),
                 BuildingType.Space);
-
+            
             Rock = new BuildingPattern(
-                "Rock", ConsoleColor.DarkGray, 'r',
-                new Dictionary<ResourceType, int> {
-                    [ResourceType.Stone] = 1000,
-                },
-                new Dictionary<ResourceType, int>());
+                "Rock",
+                new Resources(stone: 10000),
+                new Resources());
 
             Water = new BuildingPattern(
-                "Water", ConsoleColor.DarkBlue, '~',
-                new Dictionary<ResourceType, int>(),
-                new Dictionary<ResourceType, int>());
+                "Water",
+                new Resources(),
+                new Resources());
 
             Forest = new BuildingPattern(
-                "Forest", ConsoleColor.DarkGreen, 'f',
-                new Dictionary<ResourceType, int>(), 
-                new Dictionary<ResourceType, int>());
+                "Forest",
+                new Resources(wood: 1000),
+                new Resources());
 
             WoodHouse = new BuildingPattern(
-                "Wood house I", ConsoleColor.Yellow, 'H', 20,
-                BuildingType.Building,
-                new Dictionary<ResourceType, int>(), 
-                new Dictionary<ResourceType, int>()) {
-                    TickIndependentAction = args => { },
-                };
+                "Wood house I",
+                new Resources(),
+                new Resources(wood: 500));
 
             WoodHouse2 = new BuildingPattern(
-                "Wood house II", ConsoleColor.Yellow, 'H', 30,
-                BuildingType.Building,
-                new Dictionary<ResourceType, int>(),
-                new Dictionary<ResourceType, int>()) {
-                    TickIndependentAction = args => { },
-                };
+                "Wood house II", 
+                new Resources(),
+                new Resources(wood: 300, stone: 100));
         }
     }
 }

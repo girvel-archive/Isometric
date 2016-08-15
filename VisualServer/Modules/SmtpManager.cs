@@ -59,6 +59,8 @@ namespace VisualServer.Modules
             }
         }
 
+        public string From { get; set; }
+
         public MailSignupConstructor ConstructMailSignup { get; set; }
 
 
@@ -68,12 +70,12 @@ namespace VisualServer.Modules
             return new SmtpManager
             {
                 Client = new SmtpClient {
-                    // TODO default smtp data
+                    // FIXME default smtp data
                 },
 
                 ConstructMailSignup = (to, code) => {
                     return new MailMessage(
-                        Instance.Client.Credentials.GetCredential().UserName,
+                        From,
                         to,
                         "Isometric game registration",
                         "Your code: " + code);
@@ -85,7 +87,7 @@ namespace VisualServer.Modules
 
         public static void SendSignupMail(string to, int code)
         {
-            Instance.Client.Send(MailSignupConstructor(Instance.Client.Credentials.GetCredential()., to, code));
+            Instance.Client.Send(ConstructMailSignup(to, code));
         }
     }
 }

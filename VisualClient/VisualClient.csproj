@@ -31,13 +31,13 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="VectorNet">
-      <HintPath>..\..\..\tools\VectorNet\bin\Release\VectorNet.dll</HintPath>
+      <HintPath>..\..\tools\VectorNet\bin\Release\VectorNet.dll</HintPath>
     </Reference>
     <Reference Include="CommandInterface">
-      <HintPath>..\..\..\tools\CommandInterface\bin\Release\CommandInterface.dll</HintPath>
+      <HintPath>..\..\tools\CommandInterface\bin\Debug\CommandInterface.dll</HintPath>
     </Reference>
     <Reference Include="VisualConsole">
-      <HintPath>..\..\..\tools\VisualConsole\bin\Release\VisualConsole.dll</HintPath>
+      <HintPath>..\..\tools\VisualConsole\bin\Release\VisualConsole.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

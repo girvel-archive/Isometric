@@ -1,16 +1,21 @@
 ﻿<Properties StartupItem="VisualClient/VisualClient.csproj" GitUserInfo="UsingGIT">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="VisualServer/Connection.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="GameRealization/Modules/PatternsRealization/TerritoryPatterns.cs">
     <Files>
-      <File FileName="VisualServer/Connection.cs" Line="134" Column="21" />
-      <File FileName="VisualServer/Extensions/CommonExtensions.cs" Line="13" Column="10" />
+      <File FileName="VisualServer/Server.cs" Line="120" Column="9" />
+      <File FileName="VisualServer/Connection.cs" Line="226" Column="35" />
+      <File FileName="VisualServer/Account.cs" Line="1" Column="1" />
+      <File FileName="VisualServer/Modules/SmtpManager.cs" Line="44" Column="9" />
+      <File FileName="GameCore/Modules/WorldModule/Buildings/BuildingPattern.cs" Line="46" Column="31" />
+      <File FileName="GameRealization/Modules/PatternsRealization/BuildingPatterns.cs" Line="47" Column="13" />
+      <File FileName="GameRealization/Modules/DataRealization/TimeDataRealization.cs" Line="10" Column="22" />
+      <File FileName="GameRealization/Modules/DataRealization/PlayerDataRealization.cs" Line="19" Column="13" />
+      <File FileName="GameRealization/Modules/DataRealization/WorldDataRealization.cs" Line="11" Column="14" />
+      <File FileName="GameRealization/Modules/PatternsRealization/TerritoryPatterns.cs" Line="18" Column="9" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
-    <BreakpointStore>
-      <RunToCursorBreakpoint file="/home/Nika/projs/isogame/IsometricServer/VisualServer/Connection.cs" line="204" column="66" />
-      <RunToCursorBreakpoint file="/home/Nika/projs/isogame/IsometricServer/VisualServer/Connection.cs" line="213" column="47" />
-    </BreakpointStore>
+    <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
 </Properties>

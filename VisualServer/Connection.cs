@@ -16,8 +16,10 @@ using GameCore.Modules;
 
 namespace VisualServer
 {
-    internal class Connection : IDisposable
+    public class Connection
     {
+        #region Login classes
+
         public class NetArgs
         {
             public Socket CurrentSocket { get; }
@@ -32,6 +34,32 @@ namespace VisualServer
                 CurrentSocket.Send(Encoding.ASCII.GetBytes(message));
             }
         }
+
+        [Serializable]
+        public class DataArgs : EventArgs
+        {
+            public string Data { get; }
+            public Account Account { get; }
+
+            public DataArgs(string data, Account account)
+            {
+                this.Account = account;
+                Data = data;
+            }
+        }
+
+        [Serializable]
+        public class ConnectionArgs : EventArgs
+        {
+            public Connection Connection { get; }
+
+            public ConnectionArgs(Connection connection)
+            {
+                this.Connection = connection;
+            }
+        }
+
+        #endregion
 
 
 
@@ -50,6 +78,14 @@ namespace VisualServer
 
 
 
+        public static event EventHandler<DataArgs> OnDataReceived;
+        public static event EventHandler<DataArgs> OnWrongCommand;
+        public static event EventHandler<ConnectionArgs> OnConnectionEnd;
+
+
+
+        #region Ctors, finalizers
+
         public Connection(
             Socket mainSocket, Account mainAccount, Server server)
         {
@@ -67,11 +103,11 @@ namespace VisualServer
             
                 new Command<NetArgs, CommandResult>(
                     "uba", new[] { "action" },
-                    _useBuildingContextActions),
+                    _useBuildingContextAction),
             
                 new Command<NetArgs, CommandResult>(
                     "gr", new string[0],
-                    (args, netArgs) => _sendResources(null, new Player.RefreshEventArgs(mainAccount.Player))));
+                    (args, netArgs) => _sendResources(null, new Player.RefreshEventArgs(Account.Player))));
         }
 
         ~Connection()
@@ -79,19 +115,58 @@ namespace VisualServer
             Stop();
         }
 
-        void IDisposable.Dispose()
+        #endregion
+
+
+
+        public void StartThread()
         {
-            Stop();
-        }
-
-
-
-        public void Start()
-        {
-            MainThread = new Thread(_connectionLoop);
+            MainThread = new Thread(Start);
             MainThread.Start();
 
             Account.Player.OnRefresh += _sendResources;
+        }
+
+        public void Start()
+        {
+            Active = true;
+
+            try
+            {
+                while (Active)
+                {
+                    #if !DEBUG
+                    try
+                    {
+                    #endif
+
+                    var receivedString = MainSocket.ReceiveAll(ParentServer.Encoding);
+
+                    OnDataReceived?.Invoke(this, new DataArgs(receivedString, Account));
+
+                    Func<CommandResult> cmdUse;
+                    if (Interface.TryGetFunc(receivedString, new NetArgs(MainSocket), out cmdUse))
+                    {
+                        cmdUse();
+                    }
+                    else
+                    {
+                        OnWrongCommand?.Invoke(this, new DataArgs(receivedString, Account));
+                    }
+
+                    #if !DEBUG
+                    }
+                    catch (Exception e)
+                    {
+                    MainLog?.Exception(e, e is SocketException);
+                    }
+                    #endif
+                }
+            }
+            catch (SocketException)
+            {
+                OnConnectionEnd?.Invoke(this, new ConnectionArgs(this));
+            }
         }
 
         public void Stop()
@@ -109,81 +184,17 @@ namespace VisualServer
         
 
 
-        private void _connectionLoop()
-        {
-            Active = true;
-
-            try
-            {
-                while (Active)
-                {
-#if !DEBUG
-                    try
-                    {
-#endif
-                    SpamCounter = Math.Max(0, SpamCounter - 1);
-
-                    var currentStringBuilder = new StringBuilder();
-                    var receivedData = new byte[256];
-
-                    do
-                    {
-                        var bytes = MainSocket.Receive(receivedData);
-                        currentStringBuilder.Append(Encoding.ASCII.GetString(receivedData, 0, bytes));
-                    } while (MainSocket.Available > 0);
-
-                    MainLog?.Write("Command received by connection\n\t" + currentStringBuilder, LogType.ReceivedData);
-                    try
-                    {
-                        Interface.UseCommand(currentStringBuilder.ToString(), new NetArgs(MainSocket));
-                    }
-                    catch (ArgumentException)
-                    {
-                        MainLog?.Write($"Wrong command {currentStringBuilder.ToString().Split('@')[0]}",
-                            LogType.ReceivedData);
-
-                        SpamCounter++;
-                        Send("spam-problem");
-                    }
-
-                    if (SpamCounter > SpamCounterMax)
-                    {
-                        Account.SpamErrorTimes++;
-
-                        if (Account.SpamErrorTimes > ParentServer.SpamErrorsMax)
-                        {
-                            Account.Ban(new TimeSpan(0, 10, 0));
-                            Send("spam-ban@0,0,10");
-                        }
-                        else 
-                        {
-                            Send("spam-error");
-                        }
-                        Stop();
-                    }
-#if !DEBUG
-                    }
-                    catch (Exception e)
-                    {
-                        MainLog?.Exception(e, e is SocketException);
-                    }
-#endif
-                }
-            }
-            catch (SocketException)
-            {
-                // FIXME OnConnectionEnd
-                // MainLog?.Write($"End of {Account.Login}'s connection", LogType.Connection);
-            }
-        }
-
-        // FIXME using serialization
-        private CommandResult _sendResources(object sender, Player.RefreshEventArgs args)
+        private void _sendResources(object sender, Player.RefreshEventArgs args)
         {
             // FIXME DebugCreateCommand -> CreateCommand
             Send(this.Interface.DebugCreateCommand("r",
                 args.Owner.CurrentResources.SerializeToBytes().ToASCII()));
-            
+        }
+
+        private CommandResult _sendResources(Dictionary<string, string> args, NetArgs netArgs)
+        {
+            _sendResources(this, Account.Player);
+
             return CommandResult.Successful;
         }
 
@@ -192,7 +203,7 @@ namespace VisualServer
             // FIXME unity st@size,buildings -> st@common_territory
             // FIXME DebugCreateCommand -> CreateCommand
             Send(this.Interface.DebugCreateCommand("st",
-                    Account.Player.Territory.ToCommon()));
+                Account.Player.Territory.ToCommon().SerializeToBytes().ToASCII()));
 
             return CommandResult.Successful;
         }
@@ -203,24 +214,24 @@ namespace VisualServer
             var position = Encoding.ASCII.GetBytes(args["building"]).ByteDeserialize<IntVector>();
             var building = Account.Player.Territory[position];
             var pattern = building.Pattern;
+            var patternNodes = BuildingGraph.Instance.Find(pattern);
 
-            try
+            if (patternNodes.Any())
             {
                 // FIXME DebugCreateCommand -> CreateCommand
                 netArgs.SendASCII(this.Interface.DebugCreateCommand("sba",
-                    BuildingGraph.Instance.Find(pattern)[0].Children.Select(
+                    patternNodes[0].Children.Select(
                         c => new CommonBuildingAction(
                             Account.Player.CurrentResources.Enough(c.Value.NeedResources)
                             && c.Value.UpgradePossible(pattern, building),
                             $"Upgrade to {c.Value.Name}")).SerializeToBytes()));
             }
-            catch (IndexOutOfRangeException) {}
 
             return CommandResult.Successful;
         }
 
         // @action
-        private CommandResult _useBuildingContextActions(string[] args, NetArgs netArgs)
+        private CommandResult _useBuildingContextAction(Dictionary<string, string> args, NetArgs netArgs)
         {
             throw new NotImplementedException();
         }

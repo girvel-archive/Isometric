@@ -106,12 +106,13 @@ namespace VisualServer
                     _login),
 
                 new Command<NetArgs, CommandResult>(
-                    "esn",
+                    "email-send-numbers",
                     new[] { "email" },
                     _emailSendNumbers));
 
             #if DEBUG
-            Accounts = new List<Account> {
+            Accounts = new List<Account> 
+            {
                 new Account("usr", "1", "", AccountPermission.User)
             };
             #endif
@@ -219,7 +220,8 @@ namespace VisualServer
                 result = LoginResult.Unsuccessful;
             }
 
-            netArgs.SendASCII("ln-r@" + (byte)result);
+            // FIXME debug creating command
+            netArgs.SendASCII(this.Interface.DebugCreateCommand("ln-r", (byte)result));
 
             OnLoginAttempt?.Invoke(this, new LoginArgs(receivedAccount.Email, result));
 
@@ -236,16 +238,16 @@ namespace VisualServer
             netArgs.MainServer.CurrentConnections[account]
             = newConnection;
 
-            newConnection.Start();
+            newConnection.StartThread();
 
             return CommandResult.Successful;
         }
 
         private CommandResult _emailSendNumbers(string[] args, NetArgs netArgs)
         {
-            var numbers = SingleRandom.Instance.Next(10000, 99999);
-
-            SmtpManager.SendSignupMail
+//            var numbers = SingleRandom.Instance.Next(10000, 99999);
+//
+//            SmtpManager.SendSignupMail
             // FIXME _emailSendNumbers()
         }
     }

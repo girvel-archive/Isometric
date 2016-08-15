@@ -33,6 +33,8 @@ namespace GameCore.Modules.WorldModule.Buildings
 
         public short ID { get; set; }
 
+        public string Name { get; set; }
+
         private static short _nextID = 0;
 
 
@@ -41,7 +43,8 @@ namespace GameCore.Modules.WorldModule.Buildings
 		public BuildingPattern() {}
 
 		public BuildingPattern(
-			Resources resources, Resources needResources, BuildingType type = BuildingType.Nature)
+			string name, Resources resources, Resources needResources, 
+            BuildingType type = BuildingType.Nature)
 		{
 			Resources = resources;
 			NeedResources = needResources;

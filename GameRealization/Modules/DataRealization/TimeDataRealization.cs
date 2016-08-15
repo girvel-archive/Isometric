@@ -7,15 +7,14 @@ namespace GameRealization.Modules.DataRealization
 	{
         static TimeDataRealization ()
 		{
-            TimeData.Instance = new TimeData() 
+            GameDate.Data = new TimeData() 
             {
                 DaysInMonth = 60,
                 MonthsInYear = 6,
                 DaysInWeek = 6,
-                DaysInSeason = 90,
             };
 
-            TimeData.Instance.RefreshDependentValues();
+            GameDate.Data.RefreshDependentValues();
 		}
 	}
 }
