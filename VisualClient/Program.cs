@@ -41,23 +41,14 @@ namespace VisualClient
         {
             Console.Clear();
 
-            // Openning:
 
-            var successful = false;
-            try
+            // Generation | Opening:
+
+            if (TryOpen())
             {
-                Open();
-                successful = true;
+                Log.Instance.Write("Saves file were opened");
             }
-            catch (FileNotFoundException) {}
-            catch (DirectoryNotFoundException) {}
-            catch (UnauthorizedAccessException) {}
-            catch (SerializationException) {}
-
-
-            // Generation:
-
-            if (!successful)
+            else
             {
                 Territory = World.Instance.LazyGetTerritory(0, 0);
                 Log.Instance.Write("Main territory is generated");
@@ -108,13 +99,8 @@ namespace VisualClient
 
 
 
-        public static void Save()
+        public static bool TrySave()
         {
-            #if !DEBUG
-            try
-            {
-            #endif
-
             try
             {
                 if (!Directory.Exists(SavingDirectory))
@@ -130,49 +116,37 @@ namespace VisualClient
                     foreach (var @object in new object[] {
                         SingleServer.Instance,
                         World.Instance,
-                        SavingPeriodMilliseconds,
-                    })
+                        SavingPeriodMilliseconds})
                     { 
                         serializer.Serialize(mainStream, @object);
                     }
 
                     Log.Instance.Write("Saved successful");
+
+                    return true;
                 }
             }
-            catch (UnauthorizedAccessException)
-            {
-                Log.Instance.Write("Saving: Unathorized access");
-                throw;
-            }
-            catch (PathTooLongException)
-            {
-                Log.Instance.Write("Saving: Path is too long");
-                throw;
-            }
-            catch (DirectoryNotFoundException)
-            {
-                Log.Instance.Write("Saving: Can't find the directory");
-                throw;
-            }
-            catch (FileNotFoundException)
-            {
-                Log.Instance.Write("Saving: Can't find file");
-                throw;
-            }
-
-            #if !DEBUG
-            }
             catch (Exception ex)
-            { 
-            Log.Instance.Exception(ex);
+            {
+                Log.Instance.Exception(ex, "Saving exception was catched");
+
+                #if DEBUG
+                throw;
+                #endif
+
+                return false;
             }
-            #endif
         } 
 
-        public static void Open()
+        public static bool TryOpen()
         {
             try
             {
+                if (!File.Exists($"{SavingDirectory}/{SavingFile}"))
+                {
+                    return false;
+                }
+
                 using (FileStream mainStream = File.OpenRead(
                     $"{SavingDirectory}/{SavingFile}"))
                 {
@@ -184,35 +158,18 @@ namespace VisualClient
                 }
                 CheckVersion();
 
-                Log.Instance.Write("Saves file were opened");
+                return true;
             }
-            catch (UnauthorizedAccessException)
+            catch (Exception ex)
             {
-                Log.Instance.Write("Opening: Unathorized access");
+                Log.Instance.Exception(ex, "Opening exception was catched");
+
+                #if DEBUG
                 throw;
+                #else
+                return false;
+                #endif
             }
-            catch (PathTooLongException)
-            {
-                Log.Instance.Write("Opening: Path is too long");
-                throw;
-            }
-            catch (DirectoryNotFoundException)
-            {
-                Log.Instance.Write("Opening: Can't find directory");
-                throw;
-            }
-            catch (FileNotFoundException)
-            {
-                Log.Instance.Write("Opening: Can't find file");
-                throw;
-            }
-            #if !DEBUG
-            catch (SerializationException)
-            {
-            Log.Instance.Write("Opening: Serialization error");
-            throw;
-            }
-            #endif
         }
 
 
@@ -228,21 +185,16 @@ namespace VisualClient
         {
             while (true)
             {
-                #if !DEBUG
-                try
+                if (TrySave())
                 {
-                #endif
-                    
-                Save();
-                Thread.Sleep(SavingPeriodMilliseconds);
+                    Log.Instance.Write("Game was saved successful");
+                }
+                else
+                {
+                    Log.Instance.Write("Problem with game saving");
+                }
 
-                #if !DEBUG
-                }
-                catch (Exception ex)
-                {
-                    Log.Instance.Exception(ex);
-                }
-                #endif
+                Thread.Sleep(SavingPeriodMilliseconds);
             }
         }
     }

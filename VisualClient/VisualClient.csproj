@@ -38,10 +38,12 @@
     <Reference Include="VisualConsole">
       <HintPath>..\..\tools\VisualConsole\bin\Debug\VisualConsole.dll</HintPath>
     </Reference>
+    <Reference Include="BinarySerializationExtensions">
+      <HintPath>..\..\tools\BinarySerializationExtensions\BinarySerializationExtensions\bin\Release\BinarySerializationExtensions.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ConsoleHelper.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Modules\SingleUI.cs" />
     <Compile Include="Modules\BuildingGraphics\GraphicsManager.cs" />

@@ -4,6 +4,7 @@ using VisualServer;
 using System.Text;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
+using BinarySerializationExtensions;
 
 namespace VisualClient.Modules.LogModule
 {
@@ -91,15 +92,10 @@ namespace VisualClient.Modules.LogModule
 
 
 
-        public void Exception(Exception exception)
+        public void Exception(Exception exception, string message = "")
         {
-            Write(exception.ToString() + " caught. Serialized exception:");
-
-            // TODO log using stream -> stream field
-            using (var stream = File.Open(_currentPath, FileMode.Append))
-            {
-                new BinaryFormatter().Serialize(stream, exception);
-            }
+            Write($"{exception} caught.\n\tMessage: \"{message}\"\n\t" +
+                $"Serialized exception:\n{exception.SerializeToBytes()}");
         }
     }
 }
