@@ -21,9 +21,9 @@ namespace GameRealization.Modules.DataRealization
                     },
 
                     GenerateTerritory = 
-                        (land, x, y) =>
+                        (land, x, y, seed) =>
                         {
-                            return new Territory(TerritoryPatterns.Forest, SingleRandom.Instance.Next());
+                            return new Territory(TerritoryPatterns.Forest, seed);
                         },
 
                     NewPlayerTerritory = 

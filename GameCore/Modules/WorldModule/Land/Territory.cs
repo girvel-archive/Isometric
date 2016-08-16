@@ -39,6 +39,8 @@ namespace GameCore.Modules.WorldModule.Land
             Pattern = pattern;
             Seed = seed;
 
+            Random = new Random(Seed);
+
             BuildingGrid = new Building[World.Data.TerritorySize, World.Data.TerritorySize];
 
             Pattern.Generate(this, seed);
@@ -50,7 +52,12 @@ namespace GameCore.Modules.WorldModule.Land
 
         void IIndependentChanging.Tick()
         {
-            Pattern.Tick(this);
+            foreach (IIndependentChanging building in BuildingGrid)
+            {
+                building.Tick();
+            }
+
+            Pattern.Tick?.Invoke(this);
         }
 
         #endregion

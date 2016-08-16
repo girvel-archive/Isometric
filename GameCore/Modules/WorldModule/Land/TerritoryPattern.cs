@@ -22,14 +22,6 @@ namespace GameCore.Modules.WorldModule.Land
 			Action<Territory, int> generate)
 			: this()
 		{
-			Tick = territory =>
-			{
-                foreach (IIndependentChanging building in territory.BuildingGrid)
-				{
-					building.Tick();
-				}
-			};
-
 			Generate = generate;
 
 			ID = _nextID++;

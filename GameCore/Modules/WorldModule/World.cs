@@ -58,7 +58,7 @@ namespace GameCore.Modules.WorldModule
             {
 				if (_instance == null)
 				{
-					_instance = new World();
+                    _instance = new World(SingleRandom.Instance.Next());
 				}
 
 				return _instance;
@@ -83,14 +83,21 @@ namespace GameCore.Modules.WorldModule
 
 
 
-        public World() 
+        public World(int seed) 
         {
             LandGrid = new Territory[Data.TerritorySize, Data.TerritorySize];
+
+            Seed = seed;
+            Random = new Random(Seed);
         }
 
 
 
 		public Territory[,] LandGrid { get; }
+
+        public int Seed { get; }
+
+        protected Random Random;
 
 
 
@@ -105,7 +112,7 @@ namespace GameCore.Modules.WorldModule
         {
             if (LandGrid[x, y] == null)
             {
-                LandGrid[x, y] = Data.GenerateTerritory(LandGrid, x, y);
+                LandGrid[x, y] = Data.GenerateTerritory(LandGrid, x, y, SeedForPosition(x, y));
             }
 
             return LandGrid[x, y];
@@ -139,6 +146,14 @@ namespace GameCore.Modules.WorldModule
 
                 territory.Tick();
             }
+        }
+
+
+
+        // FIXME test it
+        protected int SeedForPosition(int x, int y)
+        {
+            return (int)((decimal)Seed * (x * Data.TerritorySize + y) / (decimal)Math.Pow(Data.TerritorySize, 2));
         }
 	}
 }

@@ -45,7 +45,7 @@ namespace GameCore.Modules.WorldModule
         /// </summary>
         public TerritoryGenerator GenerateTerritory { get; set; } 
 
-        public delegate Territory TerritoryGenerator(Territory[,] landGrid, int x, int y);
+        public delegate Territory TerritoryGenerator(Territory[,] landGrid, int x, int y, int seed);
 
 
 
