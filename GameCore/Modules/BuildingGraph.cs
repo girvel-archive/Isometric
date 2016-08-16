@@ -1,5 +1,5 @@
 ﻿using System;
-using GameBasics.Structures;
+using GameCore.Structures;
 using GameCore.Modules.WorldModule.Buildings;
 
 namespace GameCore.Modules

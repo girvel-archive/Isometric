@@ -12,8 +12,6 @@ namespace GameCore.Modules.WorldModule.Land
 
 		public Action<Territory, int> Generate { get; set; } 
 
-		public Action<Territory, Player> GenerateVillage { get; set; }
-
 		public Action<Territory> Tick { get; set; }
 
 
@@ -21,8 +19,7 @@ namespace GameCore.Modules.WorldModule.Land
 		public TerritoryPattern() {}
 
 		public TerritoryPattern(
-			Action<Territory, int> generate, 
-			Action<Territory, Player> generateVillage)
+			Action<Territory, int> generate)
 			: this()
 		{
 			Tick = territory =>
@@ -34,7 +31,6 @@ namespace GameCore.Modules.WorldModule.Land
 			};
 
 			Generate = generate;
-			GenerateVillage = generateVillage;
 
 			ID = _nextID++;
 		}

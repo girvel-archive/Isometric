@@ -12,6 +12,8 @@ using VisualServer.Modules.SpamModule;
 using GameCore.Modules;
 using VisualServer.Modules;
 using VisualServer.Extensions;
+using GameCore.Extensions;
+using System.Runtime.Serialization;
 
 
 
@@ -65,17 +67,17 @@ namespace VisualServer
         [NonSerialized]
         private Interface<NetArgs, CommandResult> Interface;
 
+        [NonSerialized]
+        private bool _connected;
 
 
-        public int ServerPort { get; set; } = 8005;
-        public string ServerAddress { get; set; } = "176.151.11.21";
+
+        public const int ServerPort = 8005;
+
+        public IPAddress ServerAddress { get; set; }
         public Encoding Encoding { get; set; } = Encoding.ASCII;
 
         public List<Account> Accounts { get; set; } = new List<Account>();
-
-
-
-        public int SpamErrorsMax { get; set; }
 
 
 
@@ -86,7 +88,7 @@ namespace VisualServer
 
 
         public event EventHandler<LoginArgs> OnLoginAttempt;
-        public event EventHandler OnFormatException;
+        public event EventHandler OnWrongIP;
         public event EventHandler OnAcceptedConnection;
 
 
@@ -118,6 +120,7 @@ namespace VisualServer
             #endif
         }
 
+        // FIXME check all classes for CheckVersion() and create checklist in Program
         public bool Init(string smtpEmail, string smtpPassword)
         {
             try
@@ -139,24 +142,53 @@ namespace VisualServer
             return true;
         }
 
+        public bool TryToAutoConnect()
+        {
+            foreach (var ip in Dns.GetHostEntry(Dns.GetHostName()).AddressList)
+            {
+                if (TryToConnect(ip))
+                {
+                    return true;
+                }
+            }
 
+            return false;
+        }
 
-        public void ServerLoop()
+        public bool TryToConnect(string address)
         {
             IPAddress ip;
 
-            if (!IPAddress.TryParse(ServerAddress, out ip))
+            if (!IPAddress.TryParse(address, out ip))
             {
-                OnFormatException?.Invoke(this, new EventArgs());
-                return;
+                OnWrongIP?.Invoke(this, new EventArgs());
+                return false;
             }
 
-            var ipPoint = new IPEndPoint(IPAddress.Parse(ServerAddress), ServerPort);
+            return TryToConnect(ip);
+        }
+
+        public bool TryToConnect(IPAddress ip)
+        {
+            var ipPoint = new IPEndPoint(ip, ServerPort);
 
             _listenSocket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Unspecified);
 
             _listenSocket.Bind(ipPoint);
             _listenSocket.Listen(10); // TODO increase if there will be a lot of players
+
+            _connected = true;
+            ServerAddress = ip;
+
+            return true;
+        }
+
+        public void ServerLoop()
+        {
+            if (!_connected)
+            {
+                throw new InvalidOperationException("Server is not connected. Use TryToAutoConnect() and TryToConnect()");
+            }
 
             while (true)
             {
@@ -178,7 +210,7 @@ namespace VisualServer
                 }
                 catch (Exception e)
                 {
-                    MainLog?.Exception(e, false);
+                GlobalData.Instance.OnUnknownException?.Invoke(this, new DelegateExtensions.ExceptionEventArgs(e));
                 }
                 #endif
             }
@@ -187,13 +219,16 @@ namespace VisualServer
         public void CheckVersion()
         {
 
-        }
+         }
 
 
 
-        private CommandResult _login(string[] args, NetArgs netArgs)
+
+
+        // @account
+        private CommandResult _login(Dictionary<string, string> args, NetArgs netArgs)
         {
-            var receivedAccount = Encoding.ASCII.GetBytes(args[0]).ByteDeserialize<CommonAccount>();
+            var receivedAccount = Encoding.ASCII.GetBytes(args["account"]).ByteDeserialize<CommonAccount>();
 
             var suitableAccounts = netArgs.MainServer.Accounts.Where(
                 a => a.Email == receivedAccount.Email
@@ -204,7 +239,7 @@ namespace VisualServer
 
             if (successful)
             {
-                if (suitableAccounts.First())
+                if (suitableAccounts.First().Banned)
                 { 
                     result = LoginResult.Banned;
                 }
@@ -212,8 +247,6 @@ namespace VisualServer
                 {
                     result = LoginResult.Successful;
                 }
-
-                return;
             }
             else
             {
@@ -221,7 +254,7 @@ namespace VisualServer
             }
 
             // FIXME debug creating command
-            netArgs.SendASCII(this.Interface.DebugCreateCommand("ln-r", (byte)result));
+            netArgs.SendASCII(this.Interface.DebugCreateCommand("ln-r", ((byte)result).ToString()));
 
             OnLoginAttempt?.Invoke(this, new LoginArgs(receivedAccount.Email, result));
 
@@ -243,12 +276,15 @@ namespace VisualServer
             return CommandResult.Successful;
         }
 
-        private CommandResult _emailSendNumbers(string[] args, NetArgs netArgs)
+        // @email
+        private CommandResult _emailSendNumbers(Dictionary<string, string> args, NetArgs netArgs)
         {
 //            var numbers = SingleRandom.Instance.Next(10000, 99999);
 //
 //            SmtpManager.SendSignupMail
             // FIXME _emailSendNumbers()
+
+            return CommandResult.Successful;
         }
     }
 }

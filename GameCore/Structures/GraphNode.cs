@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace GameBasics.Structures
+namespace GameCore.Structures
 {
     [Serializable]
     public class GraphNode<T>

@@ -81,7 +81,7 @@ namespace GameCore.Modules
             return result;
         }
 
-        public static IntVector Next(IntVector max) => Next(new IntVector(), max);
+        public static IntVector Next(IntVector max) => Next(new IntVector(0, 0), max);
 	}
 }
 

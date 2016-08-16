@@ -6,7 +6,7 @@ namespace GameRealization.Modules.DataRealization
 {
     public static class GlobalDataRealization
 	{
-        static GlobalDataRealization()
+        internal static void Init()
         {
             GlobalData.Instance = new GlobalData 
             {

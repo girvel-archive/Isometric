@@ -41,7 +41,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Modules\GlobalData.cs" />
     <Compile Include="Modules\SingleRandom.cs" />
-    <Compile Include="Structures\LazyArray.cs" />
     <Compile Include="Modules\WorldModule\Buildings\Building.cs" />
     <Compile Include="Modules\WorldModule\Buildings\BuildingPattern.cs" />
     <Compile Include="Modules\WorldModule\Buildings\BuildingType.cs" />
@@ -70,6 +69,7 @@
     <Compile Include="Modules\PlayerModule\PlayerData.cs" />
     <Compile Include="Modules\TimeModule\TimeData.cs" />
     <Compile Include="Modules\TickModule\TickData.cs" />
+    <Compile Include="Modules\PlayerModule\PlayersManager.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

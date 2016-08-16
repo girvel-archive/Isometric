@@ -5,7 +5,7 @@ using CommonStructures;
 
 namespace GameCore.Modules.PlayerModule.Leaders
 {
-    // TODO leader dna
+    // TODO 1.y leader dna
 
 	[Serializable]
 	public class Leader : IIndependentChanging, IResourcesBonusChanging

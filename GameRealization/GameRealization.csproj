@@ -53,6 +53,9 @@
     <Reference Include="VectorNet">
       <HintPath>..\..\tools\VectorNet\bin\Release\VectorNet.dll</HintPath>
     </Reference>
+    <Reference Include="RandomExtensions">
+      <HintPath>..\..\tools\RandomExtensions\RandomExtensions\bin\Release\RandomExtensions.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -63,6 +66,7 @@
     <Compile Include="Modules\DataRealization\GlobalDataRealization.cs" />
     <Compile Include="Modules\PatternsRealization\BuildingPatterns.cs" />
     <Compile Include="Modules\PatternsRealization\TerritoryPatterns.cs" />
+    <Compile Include="InitializationManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />

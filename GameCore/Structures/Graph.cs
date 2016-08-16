@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace GameBasics.Structures
+namespace GameCore.Structures
 {
     [Serializable]
     public class Graph<T> : IEnumerable<GraphNode<T>>

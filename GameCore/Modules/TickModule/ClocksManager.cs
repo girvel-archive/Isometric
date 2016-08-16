@@ -1,4 +1,7 @@
 ﻿using System;
+using System.Threading;
+using GameCore.Modules.PlayerModule;
+using GameCore.Modules.WorldModule;
 
 namespace GameCore.Modules.TickModule
 {
@@ -53,32 +56,54 @@ namespace GameCore.Modules.TickModule
 			}
 
 			set {
+                #if DEBUG
+
 				if (_instance != null)
 				{
 					throw new ArgumentException("ClocksManager.Instance is already set");
 				}
 
+                #endif
+
 				_instance = value;
 			}
 		}
-
-		private ClocksManager() {}
 
 		#endregion
 
 
 
-		public IIndependentChanging[] Subjects { get; set; }
+		public IIndependentChanging[] Subjects { get; }
 
 
 
-		public void Tick()
+        public ClocksManager()
+        {
+            Subjects = new IIndependentChanging[]
+                {
+                    PlayersManager.Instance,
+                    World.Instance,
+                };
+        }
+
+
+
+        public void Tick()
 		{
 			foreach (var subject in Subjects) 
 			{
 				subject.Tick();
 			}
 		}
+
+        public void TickLoop()
+        {
+            while (true)
+            {
+                Tick();
+                Thread.Sleep(Data.TickLengthMilliseconds);
+            }
+        }
 	}
 }
 

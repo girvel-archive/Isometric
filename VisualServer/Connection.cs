@@ -5,7 +5,6 @@ using System.Net.Sockets;
 using System.Text;
 using System.Threading;
 using CommandInterface;
-using GameBasics;
 using VisualServer.Modules.SpamModule;
 using GameCore.Modules.PlayerModule;
 using CommonStructures;
@@ -13,6 +12,7 @@ using BinarySerializationExtensions;
 using VisualServer.Extensions;
 using VectorNet;
 using GameCore.Modules;
+using GameCore.Extensions;
 
 namespace VisualServer
 {
@@ -107,7 +107,7 @@ namespace VisualServer
             
                 new Command<NetArgs, CommandResult>(
                     "gr", new string[0],
-                    (args, netArgs) => _sendResources(null, new Player.RefreshEventArgs(Account.Player))));
+                    _sendResources));
         }
 
         ~Connection()
@@ -158,7 +158,8 @@ namespace VisualServer
                     }
                     catch (Exception e)
                     {
-                    MainLog?.Exception(e, e is SocketException);
+                        GlobalData.Instance.OnUnknownException?.Invoke(
+                            this, new DelegateExtensions.ExceptionEventArgs(e));
                     }
                     #endif
                 }
@@ -193,7 +194,7 @@ namespace VisualServer
 
         private CommandResult _sendResources(Dictionary<string, string> args, NetArgs netArgs)
         {
-            _sendResources(this, Account.Player);
+            _sendResources(this, new Player.RefreshEventArgs(Account.Player));
 
             return CommandResult.Successful;
         }
@@ -224,7 +225,8 @@ namespace VisualServer
                         c => new CommonBuildingAction(
                             Account.Player.CurrentResources.Enough(c.Value.NeedResources)
                             && c.Value.UpgradePossible(pattern, building),
-                            $"Upgrade to {c.Value.Name}")).SerializeToBytes()));
+                            $"Upgrade to {c.Value.Name}"))
+                    .SerializeToBytes().ToASCII()));
             }
 
             return CommandResult.Successful;

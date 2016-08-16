@@ -28,13 +28,21 @@ namespace GameCore.Modules.WorldModule.Land
 
         public int Seed { get; }
 
-        public TerritoryGenerationType Type { get; }
+        public TerritoryGenerationType Type { get; set; } = TerritoryGenerationType.Wild;
 
         protected Random Random;
 
 
 
-		public Territory() {}
+        public Territory(TerritoryPattern pattern, int seed) 
+        {
+            Pattern = pattern;
+            Seed = seed;
+
+            BuildingGrid = new Building[World.Data.TerritorySize, World.Data.TerritorySize];
+
+            Pattern.Generate(this, seed);
+        }
 
 
 

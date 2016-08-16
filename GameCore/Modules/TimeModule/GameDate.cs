@@ -62,6 +62,11 @@ namespace GameCore.Modules.TimeModule
 			TotalDays = totalDays;
 		}
 
+        public GameDate(int years, int months, int days)
+        {
+            TotalDays = Data.DaysInYear * years + Data.DaysInYear * months + days;
+        }
+
 		public static GameDate operator +(GameDate d1, GameDate d2)
 		{
 			return new GameDate(d1.TotalDays + d2.TotalDays);

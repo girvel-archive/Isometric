@@ -14,7 +14,6 @@ namespace GameCore.Modules.WorldModule.Buildings
 
 
 
-		// TODO графику отдельно
 		public Action<Building> TickIndependentAction { get; set; }
 
         public Func<Building, Resources> TickResourcesAction { get; set; }

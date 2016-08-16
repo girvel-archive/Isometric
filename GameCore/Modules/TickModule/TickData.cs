@@ -9,6 +9,7 @@ namespace GameCore.Modules.TickModule
 
 
         public short DaysInTick;
+        public int TickLengthMilliseconds;
 
 
 

@@ -29,7 +29,7 @@ namespace GameCore.Modules
 #if DEBUG
 					throw ex;
 #else
-                    OnUnknownException(_instance, new DelegateExtensions.ExceptionEventArgs(ex));
+                    Instance.OnUnknownException?.Invoke(_instance, new DelegateExtensions.ExceptionEventArgs(ex));
 #endif
 				}
 			}

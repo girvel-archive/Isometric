@@ -1,5 +1,15 @@
 ﻿using System;
 using System.Threading;
+using GameCore.Modules.WorldModule.Land;
+using System.IO;
+using VisualClient.Modules;
+using System.Runtime.Serialization.Formatters.Binary;
+using GameCore.Modules.WorldModule;
+using System.Runtime.Serialization;
+using GameCore.Modules.TickModule;
+using VisualServer;
+using GameRealization;
+using VisualClient.Modules.LogModule;
 
 namespace VisualClient
 {
@@ -10,21 +20,90 @@ namespace VisualClient
             RefreshThread,
             SavingThread;
 
-        public static Server MainServer; // TODO server singleton
-
         public static Territory Territory { get; set; }
 
         public static int SavingPeriodMilliseconds { get; set; } = 60000;
 
         public static string SavingDirectory { get; set; } = @"saves";
-        public static string SavingPath { get; set; } = @"server-save";
+        public static string SavingFile { get; set; } = @"server-save";
         public static string SavingPathLog { get; set; } = @"server-log";
 
 
 
         static Program()
         {
-            MainLog = new Log();
+            InitializationManager.Init();
+        }
+
+
+
+        private static void Main(string[] args)
+        {
+            Console.Clear();
+
+            // Openning:
+
+            var successful = false;
+            try
+            {
+                Open();
+                successful = true;
+            }
+            catch (FileNotFoundException) {}
+            catch (DirectoryNotFoundException) {}
+            catch (UnauthorizedAccessException) {}
+            catch (SerializationException) {}
+
+
+            // Generation:
+
+            if (!successful)
+            {
+                Territory = World.Instance.LazyGetTerritory(0, 0);
+                Log.Instance.Write("Main territory is generated");
+            }
+
+
+            // Ip:
+
+            if (SingleServer.Instance.TryToAutoConnect())
+            {
+                Log.Instance.Write("Server IP selected automatically");
+            }
+            else
+            {
+                Log.Instance.Write("Server IP automatic selection failed");
+
+                while (true)
+                {
+                    Console.Write("Write your IP: ");
+                    var ip = Console.ReadLine();
+
+                    if (SingleServer.Instance.TryToConnect(ip))
+                    {
+                        break;
+                    }
+
+                    Log.Instance.Write("Wrong IP format");
+                }
+            }
+
+            Log.Instance.Write($"IP set as {SingleServer.Instance.ServerAddress}");
+
+
+            // Threads:
+
+            NetThread = new Thread(SingleServer.Instance.ServerLoop);
+            NetThread.Start();
+
+            RefreshThread = new Thread(ClocksManager.Instance.TickLoop);
+            RefreshThread.Start();
+
+            SavingThread = new Thread(_savingLoop);
+            SavingThread.Start();
+
+//            SingleUI.Instance.Control();
+            Console.ReadKey();
         }
 
 
@@ -35,6 +114,7 @@ namespace VisualClient
             try
             {
             #endif
+
             try
             {
                 if (!Directory.Exists(SavingDirectory))
@@ -42,104 +122,94 @@ namespace VisualClient
                     Directory.CreateDirectory(SavingDirectory);
                 }
 
-                using (
-                    FileStream mainStream = File.OpenWrite(
-                        $"{SavingDirectory}/{SavingPath}"),
-                    logStream = File.OpenWrite($"{SavingDirectory}/{SavingPathLog}"))
+                using (FileStream mainStream = File.OpenWrite(
+                    $"{SavingDirectory}/{SavingFile}"))
                 {
                     var serializer = new BinaryFormatter();
 
                     foreach (var @object in new object[] {
-                        Version,
-                        //                        MainServer.Accounts,
-                        Game, 
-                        Territory,
+                        SingleServer.Instance,
+                        World.Instance,
                         SavingPeriodMilliseconds,
-                    }) // TODO Server serialization
-                    {
+                    })
+                    { 
                         serializer.Serialize(mainStream, @object);
                     }
 
-                    serializer.Serialize(logStream, MainLog);
+                    Log.Instance.Write("Saved successful");
                 }
             }
             catch (UnauthorizedAccessException)
             {
-                MainLog.Write("Saving: Unathorized access", LogType.IO);
+                Log.Instance.Write("Saving: Unathorized access");
                 throw;
             }
             catch (PathTooLongException)
             {
-                MainLog.Write("Saving: Path is too long", LogType.IO);
+                Log.Instance.Write("Saving: Path is too long");
                 throw;
             }
             catch (DirectoryNotFoundException)
             {
-                MainLog.Write("Saving: Can't find the directory", LogType.IO);
+                Log.Instance.Write("Saving: Can't find the directory");
                 throw;
             }
             catch (FileNotFoundException)
             {
-                MainLog.Write("Saving: Can't find file", LogType.IO);
+                Log.Instance.Write("Saving: Can't find file");
                 throw;
             }
+
             #if !DEBUG
             }
             catch (Exception ex)
             { 
-            MainLog.Exception(ex, false);
+            Log.Instance.Exception(ex);
             }
             #endif
-        } // TODO remove user argument
+        } 
 
         public static void Open()
         {
             try
             {
-                using (
-                    FileStream mainStream = File.OpenRead(
-                        $"{SavingDirectory}/{SavingPath}"),
-                    logStream = File.OpenRead($"{SavingDirectory}/{SavingPathLog}"))
+                using (FileStream mainStream = File.OpenRead(
+                    $"{SavingDirectory}/{SavingFile}"))
                 {
                     var serializer = new BinaryFormatter();
 
-                    Version = (ProgramVersion) serializer.Deserialize(mainStream);
-                    MainServer.Accounts = (List<Account>) serializer.Deserialize(mainStream);
-                    Game = (Game) serializer.Deserialize(mainStream);
-                    Territory = (Territory) serializer.Deserialize(mainStream);
+                    SingleServer.Instance = (Server) serializer.Deserialize(mainStream);
+                    World.Instance = (World) serializer.Deserialize(mainStream);
                     SavingPeriodMilliseconds = (int) serializer.Deserialize(mainStream);
-
-                    MainLog = (Log) serializer.Deserialize(logStream);
                 }
                 CheckVersion();
 
-                MainLog.Write("Saves file opened", LogType.User);
-                // TODO enable checkVersion()
+                Log.Instance.Write("Saves file were opened");
             }
             catch (UnauthorizedAccessException)
             {
-                MainLog.Write("Saving: Unathorized access", LogType.IO);
+                Log.Instance.Write("Opening: Unathorized access");
                 throw;
             }
             catch (PathTooLongException)
             {
-                MainLog.Write("Saving: Path is too long", LogType.IO);
+                Log.Instance.Write("Opening: Path is too long");
                 throw;
             }
             catch (DirectoryNotFoundException)
             {
-                MainLog.Write("Saving: Can't find directory", LogType.IO);
+                Log.Instance.Write("Opening: Can't find directory");
                 throw;
             }
             catch (FileNotFoundException)
             {
-                MainLog.Write("Saving: Can't find file", LogType.IO);
+                Log.Instance.Write("Opening: Can't find file");
                 throw;
             }
             #if !DEBUG
             catch (SerializationException)
             {
-            MainLog.Write("Saving: Serialization error", LogType.IO);
+            Log.Instance.Write("Opening: Serialization error");
             throw;
             }
             #endif
@@ -147,86 +217,11 @@ namespace VisualClient
 
 
 
-        private static void Main(string[] args)
-        {
-            try 
-            {
-                Console.Clear();
-
-
-                // Openning:
-
-                var successful = false;
-                try
-                {
-                    Open();
-                    successful = true;
-                }
-                catch (FileNotFoundException) {}
-                catch (DirectoryNotFoundException) {}
-                catch (UnauthorizedAccessException) {}
-                catch (SerializationException) {}
-
-
-                // Generation:
-
-                if (!successful)
-                {
-                    Game = new GameRealization.Main.GameRealization(MainRandom.Next());
-                    MainServer = new Server(MainLog, Game.World, Game);
-
-                    Territory = MainServer.Accounts.Find(a => a.Login == "usr")
-                        .Player.Territory; // TODO main's territory
-                }
-
-                if (!successful)
-                {
-                    MainLog.Write("Main territory is generated", LogType.GameEvent);
-                }
-
-
-                // Ip:
-
-                MainLog.Write("Write your IP: ", LogType.User);
-                var ip = Console.ReadLine();
-
-                if (ip == "")
-                {
-                    MainLog.Write(
-                        "String was empty. Server chose default address",
-                        LogType.User);
-                }
-                else
-                {
-                    MainServer.ServerAddress = ip;
-                }
-
-
-                // Threads:
-
-//                NetThread = new Thread(MainServer.ServerLoop);
-//                NetThread.Start();
-
-                RefreshThread = new Thread(Game.RefreshLoop);
-                RefreshThread.Start();
-
-                SavingThread = new Thread(_savingLoop);
-                SavingThread.Start();
-
-                SingleUI.Instance.Control();
-                Console.ReadKey();
-            }
-            finally
-            {
-                Console.ReadKey();
-            }
-        }
-
         private static void CheckVersion()
         {
-            MainLog.CheckVersion(Version);
-            MainServer.CheckVersion(Version);
-            Game.CheckVersion(Version);
+            Log.Instance.CheckVersion();
+            SingleServer.Instance.CheckVersion();
+            World.Instance.CheckVersion();
         }
 
         private static void _savingLoop()
@@ -237,13 +232,15 @@ namespace VisualClient
                 try
                 {
                 #endif
+                    
                 Save();
                 Thread.Sleep(SavingPeriodMilliseconds);
+
                 #if !DEBUG
                 }
                 catch (Exception ex)
                 {
-                MainLog.Exception(ex, false);
+                    Log.Instance.Exception(ex);
                 }
                 #endif
             }

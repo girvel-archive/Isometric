@@ -6,7 +6,7 @@ namespace VisualServer.Modules.SpamModule
 {
     public class SpamFilterData
     {
-        private SpamFilterData() {}
+        internal SpamFilterData() {}
 
 
 

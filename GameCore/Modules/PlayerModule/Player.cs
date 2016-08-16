@@ -66,7 +66,7 @@ namespace GameCore.Modules.PlayerModule
 
 		public List<Building> OwnedBuildings { get; }
 
-        // TODO Player's leader
+        // 1.x TODO Player's leader
 
         public Resources CurrentResources { get; set; }
 
@@ -76,11 +76,11 @@ namespace GameCore.Modules.PlayerModule
 
 
 
-		public IIndependentChanging[] IndependentSubjects { get; set; }
+        public List<IIndependentChanging> IndependentSubjects { get; set; }
 
-		public IResourcesChanging[] ResourceSubjects { get; set; }
+		public List<IResourcesChanging> ResourceSubjects { get; set; }
 
-		public IResourcesBonusChanging[] ResourceBonusSubjects { get; set; }
+        public List<IResourcesBonusChanging> ResourceBonusSubjects { get; set; }
 
 
 
@@ -90,9 +90,17 @@ namespace GameCore.Modules.PlayerModule
 			Enemy = new Player() { Name = "enemy", };
 		}
 
-		public Player() {}
+		public Player() 
+        {
+            PlayersManager.Instance.Players.Add(this);
 
-		public Player(string name)
+            // FIXME player tick subjects
+            IndependentSubjects = new List<IIndependentChanging>();
+            ResourceSubjects = new List<IResourcesChanging>();
+            ResourceBonusSubjects = new List<IResourcesBonusChanging>();
+        }
+
+        public Player(string name) : this()
 		{
 			Name = name;
 			OwnedBuildings = new List<Building>();

@@ -5,7 +5,7 @@ namespace GameRealization.Modules.DataRealization
 {
     internal static class TimeDataRealization
 	{
-        static TimeDataRealization ()
+        internal static void Init()
 		{
             GameDate.Data = new TimeData() 
             {

@@ -6,6 +6,7 @@ using GameCore.Modules.WorldModule.Land;
 using GameCore.Modules.WorldModule.Buildings;
 using GameCore.Modules.PlayerModule;
 using GameCore.Modules;
+using GameCore.Modules.WorldModule;
 
 namespace GameRealization.Modules.PatternsRealization
 {
@@ -20,27 +21,11 @@ namespace GameRealization.Modules.PatternsRealization
         {
             Forest = new TerritoryPattern(
                 (terr, seed) => _defaultGeneration(terr, seed, new Dictionary<int, BuildingPattern> { 
-                    [1] = BuildingPatterns.Forest 
-                }),
-                _defaultVillageGeneration);
+                    [1] = BuildingPatterns.Forest,
+                }));
         }
 
 
-
-        private static void _defaultVillageGeneration(Territory territory, Player player)
-        {
-            for (var i = 0; i < Territory.VillageHouses; i++)
-            {
-                var randomPosition = SingleRandom.Next(GlobalData.Instance.TerritoryVectorSize);
-
-                if (territory[randomPosition]?.Pattern 
-                    != BuildingPatterns.WoodHouse)
-                {
-                    territory[randomPosition] = new Building(
-                        randomPosition, player, territory, BuildingPatterns.WoodHouse);
-                }
-            }
-        }
     
         private static void _defaultGeneration(
             Territory territory, 
@@ -49,9 +34,9 @@ namespace GameRealization.Modules.PatternsRealization
         {
             var random = new Random(seed);
 
-            for (var y = 0; y < GlobalData.Instance.TerritorySize; y++)
+            for (var y = 0; y < World.Data.TerritorySize; y++)
             {
-                for (var x = 0; x < GlobalData.Instance.TerritorySize; x++)
+                for (var x = 0; x < World.Data.TerritorySize; x++)
                 {
                     var pos = new IntVector(x, y); 
 

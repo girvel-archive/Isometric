@@ -4,16 +4,17 @@ using GameCore.Modules.TickModule;
 namespace GameRealization.Modules.DataRealization
 {
     public static class TickDataRealization
-	{
-        static TickDataRealization ()
-		{
-            TickData.Instance = new TickData() 
-            {
-                DaysInTick = 60,
-            };
+    {
+        internal static void Init()
+        {
+            ClocksManager.Data = new TickData() 
+                {
+                    DaysInTick = 60,
+                    TickLengthMilliseconds = 60000,
+                };
 
-            TickData.Instance.RefreshDependentValues();
-		}
-	}
+            ClocksManager.Data.RefreshDependentValues();
+        }
+    }
 }
 

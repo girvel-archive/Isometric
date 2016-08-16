@@ -43,7 +43,7 @@ namespace VisualServer.Modules
 
 
 
-        public delegate void MailSignupConstructor(string to, int code);
+        public delegate MailMessage MailSignupConstructor(string to, int code);
 
         public SmtpClient Client { get; set; }
         public static SmtpClient SingleClient
@@ -75,7 +75,7 @@ namespace VisualServer.Modules
 
                 ConstructMailSignup = (to, code) => {
                     return new MailMessage(
-                        From,
+                        Instance.From,
                         to,
                         "Isometric game registration",
                         "Your code: " + code);
@@ -87,7 +87,7 @@ namespace VisualServer.Modules
 
         public static void SendSignupMail(string to, int code)
         {
-            Instance.Client.Send(ConstructMailSignup(to, code));
+            Instance.Client.Send(Instance.ConstructMailSignup(to, code));
         }
     }
 }

@@ -14,9 +14,9 @@ namespace GameCore.Modules.WorldModule.Buildings
 	{
 		public BuildingPattern Pattern { get; set; }
 
-		public IntVector Position { get; }
+        public IntVector Position { get; set; }
 		public Player Owner { get; set; }
-		public Territory CurrentTerritory { get; private set; }
+		public Territory CurrentTerritory { get; set; }
 
 		public int PeopleNow { get; set; }
 
