@@ -6,6 +6,7 @@ using GameCore.Modules.WorldModule.Land;
 using System.Collections.Generic;
 using GameCore.Modules.TickModule;
 using CommonStructures;
+using System.Linq;
 
 namespace GameCore.Modules.WorldModule.Buildings
 {
@@ -49,17 +50,17 @@ namespace GameCore.Modules.WorldModule.Buildings
 
             InitFromPattern(pattern);
 
-            if (!Owner?.OwnedBuildings?.Contains(this) ?? false)
+            if (!Owner.GetOwnedBuildings()?.Contains(this) ?? false)
             {
-                Owner.OwnedBuildings.Add(this);
+                Owner.AddOwnedBuilding(this);
             }
         }
 
         ~Building()
         {
-            if (Owner?.OwnedBuildings?.Contains(this) ?? false)
+            if (Owner.GetOwnedBuildings()?.Contains(this) ?? false)
             {
-                Owner.OwnedBuildings.Remove(this);
+                Owner.RemoveOwnedBuilding(this);
             }
         }
 

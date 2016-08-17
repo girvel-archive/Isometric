@@ -155,9 +155,20 @@ namespace VisualClient.Modules
                 OnOpeningException?.Invoke(ex);
 
                 #if DEBUG
-                throw;
+
+                if (ex.Message != "Attempting to deserialize an empty stream.")
+                {
+                    throw;
+                }
+                else
+                {
+                    return false;
+                }
+
                 #else
+
                 return false;
+
                 #endif
             }
         }

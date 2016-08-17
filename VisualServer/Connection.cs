@@ -124,7 +124,7 @@ namespace VisualServer
             MainThread = new Thread(Start);
             MainThread.Start();
 
-            Account.Player.OnRefresh += _sendResources;
+            Account.Player.OnTick += _sendResources;
         }
 
         public void Start()
@@ -175,7 +175,7 @@ namespace VisualServer
             MainSocket.Close();
             MainThread.Abort();
 
-            Account.Player.OnRefresh -= _sendResources;
+            Account.Player.OnTick -= _sendResources;
         }
 
         protected void Send(string message)
