@@ -64,15 +64,21 @@ namespace GameCore.Modules.PlayerModule
 
         public string Name { get; set; }
 
-        public List<Building> OwnedBuildings { get; }
 
-        // 1.x TODO Player's leader
+
+        public Building[] GetOwnedBuildings() => _ownedBuildings?.ToArray();
+
+        private List<Building> _ownedBuildings { get; }
+
+
+
+        // TODO 1.x Player's leader
 
         public Resources CurrentResources { get; set; }
 
         public Territory Territory { get; set; }
 
-        public event EventHandler<RefreshEventArgs> OnRefresh;
+        public event EventHandler<RefreshEventArgs> OnTick;
 
 
 
@@ -86,24 +92,36 @@ namespace GameCore.Modules.PlayerModule
 
         static Player()
         {
+            #pragma warning disable 618
+
             Nature = new Player() { Name = "nature", };
             Enemy = new Player() { Name = "enemy", };
+
+            #pragma warning restore 618
         }
 
+        [Obsolete("using serialization ctor")]
         public Player() 
         {
             PlayersManager.Instance.Players.Add(this);
 
-            // FIXME player tick subjects
+            // TODO 1.x progress subject
+            // TODO 1.x leader subject
             IndependentSubjects = new List<IIndependentChanging>();
             ResourceSubjects = new List<IResourcesChanging>();
             ResourceBonusSubjects = new List<IResourcesBonusChanging>();
         }
 
+
+
+        #pragma warning disable 618 // closing is instide
+
         public Player(string name) : this()
         {
+            #pragma warning restore 618
+
             Name = name;
-            OwnedBuildings = new List<Building>();
+            _ownedBuildings = new List<Building>();
 
             this.Territory = World.Instance.NewPlayerTerritory(this);
 
@@ -130,7 +148,25 @@ namespace GameCore.Modules.PlayerModule
                 subject.Tick(ref resourcesDelta);
             }
 
-            OnRefresh.SafeInvoke(this, new RefreshEventArgs(this), GlobalData.Instance.OnUnknownException);
+            OnTick.SafeInvoke(this, new RefreshEventArgs(this), GlobalData.Instance.OnUnknownException);
+        }
+
+        public void AddOwnedBuilding(Building building) 
+        {
+            _ownedBuildings.Add(building);
+
+            IndependentSubjects.Add(building);
+            ResourceSubjects.Add(building);
+            ResourceBonusSubjects.Add(building);
+        }
+
+        public void RemoveOwnedBuilding(Building building)
+        {
+            _ownedBuildings.Remove(building);
+
+            IndependentSubjects.Remove(building);
+            ResourceSubjects.Remove(building);
+            ResourceBonusSubjects.Remove(building);
         }
     }
 }

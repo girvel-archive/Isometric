@@ -5,65 +5,82 @@ namespace CommonStructures
     [Serializable]
     public struct Resources
     {
-        public int[] ResourcesArray;
+        private int[] _resourcesArray;
+        public int[] ResourcesArray
+        {
+            get
+            {
+                if (_resourcesArray == null)
+                {
+                    _resourcesArray = new int[Enum.GetValues(typeof(ResourceType)).Length];
+                }
+
+                return _resourcesArray;
+            }
+
+            set
+            {
+                _resourcesArray = value;
+            }
+        }
 
         public int Gold {
             get {
-                return ResourcesArray[(byte)ResourceType.Gold];
+                return _resourcesArray[(byte)ResourceType.Gold];
             }
 
             set {
-                ResourcesArray[(byte)ResourceType.Gold] = value;
+                _resourcesArray[(byte)ResourceType.Gold] = value;
             }
         }
 
         public int Meat {
             get {
-                return ResourcesArray[(byte)ResourceType.Meat];
+                return _resourcesArray[(byte)ResourceType.Meat];
             }
 
             set {
-                ResourcesArray[(byte)ResourceType.Meat] = value;
+                _resourcesArray[(byte)ResourceType.Meat] = value;
             }
         }
 
         public int Corn {
             get {
-                return ResourcesArray[(byte)ResourceType.Corn];
+                return _resourcesArray[(byte)ResourceType.Corn];
             }
 
             set {
-                ResourcesArray[(byte)ResourceType.Corn] = value;
+                _resourcesArray[(byte)ResourceType.Corn] = value;
             }
         }
 
         public int Stone {
             get {
-                return ResourcesArray[(byte)ResourceType.Stone];
+                return _resourcesArray[(byte)ResourceType.Stone];
             }
 
             set {
-                ResourcesArray[(byte)ResourceType.Stone] = value;
+                _resourcesArray[(byte)ResourceType.Stone] = value;
             }
         }
 
         public int Wood {
             get {
-                return ResourcesArray[(byte)ResourceType.Wood];
+                return _resourcesArray[(byte)ResourceType.Wood];
             }
 
             set {
-                ResourcesArray[(byte)ResourceType.Wood] = value;
+                _resourcesArray[(byte)ResourceType.Wood] = value;
             }
         }
 
         public int People {
             get {
-                return ResourcesArray[(byte)ResourceType.People];
+                return _resourcesArray[(byte)ResourceType.People];
             }
 
             set {
-                ResourcesArray[(byte)ResourceType.People] = value;
+                _resourcesArray[(byte)ResourceType.People] = value;
             }
         }
 
@@ -77,7 +94,7 @@ namespace CommonStructures
             int wood = 0, 
             int people = 0)
         {
-            ResourcesArray = new int[typeof(ResourceType).GetEnumValues().Length];
+            _resourcesArray = new int[Enum.GetValues(typeof(ResourceType)).Length];
 
             Gold = gold;
             Meat = meat;
@@ -107,6 +124,16 @@ namespace CommonStructures
         public static Resources operator +(Resources r1, Resources r2)
         {
             var result = new Resources();
+
+            if (r1._resourcesArray == null)
+            {
+                return r2;
+            }
+
+            if (r2._resourcesArray == null)
+            {
+                return r1;
+            }
 
             for (var i = 0; i < result.ResourcesArray.Length; i++)
             {
