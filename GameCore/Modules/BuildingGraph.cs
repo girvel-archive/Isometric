@@ -4,35 +4,35 @@ using GameCore.Modules.WorldModule.Buildings;
 
 namespace GameCore.Modules
 {
-	[Serializable]
-	public class BuildingGraph
-	{
-		#region Singleton-part
+    [Serializable]
+    public class BuildingGraph
+    {
+        #region Singleton-part
 
-		private static Graph<BuildingPattern> _instance;
-		public static Graph<BuildingPattern> Instance {
-			get {
-				if (_instance == null)
-				{
-					_instance = new Graph<BuildingPattern>(true);
-				}
+        private static Graph<BuildingPattern> _instance;
+        public static Graph<BuildingPattern> Instance {
+            get {
+                if (_instance == null)
+                {
+                    _instance = new Graph<BuildingPattern>(true);
+                }
 
-				return _instance;
-			}
+                return _instance;
+            }
 
-			set {
-				if (_instance != null)
-				{
-					throw new ArgumentException("BuildingGraph.Instance is already set");
-				}
+            set {
+                if (_instance != null)
+                {
+                    throw new ArgumentException("BuildingGraph.Instance is already set");
+                }
 
-				_instance = value;
-			}
-		}
+                _instance = value;
+            }
+        }
 
-		public BuildingGraph() {}
+        public BuildingGraph() {}
 
-		#endregion
-	}
+        #endregion
+    }
 }
 

@@ -2,9 +2,9 @@
 
 namespace GameCore.Modules.WorldModule.Interfaces
 {
-	public interface IRefreshable
-	{
-		void Refresh();
-	}
+    public interface IRefreshable
+    {
+        void Refresh();
+    }
 }
 

@@ -9,9 +9,9 @@ using GameCore.Modules.TickModule;
 
 namespace GameCore.Modules.WorldModule
 {
-	[Serializable]
-	public class World : IIndependentChanging
-	{
+    [Serializable]
+    public class World : IIndependentChanging
+    {
         #region Data singleton
 
         [Obsolete("using backing field")]
@@ -48,21 +48,21 @@ namespace GameCore.Modules.WorldModule
 
 
 
-		#region Singleton-part
+        #region Singleton-part
 
         [NonSerialized]
-		private static World _instance;
-		public static World Instance 
+        private static World _instance;
+        public static World Instance 
         {
-			get 
+            get 
             {
-				if (_instance == null)
-				{
+                if (_instance == null)
+                {
                     _instance = new World(SingleRandom.Instance.Next());
-				}
+                }
 
-				return _instance;
-			}
+                return _instance;
+            }
 
             set
             {
@@ -77,7 +77,7 @@ namespace GameCore.Modules.WorldModule
 
                 _instance = value;
             }
-		}
+        }
 
         #endregion
 
@@ -93,7 +93,7 @@ namespace GameCore.Modules.WorldModule
 
 
 
-		public Territory[,] LandGrid { get; }
+        public Territory[,] LandGrid { get; }
 
         public int Seed { get; }
 
@@ -155,6 +155,6 @@ namespace GameCore.Modules.WorldModule
         {
             return (int)((decimal)Seed * (x * Data.TerritorySize + y) / (decimal)Math.Pow(Data.TerritorySize, 2));
         }
-	}
+    }
 }
 

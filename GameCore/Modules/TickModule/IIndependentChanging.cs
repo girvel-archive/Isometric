@@ -2,10 +2,10 @@
 
 namespace GameCore.Modules.TickModule
 {
-	public interface IIndependentChanging
-	{
-		void Tick();
-	}
+    public interface IIndependentChanging
+    {
+        void Tick();
+    }
 
 }
 

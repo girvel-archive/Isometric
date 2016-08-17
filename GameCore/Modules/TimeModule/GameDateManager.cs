@@ -4,47 +4,47 @@ using GameCore.Modules.TimeModule;
 
 namespace GameCore.Modules.TimeModule
 {
-	public class GameDateManager : IIndependentChanging
-	{
-		#region Singleton-part
+    public class GameDateManager : IIndependentChanging
+    {
+        #region Singleton-part
 
-		private static GameDateManager _instance;
-		public static GameDateManager Instance {
-			get {
-				if (_instance == null)
-				{
-					_instance = new GameDateManager();
-				}
+        private static GameDateManager _instance;
+        public static GameDateManager Instance {
+            get {
+                if (_instance == null)
+                {
+                    _instance = new GameDateManager();
+                }
 
-				return _instance;
-			}
+                return _instance;
+            }
 
-			set {
-				if (_instance != null)
-				{
-					throw new ArgumentException("GameDateManager.Instance is already set");
-				}
+            set {
+                if (_instance != null)
+                {
+                    throw new ArgumentException("GameDateManager.Instance is already set");
+                }
 
-				_instance = value;
-			}
-		}
+                _instance = value;
+            }
+        }
 
-		private GameDateManager() {}
+        private GameDateManager() {}
 
-		#endregion
+        #endregion
 
 
 
-		public static GameDate CurrentDate => Instance.Current;
+        public static GameDate CurrentDate => Instance.Current;
 
         private GameDate Current;
 
 
 
-		void IIndependentChanging.Tick()
-		{
+        void IIndependentChanging.Tick()
+        {
             Current.TotalDays += ClocksManager.Data.DaysInTick;
-		}
-	}
+        }
+    }
 }
 

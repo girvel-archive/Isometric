@@ -9,9 +9,9 @@ using CommonStructures;
 
 namespace GameCore.Modules.PlayerModule
 {
-	[Serializable]
-	public class Player : IIndependentChanging
-	{
+    [Serializable]
+    public class Player : IIndependentChanging
+    {
         #region Data singleton
 
         [Obsolete("using backing field")]
@@ -47,24 +47,24 @@ namespace GameCore.Modules.PlayerModule
 
 
 
-		public class RefreshEventArgs : EventArgs
-		{
-			public Player Owner { get; }
+        public class RefreshEventArgs : EventArgs
+        {
+            public Player Owner { get; }
 
-			public RefreshEventArgs(Player owner)
-			{
-				Owner = owner;
-			}
-		}
+            public RefreshEventArgs(Player owner)
+            {
+                Owner = owner;
+            }
+        }
 
 
 
-		public static Player Nature { get; }
-		public static Player Enemy { get; }
+        public static Player Nature { get; }
+        public static Player Enemy { get; }
 
         public string Name { get; set; }
 
-		public List<Building> OwnedBuildings { get; }
+        public List<Building> OwnedBuildings { get; }
 
         // 1.x TODO Player's leader
 
@@ -72,25 +72,25 @@ namespace GameCore.Modules.PlayerModule
 
         public Territory Territory { get; set; }
 
-		public event EventHandler<RefreshEventArgs> OnRefresh;
+        public event EventHandler<RefreshEventArgs> OnRefresh;
 
 
 
         public List<IIndependentChanging> IndependentSubjects { get; set; }
 
-		public List<IResourcesChanging> ResourceSubjects { get; set; }
+        public List<IResourcesChanging> ResourceSubjects { get; set; }
 
         public List<IResourcesBonusChanging> ResourceBonusSubjects { get; set; }
 
 
 
-		static Player()
-		{
-			Nature = new Player() { Name = "nature", };
-			Enemy = new Player() { Name = "enemy", };
-		}
+        static Player()
+        {
+            Nature = new Player() { Name = "nature", };
+            Enemy = new Player() { Name = "enemy", };
+        }
 
-		public Player() 
+        public Player() 
         {
             PlayersManager.Instance.Players.Add(this);
 
@@ -101,37 +101,37 @@ namespace GameCore.Modules.PlayerModule
         }
 
         public Player(string name) : this()
-		{
-			Name = name;
-			OwnedBuildings = new List<Building>();
+        {
+            Name = name;
+            OwnedBuildings = new List<Building>();
 
-			this.Territory = World.Instance.NewPlayerTerritory(this);
+            this.Territory = World.Instance.NewPlayerTerritory(this);
 
-			CurrentResources = Data.DefaultPlayerResources;
-		}
+            CurrentResources = Data.DefaultPlayerResources;
+        }
 
 
 
-		public void Tick()
-		{
-			foreach (var subject in IndependentSubjects)
-			{
-				subject.Tick();
-			}
+        public void Tick()
+        {
+            foreach (var subject in IndependentSubjects)
+            {
+                subject.Tick();
+            }
 
             Resources resourcesDelta = new Resources();
-			foreach (var subject in ResourceSubjects)
-			{
-				resourcesDelta += subject.Tick();
-			}
+            foreach (var subject in ResourceSubjects)
+            {
+                resourcesDelta += subject.Tick();
+            }
 
-			foreach (var subject in ResourceBonusSubjects)
-			{
-				subject.Tick(ref resourcesDelta);
-			}
+            foreach (var subject in ResourceBonusSubjects)
+            {
+                subject.Tick(ref resourcesDelta);
+            }
 
             OnRefresh.SafeInvoke(this, new RefreshEventArgs(this), GlobalData.Instance.OnUnknownException);
-		}
-	}
+        }
+    }
 }
 

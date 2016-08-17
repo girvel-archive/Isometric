@@ -2,11 +2,11 @@
 
 namespace GameCore.Modules.WorldModule.Land
 {
-	public enum TerritoryGenerationType
-	{
-		Wild,
-		EnemyVillage,
-		PlayerVillage,
-	}
+    public enum TerritoryGenerationType
+    {
+        Wild,
+        EnemyVillage,
+        PlayerVillage,
+    }
 }
 

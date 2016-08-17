@@ -3,9 +3,9 @@
 namespace GameCore.Modules.TimeModule
 {
     // TODO 1.1 GameDate to common
-	[Serializable]
-	public struct GameDate
-	{
+    [Serializable]
+    public struct GameDate
+    {
         #region Data singleton
 
         [Obsolete("using backing field")]
@@ -41,7 +41,7 @@ namespace GameCore.Modules.TimeModule
 
 
 
-		public int TotalDays;
+        public int TotalDays;
 
         public int Year => (int)Math.Floor((double)TotalDays / Data.DaysInYear);
 
@@ -57,45 +57,45 @@ namespace GameCore.Modules.TimeModule
 
 
 
-		public GameDate(int totalDays)
-		{
-			TotalDays = totalDays;
-		}
+        public GameDate(int totalDays)
+        {
+            TotalDays = totalDays;
+        }
 
         public GameDate(int years, int months, int days)
         {
             TotalDays = Data.DaysInYear * years + Data.DaysInYear * months + days;
         }
 
-		public static GameDate operator +(GameDate d1, GameDate d2)
-		{
-			return new GameDate(d1.TotalDays + d2.TotalDays);
-		}
+        public static GameDate operator +(GameDate d1, GameDate d2)
+        {
+            return new GameDate(d1.TotalDays + d2.TotalDays);
+        }
 
-		public static GameDate operator -(GameDate d1, GameDate d2)
-		{
-			return new GameDate(d1.TotalDays - d2.TotalDays);
-		}
+        public static GameDate operator -(GameDate d1, GameDate d2)
+        {
+            return new GameDate(d1.TotalDays - d2.TotalDays);
+        }
 
-		public static GameDate operator +(GameDate d, int days)
-		{
-			return new GameDate(d.TotalDays + days);
-		}
+        public static GameDate operator +(GameDate d, int days)
+        {
+            return new GameDate(d.TotalDays + days);
+        }
 
-		public static GameDate operator -(GameDate d, int days)
-		{
-			return new GameDate(d.TotalDays - days);
-		}
+        public static GameDate operator -(GameDate d, int days)
+        {
+            return new GameDate(d.TotalDays - days);
+        }
 
-		public static bool operator >(GameDate d1, GameDate d2)
-		{
-			return d1.TotalDays > d2.TotalDays;
-		}
+        public static bool operator >(GameDate d1, GameDate d2)
+        {
+            return d1.TotalDays > d2.TotalDays;
+        }
 
-		public static bool operator <(GameDate d1, GameDate d2)
-		{
-			return d1.TotalDays < d2.TotalDays;
-		}
-	}
+        public static bool operator <(GameDate d1, GameDate d2)
+        {
+            return d1.TotalDays < d2.TotalDays;
+        }
+    }
 }
 

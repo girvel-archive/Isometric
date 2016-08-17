@@ -2,9 +2,9 @@
 
 namespace CommonStructures
 {
-	[Serializable]
-	public struct Resources
-	{
+    [Serializable]
+    public struct Resources
+    {
         public int[] ResourcesArray;
 
         public int Gold {
@@ -69,23 +69,23 @@ namespace CommonStructures
 
 
 
-		public Resources(
-			int gold = 0, 
-			int meat = 0, 
-			int corn = 0, 
-			int stone = 0, 
-			int wood = 0, 
-			int people = 0)
-		{
+        public Resources(
+            int gold = 0, 
+            int meat = 0, 
+            int corn = 0, 
+            int stone = 0, 
+            int wood = 0, 
+            int people = 0)
+        {
             ResourcesArray = new int[typeof(ResourceType).GetEnumValues().Length];
 
-			Gold = gold;
-			Meat = meat;
-			Corn = corn;
-			Stone = stone;
-			Wood = wood;
-			People = people;
-		}
+            Gold = gold;
+            Meat = meat;
+            Corn = corn;
+            Stone = stone;
+            Wood = wood;
+            People = people;
+        }
 
 
 
@@ -104,8 +104,8 @@ namespace CommonStructures
 
 
 
-		public static Resources operator +(Resources r1, Resources r2)
-		{
+        public static Resources operator +(Resources r1, Resources r2)
+        {
             var result = new Resources();
 
             for (var i = 0; i < result.ResourcesArray.Length; i++)
@@ -114,10 +114,10 @@ namespace CommonStructures
             }
 
             return result;
-		}
+        }
 
-		public static Resources operator -(Resources r1, Resources r2)
-		{
+        public static Resources operator -(Resources r1, Resources r2)
+        {
             var result = new Resources();
 
             for (var i = 0; i < result.ResourcesArray.Length; i++)
@@ -127,6 +127,6 @@ namespace CommonStructures
 
             return result;
         }
-	}
+    }
 }
 

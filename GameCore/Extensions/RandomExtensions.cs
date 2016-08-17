@@ -2,11 +2,11 @@
 
 namespace GameCore.Extensions
 {
-	public class AgeExtensions
-	{
-		public AgeExtensions ()
-		{
-		}
-	}
+    public class AgeExtensions
+    {
+        public AgeExtensions ()
+        {
+        }
+    }
 }
 

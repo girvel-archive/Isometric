@@ -9,24 +9,24 @@ using CommonStructures;
 
 namespace GameCore.Modules.WorldModule.Buildings
 {
-	[Serializable]
+    [Serializable]
     public class Building : IIndependentChanging, IResourcesChanging, IResourcesBonusChanging
-	{
-		public BuildingPattern Pattern { get; set; }
+    {
+        public BuildingPattern Pattern { get; set; }
 
 
 
         public IntVector Position { get; set; }
 
-		public Player Owner { get; set; }
+        public Player Owner { get; set; }
 
-		public Territory Territory { get; set; }
+        public Territory Territory { get; set; }
 
 
 
-		public int PeopleNow { get; set; }
+        public int PeopleNow { get; set; }
 
-		public Resources Resources { get; set; }
+        public Resources Resources { get; set; }
 
 
 
@@ -38,57 +38,57 @@ namespace GameCore.Modules.WorldModule.Buildings
 
 
 
-		public Building() {}
+        public Building() {}
 
-		public Building(IntVector position, Player owner, Territory territory, BuildingPattern pattern)
-		{
-			Position = position;
-			Owner = owner;
-			Territory = territory;
-			Pattern = pattern;
+        public Building(IntVector position, Player owner, Territory territory, BuildingPattern pattern)
+        {
+            Position = position;
+            Owner = owner;
+            Territory = territory;
+            Pattern = pattern;
 
-			InitFromPattern(pattern);
+            InitFromPattern(pattern);
 
-			if (!Owner?.OwnedBuildings?.Contains(this) ?? false)
-			{
-				Owner.OwnedBuildings.Add(this);
-			}
-		}
+            if (!Owner?.OwnedBuildings?.Contains(this) ?? false)
+            {
+                Owner.OwnedBuildings.Add(this);
+            }
+        }
 
-		~Building()
-		{
-			if (Owner?.OwnedBuildings?.Contains(this) ?? false)
-			{
-				Owner.OwnedBuildings.Remove(this);
-			}
-		}
+        ~Building()
+        {
+            if (Owner?.OwnedBuildings?.Contains(this) ?? false)
+            {
+                Owner.OwnedBuildings.Remove(this);
+            }
+        }
 
 
 
         public bool TryUpgrade(BuildingPattern target)
-		{
+        {
             var foundedObjects = BuildingGraph.Instance.Find(Pattern);
 
-			if (!(foundedObjects[0].IsParentOf(target)
+            if (!(foundedObjects[0].IsParentOf(target)
                 && (target.UpgradePossible?.Invoke(Pattern, this) ?? true)
                 && target.NeedResources.Enough(Owner.CurrentResources)))
-			{
-				return false;
-			}
+            {
+                return false;
+            }
 
             Owner.CurrentResources -= target.NeedResources;
             // TODO 1.1 upgrade duration (this.properties + ActionsProcessor)
-			InitFromPattern(target);
+            InitFromPattern(target);
 
             return true;
-		}
+        }
 
 
 
-		protected void InitFromPattern(BuildingPattern pattern)
-		{
-			Resources = Pattern.Resources;
-		}
+        protected void InitFromPattern(BuildingPattern pattern)
+        {
+            Resources = Pattern.Resources;
+        }
 
 
 
@@ -110,6 +110,6 @@ namespace GameCore.Modules.WorldModule.Buildings
         }
 
         #endregion
-	}
+    }
 }
 

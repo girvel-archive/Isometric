@@ -13,13 +13,13 @@ namespace GameCore.Structures
 
 
 
-		/// <summary>
-		/// Serialization ctor.
-		/// </summary>
+        /// <summary>
+        /// Serialization ctor.
+        /// </summary>
         [Obsolete("Using serialization ctor", true)]
-		public GraphNode() {}
+        public GraphNode() {}
 
-		public GraphNode(T value, Graph<T> parentGraph)
+        public GraphNode(T value, Graph<T> parentGraph)
         {
             Value = value;
             ParentGraph = parentGraph;

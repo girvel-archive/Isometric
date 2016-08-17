@@ -5,7 +5,7 @@ using GameCore.Modules.PlayerModule;
 namespace GameRealization.Modules.DataRealization
 {
     public static class GlobalDataRealization
-	{
+    {
         internal static void Init()
         {
             GlobalData.Instance = new GlobalData 
@@ -15,6 +15,6 @@ namespace GameRealization.Modules.DataRealization
 
             GlobalData.Instance.RefreshValues();
         }
-	}
+    }
 }
 

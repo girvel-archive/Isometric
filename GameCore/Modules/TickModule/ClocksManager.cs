@@ -5,8 +5,8 @@ using GameCore.Modules.WorldModule;
 
 namespace GameCore.Modules.TickModule
 {
-	public class ClocksManager
-	{
+    public class ClocksManager
+    {
         #region Data singleton
 
         [Obsolete("using backing field")]
@@ -42,38 +42,38 @@ namespace GameCore.Modules.TickModule
 
 
 
-		#region Singleton-part
+        #region Singleton-part
 
-		private static ClocksManager _instance;
-		public static ClocksManager Instance {
-			get {
-				if (_instance == null)
-				{
-					_instance = new ClocksManager();
-				}
+        private static ClocksManager _instance;
+        public static ClocksManager Instance {
+            get {
+                if (_instance == null)
+                {
+                    _instance = new ClocksManager();
+                }
 
-				return _instance;
-			}
+                return _instance;
+            }
 
-			set {
+            set {
                 #if DEBUG
 
-				if (_instance != null)
-				{
-					throw new ArgumentException("ClocksManager.Instance is already set");
-				}
+                if (_instance != null)
+                {
+                    throw new ArgumentException("ClocksManager.Instance is already set");
+                }
 
                 #endif
 
-				_instance = value;
-			}
-		}
+                _instance = value;
+            }
+        }
 
-		#endregion
+        #endregion
 
 
 
-		public IIndependentChanging[] Subjects { get; }
+        public IIndependentChanging[] Subjects { get; }
 
 
 
@@ -89,12 +89,12 @@ namespace GameCore.Modules.TickModule
 
 
         public void Tick()
-		{
-			foreach (var subject in Subjects) 
-			{
-				subject.Tick();
-			}
-		}
+        {
+            foreach (var subject in Subjects) 
+            {
+                subject.Tick();
+            }
+        }
 
         public void TickLoop()
         {
@@ -104,6 +104,6 @@ namespace GameCore.Modules.TickModule
                 Thread.Sleep(Data.TickLengthMilliseconds);
             }
         }
-	}
+    }
 }
 
