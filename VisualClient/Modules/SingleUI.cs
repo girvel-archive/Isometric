@@ -8,7 +8,7 @@ using VisualClient.Modules.BuildingGraphics;
 namespace VisualClient.Modules
 {
     public static class SingleUI
-	{
+    {
         private static ConsoleUI _instance;
         public static ConsoleUI Instance {
             get {
@@ -30,6 +30,6 @@ namespace VisualClient.Modules
 //                },
 //                new List<Command>
         }
-	}
+    }
 }
 

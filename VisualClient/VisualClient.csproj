@@ -44,6 +44,7 @@
     <Reference Include="CustomProperty">
       <HintPath>..\..\tools\CustomProperty\CustomProperty\bin\Release\CustomProperty.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.CSharp" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />

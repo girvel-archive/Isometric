@@ -4,9 +4,9 @@ using CommonStructures;
 
 namespace GameCore.Modules.TickModule
 {
-	public interface IResourcesBonusChanging
-	{
-		void Tick(ref Resources resources);
-	}
+    public interface IResourcesBonusChanging
+    {
+        void Tick(ref Resources resources);
+    }
 }
 

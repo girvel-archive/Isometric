@@ -8,7 +8,7 @@ namespace GameCore.Structures
     [Serializable]
     public class Graph<T> : IEnumerable<GraphNode<T>>
     {
-		public bool CheckIdentity { get; }
+        public bool CheckIdentity { get; }
 
         public GraphNode<T> Root {
             get { return _root; }
@@ -23,25 +23,25 @@ namespace GameCore.Structures
 
         public GraphNode<T>[] NodesCopy => _nodes.ToArray();
 
-		private List<GraphNode<T>> _nodes = new List<GraphNode<T>>();
+        private List<GraphNode<T>> _nodes = new List<GraphNode<T>>();
         private GraphNode<T> _root;
 
 
         
-		/// <summary>
-		/// Serialization ctor. Don't use it in code!
-		/// </summary>
+        /// <summary>
+        /// Serialization ctor. Don't use it in code!
+        /// </summary>
         [Obsolete("using serialization ctor", true)]
-		public Graph() {}
+        public Graph() {}
 
-		public Graph(bool checkIdentity)
-		{
-			CheckIdentity = checkIdentity;
-		}
+        public Graph(bool checkIdentity)
+        {
+            CheckIdentity = checkIdentity;
+        }
 
 
 
-		public IEnumerator<GraphNode<T>> GetEnumerator()
+        public IEnumerator<GraphNode<T>> GetEnumerator()
         {
             return _nodes.GetEnumerator();
         }
@@ -74,26 +74,26 @@ namespace GameCore.Structures
         /// </summary>
         /// <returns><c>true</c>, if add node was tryed, <c>false</c> if list already contains it.</returns>
         /// <param name="item">new item</param>
-		public bool TryAddNode(GraphNode<T> item)
-		{
+        public bool TryAddNode(GraphNode<T> item)
+        {
             if (!_nodes.Contains(item))
-			{
+            {
                 _nodes.Add(item);
-				return true;
-			}
+                return true;
+            }
 
-			return false;
-		}
+            return false;
+        }
 
-		public bool TryRemoveNode(GraphNode<T> node)
-		{
-			if (_nodes.Contains(node))
-			{
-				_nodes.Remove(node);
-				return true;
-			}
+        public bool TryRemoveNode(GraphNode<T> node)
+        {
+            if (_nodes.Contains(node))
+            {
+                _nodes.Remove(node);
+                return true;
+            }
 
-			return false;
-		}
+            return false;
+        }
     }
 }

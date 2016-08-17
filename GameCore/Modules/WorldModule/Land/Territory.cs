@@ -5,12 +5,12 @@ using VectorNet;
 
 namespace GameCore.Modules.WorldModule.Land
 {
-	[Serializable]
-	public class Territory : IIndependentChanging
-	{
-		public TerritoryPattern Pattern { get; set; }
+    [Serializable]
+    public class Territory : IIndependentChanging
+    {
+        public TerritoryPattern Pattern { get; set; }
 
-		public Building[,] BuildingGrid { get; }
+        public Building[,] BuildingGrid { get; }
 
         public Building this[IntVector position] 
         {
@@ -61,6 +61,6 @@ namespace GameCore.Modules.WorldModule.Land
         }
 
         #endregion
-	}
+    }
 }
 

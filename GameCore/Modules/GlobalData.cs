@@ -3,37 +3,37 @@ using GameCore.Extensions;
 
 namespace GameCore.Modules
 {
-	[Serializable]
-	public class GlobalData
-	{
-		#region Singleton-part
+    [Serializable]
+    public class GlobalData
+    {
+        #region Singleton-part
 
-		private static GlobalData _instance;
-		public static GlobalData Instance {
-			get {
-				if (_instance == null)
-				{
-					_instance = new GlobalData();
-				}
+        private static GlobalData _instance;
+        public static GlobalData Instance {
+            get {
+                if (_instance == null)
+                {
+                    _instance = new GlobalData();
+                }
 
-				return _instance;
-			}
-			set {
-				if (_instance == null)
-				{
-					_instance = value;
-				}
-				else
-				{
+                return _instance;
+            }
+            set {
+                if (_instance == null)
+                {
+                    _instance = value;
+                }
+                else
+                {
                     var ex = new ArgumentException("GlobalData.Instance is already set");
 #if DEBUG
-					throw ex;
+                    throw ex;
 #else
                     Instance.OnUnknownException?.Invoke(_instance, new DelegateExtensions.ExceptionEventArgs(ex));
 #endif
-				}
-			}
-		}
+                }
+            }
+        }
 
         #endregion
 
@@ -46,6 +46,6 @@ namespace GameCore.Modules
         public void RefreshValues()
         {
         }
-	}
+    }
 }
 

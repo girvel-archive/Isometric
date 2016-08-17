@@ -4,7 +4,7 @@ using System.Runtime.Serialization.Formatters.Binary;
 using GameCore.Modules.WorldModule;
 using VisualServer;
 using GameCore.Modules;
-using CustomProperty;
+using CustomProperty.Dynamic;
 
 namespace VisualClient.Modules
 {
@@ -73,19 +73,19 @@ namespace VisualClient.Modules
             {
                 new Property(
                     @get: () => Core.Version,
-                    @set: value => Core.SavingVersion = (Version)value),
+                    @set: value => Core.SavingVersion = value),
 
                 new Property(
                     @get: () => SingleServer.Instance,
-                    @set: value => SingleServer.Instance = (Server)value),
+                    @set: value => SingleServer.Instance = value),
 
                 new Property(
                     @get: () => World.Instance,
-                    @set: value => World.Instance = (World)value),
+                    @set: value => World.Instance = value),
 
                 new Property(
                     @get: () => Instance.SavingPeriodMilliseconds,
-                    @set: value => Instance.SavingPeriodMilliseconds = (uint)value),
+                    @set: value => Instance.SavingPeriodMilliseconds = value),
             };
 
 

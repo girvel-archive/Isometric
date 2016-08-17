@@ -4,9 +4,9 @@ using GameCore.Modules.TimeModule;
 namespace GameRealization.Modules.DataRealization
 {
     internal static class TimeDataRealization
-	{
+    {
         internal static void Init()
-		{
+        {
             GameDate.Data = new TimeData() 
             {
                 DaysInMonth = 60,
@@ -15,7 +15,7 @@ namespace GameRealization.Modules.DataRealization
             };
 
             GameDate.Data.RefreshDependentValues();
-		}
-	}
+        }
+    }
 }
 

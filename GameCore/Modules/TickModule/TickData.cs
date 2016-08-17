@@ -3,7 +3,7 @@
 namespace GameCore.Modules.TickModule
 {
     public class TickData
-	{
+    {
         public TickData() {}
 
 
@@ -17,6 +17,6 @@ namespace GameCore.Modules.TickModule
         {
 
         }
-	}
+    }
 }
 

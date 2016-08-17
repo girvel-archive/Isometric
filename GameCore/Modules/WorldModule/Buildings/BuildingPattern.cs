@@ -5,9 +5,9 @@ using CommonStructures;
 
 namespace GameCore.Modules.WorldModule.Buildings
 {
-	[Serializable]
-	public class BuildingPattern
-	{
+    [Serializable]
+    public class BuildingPattern
+    {
         public delegate void BonusTickAction(Building building, ref Resources resources);
 
         public delegate bool UpgradeCondition(BuildingPattern previous, Building currentBuilding);
@@ -22,7 +22,7 @@ namespace GameCore.Modules.WorldModule.Buildings
 
 
 
-		public Action<Building> TickIndependentAction { get; set; }
+        public Action<Building> TickIndependentAction { get; set; }
 
         public Func<Building, Resources> TickResourcesAction { get; set; }
 
@@ -32,11 +32,11 @@ namespace GameCore.Modules.WorldModule.Buildings
 
         public UpgradeCondition UpgradePossible { get; set; } 
 
-		public Resources NeedResources { get; set; }
+        public Resources NeedResources { get; set; }
 
         public Resources Resources { get; set; }
 
-        public int UpgradeTimeNormal { get; set; }
+        public TimeSpan UpgradeTimeNormal { get; set; }
 
 
 
@@ -47,19 +47,19 @@ namespace GameCore.Modules.WorldModule.Buildings
 
 
         [Obsolete("using serialization ctor", true)]
-		public BuildingPattern() {}
+        public BuildingPattern() {}
 
-		public BuildingPattern(
-			string name, Resources resources, Resources needResources, int upgradeTimeNormal,
+        public BuildingPattern(
+            string name, Resources resources, Resources needResources, TimeSpan upgradeTimeNormal,
             BuildingType type = BuildingType.Nature)
-		{
-			Resources = resources;
-			NeedResources = needResources;
-			Type = type;
+        {
+            Resources = resources;
+            NeedResources = needResources;
+            Type = type;
             UpgradeTimeNormal = upgradeTimeNormal;
 
             ID = _nextID++;
-		}
-	}
+        }
+    }
 }
 

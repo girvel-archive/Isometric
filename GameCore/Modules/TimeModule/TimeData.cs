@@ -4,7 +4,7 @@ using GameCore.Modules.TimeModule;
 namespace GameCore.Modules.TimeModule
 {
     public class TimeData
-	{
+    {
         public TimeData() {}
 
 
@@ -27,6 +27,6 @@ namespace GameCore.Modules.TimeModule
 
             DaysInSeason = (short)(DaysInYear / typeof(GameSeason).GetEnumValues().Length);
         }
-	}
+    }
 }
 

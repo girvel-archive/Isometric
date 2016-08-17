@@ -7,53 +7,53 @@ namespace GameCore.Modules.PlayerModule.Leaders
 {
     // TODO 1.y leader dna
 
-	[Serializable]
-	public class Leader : IIndependentChanging, IResourcesBonusChanging
-	{
-		public LeaderPattern Pattern { get; set; }
+    [Serializable]
+    public class Leader : IIndependentChanging, IResourcesBonusChanging
+    {
+        public LeaderPattern Pattern { get; set; }
 
-		public Name Name { get; set; }
+        public Name Name { get; set; }
 
-		public GameDate Age { get; set; }
+        public GameDate Age { get; set; }
 
-		public GameDate AgeMax { get; set; }
+        public GameDate AgeMax { get; set; }
 
 
 
-		public Leader() {}
+        public Leader() {}
 
-		public Leader(LeaderPattern pattern)
-		{
-			Pattern = pattern;
-			this.Name = NamesGenerator.Instance.Generate();
+        public Leader(LeaderPattern pattern)
+        {
+            Pattern = pattern;
+            this.Name = NamesGenerator.Instance.Generate();
 
-			Age = SingleRandom.Next(
+            Age = SingleRandom.Next(
                 Player.Data.MinimalNewLeaderAge,
                 Player.Data.MaximalNewLeaderAge);
 
-			AgeMax = Age + SingleRandom.Next(
+            AgeMax = Age + SingleRandom.Next(
                 Player.Data.MinimalLeaderLifeDuration,
                 Player.Data.MaximalLeaderLifeDuration);
-		}
+        }
 
-		public void Die()
-		{
-			throw new NotImplementedException();
-   		}
+        public void Die()
+        {
+            throw new NotImplementedException();
+           }
 
 
 
-		#region Interfaces
+        #region Interfaces
 
-		void IIndependentChanging.Tick()
-		{
+        void IIndependentChanging.Tick()
+        {
             Age += ClocksManager.Data.DaysInTick;
 
             if (Age > AgeMax)
             {
                 Die();
             }
-		}
+        }
 
         void IResourcesBonusChanging.Tick(ref Resources resources)
         {
@@ -66,6 +66,6 @@ namespace GameCore.Modules.PlayerModule.Leaders
         {
 
         }
-	}
+    }
 }
 

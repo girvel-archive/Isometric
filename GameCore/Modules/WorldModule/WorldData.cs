@@ -7,7 +7,7 @@ using GameCore.Modules.WorldModule.Land;
 namespace GameCore.Modules.WorldModule
 {
     public class WorldData
-	{
+    {
         public WorldData() {}
 
 
@@ -53,6 +53,6 @@ namespace GameCore.Modules.WorldModule
         {
             TerritoryVectorSize = new IntVector(TerritorySize, TerritorySize);
         }
-	}
+    }
 }
 

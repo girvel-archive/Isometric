@@ -5,7 +5,7 @@ using CommonStructures;
 namespace GameCore.Modules.PlayerModule
 {
     public class PlayerData
-	{
+    {
         public PlayerData() {}
 
 
@@ -24,6 +24,6 @@ namespace GameCore.Modules.PlayerModule
         {
 
         }
-	}
+    }
 }
 
