@@ -35,30 +35,6 @@ namespace VisualServer
             }
         }
 
-        [Serializable]
-        public class DataArgs : EventArgs
-        {
-            public string Data { get; }
-            public Account Account { get; }
-
-            public DataArgs(string data, Account account)
-            {
-                this.Account = account;
-                Data = data;
-            }
-        }
-
-        [Serializable]
-        public class ConnectionArgs : EventArgs
-        {
-            public Connection Connection { get; }
-
-            public ConnectionArgs(Connection connection)
-            {
-                this.Connection = connection;
-            }
-        }
-
         #endregion
 
 
@@ -78,9 +54,12 @@ namespace VisualServer
 
 
 
-        public static event EventHandler<DataArgs> OnDataReceived;
-        public static event EventHandler<DataArgs> OnWrongCommand;
-        public static event EventHandler<ConnectionArgs> OnConnectionEnd;
+        public delegate void DataEvent(string data, Account account);
+        public delegate void ConnectionEvent(Connection connection);
+
+        public static event DataEvent OnDataReceived;
+        public static event DataEvent OnWrongCommand;
+        public static event ConnectionEvent OnConnectionEnd;
 
 
 
@@ -142,7 +121,7 @@ namespace VisualServer
 
                     var receivedString = MainSocket.ReceiveAll(ParentServer.Encoding);
 
-                    OnDataReceived?.Invoke(this, new DataArgs(receivedString, Account));
+                    OnDataReceived?.Invoke(receivedString, Account);
 
                     Func<CommandResult> cmdUse;
                     if (Interface.TryGetFunc(receivedString, new NetArgs(MainSocket), out cmdUse))
@@ -151,22 +130,21 @@ namespace VisualServer
                     }
                     else
                     {
-                        OnWrongCommand?.Invoke(this, new DataArgs(receivedString, Account));
+                        OnWrongCommand?.Invoke(receivedString, Account);
                     }
 
                     #if !DEBUG
                     }
                     catch (Exception e)
                     {
-                        GlobalData.Instance.OnUnknownException?.Invoke(
-                            this, new DelegateExtensions.ExceptionEventArgs(e));
+                        GlobalData.Instance.OnUnknownException?.Invoke(e);
                     }
                     #endif
                 }
             }
             catch (SocketException)
             {
-                OnConnectionEnd?.Invoke(this, new ConnectionArgs(this));
+                OnConnectionEnd?.Invoke(this);
             }
         }
 
@@ -185,16 +163,16 @@ namespace VisualServer
         
 
 
-        private void _sendResources(object sender, Player.RefreshEventArgs args)
+        private void _sendResources(Player owner)
         {
             // FIXME DebugCreateCommand -> CreateCommand
             Send(this.Interface.DebugCreateCommand("r",
-                args.Owner.CurrentResources.SerializeToBytes().ToASCII()));
+                owner.CurrentResources.SerializeToBytes().ToASCII()));
         }
 
         private CommandResult _sendResources(Dictionary<string, string> args, NetArgs netArgs)
         {
-            _sendResources(this, new Player.RefreshEventArgs(Account.Player));
+            _sendResources(Account.Player);
 
             return CommandResult.Successful;
         }

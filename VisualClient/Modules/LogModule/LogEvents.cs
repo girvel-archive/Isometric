@@ -24,18 +24,20 @@ namespace VisualClient.Modules.LogModule
                 ex => _onSerializationException("Opening", ex);
         }
 
+
+
         #region SingleServer
 
-        private static void _onAcceptedConnection(object sender, EventArgs args)
+        private static void _onAcceptedConnection()
         {
             Log.Instance.Write("Connection accepted");
         }
 
-        private static void _onLoginAttempt(object sender, Server.LoginArgs args)
+        private static void _onLoginAttempt(string email, LoginResult result)
         {
             var message = string.Empty;
 
-            switch (args.Result)
+            switch (result)
             {
                 case LoginResult.Successful:
                     message = "Successful attempt to enter";
@@ -54,29 +56,33 @@ namespace VisualClient.Modules.LogModule
                     break;
             }
 
-            Log.Instance.Write(message + $"\n\tEmail: {args.Email}");
+            Log.Instance.Write(message + $"\n\tEmail: {email}");
         }
 
         #endregion
+
+
 
         #region Connection
 
-        private static void _onConnectionEnd(object sender, Connection.ConnectionArgs args)
+        private static void _onConnectionEnd(Connection connection)
         {
-            Log.Instance.Write("Connection end. Login: " + args.Connection.Account.Login);
+            Log.Instance.Write("Connection end. Login: " + connection.Account.Login);
         }
 
-        private static void _onDataReceived(object sender, Connection.DataArgs args)
+        private static void _onDataReceived(string data, Account account)
         {
-            Log.Instance.Write("Data received: " + args.Data);
+            Log.Instance.Write($"Data received by {account.Login}.\n{data}");
         }
 
-        private static void _onWrongCommand(object sender, Connection.DataArgs args)
+        private static void _onWrongCommand(string data, Account account)
         {
-            Log.Instance.Write("Wrong command received: " + args.Data);
+            Log.Instance.Write($"Wrong command received by {account.Login}.\n{data}");
         }
     
         #endregion
+
+
 
         #region SerializationManager
 

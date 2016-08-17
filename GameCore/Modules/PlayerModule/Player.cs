@@ -43,19 +43,7 @@ namespace GameCore.Modules.PlayerModule
 
         #pragma warning restore 618
 
-        #endregion
-
-
-
-        public class RefreshEventArgs : EventArgs
-        {
-            public Player Owner { get; }
-
-            public RefreshEventArgs(Player owner)
-            {
-                Owner = owner;
-            }
-        }
+                          #endregion
 
 
 
@@ -78,7 +66,7 @@ namespace GameCore.Modules.PlayerModule
 
         public Territory Territory { get; set; }
 
-        public event EventHandler<RefreshEventArgs> OnTick;
+        public event Action<Player> OnTick;
 
 
 
@@ -114,7 +102,7 @@ namespace GameCore.Modules.PlayerModule
 
 
 
-        #pragma warning disable 618 // closing is instide
+        #pragma warning disable 618 // closing is inside
 
         public Player(string name) : this()
         {
@@ -148,7 +136,9 @@ namespace GameCore.Modules.PlayerModule
                 subject.Tick(ref resourcesDelta);
             }
 
-            OnTick.SafeInvoke(this, new RefreshEventArgs(this), GlobalData.Instance.OnUnknownException);
+            DelegateExtensions.SafeInvoke(
+                () => OnTick(this),
+                GlobalData.Instance.OnUnknownException);
         }
 
         public void AddOwnedBuilding(Building building) 

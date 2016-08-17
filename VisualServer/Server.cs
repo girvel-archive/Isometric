@@ -41,19 +41,6 @@ namespace VisualServer
             }
         }
 
-
-        public class LoginArgs : EventArgs
-        {
-            public string Email { get; }
-            public LoginResult Result { get; }
-
-            public LoginArgs(string email, LoginResult result)
-            {
-                Email = email;
-                Result = result;
-            }
-        }
-
         #endregion
 
 
@@ -92,9 +79,11 @@ namespace VisualServer
 
 
 
-        public event EventHandler<LoginArgs> OnLoginAttempt;
-        public event EventHandler OnWrongIP;
-        public event EventHandler OnAcceptedConnection;
+        public delegate void LoginEvent(string email, LoginResult result);
+
+        public event LoginEvent OnLoginAttempt;
+        public event Action OnWrongIP;
+        public event Action OnAcceptedConnection;
 
 
 
@@ -166,7 +155,7 @@ namespace VisualServer
 
             if (!IPAddress.TryParse(address, out ip))
             {
-                OnWrongIP?.Invoke(this, new EventArgs());
+                OnWrongIP?.Invoke();
                 return false;
             }
 
@@ -203,7 +192,7 @@ namespace VisualServer
                 #endif
 
                 var socket = _listenSocket.Accept();
-                OnAcceptedConnection?.Invoke(this, new EventArgs());
+                OnAcceptedConnection?.Invoke();
 
                 Interface.GetFunc(
                     socket.ReceiveAll(this.Encoding), 
@@ -215,7 +204,7 @@ namespace VisualServer
                 }
                 catch (Exception e)
                 {
-                GlobalData.Instance.OnUnknownException?.Invoke(this, new DelegateExtensions.ExceptionEventArgs(e));
+                    GlobalData.Instance.OnUnknownException?.Invoke(e);
                 }
                 #endif
             }
@@ -261,7 +250,7 @@ namespace VisualServer
             // FIXME debug creating command
             netArgs.SendASCII(this.Interface.DebugCreateCommand("ln-r", ((byte)result).ToString()));
 
-            OnLoginAttempt?.Invoke(this, new LoginArgs(receivedAccount.Email, result));
+            OnLoginAttempt?.Invoke(receivedAccount.Email, result);
 
             if (!successful)
             {

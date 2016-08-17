@@ -4,29 +4,15 @@ namespace GameCore.Extensions
 {
     public static class DelegateExtensions
     {
-        [Serializable]
-        public sealed class ExceptionEventArgs : EventArgs
-        {
-            public Exception Exception { get; }
-
-            public ExceptionEventArgs (Exception exception)
-            {
-                this.Exception = exception;
-            }
-        }
-
-
-
-        public static void SafeInvoke<T>(
-            this EventHandler<T> @event, object sender, T args, EventHandler<ExceptionEventArgs> @catch)
+        public static void SafeInvoke(Action action, Action<Exception> @catch)
         {
             try
             {
-                @event(sender, args);
+                action();
             }
             catch (Exception ex)
             {
-                @catch?.Invoke(sender, new ExceptionEventArgs(ex));
+                @catch?.Invoke(ex);
             }
         }
     }
