@@ -71,6 +71,7 @@
     <Compile Include="Modules\TickModule\TickData.cs" />
     <Compile Include="Modules\PlayerModule\PlayersManager.cs" />
     <Compile Include="Modules\Core.cs" />
+    <Compile Include="Modules\ActionsProcessor.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

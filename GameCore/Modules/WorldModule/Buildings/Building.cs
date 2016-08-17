@@ -14,13 +14,27 @@ namespace GameCore.Modules.WorldModule.Buildings
 	{
 		public BuildingPattern Pattern { get; set; }
 
+
+
         public IntVector Position { get; set; }
+
 		public Player Owner { get; set; }
-		public Territory CurrentTerritory { get; set; }
+
+		public Territory Territory { get; set; }
+
+
 
 		public int PeopleNow { get; set; }
 
 		public Resources Resources { get; set; }
+
+
+
+        public bool Ready { get; set; }
+
+        public DateTime UpgradeBeginTime { get; private set; }
+
+        public TimeSpan UpgradeDuration { get; private set; }
 
 
 
@@ -30,7 +44,7 @@ namespace GameCore.Modules.WorldModule.Buildings
 		{
 			Position = position;
 			Owner = owner;
-			CurrentTerritory = territory;
+			Territory = territory;
 			Pattern = pattern;
 
 			InitFromPattern(pattern);
@@ -55,14 +69,15 @@ namespace GameCore.Modules.WorldModule.Buildings
 		{
             var foundedObjects = BuildingGraph.Instance.Find(Pattern);
 
-			if (!foundedObjects[0].IsParentOf(target)
-                || (!target.UpgradePossible?.Invoke(Pattern, this) ?? false)
-                || target.NeedResources.Enough(Owner.CurrentResources))
+			if (!(foundedObjects[0].IsParentOf(target)
+                && (target.UpgradePossible?.Invoke(Pattern, this) ?? true)
+                && target.NeedResources.Enough(Owner.CurrentResources)))
 			{
 				return false;
 			}
 
             Owner.CurrentResources -= target.NeedResources;
+            // TODO 1.1 upgrade duration (this.properties + ActionsProcessor)
 			InitFromPattern(target);
 
             return true;

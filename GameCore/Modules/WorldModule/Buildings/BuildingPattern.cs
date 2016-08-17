@@ -14,6 +14,14 @@ namespace GameCore.Modules.WorldModule.Buildings
 
 
 
+        public short ID { get; set; }
+
+        public string Name { get; set; } 
+
+        public BuildingType Type { get; set; }
+
+
+
 		public Action<Building> TickIndependentAction { get; set; }
 
         public Func<Building, Resources> TickResourcesAction { get; set; }
@@ -24,17 +32,17 @@ namespace GameCore.Modules.WorldModule.Buildings
 
         public UpgradeCondition UpgradePossible { get; set; } 
 
-		public Resources NeedResources { get; set; } 
+		public Resources NeedResources { get; set; }
 
-		public BuildingType Type { get; set; }
+        public Resources Resources { get; set; }
 
-		public Resources Resources { get; set; }
+        public int UpgradeTimeNormal { get; set; }
 
-        public short ID { get; set; }
 
-        public string Name { get; set; }
 
         private static short _nextID = 0;
+
+
 
 
 
@@ -42,12 +50,13 @@ namespace GameCore.Modules.WorldModule.Buildings
 		public BuildingPattern() {}
 
 		public BuildingPattern(
-			string name, Resources resources, Resources needResources, 
+			string name, Resources resources, Resources needResources, int upgradeTimeNormal,
             BuildingType type = BuildingType.Nature)
 		{
 			Resources = resources;
 			NeedResources = needResources;
 			Type = type;
+            UpgradeTimeNormal = upgradeTimeNormal;
 
             ID = _nextID++;
 		}
