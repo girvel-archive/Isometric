@@ -17,6 +17,11 @@ namespace GameCore.Modules.PlayerModule.Leaders
 		{
 			Tick = tick;
 		}
+
+        public void CheckVersion()
+        {
+
+        }
 	}
 }
 

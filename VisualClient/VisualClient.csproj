@@ -41,6 +41,9 @@
     <Reference Include="BinarySerializationExtensions">
       <HintPath>..\..\tools\BinarySerializationExtensions\BinarySerializationExtensions\bin\Release\BinarySerializationExtensions.dll</HintPath>
     </Reference>
+    <Reference Include="CustomProperty">
+      <HintPath>..\..\tools\CustomProperty\CustomProperty\bin\Release\CustomProperty.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -52,6 +55,8 @@
     <Compile Include="Modules\SingleServer.cs" />
     <Compile Include="Modules\LogModule\Log.cs" />
     <Compile Include="Modules\LogModule\LogEvents.cs" />
+    <Compile Include="Modules\SerializationManager.cs" />
+    <Compile Include="Modules\Client.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

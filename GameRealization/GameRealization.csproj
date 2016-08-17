@@ -67,6 +67,7 @@
     <Compile Include="Modules\PatternsRealization\BuildingPatterns.cs" />
     <Compile Include="Modules\PatternsRealization\TerritoryPatterns.cs" />
     <Compile Include="InitializationManager.cs" />
+    <Compile Include="Modules\Realization.cs" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />

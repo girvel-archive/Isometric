@@ -39,7 +39,7 @@ namespace GameCore.Modules.PlayerModule.Leaders
 		public void Die()
 		{
 			throw new NotImplementedException();
-		}
+   		}
 
 
 
@@ -60,7 +60,12 @@ namespace GameCore.Modules.PlayerModule.Leaders
             Pattern.BonusTick(this, ref resources);
         }
 
-		#endregion
+        #endregion
+
+        public void CheckVersion()
+        {
+
+        }
 	}
 }
 

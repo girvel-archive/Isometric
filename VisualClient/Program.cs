@@ -1,15 +1,16 @@
 ﻿using System;
-using System.Threading;
-using GameCore.Modules.WorldModule.Land;
 using System.IO;
-using VisualClient.Modules;
-using System.Runtime.Serialization.Formatters.Binary;
-using GameCore.Modules.WorldModule;
 using System.Runtime.Serialization;
+using System.Runtime.Serialization.Formatters.Binary;
+using System.Threading;
+using GameCore.Modules.PlayerModule;
 using GameCore.Modules.TickModule;
-using VisualServer;
+using GameCore.Modules.WorldModule;
+using GameCore.Modules.WorldModule.Land;
 using GameRealization;
+using VisualClient.Modules;
 using VisualClient.Modules.LogModule;
+using VisualServer;
 
 namespace VisualClient
 {
@@ -44,7 +45,7 @@ namespace VisualClient
 
             // Generation | Opening:
 
-            if (TryOpen())
+            if (SerializationManager.Instance.TryOpen())
             {
                 Log.Instance.Write("Saves file were opened");
             }
@@ -99,93 +100,15 @@ namespace VisualClient
 
 
 
-        public static bool TrySave()
-        {
-            try
-            {
-                if (!Directory.Exists(SavingDirectory))
-                {
-                    Directory.CreateDirectory(SavingDirectory);
-                }
-
-                using (FileStream mainStream = File.OpenWrite(
-                    $"{SavingDirectory}/{SavingFile}"))
-                {
-                    var serializer = new BinaryFormatter();
-
-                    foreach (var @object in new object[] {
-                        SingleServer.Instance,
-                        World.Instance,
-                        SavingPeriodMilliseconds})
-                    { 
-                        serializer.Serialize(mainStream, @object);
-                    }
-
-                    Log.Instance.Write("Saved successful");
-
-                    return true;
-                }
-            }
-            catch (Exception ex)
-            {
-                Log.Instance.Exception(ex, "Saving exception was catched");
-
-                #if DEBUG
-                throw;
-                #endif
-
-                return false;
-            }
-        } 
-
-        public static bool TryOpen()
-        {
-            try
-            {
-                if (!File.Exists($"{SavingDirectory}/{SavingFile}"))
-                {
-                    return false;
-                }
-
-                using (FileStream mainStream = File.OpenRead(
-                    $"{SavingDirectory}/{SavingFile}"))
-                {
-                    var serializer = new BinaryFormatter();
-
-                    SingleServer.Instance = (Server) serializer.Deserialize(mainStream);
-                    World.Instance = (World) serializer.Deserialize(mainStream);
-                    SavingPeriodMilliseconds = (int) serializer.Deserialize(mainStream);
-                }
-                CheckVersion();
-
-                return true;
-            }
-            catch (Exception ex)
-            {
-                Log.Instance.Exception(ex, "Opening exception was catched");
-
-                #if DEBUG
-                throw;
-                #else
-                return false;
-                #endif
-            }
-        }
 
 
 
-        private static void CheckVersion()
-        {
-            Log.Instance.CheckVersion();
-            SingleServer.Instance.CheckVersion();
-            World.Instance.CheckVersion();
-        }
 
         private static void _savingLoop()
         {
             while (true)
             {
-                if (TrySave())
+                if (SerializationManager.Instance.TrySave())
                 {
                     Log.Instance.Write("Game was saved successful");
                 }

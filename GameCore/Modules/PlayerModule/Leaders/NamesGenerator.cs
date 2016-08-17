@@ -49,6 +49,13 @@ namespace GameCore.Modules.PlayerModule.Leaders
 				FirstNames.GetRandom(SingleRandom.Instance),
 				LastNames.GetRandom(SingleRandom.Instance));
 		}
+
+
+
+        public void CheckVersion()
+        {
+
+        }
 	}
 }
 

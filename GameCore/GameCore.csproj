@@ -70,6 +70,7 @@
     <Compile Include="Modules\TimeModule\TimeData.cs" />
     <Compile Include="Modules\TickModule\TickData.cs" />
     <Compile Include="Modules\PlayerModule\PlayersManager.cs" />
+    <Compile Include="Modules\Core.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

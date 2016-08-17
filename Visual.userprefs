@@ -1,12 +1,9 @@
 ﻿<Properties StartupItem="VisualClient/VisualClient.csproj" GitUserInfo="UsingGIT" RefactoringSettings.EnableRefactorings="True">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="VisualClient/Program.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="VisualClient/Modules/SerializationManager.cs">
     <Files>
-      <File FileName="VisualServer/Connection.cs" Line="1" Column="1" />
-      <File FileName="VisualServer/Server.cs" Line="1" Column="1" />
-      <File FileName="VisualClient/Program.cs" Line="89" Column="13" />
-      <File FileName="GameCore/Modules/TickModule/ClocksManager.cs" Line="1" Column="1" />
-      <File FileName="VisualClient/ConsoleHelper.cs" Line="5" Column="20" />
+      <File FileName="VisualClient/Program.cs" Line="1" Column="1" />
+      <File FileName="VisualClient/Modules/SerializationManager.cs" Line="73" Column="42" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

@@ -14,7 +14,17 @@ namespace VisualClient.Modules.LogModule
             Connection.OnConnectionEnd += _onConnectionEnd;
             Connection.OnDataReceived += _onDataReceived;
             Connection.OnWrongCommand += _onWrongCommand;
+
+            SerializationManager.OnSuccessfulSaving += () => _onSuccessfulAction("Saved");
+            SerializationManager.OnSuccessfulOpening += () => _onSuccessfulAction("Opened");
+
+            SerializationManager.OnSavingException += 
+                ex => _onSerializationException("Saving", ex);
+            SerializationManager.OnOpeningException +=
+                ex => _onSerializationException("Opening", ex);
         }
+
+        #region SingleServer
 
         private static void _onAcceptedConnection(object sender, EventArgs args)
         {
@@ -47,6 +57,10 @@ namespace VisualClient.Modules.LogModule
             Log.Instance.Write(message + $"\n\tEmail: {args.Email}");
         }
 
+        #endregion
+
+        #region Connection
+
         private static void _onConnectionEnd(object sender, Connection.ConnectionArgs args)
         {
             Log.Instance.Write("Connection end. Login: " + args.Connection.Account.Login);
@@ -61,6 +75,22 @@ namespace VisualClient.Modules.LogModule
         {
             Log.Instance.Write("Wrong command received: " + args.Data);
         }
+    
+        #endregion
+
+        #region SerializationManager
+
+        private static void _onSuccessfulAction(string action)
+        {
+            Log.Instance.Write($"{action} successful");
+        }
+
+        private static void _onSerializationException(string process, Exception exception)
+        {
+            Log.Instance.Exception(exception, "{process} exception was catched");
+        }
+
+        #endregion
     }
 }
 

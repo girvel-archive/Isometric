@@ -58,6 +58,11 @@ namespace VisualServer
 
 
 
+        public static readonly Version Version = new Version(0, 4);
+        public static Version SavingVersion;
+
+
+
         [NonSerialized]
         internal Dictionary<Account, Connection> CurrentConnections;
 
