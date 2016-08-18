@@ -14,6 +14,7 @@ using VisualServer.Modules;
 using VisualServer.Extensions;
 using GameCore.Extensions;
 using System.Runtime.Serialization;
+using System.Text.RegularExpressions;
 
 
 
@@ -26,18 +27,40 @@ namespace VisualServer
 
         public class NetArgs
         {
-            public Socket CurrentSocket { get; }
-            public Server MainServer { get; }
+            public Socket Socket { get; }
+            public Server Server { get; }
 
-            public NetArgs(Socket currentSocket, Server mainServer)
+            public NetArgs(Socket socket, Server server)
             {
-                CurrentSocket = currentSocket;
-                MainServer = mainServer;
+                Socket = socket;
+                Server = server;
             }
 
             public void SendASCII(string message)
             {
-                CurrentSocket.Send(Encoding.ASCII.GetBytes(message));
+                Socket.Send(Encoding.ASCII.GetBytes(message));
+            }
+        }
+
+        public class EmailArgs
+        {
+            public int Code { get; }
+
+            public EmailArgs(int code)
+            {
+                Code = code;
+            }
+        }
+
+        public class EmailPairArgs
+        {
+            public NetArgs NetArgs { get; }
+            public EmailArgs EmailArgs { get; }
+
+            public EmailPairArgs(NetArgs netArgs, EmailArgs emailArgs)
+            {
+                NetArgs = netArgs;
+                EmailArgs = emailArgs;
             }
         }
 
@@ -57,7 +80,13 @@ namespace VisualServer
         private Socket _listenSocket;
 
         [NonSerialized]
-        private Interface<NetArgs, CommandResult> Interface;
+        private Interface<NetArgs, CommandResult> MainInterface;
+
+        [NonSerialized]
+        private Interface<EmailPairArgs, CommandResult> AfterEmailInterface;
+
+        [NonSerialized]
+        private Interface<NetArgs, CommandResult> AfterCodeInterface;
 
         [NonSerialized]
         private bool _connected;
@@ -89,22 +118,32 @@ namespace VisualServer
 
         static Server() {}
 
-
-
         public Server()
         {
             CurrentConnections = new Dictionary<Account, Connection>();
 
-            Interface = new Interface<NetArgs, CommandResult>(
+            MainInterface = new Interface<NetArgs, CommandResult>(
                 new Command<NetArgs, CommandResult>(
                     "login",
                     new[] { "account" },
                     _login),
 
-                new Command<NetArgs, CommandResult>(
-                    "email-send-numbers",
+                new Command<NetArgs, CommandResult>( // FIXME Unity email-send-code
+                    "email-send-code",
                     new[] { "email" },
-                    _emailSendNumbers));
+                    _emailSendCode));
+
+            AfterEmailInterface = new Interface<EmailPairArgs, CommandResult>(
+                new Command<EmailPairArgs, CommandResult>(
+                    "code-set",
+                    new[] { "code" },
+                    _codeSet));
+
+            AfterCodeInterface = new Interface<NetArgs, CommandResult>(
+                new Command<NetArgs, CommandResult>(
+                    "account-set",
+                    new[] { "login", "account" },
+                    _accountSet));
 
             #if DEBUG
             Accounts = new List<Account> 
@@ -113,6 +152,8 @@ namespace VisualServer
             };
             #endif
         }
+
+
 
         // FIXME check all classes for CheckVersion() and create checklist in Program
         public bool Init(string smtpEmail, string smtpPassword)
@@ -186,27 +227,27 @@ namespace VisualServer
 
             while (true)
             {
-                #if !DEBUG
                 try
                 {
-                #endif
+                    var socket = _listenSocket.Accept();
+                    OnAcceptedConnection?.Invoke();
 
-                var socket = _listenSocket.Accept();
-                OnAcceptedConnection?.Invoke();
+                    MainInterface.GetFunc(
+                        socket.ReceiveAll(this.Encoding), 
+                        new NetArgs(socket, this))();
 
-                Interface.GetFunc(
-                    socket.ReceiveAll(this.Encoding), 
-                    new NetArgs(socket, this))();
-
-                // TODO 1.1 spamfilter using
-
-                #if !DEBUG
+                    // TODO 1.1 spamfilter using
                 }
                 catch (Exception e)
                 {
                     GlobalData.Instance.OnUnknownException?.Invoke(e);
+
+                    #if DEBUG
+
+                    throw;
+
+                    #endif
                 }
-                #endif
             }
         }
 
@@ -219,12 +260,13 @@ namespace VisualServer
 
 
 
+        // Main interface
         // @account
         private CommandResult _login(Dictionary<string, string> args, NetArgs netArgs)
         {
-            var receivedAccount = Encoding.ASCII.GetBytes(args["account"]).ByteDeserialize<CommonAccount>();
+            var receivedAccount = Encoding.GetBytes(args["account"]).ByteDeserialize<CommonAccount>();
 
-            var suitableAccounts = netArgs.MainServer.Accounts.Where(
+            var suitableAccounts = netArgs.Server.Accounts.Where(
                 a => a.Email == receivedAccount.Email
                 && a.Password == receivedAccount.Password);
 
@@ -247,8 +289,7 @@ namespace VisualServer
                 result = LoginResult.Unsuccessful;
             }
 
-            // FIXME debug creating command
-            netArgs.SendASCII(this.Interface.DebugCreateCommand("ln-r", ((byte)result).ToString()));
+            netArgs.SendASCII("ln-r".CreateCommand(((byte)result).ToString()));
 
             OnLoginAttempt?.Invoke(receivedAccount.Email, result);
 
@@ -260,23 +301,112 @@ namespace VisualServer
             var account = suitableAccounts.First();
 
             var newConnection = new Connection(
-                netArgs.CurrentSocket, account, this);
+                netArgs.Socket, account, this);
 
-            netArgs.MainServer.CurrentConnections[account]
-            = newConnection;
+            netArgs.Server.CurrentConnections[account] = 
+                newConnection;
 
             newConnection.StartThread();
 
             return CommandResult.Successful;
         }
 
+        // Main interface
         // @email
-        private CommandResult _emailSendNumbers(Dictionary<string, string> args, NetArgs netArgs)
+        private CommandResult _emailSendCode(Dictionary<string, string> args, NetArgs netArgs)
         {
-//            var numbers = SingleRandom.Instance.Next(10000, 99999);
-//
-//            SmtpManager.SendSignupMail
-            // FIXME _emailSendNumbers()
+            var code = SingleRandom.Instance.Next(10000, 99999);
+
+            SmtpManager.SendSignupMail(args["email"], code);
+
+            Func<CommandResult> result;
+            var i = 0;
+
+            while (!AfterEmailInterface.TryGetFunc(
+                      netArgs.Socket.ReceiveAll(Encoding), 
+                      new EmailPairArgs(netArgs, new EmailArgs(code)),
+                      out result)
+                || result() != CommandResult.Successful)
+            {
+                if (++i >= 3)
+                {
+                    return CommandResult.Unsuccessful;
+                }
+                // TODO 1.x spam filter
+            }
+
+            i = 0;
+
+            while (!AfterCodeInterface.TryGetFunc(
+                       netArgs.Socket.ReceiveAll(Encoding), 
+                       netArgs, out result)
+                   || result() == CommandResult.Unsuccessful)
+            {
+                if (++i >= 3)
+                {
+                    return CommandResult.Unsuccessful;
+                }
+            }
+
+            netArgs.Socket.Close();
+            
+            return CommandResult.Successful;
+        }
+
+        // After email interface
+        // @code
+        private CommandResult _codeSet(Dictionary<string, string> args, EmailPairArgs pairArgs)
+        {
+            int code;
+            if (!int.TryParse(args["code"], out code))
+            {
+                // FIXME Unity code-result
+                pairArgs.NetArgs.SendASCII("code-result".CreateCommand(((byte)CodeResult.WrongCommand).ToString()));
+                    
+                return CommandResult.Spam;
+            }
+
+            if (code == pairArgs.EmailArgs.Code)
+            {
+                pairArgs.NetArgs.SendASCII("code-result".CreateCommand(((byte)CodeResult.Successful).ToString()));
+
+                return CommandResult.Successful;
+            }
+
+            pairArgs.NetArgs.SendASCII("code-result".CreateCommand(((byte)CodeResult.WrongCode).ToString()));
+
+            return CommandResult.Unsuccessful;
+        }
+
+        // After code interface
+        // @login,account
+        private CommandResult _accountSet(Dictionary<string, string> args, NetArgs netArgs)
+        {
+            var account = Encoding.GetBytes(args["account"]).ByteDeserialize<CommonAccount>();
+
+            if (!Regex.IsMatch(args["login"], @"^[\w\s]*$"))
+            {
+                netArgs.SendASCII("account-result".CreateCommand(((byte)AccountCreatingResult.WrongLogin).ToString()));
+
+                return CommandResult.Spam;
+            }
+
+            if (Accounts.Any(a => a.Email == account.Email))
+            {
+                netArgs.SendASCII("account-result".CreateCommand(((byte)AccountCreatingResult.ExistingEmail).ToString()));
+
+                return CommandResult.Unsuccessful;
+            }
+
+            if (Accounts.Any(a => a.Login == args["login"]))
+            {
+                netArgs.SendASCII("account-result".CreateCommand(((byte)AccountCreatingResult.ExistingLogin).ToString()));
+
+                return CommandResult.Unsuccessful;
+            }
+
+            Accounts.Add(new Account(args["login"], account));
+            netArgs.SendASCII("account-result".CreateCommand(((byte)AccountCreatingResult.Successful).ToString()));
 
             return CommandResult.Successful;
         }

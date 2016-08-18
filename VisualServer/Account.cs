@@ -1,5 +1,6 @@
 ﻿using System;
 using GameCore.Modules.PlayerModule;
+using CommonStructures;
 
 namespace VisualServer
 {
@@ -39,6 +40,9 @@ namespace VisualServer
 
 
 
+        [Obsolete("using serialization ctor", true)]
+        public Account() {}
+
         public Account(string login, string password, string email, AccountPermission permission)
         {
             Login = login;
@@ -46,7 +50,17 @@ namespace VisualServer
             Email = email;
             Permission = permission;
 
-            Player = new Player(login); // TODO choosing world
+            Player = new Player(Login);
+        }
+
+        public Account(string login, CommonAccount common)
+        {
+            Login = login;
+            Email = common.Email;
+            Password = common.Password;
+            Permission = AccountPermission.User;
+
+            Player = new Player(Login);
         }
 
 

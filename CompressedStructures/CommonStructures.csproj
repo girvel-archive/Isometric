@@ -61,6 +61,8 @@
     <Compile Include="ResourceType.cs" />
     <Compile Include="LoginResult.cs" />
     <Compile Include="CommonTerritory.cs" />
+    <Compile Include="CodeResult.cs" />
+    <Compile Include="AccountCreatingResult.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
