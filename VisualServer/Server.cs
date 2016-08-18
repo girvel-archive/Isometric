@@ -15,6 +15,7 @@ using VisualServer.Extensions;
 using GameCore.Extensions;
 using System.Runtime.Serialization;
 using System.Text.RegularExpressions;
+using VisualServer.Extensions.Interfaces;
 
 
 
@@ -25,7 +26,7 @@ namespace VisualServer
     {
         #region Args classes
 
-        public class NetArgs
+        public class NetArgs : ISocketContainer
         {
             public Socket Socket { get; }
             public Server Server { get; }
@@ -34,11 +35,6 @@ namespace VisualServer
             {
                 Socket = socket;
                 Server = server;
-            }
-
-            public void SendASCII(string message)
-            {
-                Socket.Send(Encoding.ASCII.GetBytes(message));
             }
         }
 
@@ -155,7 +151,6 @@ namespace VisualServer
 
 
 
-        // FIXME check all classes for CheckVersion() and create checklist in Program
         public bool Init(string smtpEmail, string smtpPassword)
         {
             try
@@ -251,10 +246,11 @@ namespace VisualServer
             }
         }
 
+        [OnDeserialized]
         public void CheckVersion()
         {
 
-         }
+        }
 
 
 
@@ -289,7 +285,7 @@ namespace VisualServer
                 result = LoginResult.Unsuccessful;
             }
 
-            netArgs.SendASCII("ln-r".CreateCommand(((byte)result).ToString()));
+            netArgs.Send("ln-r".CreateCommand(((byte)result).ToString()));
 
             OnLoginAttempt?.Invoke(receivedAccount.Email, result);
 
@@ -361,19 +357,19 @@ namespace VisualServer
             if (!int.TryParse(args["code"], out code))
             {
                 // FIXME Unity code-result
-                pairArgs.NetArgs.SendASCII("code-result".CreateCommand(((byte)CodeResult.WrongCommand).ToString()));
+                pairArgs.NetArgs.Send("code-result".CreateCommand(((byte)CodeResult.WrongCommand).ToString()));
                     
                 return CommandResult.Spam;
             }
 
             if (code == pairArgs.EmailArgs.Code)
             {
-                pairArgs.NetArgs.SendASCII("code-result".CreateCommand(((byte)CodeResult.Successful).ToString()));
+                pairArgs.NetArgs.Send("code-result".CreateCommand(((byte)CodeResult.Successful).ToString()));
 
                 return CommandResult.Successful;
             }
 
-            pairArgs.NetArgs.SendASCII("code-result".CreateCommand(((byte)CodeResult.WrongCode).ToString()));
+            pairArgs.NetArgs.Send("code-result".CreateCommand(((byte)CodeResult.WrongCode).ToString()));
 
             return CommandResult.Unsuccessful;
         }
@@ -386,27 +382,27 @@ namespace VisualServer
 
             if (!Regex.IsMatch(args["login"], @"^[\w\s]*$"))
             {
-                netArgs.SendASCII("account-result".CreateCommand(((byte)AccountCreatingResult.WrongLogin).ToString()));
+                netArgs.Send("account-result".CreateCommand(((byte)AccountCreatingResult.WrongLogin).ToString()));
 
                 return CommandResult.Spam;
             }
 
             if (Accounts.Any(a => a.Email == account.Email))
             {
-                netArgs.SendASCII("account-result".CreateCommand(((byte)AccountCreatingResult.ExistingEmail).ToString()));
+                netArgs.Send("account-result".CreateCommand(((byte)AccountCreatingResult.ExistingEmail).ToString()));
 
                 return CommandResult.Unsuccessful;
             }
 
             if (Accounts.Any(a => a.Login == args["login"]))
             {
-                netArgs.SendASCII("account-result".CreateCommand(((byte)AccountCreatingResult.ExistingLogin).ToString()));
+                netArgs.Send("account-result".CreateCommand(((byte)AccountCreatingResult.ExistingLogin).ToString()));
 
                 return CommandResult.Unsuccessful;
             }
 
             Accounts.Add(new Account(args["login"], account));
-            netArgs.SendASCII("account-result".CreateCommand(((byte)AccountCreatingResult.Successful).ToString()));
+            netArgs.Send("account-result".CreateCommand(((byte)AccountCreatingResult.Successful).ToString()));
 
             return CommandResult.Successful;
         }

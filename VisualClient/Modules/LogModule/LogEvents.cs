@@ -1,6 +1,7 @@
 ﻿using System;
 using CommonStructures;
 using VisualServer;
+using GameCore.Modules.TickModule;
 
 namespace VisualClient.Modules.LogModule
 {
@@ -12,16 +13,21 @@ namespace VisualClient.Modules.LogModule
             SingleServer.Instance.OnLoginAttempt += _onLoginAttempt;
 
             Connection.OnConnectionEnd += _onConnectionEnd;
+            Connection.OnConnectionAbort += _onConnectionAbort;
             Connection.OnDataReceived += _onDataReceived;
             Connection.OnWrongCommand += _onWrongCommand;
 
-            SerializationManager.OnSuccessfulSaving += () => _onSuccessfulAction("Saved");
-            SerializationManager.OnSuccessfulOpening += () => _onSuccessfulAction("Opened");
+            SerializationManager.OnSuccessfulSaving += 
+                () => _onSuccessfulAction("Saved");
+            SerializationManager.OnSuccessfulOpening += 
+                () => _onSuccessfulAction("Opened");
 
             SerializationManager.OnSavingException += 
                 ex => _onSerializationException("Saving", ex);
             SerializationManager.OnOpeningException +=
                 ex => _onSerializationException("Opening", ex);
+
+            ClocksManager.OnTick += _onTick;
         }
 
 
@@ -65,6 +71,11 @@ namespace VisualClient.Modules.LogModule
 
         #region Connection
 
+        private static void _onConnectionAbort(Connection connection)
+        {
+            Log.Instance.Write("Connection aborted. Login: " + connection.Account.Login);
+        }
+
         private static void _onConnectionEnd(Connection connection)
         {
             Log.Instance.Write("Connection end. Login: " + connection.Account.Login);
@@ -88,12 +99,23 @@ namespace VisualClient.Modules.LogModule
 
         private static void _onSuccessfulAction(string action)
         {
-            Log.Instance.Write($"{action} successful");
+            Log.Instance.Write($"{action} successful ending");
         }
 
         private static void _onSerializationException(string process, Exception exception)
         {
             Log.Instance.Exception(exception, "{process} exception was catched");
+        }
+
+        #endregion
+
+
+
+        #region ClocksManager
+
+        private static void _onTick()
+        {
+            Log.Instance.Write("Tick event");
         }
 
         #endregion

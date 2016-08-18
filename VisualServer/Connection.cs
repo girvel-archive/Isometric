@@ -13,6 +13,7 @@ using VisualServer.Extensions;
 using VectorNet;
 using GameCore.Modules;
 using GameCore.Extensions;
+using VisualServer.Extensions.Interfaces;
 
 namespace VisualServer
 {
@@ -20,18 +21,17 @@ namespace VisualServer
     {
         #region Login classes
 
-        public class NetArgs
+        public class NetArgs : ISocketContainer
         {
-            public Socket CurrentSocket { get; }
+            public Socket Socket { get; }
+            public Connection Connection { get; }
 
-            public NetArgs(Socket currentSocket)
-            {
-                CurrentSocket = currentSocket;
-            }
+            public Server Server => Connection.ParentServer;
 
-            public void SendASCII(string message)
+            public NetArgs(Socket currentSocket, Connection connection)
             {
-                CurrentSocket.Send(Encoding.ASCII.GetBytes(message));
+                Socket = currentSocket;
+                Connection = connection;
             }
         }
 
@@ -42,15 +42,17 @@ namespace VisualServer
         public bool Active { get; set; }
         
         public Interface<NetArgs, CommandResult> Interface { get; set; }
-        public Thread MainThread { get; set; }
+        public Thread Thread { get; set; }
 
-        public Socket MainSocket { get; set; }
+        public Socket Socket { get; set; }
         public Server ParentServer { get; set; }
 
         public Account Account { get; set; }
 
         public int SpamCounter { get; private set; }
         public int SpamCounterMax { get; set; }
+
+        public Encoding Encoding => ParentServer.Encoding;
 
 
 
@@ -60,32 +62,33 @@ namespace VisualServer
         public static event DataEvent OnDataReceived;
         public static event DataEvent OnWrongCommand;
         public static event ConnectionEvent OnConnectionEnd;
+        public static event ConnectionEvent OnConnectionAbort;
 
 
 
         #region Ctors, finalizers
 
         public Connection(
-            Socket mainSocket, Account mainAccount, Server server)
+            Socket socket, Account account, Server server)
         {
-            MainSocket = mainSocket;
-            Account = mainAccount;
+            Socket = socket;
+            Account = account;
 
             Interface = new Interface<NetArgs, CommandResult>(
                 new Command<NetArgs, CommandResult>(
-                    "gt", new string[0],
+                    "get-territory", new string[0],
                     _getTerritory),
 
                 new Command<NetArgs, CommandResult>(
-                    "gba", new[] { "building" },
+                    "get-building-action", new[] { "building" },
                     _getBuildingContextActions),
             
                 new Command<NetArgs, CommandResult>(
-                    "uba", new[] { "action" },
+                    "use-building-action", new[] { "action" },
                     _useBuildingContextAction),
             
                 new Command<NetArgs, CommandResult>(
-                    "gr", new string[0],
+                    "get-resources", new string[0],
                     _sendResources));
         }
 
@@ -100,74 +103,74 @@ namespace VisualServer
 
         public void StartThread()
         {
-            MainThread = new Thread(Start);
-            MainThread.Start();
+            Thread = new Thread(Start);
+            Thread.Start();
 
             Account.Player.OnTick += _sendResources;
         }
 
         public void Start()
         {
-            Active = true;
-
             try
             {
-                while (Active)
+                while (true)
                 {
-                    #if !DEBUG
                     try
                     {
-                    #endif
+                        var receivedString = Socket.ReceiveAll(ParentServer.Encoding);
 
-                    var receivedString = MainSocket.ReceiveAll(ParentServer.Encoding);
+                        OnDataReceived?.Invoke(receivedString, Account);
 
-                    OnDataReceived?.Invoke(receivedString, Account);
-
-                    Func<CommandResult> cmdUse;
-                    if (Interface.TryGetFunc(receivedString, new NetArgs(MainSocket), out cmdUse))
-                    {
-                        cmdUse();
-                    }
-                    else
-                    {
-                        OnWrongCommand?.Invoke(receivedString, Account);
-                    }
-
-                    #if !DEBUG
+                        Func<CommandResult> cmdUse;
+                        if (Interface.TryGetFunc(receivedString, new NetArgs(Socket, this), out cmdUse))
+                        {
+                            cmdUse();
+                        }
+                        else
+                        {
+                            OnWrongCommand?.Invoke(receivedString, Account);
+                        }
                     }
                     catch (Exception e)
                     {
                         GlobalData.Instance.OnUnknownException?.Invoke(e);
+
+                        #if DEBUG
+
+                        throw;
+
+                        #endif
                     }
-                    #endif
                 }
             }
             catch (SocketException)
             {
                 OnConnectionEnd?.Invoke(this);
             }
+            catch (ThreadAbortException)
+            {
+                OnConnectionAbort?.Invoke(this);
+            }
         }
 
         public void Stop()
         {
-            MainSocket.Close();
-            MainThread.Abort();
+            Socket.Close();
+            Thread.Abort();
 
             Account.Player.OnTick -= _sendResources;
         }
 
         protected void Send(string message)
         {
-            MainSocket.Send(Encoding.ASCII.GetBytes(message));
+            Socket.Send(Encoding.GetBytes(message));
         }
         
 
 
         private void _sendResources(Player owner)
         {
-            // FIXME DebugCreateCommand -> CreateCommand
-            Send(this.Interface.DebugCreateCommand("r",
-                owner.CurrentResources.SerializeToBytes().ToASCII()));
+            Send("r".CreateCommand(owner.CurrentResources.SerializeToString(Encoding)));
         }
 
         private CommandResult _sendResources(Dictionary<string, string> args, NetArgs netArgs)
@@ -180,9 +183,7 @@ namespace VisualServer
         private CommandResult _getTerritory(Dictionary<string, string> args, NetArgs netArgs)
         {
             // FIXME unity st@size,buildings -> st@common_territory
-            // FIXME DebugCreateCommand -> CreateCommand
-            Send(this.Interface.DebugCreateCommand("st",
-                Account.Player.Territory.ToCommon().SerializeToBytes().ToASCII()));
+            Send("st".CreateCommand( Account.Player.Territory.ToCommon().SerializeToString(Encoding)));
 
             return CommandResult.Successful;
         }
@@ -190,21 +191,20 @@ namespace VisualServer
         // @building
         private CommandResult _getBuildingContextActions(Dictionary<string, string> args, NetArgs netArgs)
         {
-            var position = Encoding.ASCII.GetBytes(args["building"]).ByteDeserialize<IntVector>();
+            var position = Encoding.GetBytes(args["building"]).ByteDeserialize<IntVector>();
             var building = Account.Player.Territory[position];
             var pattern = building.Pattern;
             var patternNodes = BuildingGraph.Instance.Find(pattern);
 
             if (patternNodes.Any())
             {
-                // FIXME DebugCreateCommand -> CreateCommand
-                netArgs.SendASCII(this.Interface.DebugCreateCommand("sba",
+                netArgs.Send("sba".CreateCommand(
                     patternNodes[0].Children.Select(
                         c => new CommonBuildingAction(
                             Account.Player.CurrentResources.Enough(c.Value.NeedResources)
                             && c.Value.UpgradePossible(pattern, building),
                             $"Upgrade to {c.Value.Name}"))
-                    .SerializeToBytes().ToASCII()));
+                    .SerializeToString(Encoding)));
             }
 
             return CommandResult.Successful;

@@ -73,6 +73,10 @@ namespace GameCore.Modules.TickModule
 
 
 
+        public static event Action OnTick;
+
+
+
         public IIndependentChanging[] Subjects { get; }
 
 
@@ -101,6 +105,7 @@ namespace GameCore.Modules.TickModule
             while (true)
             {
                 Tick();
+                OnTick?.Invoke();
                 Thread.Sleep(Data.TickLengthMilliseconds);
             }
         }

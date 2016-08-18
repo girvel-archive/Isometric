@@ -5,6 +5,7 @@ using GameCore.Modules.WorldModule;
 using VisualServer;
 using GameCore.Modules;
 using CustomProperty.Dynamic;
+using GameRealization.Modules;
 
 namespace VisualClient.Modules
 {
@@ -76,6 +77,18 @@ namespace VisualClient.Modules
                     @set: value => Core.SavingVersion = value),
 
                 new Property(
+                    @get: () => Realization.Version,
+                    @set: value => Realization.SavingVersion = value),
+
+                new Property(
+                    @get: () => Client.Version,
+                    @set: value => Client.SavingVersion = value),
+
+                new Property(
+                    @get: () => Server.Version,
+                    @set: value => Server.SavingVersion = value),
+
+                new Property(
                     @get: () => SingleServer.Instance,
                     @set: value => SingleServer.Instance = value),
 
@@ -120,9 +133,13 @@ namespace VisualClient.Modules
                 OnSavingException?.Invoke(ex);
 
                 #if DEBUG
+
                 throw;
+
                 #else
+
                 return false;
+
                 #endif
             }
         } 
