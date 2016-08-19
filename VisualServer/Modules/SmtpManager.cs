@@ -69,10 +69,6 @@ namespace VisualServer.Modules
         {
             return new SmtpManager
             {
-                Client = new SmtpClient {
-                    // FIXME default smtp data
-                },
-
                 ConstructMailSignup = (to, code) => {
                     return new MailMessage(
                         Instance.From,

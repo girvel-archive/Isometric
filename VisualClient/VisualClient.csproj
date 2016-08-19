@@ -58,6 +58,7 @@
     <Compile Include="Modules\LogModule\LogEvents.cs" />
     <Compile Include="Modules\SerializationManager.cs" />
     <Compile Include="Modules\Client.cs" />
+    <Compile Include="Tools\ConsoleDecorator.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
@@ -82,5 +83,6 @@
     <Folder Include="Modules\" />
     <Folder Include="Modules\BuildingGraphics\" />
     <Folder Include="Modules\LogModule\" />
+    <Folder Include="Tools\" />
   </ItemGroup>
 </Project>

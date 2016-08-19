@@ -11,6 +11,10 @@ using GameRealization;
 using VisualClient.Modules;
 using VisualClient.Modules.LogModule;
 using VisualServer;
+using VisualServer.Modules;
+using System.Net.Mail;
+using System.Net;
+using VisualClient.Tools;
 
 namespace VisualClient
 {
@@ -68,8 +72,7 @@ namespace VisualClient
 
                 while (true)
                 {
-                    Console.Write("Write your IP: ");
-                    var ip = Console.ReadLine();
+                    var ip = ConsoleDecorator.GetLine("Write your IP: ");
 
                     if (SingleServer.Instance.TryToConnect(ip))
                     {
@@ -81,6 +84,18 @@ namespace VisualClient
             }
 
             Log.Instance.Write($"IP set as {SingleServer.Instance.ServerAddress}");
+
+
+            // Smtp:
+
+            SmtpManager.Instance.Client = new SmtpClient("smtp.gmail.com", 465) 
+            {
+                EnableSsl = true,
+                Credentials = new NetworkCredential(
+                    ConsoleDecorator.GetLine("Mail login:    #"),
+                    ConsoleDecorator.GetPassword("Mail password: #")),
+            };
+             
 
 
             // Threads:

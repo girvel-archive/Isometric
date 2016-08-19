@@ -1,5 +1,8 @@
 # Isometric
 
+![Screenshot](screenshot-server.png)
+*Working server in ubuntu terminal*
+
 Online strategy creating by C# and Unity3D. Repository includes game core, simple realization, server, server console and DLL with common for server and client classes and structures.
 
  * [Wiki] (https://github.com/girvel/Isometric/wiki)
