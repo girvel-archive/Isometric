@@ -41,13 +41,21 @@ namespace GameCore.Modules.WorldModule.Buildings
 
 
         private static short _nextID = 0;
+        private static List<BuildingPattern> _patterns 
+            = new List<BuildingPattern>();
 
 
 
 
 
         [Obsolete("using serialization ctor", true)]
-        public BuildingPattern() {}
+        public BuildingPattern()
+        {
+            if (!_patterns.Contains(this))
+            {
+                _patterns.Add(this);
+            }
+        }
 
         public BuildingPattern(
             string name, Resources resources, Resources needResources, TimeSpan upgradeTimeNormal,
@@ -59,6 +67,14 @@ namespace GameCore.Modules.WorldModule.Buildings
             UpgradeTimeNormal = upgradeTimeNormal;
 
             ID = _nextID++;
+            _patterns.Add(this);
+        }
+
+
+
+        public static BuildingPattern Find(short id)
+        {
+            return _patterns.Find(p => p.ID == id);
         }
     }
 }

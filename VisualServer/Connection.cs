@@ -14,6 +14,7 @@ using VectorNet;
 using GameCore.Modules;
 using GameCore.Extensions;
 using VisualServer.Extensions.Interfaces;
+using GameCore.Modules.WorldModule.Buildings;
 
 namespace VisualServer
 {
@@ -168,28 +169,34 @@ namespace VisualServer
         
 
 
+        #region commands
+
         private void _sendResources(Player owner)
         {
-            Send("r".CreateCommand(owner.CurrentResources.SerializeToString(Encoding)));
+            // FIXME Unity r -> refresh
+            Send("refresh".CreateCommand(owner.CurrentResources.SerializeToString(Encoding)));
         }
 
-        private CommandResult _sendResources(Dictionary<string, string> args, NetArgs netArgs)
+        private CommandResult _sendResources(
+                Dictionary<string, string> args, Connection.NetArgs netArgs)
         {
             _sendResources(Account.Player);
 
             return CommandResult.Successful;
         }
 
-        private CommandResult _getTerritory(Dictionary<string, string> args, NetArgs netArgs)
+        private CommandResult _getTerritory(
+                Dictionary<string, string> args, Connection.NetArgs netArgs)
         {
-            // FIXME unity st@size,buildings -> st@common_territory
-            Send("st".CreateCommand( Account.Player.Territory.ToCommon().SerializeToString(Encoding)));
+            // FIXME unity st@size,buildings -> set-territory@common_territory
+            Send("set-territory".CreateCommand(Account.Player.Territory.ToCommon().SerializeToString(Encoding)));
 
             return CommandResult.Successful;
         }
 
         // @building
-        private CommandResult _getBuildingContextActions(Dictionary<string, string> args, NetArgs netArgs)
+        private CommandResult _getBuildingContextActions(
+                Dictionary<string, string> args, Connection.NetArgs netArgs)
         {
             var position = Encoding.GetBytes(args["building"]).ByteDeserialize<IntVector>();
             var building = Account.Player.Territory[position];
@@ -198,12 +205,15 @@ namespace VisualServer
 
             if (patternNodes.Any())
             {
-                netArgs.Send("sba".CreateCommand(
+                // FIXME Unity sba -> set-building-actions
+                Send("set-building-actions".CreateCommand(
                     patternNodes[0].Children.Select(
                         c => new CommonBuildingAction(
-                            Account.Player.CurrentResources.Enough(c.Value.NeedResources)
-                            && c.Value.UpgradePossible(pattern, building),
-                            $"Upgrade to {c.Value.Name}"))
+                            Account.Player.CurrentResources.Enough(c.Value.NeedResources) 
+                                && c.Value.UpgradePossible(pattern, building),
+                            $"Upgrade to {c.Value.Name}",
+                            new CommonBuilding(position),
+                            pattern.ID))
                     .SerializeToString(Encoding)));
             }
 
@@ -211,10 +221,19 @@ namespace VisualServer
         }
 
         // @action
-        private CommandResult _useBuildingContextAction(Dictionary<string, string> args, NetArgs netArgs)
+        private CommandResult _useBuildingContextAction(
+                Dictionary<string, string> args, Connection.NetArgs netArgs)
         {
-            throw new NotImplementedException();
+            var action = Encoding.GetBytes(args["message"]).ByteDeserialize<CommonBuildingAction>();
+            var subject = Account.Player.Territory[action.Subject.Position];
+            var upgrade = BuildingPattern.Find(action.Upgrade);
+
+            return subject.TryUpgrade(upgrade) 
+                ? CommandResult.Successful 
+                : CommandResult.Unsuccessful;
         }
+
+        #endregion
     }
 }
 
