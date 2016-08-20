@@ -1,7 +1,7 @@
 ﻿using System;
 using CommonStructures;
 using VisualServer;
-using GameCore.Modules.TickModule;
+using IsometricCore.Modules.TickModule;
 
 namespace VisualClient.Modules.LogModule
 {

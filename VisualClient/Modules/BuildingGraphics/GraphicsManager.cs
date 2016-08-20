@@ -1,7 +1,7 @@
 ﻿using System;
 using VisualConsole;
-using GameCore.Modules.WorldModule.Buildings;
-using GameRealization.Modules.PatternsRealization;
+using IsometricCore.Modules.WorldModule.Buildings;
+using IsometricImplementation.Modules.PatternsRealization;
 using System.Linq;
 
 namespace VisualClient.Modules.BuildingGraphics

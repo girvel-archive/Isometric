@@ -26,6 +26,7 @@ namespace VisualClient.Tools
                         break;
 
                     case ConsoleKey.Enter:
+                        Console.WriteLine();
                         return result;
 
                     case ConsoleKey.Backspace:

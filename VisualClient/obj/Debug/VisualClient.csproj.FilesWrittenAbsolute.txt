@@ -17,5 +17,5 @@
 /media/nik/Doc/projects/isogame/Visual/VisualClient/bin/Debug/VisualClient.exe
 /media/nik/Doc/projects/isogame/Visual/VisualClient/obj/Debug/VisualClient.exe
 /media/nik/Doc/projects/isogame/Visual/VisualClient/obj/Debug/VisualClient.exe.mdb
-/media/nik/Doc/projects/isogame/Visual/VisualClient/bin/Debug/GameRealization.dll
-/media/nik/Doc/projects/isogame/Visual/VisualClient/bin/Debug/GameRealization.dll.mdb
+/media/nik/Doc/projects/isogame/Visual/VisualClient/bin/Debug/IsometricImplementation.dll
+/media/nik/Doc/projects/isogame/Visual/VisualClient/bin/Debug/IsometricImplementation.dll.mdb

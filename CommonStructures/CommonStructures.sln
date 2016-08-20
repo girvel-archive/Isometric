@@ -1,0 +1,20 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CommonStructures", "CommonStructures.csproj", "{64EE5B69-4B32-4080-82A7-9E5F419DAFAA}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+		Unity|Any CPU = Unity|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{64EE5B69-4B32-4080-82A7-9E5F419DAFAA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{64EE5B69-4B32-4080-82A7-9E5F419DAFAA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{64EE5B69-4B32-4080-82A7-9E5F419DAFAA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{64EE5B69-4B32-4080-82A7-9E5F419DAFAA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{64EE5B69-4B32-4080-82A7-9E5F419DAFAA}.Unity|Any CPU.ActiveCfg = Unity|Any CPU
+		{64EE5B69-4B32-4080-82A7-9E5F419DAFAA}.Unity|Any CPU.Build.0 = Unity|Any CPU
+	EndGlobalSection
+EndGlobal

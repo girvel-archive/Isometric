@@ -87,13 +87,13 @@
     <Compile Include="Extensions\SocketContainerExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\GameCore\GameCore.csproj">
-      <Project>{5E853DD8-DDC3-4F8C-9966-52CA5881CBCE}</Project>
-      <Name>GameCore</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\CompressedStructures\CommonStructures.csproj">
+    <ProjectReference Include="..\CommonStructures\CommonStructures.csproj">
       <Project>{64EE5B69-4B32-4080-82A7-9E5F419DAFAA}</Project>
       <Name>CommonStructures</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\IsometricCore\IsometricCore.csproj">
+      <Project>{5E853DD8-DDC3-4F8C-9966-52CA5881CBCE}</Project>
+      <Name>IsometricCore</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

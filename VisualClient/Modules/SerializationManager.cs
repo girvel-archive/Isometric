@@ -1,11 +1,11 @@
 ﻿using System;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
-using GameCore.Modules.WorldModule;
+using IsometricCore.Modules.WorldModule;
 using VisualServer;
-using GameCore.Modules;
+using IsometricCore.Modules;
 using CustomProperty.Dynamic;
-using GameRealization.Modules;
+using IsometricImplementation.Modules;
 
 namespace VisualClient.Modules
 {

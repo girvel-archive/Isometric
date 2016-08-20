@@ -1,6 +1,6 @@
 ﻿using System;
 using VisualConsole;
-using GameCore.Modules.WorldModule.Buildings;
+using IsometricCore.Modules.WorldModule.Buildings;
 
 namespace VisualClient.Modules.BuildingGraphics
 {

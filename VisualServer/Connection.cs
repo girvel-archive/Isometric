@@ -6,15 +6,15 @@ using System.Text;
 using System.Threading;
 using CommandInterface;
 using VisualServer.Modules.SpamModule;
-using GameCore.Modules.PlayerModule;
+using IsometricCore.Modules.PlayerModule;
 using CommonStructures;
 using BinarySerializationExtensions;
 using VisualServer.Extensions;
 using VectorNet;
-using GameCore.Modules;
-using GameCore.Extensions;
+using IsometricCore.Modules;
+using IsometricCore.Extensions;
 using VisualServer.Extensions.Interfaces;
-using GameCore.Modules.WorldModule.Buildings;
+using IsometricCore.Modules.WorldModule.Buildings;
 
 namespace VisualServer
 {

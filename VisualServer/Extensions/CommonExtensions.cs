@@ -1,7 +1,7 @@
 ﻿using System;
 using CommonStructures;
-using GameCore.Modules.WorldModule.Land;
-using GameCore.Modules.WorldModule.Buildings;
+using IsometricCore.Modules.WorldModule.Land;
+using IsometricCore.Modules.WorldModule.Buildings;
 
 namespace VisualServer.Extensions
 {

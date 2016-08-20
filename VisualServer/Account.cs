@@ -1,5 +1,5 @@
 ﻿using System;
-using GameCore.Modules.PlayerModule;
+using IsometricCore.Modules.PlayerModule;
 using CommonStructures;
 
 namespace VisualServer
