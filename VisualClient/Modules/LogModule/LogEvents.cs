@@ -2,6 +2,7 @@
 using CommonStructures;
 using VisualServer;
 using IsometricCore.Modules.TickModule;
+using ServerCommandManager = VisualServer.Modules.CommandModule.Server.CommandManager;
 
 namespace VisualClient.Modules.LogModule
 {
@@ -10,7 +11,7 @@ namespace VisualClient.Modules.LogModule
         internal static void Init()
         {
             SingleServer.Instance.OnAcceptedConnection += _onAcceptedConnection;
-            SingleServer.Instance.OnLoginAttempt += _onLoginAttempt;
+            ServerCommandManager.Instance.OnLoginAttempt += _onLoginAttempt;
 
             Connection.OnConnectionEnd += _onConnectionEnd;
             Connection.OnConnectionAbort += _onConnectionAbort;

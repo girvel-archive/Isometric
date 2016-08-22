@@ -1,48 +1,21 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading;
-using CommandInterface;
-using VisualServer.Modules.SpamModule;
-using IsometricCore.Modules.PlayerModule;
-using CommonStructures;
 using BinarySerializationExtensions;
-using VisualServer.Extensions;
-using VectorNet;
+using CommandInterface;
 using IsometricCore.Modules;
-using IsometricCore.Extensions;
-using VisualServer.Extensions.Interfaces;
-using IsometricCore.Modules.WorldModule.Buildings;
+using IsometricCore.Modules.PlayerModule;
+using VisualServer.Extensions;
+using VisualServer.Modules.CommandModule.Connection;
+using VisualServer.Modules.SpamModule;
 
 namespace VisualServer
 {
     public class Connection
     {
-        #region Login classes
-
-        public class NetArgs : ISocketContainer
-        {
-            public Socket Socket { get; }
-            public Connection Connection { get; }
-
-            public Server Server => Connection.ParentServer;
-
-            public NetArgs(Socket currentSocket, Connection connection)
-            {
-                Socket = currentSocket;
-                Connection = connection;
-            }
-        }
-
-        #endregion
-
-
-
         public bool Active { get; set; }
-        
-        public Interface<NetArgs, CommandResult> Interface { get; set; }
+
         public Thread Thread { get; set; }
 
         public Socket Socket { get; set; }
@@ -74,23 +47,6 @@ namespace VisualServer
         {
             Socket = socket;
             Account = account;
-
-            Interface = new Interface<NetArgs, CommandResult>(
-                new Command<NetArgs, CommandResult>(
-                    "get-territory", new string[0],
-                    _getTerritory),
-
-                new Command<NetArgs, CommandResult>(
-                    "get-building-action", new[] { "building" },
-                    _getBuildingContextActions),
-            
-                new Command<NetArgs, CommandResult>(
-                    "use-building-action", new[] { "action" },
-                    _useBuildingContextAction),
-            
-                new Command<NetArgs, CommandResult>(
-                    "get-resources", new string[0],
-                    _sendResources));
         }
 
         ~Connection()
@@ -107,7 +63,7 @@ namespace VisualServer
             Thread = new Thread(Start);
             Thread.Start();
 
-            Account.Player.OnTick += _sendResources;
+            Account.Player.OnTick += SendResources;
         }
 
         public void Start()
@@ -123,7 +79,8 @@ namespace VisualServer
                         OnDataReceived?.Invoke(receivedString, Account);
 
                         Func<CommandResult> cmdUse;
-                        if (Interface.TryGetFunc(receivedString, new NetArgs(Socket, this), out cmdUse))
+                        if (CommandManager.Instance.Interface.TryGetFunc(
+                                receivedString, new NetArgs(Socket, this), out cmdUse))
                         {
                             cmdUse();
                         }
@@ -159,7 +116,7 @@ namespace VisualServer
             Socket.Close();
             Thread.Abort();
 
-            Account.Player.OnTick -= _sendResources;
+            Account.Player.OnTick -= SendResources;
         }
 
         protected void Send(string message)
@@ -169,71 +126,11 @@ namespace VisualServer
         
 
 
-        #region commands
-
-        private void _sendResources(Player owner)
+        internal void SendResources(Player owner)
         {
             // FIXME Unity r -> refresh
             Send("refresh".CreateCommand(owner.CurrentResources.SerializeToString(Encoding)));
         }
-
-        private CommandResult _sendResources(
-                Dictionary<string, string> args, Connection.NetArgs netArgs)
-        {
-            _sendResources(Account.Player);
-
-            return CommandResult.Successful;
-        }
-
-        private CommandResult _getTerritory(
-                Dictionary<string, string> args, Connection.NetArgs netArgs)
-        {
-            // FIXME unity st@size,buildings -> set-territory@common_territory
-            Send("set-territory".CreateCommand(Account.Player.Territory.ToCommon().SerializeToString(Encoding)));
-
-            return CommandResult.Successful;
-        }
-
-        // @building
-        private CommandResult _getBuildingContextActions(
-                Dictionary<string, string> args, Connection.NetArgs netArgs)
-        {
-            var position = Encoding.GetBytes(args["building"]).ByteDeserialize<IntVector>();
-            var building = Account.Player.Territory[position];
-            var pattern = building.Pattern;
-            var patternNodes = BuildingGraph.Instance.Find(pattern);
-
-            if (patternNodes.Any())
-            {
-                // FIXME Unity sba -> set-building-actions
-                Send("set-building-actions".CreateCommand(
-                    patternNodes[0].Children.Select(
-                        c => new CommonBuildingAction(
-                            Account.Player.CurrentResources.Enough(c.Value.NeedResources) 
-                                && c.Value.UpgradePossible(pattern, building),
-                            $"Upgrade to {c.Value.Name}",
-                            new CommonBuilding(position),
-                            pattern.ID))
-                    .SerializeToString(Encoding)));
-            }
-
-            return CommandResult.Successful;
-        }
-
-        // @action
-        private CommandResult _useBuildingContextAction(
-                Dictionary<string, string> args, Connection.NetArgs netArgs)
-        {
-            var action = Encoding.GetBytes(args["message"]).ByteDeserialize<CommonBuildingAction>();
-            var subject = Account.Player.Territory[action.Subject.Position];
-            var upgrade = BuildingPattern.Find(action.Upgrade);
-
-            return subject.TryUpgrade(upgrade) 
-                ? CommandResult.Successful 
-                : CommandResult.Unsuccessful;
-        }
-
-        #endregion
     }
 }
 

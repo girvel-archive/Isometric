@@ -85,6 +85,10 @@
     <Compile Include="Extensions\ArrayExtensions.cs" />
     <Compile Include="Extensions\Interfaces\ISocketContainer.cs" />
     <Compile Include="Extensions\SocketContainerExtensions.cs" />
+    <Compile Include="Modules\CommandModule\Connection\NetArgs.cs" />
+    <Compile Include="Modules\CommandModule\Server\NetArgs.cs" />
+    <Compile Include="Modules\CommandModule\Server\CommandManager.cs" />
+    <Compile Include="Modules\CommandModule\Connection\CommandManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CommonStructures\CommonStructures.csproj">
@@ -109,5 +113,8 @@
     <Folder Include="Modules\SpamModule\" />
     <Folder Include="Extensions\" />
     <Folder Include="Extensions\Interfaces\" />
+    <Folder Include="Modules\CommandModule\" />
+    <Folder Include="Modules\CommandModule\Connection\" />
+    <Folder Include="Modules\CommandModule\Server\" />
   </ItemGroup>
 </Project>

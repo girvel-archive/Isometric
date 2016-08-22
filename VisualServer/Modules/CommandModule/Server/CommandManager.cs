@@ -1,0 +1,249 @@
+﻿using System;
+using VisualServer.Modules.SpamModule;
+using CommandInterface;
+using System.Collections.Generic;
+using System.Text;
+using CommonStructures;
+using BinarySerializationExtensions;
+using IsometricCore.Modules;
+using System.Linq;
+using VisualServer.Extensions;
+using _Connection = VisualServer.Connection;
+using System.Net.Sockets;
+using System.Text.RegularExpressions;
+
+namespace VisualServer.Modules.CommandModule.Server
+{
+    [Serializable]
+    public class CommandManager
+    {
+        #region Singleton-part
+
+        [Obsolete("using backing field")]
+        private static CommandManager _instance;
+
+        #pragma warning disable 618
+
+        public static CommandManager Instance
+        {
+            get
+            {
+                if (_instance == null)
+                {
+                    _instance = new CommandManager()._setDefault();
+                }
+
+                return _instance;
+            }
+
+            set
+            {
+                #if DEBUG
+
+                if (_instance != null)
+                {
+                    throw new ArgumentException("Instance is already set");
+                }
+
+                #endif
+
+                _instance = value;
+            }
+        }
+
+        #pragma warning restore 618
+
+        #endregion
+
+
+
+        public Interface<NetArgs, CommandResult> Interface { get; set; }
+
+        // FIXME after closing socket delete code
+        public Dictionary<Socket, int> SignupCodes { get; set; }
+
+
+
+        public delegate void LoginEvent(string email, LoginResult result);
+
+        public event LoginEvent OnLoginAttempt;
+
+
+
+        private CommandResult _login(Dictionary<string, string> args, NetArgs netArgs)
+        {
+            var receivedAccount = netArgs.Server.Encoding.GetBytes(args["account"])
+                .ByteDeserialize<CommonAccount>();
+
+            var suitableAccounts = netArgs.Server.Accounts.Where(
+                a => a.Email == receivedAccount.Email
+                && a.Password == receivedAccount.Password);
+
+            var successful = suitableAccounts.Any();
+            LoginResult result;
+
+            if (successful)
+            {
+                if (suitableAccounts.First().Banned)
+                { 
+                    result = LoginResult.Banned;
+                }
+                else
+                {
+                    result = LoginResult.Successful;
+                }
+            }
+            else
+            {
+                result = LoginResult.Unsuccessful;
+            }
+
+            netArgs.Send("ln-r".CreateCommand(((byte)result).ToString()));
+
+            OnLoginAttempt?.Invoke(receivedAccount.Email, result);
+
+            if (!successful)
+            {
+                return CommandResult.Unsuccessful;
+            }
+
+            var newConnection = new _Connection(
+                netArgs.Socket, suitableAccounts.First(), netArgs.Server);
+
+            netArgs.Server.CurrentConnections.Add(newConnection);
+
+            newConnection.StartThread();
+
+            return CommandResult.Successful;
+        }
+
+        // @email
+        private CommandResult _emailSendCode(Dictionary<string, string> args, NetArgs netArgs)
+        {
+            var code = SingleRandom.Instance.Next(10000, 99999);
+
+            SmtpManager.SendSignupMail(args["email"], code);
+
+            Func<CommandResult> result;
+            var i = 0;
+
+            while (!Interface.TryGetFunc(netArgs.ReceiveAll(), netArgs, out result)
+                || result() != CommandResult.Successful)
+            {
+                if (++i >= 3)
+                {
+                    return CommandResult.Unsuccessful;
+                }
+                // TODO 1.x spam filter
+            }
+
+            i = 0;
+
+            while (!Interface.TryGetFunc(netArgs.ReceiveAll(), netArgs, out result)
+                   || result() == CommandResult.Unsuccessful)
+            {
+                if (++i >= 3)
+                {
+                    return CommandResult.Unsuccessful;
+                }
+            }
+
+            netArgs.Socket.Close();
+            
+            return CommandResult.Successful;
+        }
+
+        // @code
+        private CommandResult _codeSet(
+            Dictionary<string, string> args, NetArgs netArgs)
+        {
+            int code;
+            if (!int.TryParse(args["code"], out code))
+            {
+                // FIXME Unity code-result
+                netArgs.Send("code-result".CreateCommand(
+                    ((byte)CodeResult.WrongCommand).ToString()));
+                    
+                return CommandResult.Spam;
+            }
+
+            if (code == SignupCodes[netArgs.Socket])
+            {
+                netArgs.Send("code-result".CreateCommand(
+                    ((byte)CodeResult.Successful).ToString()));
+
+                return CommandResult.Successful;
+            }
+
+            netArgs.Send("code-result".CreateCommand(((byte)CodeResult.WrongCode).ToString()));
+
+            return CommandResult.Unsuccessful;
+        }
+
+        // @login,account
+        private CommandResult _accountSet(Dictionary<string, string> args, NetArgs netArgs)
+        {
+            var account = netArgs.Deserialize<CommonAccount>(args["account"]);
+
+            if (!Regex.IsMatch(args["login"], @"^[\w\s]*$"))
+            {
+                netArgs.Send("account-result".CreateCommand(
+                    AccountCreatingResult.WrongLogin.ToString("d")));
+
+                return CommandResult.Spam;
+            }
+
+            if (netArgs.Server.Accounts.Any(a => a.Email == account.Email))
+            {
+                netArgs.Send("account-result".CreateCommand(((byte)AccountCreatingResult.ExistingEmail).ToString()));
+
+                return CommandResult.Unsuccessful;
+            }
+
+            if (netArgs.Server.Accounts.Any(a => a.Login == args["login"]))
+            {
+                netArgs.Send("account-result".CreateCommand(((byte)AccountCreatingResult.ExistingLogin).ToString()));
+
+                return CommandResult.Unsuccessful;
+            }
+
+            netArgs.Server.Accounts.Add(new Account(args["login"], account));
+            netArgs.Send("account-result".CreateCommand(((byte)AccountCreatingResult.Successful).ToString()));
+
+            return CommandResult.Successful;
+        }
+
+
+
+        private CommandManager _setDefault()
+        {
+            Interface = new Interface<NetArgs, CommandResult>(
+                new Command<NetArgs, CommandResult>(
+                    "login",
+                    new[] { "account" },
+                    _login),
+
+                new Command<NetArgs, CommandResult>( // FIXME Unity email-send-code
+                    "email-send-code",
+                    new[] { "email" },
+                    _emailSendCode))
+            {
+                UnactiveCommands = new Command<NetArgs, CommandResult>[]
+                {
+                    new Command<NetArgs, CommandResult>(
+                        "code-set",
+                        new[] { "code" },
+                        _codeSet),
+
+                    new Command<NetArgs, CommandResult>(
+                        "account-set",
+                        new[] { "login", "account" },
+                        _accountSet),
+                }
+            };
+
+            return this;
+        }
+    }
+}
+
