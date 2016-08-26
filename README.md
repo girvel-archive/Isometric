@@ -11,3 +11,5 @@ Online strategy creating by C# and Unity3D. Repository includes game core, simpl
 
  * [Command Interface] (https://github.com/girvel/CommandInterface)
  * [Custom Property] (https://github.com/girvel/CustomProperty)
+ * [Visual Console] (https://github.com/girvel/VisualConsole)
+ * [C# Tools] (https://github.com/girvel/CsTools)

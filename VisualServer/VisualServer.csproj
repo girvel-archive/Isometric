@@ -68,6 +68,9 @@
     <Reference Include="VisualConsole">
       <HintPath>..\..\VisualConsole\bin\Release\VisualConsole.dll</HintPath>
     </Reference>
+    <Reference Include="SocketExtensions">
+      <HintPath>..\..\tools\SocketExtensions\SocketExtensions\bin\Release\SocketExtensions.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Account.cs" />
@@ -80,11 +83,8 @@
     <Compile Include="Modules\SpamModule\SpamFilterData.cs" />
     <Compile Include="Modules\SpamModule\FilterResult.cs" />
     <Compile Include="Modules\SmtpManager.cs" />
-    <Compile Include="Extensions\SocketExtensions.cs" />
     <Compile Include="Extensions\CommonExtensions.cs" />
     <Compile Include="Extensions\ArrayExtensions.cs" />
-    <Compile Include="Extensions\Interfaces\ISocketContainer.cs" />
-    <Compile Include="Extensions\SocketContainerExtensions.cs" />
     <Compile Include="Modules\CommandModule\Connection\NetArgs.cs" />
     <Compile Include="Modules\CommandModule\Server\NetArgs.cs" />
     <Compile Include="Modules\CommandModule\Server\CommandManager.cs" />
@@ -112,7 +112,6 @@
     <Folder Include="Modules\" />
     <Folder Include="Modules\SpamModule\" />
     <Folder Include="Extensions\" />
-    <Folder Include="Extensions\Interfaces\" />
     <Folder Include="Modules\CommandModule\" />
     <Folder Include="Modules\CommandModule\Connection\" />
     <Folder Include="Modules\CommandModule\Server\" />

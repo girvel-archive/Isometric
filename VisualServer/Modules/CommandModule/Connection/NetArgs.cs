@@ -1,8 +1,8 @@
 ﻿using System;
+using System.Text;
 using System.Net.Sockets;
-using VisualServer.Extensions.Interfaces;
-using _Server = VisualServer.Server;
 using _Connection = VisualServer.Connection;
+using SocketExtensions;
 
 namespace VisualServer.Modules.CommandModule.Connection
 {
@@ -11,7 +11,7 @@ namespace VisualServer.Modules.CommandModule.Connection
         public Socket Socket { get; }
         public _Connection Connection { get; }
 
-        public _Server Server => Connection.ParentServer;
+        public Encoding Encoding => Connection.Encoding;
 
         public NetArgs(Socket currentSocket, _Connection connection)
         {

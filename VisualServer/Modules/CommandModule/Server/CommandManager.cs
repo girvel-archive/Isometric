@@ -11,6 +11,7 @@ using VisualServer.Extensions;
 using _Connection = VisualServer.Connection;
 using System.Net.Sockets;
 using System.Text.RegularExpressions;
+using SocketExtensions;
 
 namespace VisualServer.Modules.CommandModule.Server
 {

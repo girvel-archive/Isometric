@@ -1,6 +1,5 @@
 ﻿using System;
 using CommandInterface;
-using VisualServer.Extensions.Interfaces;
 using VisualServer.Modules.SpamModule;
 using System.Collections.Generic;
 using System.Text;
@@ -12,6 +11,7 @@ using IsometricCore.Modules;
 using BinarySerializationExtensions;
 using VectorNet;
 using System.Linq;
+using SocketExtensions;
 
 namespace VisualServer.Modules.CommandModule.Connection
 {
