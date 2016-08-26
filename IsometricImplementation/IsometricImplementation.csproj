@@ -54,7 +54,7 @@
       <HintPath>..\..\tools\VectorNet\bin\Release\VectorNet.dll</HintPath>
     </Reference>
     <Reference Include="RandomExtensions">
-      <HintPath>..\..\tools\RandomExtensions\RandomExtensions\bin\Release\RandomExtensions.dll</HintPath>
+      <HintPath>..\..\tools\RandomExtensions\bin\Release\RandomExtensions.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

@@ -49,11 +49,15 @@ namespace VisualClient
 
             // Generation | Opening:
 
+            #if !DEBUG
+
             if (SerializationManager.Instance.TryOpen())
             {
                 Log.Instance.Write("Saves file were opened");
             }
             else
+
+            #endif
             {
                 Territory = World.Instance.LazyGetTerritory(0, 0);
                 Log.Instance.Write("Main territory is generated");
@@ -112,10 +116,6 @@ namespace VisualClient
 //            SingleUI.Instance.Control();
             Console.ReadKey();
         }
-
-
-
-
 
 
 
