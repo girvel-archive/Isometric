@@ -46,26 +46,19 @@ namespace VisualClient
         {
             Console.Clear();
 
+            OpenOrGenerate();
+            SelectIP();
+            SmtpInitialize();
+            StartThreads();
 
-            // Generation | Opening:
-
-            #if !DEBUG
-
-            if (SerializationManager.Instance.TryOpen())
-            {
-                Log.Instance.Write("Saves file were opened");
-            }
-            else
-
-            #endif
-            {
-                Territory = World.Instance.LazyGetTerritory(0, 0);
-                Log.Instance.Write("Main territory is generated");
-            }
+//            SingleUI.Instance.Control();
+            Console.ReadKey();
+        }
 
 
-            // Ip:
 
+        private static void SelectIP()
+        {
             if (SingleServer.Instance.TryToAutoConnect())
             {
                 Log.Instance.Write("Server IP selected automatically");
@@ -88,22 +81,48 @@ namespace VisualClient
             }
 
             Log.Instance.Write($"IP set as {SingleServer.Instance.ServerAddress}");
+        }
 
+        private static void OpenOrGenerate()
+        {
+            #if !DEBUG
 
-            // Smtp:
-
-            SmtpManager.Instance.Client = new SmtpClient("smtp.gmail.com", 465) 
+            if (SerializationManager.Instance.TryOpen())
             {
-                EnableSsl = true,
-                Credentials = new NetworkCredential(
+                Log.Instance.Write("Saves file were opened");
+            }
+            else
+
+            #endif
+            {
+                Territory = World.Instance.LazyGetTerritory(0, 0);
+                Log.Instance.Write("Main territory is generated");
+            }
+        }
+
+        private static void SmtpInitialize()
+        {
+            try
+            {
+                SmtpManager.Instance.Connect(
+                    "smtp.gmail.com", 25, true,
                     ConsoleDecorator.GetLine("Mail login:    #"),
-                    ConsoleDecorator.GetPassword("Mail password: #")),
-            };
-             
+                    ConsoleDecorator.GetPassword("Mail password: #"));
+            }
+            catch (Exception ex)
+            {
+                Log.Instance.Exception(ex);
 
+                #if DEBUG
 
-            // Threads:
+                throw;
 
+                #endif
+            }
+        }
+
+        private static void StartThreads()
+        {
             NetThread = new Thread(SingleServer.Instance.ServerLoop);
             NetThread.Start();
 
@@ -112,9 +131,6 @@ namespace VisualClient
 
             SavingThread = new Thread(_savingLoop);
             SavingThread.Start();
-
-//            SingleUI.Instance.Control();
-            Console.ReadKey();
         }
 
 

@@ -55,10 +55,6 @@ namespace VisualServer
 
 
 
-        public const string SmtpHost = "smtp.yandex.ru";
-        public const int SmtpPort = 465;
-        public const bool SmtpEnableSsl = true;
-
         public const int ServerPort = 8005;
 
 
@@ -88,27 +84,6 @@ namespace VisualServer
         }
 
 
-
-        public bool Init(string smtpEmail, string smtpPassword)
-        {
-            try
-            {
-                SmtpManager.SingleClient = new SmtpClient {
-                    Host = SmtpHost,
-                    Port = SmtpPort,
-                    EnableSsl = SmtpEnableSsl,
-                    Credentials = new NetworkCredential(
-                        smtpEmail.Split('@')[0],
-                        smtpPassword),
-                    DeliveryMethod = SmtpDeliveryMethod.Network,
-                };
-            }
-            catch (SmtpException)
-            {
-                return false;
-            }
-            return true;
-        }
 
         public bool TryToAutoConnect()
         {

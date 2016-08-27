@@ -126,7 +126,7 @@ namespace VisualServer.Modules.CommandModule.Server
 
             try
             {
-                SmtpManager.SendSignupMail(args["email"], code);
+                SmtpManager.Instance.SendSignupMail(args["email"], code);
 
                 foreach (var command in new[] { "code-set", "account-set" })
                 {

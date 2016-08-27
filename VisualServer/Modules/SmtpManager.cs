@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Net.Mail;
+using System.Net;
 
 namespace VisualServer.Modules
 {
@@ -46,22 +47,14 @@ namespace VisualServer.Modules
         public delegate MailMessage MailSignupConstructor(string to, int code);
 
         public SmtpClient Client { get; set; }
-        public static SmtpClient SingleClient
-        {
-            get
-            {
-                return Instance.Client;
-            }
-
-            set
-            {
-                Instance.Client = value;
-            }
-        }
 
         public string From { get; set; }
 
         public MailSignupConstructor ConstructMailSignup { get; set; }
+
+
+
+        [NonSerialized] private bool _connected = false;
 
 
 
@@ -81,9 +74,43 @@ namespace VisualServer.Modules
 
 
 
-        public static void SendSignupMail(string to, int code)
+        public void SendSignupMail(string to, int code)
         {
+            #if DEBUG
+            
+            if (!_connected)
+            {
+                throw new NotImplementedException("Attempt to send mail before TryConnect()");
+            }
+
+            #endif
+
             Instance.Client.Send(Instance.ConstructMailSignup(to, code));
+        }
+
+        public void Connect(string host, int port, bool enableSsl, string email, string password)
+        {
+            Client = new SmtpClient(host, port)
+                {
+                    EnableSsl = enableSsl,
+                    Credentials = new NetworkCredential(email, password),
+                };
+            From = email;
+
+            try
+            {
+                Client.Send(From, From, "testing server smtp", "test");
+            }
+            catch (SmtpException)
+            {
+                throw new ArgumentException("Something went wrong; SmtpException");
+            }
+            catch (FormatException)
+            {
+                throw new ArgumentException("Wrong email format");
+            }
+
+            _connected = true;
         }
     }
 }

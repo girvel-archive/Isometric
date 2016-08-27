@@ -95,7 +95,8 @@ namespace VisualClient.Modules.LogModule
         public void Exception(Exception exception, string message = "")
         {
             Write($"{exception} caught.\n\tMessage: \"{message}\"\n\t" +
-                $"Serialized exception:\n{exception.SerializeToBytes()}");
+                "Serialized exception:\n" 
+                + Console.OutputEncoding.GetString(exception.SerializeToBytes()));
         }
     }
 }
