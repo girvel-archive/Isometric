@@ -60,7 +60,6 @@ namespace VisualServer.Modules.CommandModule.Server
 
         public Interface<NetArgs, CommandResult> Interface { get; set; }
 
-        // FIXME after closing socket delete code
         public Dictionary<Socket, int> SignupCodes { get; set; }
 
 
@@ -123,33 +122,34 @@ namespace VisualServer.Modules.CommandModule.Server
         {
             var code = SingleRandom.Instance.Next(10000, 99999);
 
-            SmtpManager.SendSignupMail(args["email"], code);
+            SignupCodes[netArgs.Socket] = code;
 
-            Func<CommandResult> result;
-            var i = 0;
-
-            while (!Interface.TryGetFunc(netArgs.ReceiveAll(), netArgs, out result)
-                || result() != CommandResult.Successful)
+            try
             {
-                if (++i >= 3)
+                SmtpManager.SendSignupMail(args["email"], code);
+
+                foreach (var command in new[] { "code-set", "account-set" })
                 {
-                    return CommandResult.Unsuccessful;
+                    var i = 0;
+                    Func<CommandResult> result;
+
+                    while (!Interface.TryGetFunc(netArgs.ReceiveAll(), netArgs, out result, command)
+                       || result() != CommandResult.Successful)
+                    {
+                        if (++i >= 3)
+                        {
+                            return CommandResult.Unsuccessful;
+                        }
+                        // TODO 1.x spam filter
+                    }
                 }
-                // TODO 1.x spam filter
+
+                netArgs.Socket.Close();
             }
-
-            i = 0;
-
-            while (!Interface.TryGetFunc(netArgs.ReceiveAll(), netArgs, out result)
-                   || result() == CommandResult.Unsuccessful)
+            finally
             {
-                if (++i >= 3)
-                {
-                    return CommandResult.Unsuccessful;
-                }
+                SignupCodes.Remove(netArgs.Socket);
             }
-
-            netArgs.Socket.Close();
             
             return CommandResult.Successful;
         }
@@ -172,7 +172,7 @@ namespace VisualServer.Modules.CommandModule.Server
             {
                 netArgs.Send("code-result".CreateCommand(
                     ((byte)CodeResult.Successful).ToString()));
-
+                
                 return CommandResult.Successful;
             }
 

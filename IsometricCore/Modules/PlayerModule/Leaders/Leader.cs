@@ -39,7 +39,7 @@ namespace IsometricCore.Modules.PlayerModule.Leaders
         public void Die()
         {
             throw new NotImplementedException();
-           }
+        }
 
 
 

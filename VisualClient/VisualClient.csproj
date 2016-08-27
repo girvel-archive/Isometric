@@ -27,22 +27,22 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
-    <Reference Include="VectorNet">
-      <HintPath>..\..\tools\VectorNet\bin\Release\VectorNet.dll</HintPath>
-    </Reference>
     <Reference Include="CommandInterface">
       <HintPath>..\..\CommandInterface\bin\Release\CommandInterface.dll</HintPath>
     </Reference>
     <Reference Include="VisualConsole">
       <HintPath>..\..\VisualConsole\bin\Release\VisualConsole.dll</HintPath>
     </Reference>
-    <Reference Include="BinarySerializationExtensions">
-      <HintPath>..\..\tools\BinarySerializationExtensions\bin\Release\BinarySerializationExtensions.dll</HintPath>
-    </Reference>
     <Reference Include="CustomProperty">
       <HintPath>..\..\CustomProperty\CustomProperty\bin\Release\CustomProperty.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="BinarySerializationExtensions">
+      <HintPath>..\..\CsTools\BinarySerializationExtensions\bin\Release\BinarySerializationExtensions.dll</HintPath>
+    </Reference>
+    <Reference Include="VectorNet">
+      <HintPath>..\..\CsTools\VectorNet\bin\Release\VectorNet.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />

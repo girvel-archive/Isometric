@@ -57,19 +57,19 @@
       <HintPath>..\..\CommandInterface\bin\Release\CommandInterface.dll</HintPath>
     </Reference>
     <Reference Include="VectorNet">
-      <HintPath>..\..\tools\VectorNet\bin\Release\VectorNet.dll</HintPath>
+      <HintPath>..\..\CsTools\VectorNet\bin\Release\VectorNet.dll</HintPath>
     </Reference>
     <Reference Include="BinarySerializationExtensions">
-      <HintPath>..\..\tools\BinarySerializationExtensions\bin\Release\BinarySerializationExtensions.dll</HintPath>
+      <HintPath>..\..\CsTools\BinarySerializationExtensions\bin\Release\BinarySerializationExtensions.dll</HintPath>
     </Reference>
     <Reference Include="MathExtensions">
-      <HintPath>..\..\tools\MathExtensions\bin\Release\MathExtensions.dll</HintPath>
+      <HintPath>..\..\CsTools\MathExtensions\bin\Release\MathExtensions.dll</HintPath>
     </Reference>
     <Reference Include="VisualConsole">
       <HintPath>..\..\VisualConsole\bin\Release\VisualConsole.dll</HintPath>
     </Reference>
     <Reference Include="SocketExtensions">
-      <HintPath>..\..\tools\SocketExtensions\SocketExtensions\bin\Release\SocketExtensions.dll</HintPath>
+      <HintPath>..\..\CsTools\SocketExtensions\bin\Release\SocketExtensions.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
