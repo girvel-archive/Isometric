@@ -1,19 +1,13 @@
 ﻿using System;
-using System.IO;
-using System.Runtime.Serialization;
-using System.Runtime.Serialization.Formatters.Binary;
+using System.Linq;
 using System.Threading;
-using IsometricCore.Modules.PlayerModule;
 using IsometricCore.Modules.TickModule;
 using IsometricCore.Modules.WorldModule;
 using IsometricCore.Modules.WorldModule.Land;
 using IsometricImplementation;
 using VisualClient.Modules;
 using VisualClient.Modules.LogModule;
-using VisualServer;
 using VisualServer.Modules;
-using System.Net.Mail;
-using System.Net;
 using VisualClient.Tools;
 
 namespace VisualClient
@@ -80,7 +74,11 @@ namespace VisualClient
                 }
             }
 
-            Log.Instance.Write($"IP set as {SingleServer.Instance.ServerAddress}");
+            Log.Instance.Write(
+                "IP set as " +
+                SingleServer.Instance.ServerAddress
+                    .GetAddressBytes()
+                    .Aggregate("", (sum, b) => sum + "." + b));
         }
 
         private static void OpenOrGenerate()
@@ -108,6 +106,8 @@ namespace VisualClient
                     "smtp.gmail.com", 25, true,
                     ConsoleDecorator.GetLine("Mail login:    #"),
                     ConsoleDecorator.GetPassword("Mail password: #"));
+
+                Log.Instance.Write("Initialized SmtpManager successfully");
             }
             catch (Exception ex)
             {
@@ -139,14 +139,9 @@ namespace VisualClient
         {
             while (true)
             {
-                if (SerializationManager.Instance.TrySave())
-                {
-                    Log.Instance.Write("Game was saved successful");
-                }
-                else
-                {
-                    Log.Instance.Write("Problem with game saving");
-                }
+                Log.Instance.Write(SerializationManager.Instance.TrySave()
+                    ? "Game was saved successful"
+                    : "Problem with game saving");
 
                 Thread.Sleep(SavingPeriodMilliseconds);
             }

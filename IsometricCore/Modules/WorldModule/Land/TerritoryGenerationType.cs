@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace IsometricCore.Modules.WorldModule.Land
+﻿namespace IsometricCore.Modules.WorldModule.Land
 {
     public enum TerritoryGenerationType
     {

@@ -6,7 +6,6 @@ using BinarySerializationExtensions;
 using CommandInterface;
 using IsometricCore.Modules;
 using IsometricCore.Modules.PlayerModule;
-using VisualServer.Extensions;
 using VisualServer.Modules.CommandModule.Connection;
 using VisualServer.Modules.SpamModule;
 using SocketExtensions;

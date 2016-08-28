@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using VisualServer;
 using System.Text;
 using System.IO;
-using System.Runtime.Serialization.Formatters.Binary;
 using BinarySerializationExtensions;
 
 namespace VisualClient.Modules.LogModule
@@ -58,7 +55,7 @@ namespace VisualClient.Modules.LogModule
                 Directory.CreateDirectory(FileFolder);
             }
 
-            _currentPath = $"{FileFolder}/{DateTime.Now}";
+            _currentPath = $"{FileFolder}\\{DateTime.Now}";
 
             LogEvents.Init();
         }
@@ -77,7 +74,7 @@ namespace VisualClient.Modules.LogModule
         {
             message = DateTime.Now.ToString("yy.MM.dd hh:mm:ss") + '\t' + message;
 
-            using (var writer = new StreamWriter(_currentPath, true, Encoding))
+            using (var writer = new StreamWriter("log", true, Encoding))
             {
                 writer.WriteLine(message);
             }

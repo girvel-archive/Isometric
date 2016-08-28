@@ -18,12 +18,12 @@ namespace VisualClient.Modules.LogModule
             Connection.OnDataReceived += _onDataReceived;
             Connection.OnWrongCommand += _onWrongCommand;
 
-            SerializationManager.OnSuccessfulSaving += 
+            SerializationManager.OnSuccessfulSaving +=
                 () => _onSuccessfulAction("Saved");
-            SerializationManager.OnSuccessfulOpening += 
+            SerializationManager.OnSuccessfulOpening +=
                 () => _onSuccessfulAction("Opened");
 
-            SerializationManager.OnSavingException += 
+            SerializationManager.OnSavingException +=
                 ex => _onSerializationException("Saving", ex);
             SerializationManager.OnOpeningException +=
                 ex => _onSerializationException("Opening", ex);

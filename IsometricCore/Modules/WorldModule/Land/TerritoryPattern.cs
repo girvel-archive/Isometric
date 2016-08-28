@@ -1,6 +1,4 @@
 ﻿using System;
-using IsometricCore.Modules.PlayerModule;
-using IsometricCore.Modules.TickModule;
 
 namespace IsometricCore.Modules.WorldModule.Land
 {

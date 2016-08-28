@@ -1,5 +1,4 @@
-﻿using System;
-using IsometricCore.Modules.TickModule;
+﻿using IsometricCore.Modules.TickModule;
 
 namespace IsometricImplementation.Modules.DataRealization
 {

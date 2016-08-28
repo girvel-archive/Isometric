@@ -1,5 +1,4 @@
 ﻿using System;
-using IsometricCore.Extensions;
 
 namespace IsometricCore.Modules
 {

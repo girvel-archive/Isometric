@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace CommonStructures
+﻿namespace CommonStructures
 {
     public enum AccountCreatingResult
     {

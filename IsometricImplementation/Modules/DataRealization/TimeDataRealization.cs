@@ -1,5 +1,4 @@
-﻿using System;
-using IsometricCore.Modules.TimeModule;
+﻿using IsometricCore.Modules.TimeModule;
 
 namespace IsometricImplementation.Modules.DataRealization
 {

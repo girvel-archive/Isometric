@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace IsometricCore.Modules.WorldModule.Buildings
+﻿namespace IsometricCore.Modules.WorldModule.Buildings
 {
     public enum BuildingType
     {

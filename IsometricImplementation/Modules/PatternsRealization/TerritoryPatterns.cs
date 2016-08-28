@@ -5,7 +5,6 @@ using System.Linq;
 using IsometricCore.Modules.WorldModule.Land;
 using IsometricCore.Modules.WorldModule.Buildings;
 using IsometricCore.Modules.PlayerModule;
-using IsometricCore.Modules;
 using IsometricCore.Modules.WorldModule;
 
 namespace IsometricImplementation.Modules.PatternsRealization

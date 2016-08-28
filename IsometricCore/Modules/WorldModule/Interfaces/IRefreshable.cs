@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace IsometricCore.Modules.WorldModule.Interfaces
+﻿namespace IsometricCore.Modules.WorldModule.Interfaces
 {
     public interface IRefreshable
     {

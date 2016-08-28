@@ -2,12 +2,10 @@
 using VisualServer.Modules.SpamModule;
 using CommandInterface;
 using System.Collections.Generic;
-using System.Text;
 using CommonStructures;
 using BinarySerializationExtensions;
 using IsometricCore.Modules;
 using System.Linq;
-using VisualServer.Extensions;
 using _Connection = VisualServer.Connection;
 using System.Net.Sockets;
 using System.Text.RegularExpressions;

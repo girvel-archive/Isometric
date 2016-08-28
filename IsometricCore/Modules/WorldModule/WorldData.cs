@@ -1,5 +1,4 @@
-﻿using System;
-using VectorNet;
+﻿using VectorNet;
 using IsometricCore.Modules.WorldModule.Buildings;
 using IsometricCore.Modules.PlayerModule;
 using IsometricCore.Modules.WorldModule.Land;

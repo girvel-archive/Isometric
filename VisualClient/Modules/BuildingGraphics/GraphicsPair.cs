@@ -1,5 +1,4 @@
-﻿using System;
-using VisualConsole;
+﻿using VisualConsole;
 using IsometricCore.Modules.WorldModule.Buildings;
 
 namespace VisualClient.Modules.BuildingGraphics

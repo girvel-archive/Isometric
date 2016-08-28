@@ -1,5 +1,4 @@
-﻿using System;
-using IsometricImplementation.Modules.DataRealization;
+﻿using IsometricImplementation.Modules.DataRealization;
 
 namespace IsometricImplementation
 {

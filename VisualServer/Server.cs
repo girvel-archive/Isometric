@@ -1,20 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Net;
-using System.Net.Mail;
 using System.Net.Sockets;
 using System.Text;
-using CommandInterface;
-using CommonStructures;
-using BinarySerializationExtensions;
-using VisualServer.Modules.SpamModule;
 using IsometricCore.Modules;
-using VisualServer.Modules;
-using VisualServer.Extensions;
-using IsometricCore.Extensions;
-using System.Runtime.Serialization;
-using System.Text.RegularExpressions;
 using VisualServer.Modules.CommandModule.Server;
 using SocketExtensions;
 
@@ -33,11 +22,11 @@ namespace VisualServer
         [NonSerialized]
         public List<Connection> CurrentConnections;
 
-        public Encoding Encoding { get; private set; } = Encoding.ASCII;
+        public Encoding Encoding { get; } = Encoding.ASCII;
 
         public IPAddress ServerAddress { get; set; }
 
-        public List<Account> Accounts { get; set; } = new List<Account>();
+        public List<Account> Accounts { get; set; }
         
         [NonSerialized]
         private bool _connected;
@@ -115,7 +104,7 @@ namespace VisualServer
         {
             var ipPoint = new IPEndPoint(ip, ServerPort);
 
-            _listenSocket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Unspecified);
+            _listenSocket = new Socket(ipPoint.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
 
             _listenSocket.Bind(ipPoint);
             _listenSocket.Listen(10); // TODO increase if there will be a lot of players
@@ -157,12 +146,6 @@ namespace VisualServer
                     #endif
                 }
             }
-        }
-
-        [OnDeserialized]
-        public void CheckVersion()
-        {
-
         }
 
 

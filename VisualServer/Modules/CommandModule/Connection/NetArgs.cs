@@ -1,5 +1,4 @@
-﻿using System;
-using System.Text;
+﻿using System.Text;
 using System.Net.Sockets;
 using _Connection = VisualServer.Connection;
 using SocketExtensions;

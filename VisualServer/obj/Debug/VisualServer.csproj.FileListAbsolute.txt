@@ -15,3 +15,13 @@ D:\projects\isogame\Visual\VisualServer\bin\Debug\VectorNet.dll
 D:\projects\isogame\Visual\VisualServer\bin\Debug\EnumerableExtensions.dll
 D:\projects\isogame\Visual\VisualServer\bin\Debug\VectorNet.pdb
 D:\projects\isogame\Visual\VisualServer\bin\Debug\EnumerableExtensions.pdb
+D:\projects\isometric\VisualServer\bin\Debug\VisualServer.dll
+D:\projects\isometric\VisualServer\bin\Debug\VisualServer.pdb
+D:\projects\isometric\VisualServer\bin\Debug\CompressedStructures.dll
+D:\projects\isometric\VisualServer\bin\Debug\IsometricCore.dll
+D:\projects\isometric\VisualServer\bin\Debug\EnumerableExtensions.dll
+D:\projects\isometric\VisualServer\bin\Debug\CompressedStructures.pdb
+D:\projects\isometric\VisualServer\bin\Debug\IsometricCore.pdb
+D:\projects\isometric\VisualServer\obj\Debug\VisualServer.csprojResolveAssemblyReference.cache
+D:\projects\isometric\VisualServer\obj\Debug\VisualServer.dll
+D:\projects\isometric\VisualServer\obj\Debug\VisualServer.pdb

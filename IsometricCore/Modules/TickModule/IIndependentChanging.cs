@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace IsometricCore.Modules.TickModule
+﻿namespace IsometricCore.Modules.TickModule
 {
     public interface IIndependentChanging
     {

@@ -1,0 +1,10 @@
+D:\projects\isometric\IsometricImplementation\bin\Debug\IsometricImplementation.dll
+D:\projects\isometric\IsometricImplementation\bin\Debug\IsometricImplementation.pdb
+D:\projects\isometric\IsometricImplementation\bin\Debug\CompressedStructures.dll
+D:\projects\isometric\IsometricImplementation\bin\Debug\IsometricCore.dll
+D:\projects\isometric\IsometricImplementation\bin\Debug\EnumerableExtensions.dll
+D:\projects\isometric\IsometricImplementation\bin\Debug\IsometricCore.pdb
+D:\projects\isometric\IsometricImplementation\bin\Debug\CompressedStructures.pdb
+D:\projects\isometric\IsometricImplementation\obj\Debug\IsometricImplementation.csprojResolveAssemblyReference.cache
+D:\projects\isometric\IsometricImplementation\obj\Debug\IsometricImplementation.dll
+D:\projects\isometric\IsometricImplementation\obj\Debug\IsometricImplementation.pdb

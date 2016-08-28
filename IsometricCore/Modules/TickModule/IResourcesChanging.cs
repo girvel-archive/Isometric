@@ -1,6 +1,4 @@
-﻿using System;
-using IsometricCore.Modules.PlayerModule;
-using CommonStructures;
+﻿using CommonStructures;
 
 namespace IsometricCore.Modules.TickModule
 {

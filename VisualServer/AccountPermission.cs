@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace VisualServer
+﻿namespace VisualServer
 {
     public enum AccountPermission
     {

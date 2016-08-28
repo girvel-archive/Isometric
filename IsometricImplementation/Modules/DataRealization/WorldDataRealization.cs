@@ -1,5 +1,4 @@
-﻿using System;
-using IsometricCore.Modules.WorldModule;
+﻿using IsometricCore.Modules.WorldModule;
 using IsometricCore.Modules.WorldModule.Land;
 using IsometricImplementation.Modules.PatternsRealization;
 using IsometricCore.Modules;

@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace VisualServer.Modules.SpamModule
+﻿namespace VisualServer.Modules.SpamModule
 {
     public enum CommandResult
     {

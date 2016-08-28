@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace IsometricCore.Modules.PlayerModule.Leaders
+﻿namespace IsometricCore.Modules.PlayerModule.Leaders
 {
     public struct Name
     {

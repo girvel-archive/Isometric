@@ -1,6 +1,5 @@
 ﻿using System;
 using IsometricCore.Modules.TickModule;
-using IsometricCore.Modules.TimeModule;
 
 namespace IsometricCore.Modules.TimeModule
 {

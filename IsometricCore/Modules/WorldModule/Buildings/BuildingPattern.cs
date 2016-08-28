@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using IsometricCore.Modules.PlayerModule;
 using CommonStructures;
 
 namespace IsometricCore.Modules.WorldModule.Buildings

@@ -1,0 +1,15 @@
+D:\projects\isometric\VisualClient\obj\Debug\VisualClient.exe
+D:\projects\isometric\VisualClient\bin\Debug\VisualClient.exe
+D:\projects\isometric\VisualClient\bin\Debug\VisualClient.pdb
+D:\projects\isometric\VisualClient\bin\Debug\CompressedStructures.dll
+D:\projects\isometric\VisualClient\bin\Debug\IsometricCore.dll
+D:\projects\isometric\VisualClient\bin\Debug\IsometricImplementation.dll
+D:\projects\isometric\VisualClient\bin\Debug\VisualServer.dll
+D:\projects\isometric\VisualClient\bin\Debug\SocketExtensions.dll
+D:\projects\isometric\VisualClient\bin\Debug\EnumerableExtensions.dll
+D:\projects\isometric\VisualClient\bin\Debug\VisualServer.pdb
+D:\projects\isometric\VisualClient\bin\Debug\CompressedStructures.pdb
+D:\projects\isometric\VisualClient\bin\Debug\IsometricCore.pdb
+D:\projects\isometric\VisualClient\bin\Debug\IsometricImplementation.pdb
+D:\projects\isometric\VisualClient\obj\Debug\VisualClient.csprojResolveAssemblyReference.cache
+D:\projects\isometric\VisualClient\obj\Debug\VisualClient.pdb

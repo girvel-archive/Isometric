@@ -1,7 +1,4 @@
-﻿using System;
-using IsometricCore.Modules.TimeModule;
-
-namespace IsometricCore.Modules.TimeModule
+﻿namespace IsometricCore.Modules.TimeModule
 {
     public class TimeData
     {

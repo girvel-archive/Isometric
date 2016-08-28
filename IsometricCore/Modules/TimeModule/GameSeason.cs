@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace IsometricCore.Modules.TimeModule
+﻿namespace IsometricCore.Modules.TimeModule
 {
     public enum GameSeason
     {
