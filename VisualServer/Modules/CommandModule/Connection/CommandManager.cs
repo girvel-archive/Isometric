@@ -24,15 +24,7 @@ namespace VisualServer.Modules.CommandModule.Connection
 
         public static CommandManager Instance
         {
-            get
-            {
-                if (_instance == null)
-                {
-                    _instance = new CommandManager()._setDefault();
-                }
-
-                return _instance;
-            }
+            get { return _instance ?? (_instance = new CommandManager()._setDefault()); }
 
             set
             {

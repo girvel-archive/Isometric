@@ -15,14 +15,7 @@ namespace VisualServer.Modules
         #pragma warning disable 0618
 
         public static SmtpManager Instance {
-            get {
-                if (_instance == null)
-                {
-                    _instance = _constructDefault();
-                }
-
-                return _instance;
-            }
+            get { return _instance ?? (_instance = _constructDefault()); }
 
             set {
         #if DEBUG

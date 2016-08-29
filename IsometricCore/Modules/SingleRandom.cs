@@ -11,14 +11,7 @@ namespace IsometricCore.Modules
 
         private static Random _instance;
         public static Random Instance {
-            get {
-                if (_instance == null)
-                {
-                    _instance = CustomSeed ? new Random(Seed) : new Random();
-                }
-
-                return _instance;
-            }
+            get { return _instance ?? (_instance = CustomSeed ? new Random(Seed) : new Random()); }
         }
 
         private SingleRandom() {}

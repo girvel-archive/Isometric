@@ -17,15 +17,7 @@ namespace VisualClient.Modules.BuildingGraphics
 
         public GraphicsManager Instance
         {
-            get
-            {
-                if (_instance == null)
-                {
-                    _instance = new GraphicsManager();
-                }
-
-                return _instance;
-            }
+            get { return _instance ?? (_instance = new GraphicsManager()); }
 
             set
             {

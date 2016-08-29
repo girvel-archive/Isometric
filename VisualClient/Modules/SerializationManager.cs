@@ -20,15 +20,7 @@ namespace VisualClient.Modules
 
         public static SerializationManager Instance
         {
-            get
-            {
-                if (_instance == null)
-                {
-                    _instance = new SerializationManager();
-                }
-
-                return _instance;
-            }
+            get { return _instance ?? (_instance = new SerializationManager()); }
 
             set
             {
@@ -70,7 +62,6 @@ namespace VisualClient.Modules
         public delegate void Mutator(object value);
 
         public Property[] SerializationList { get; set; } = 
-            new Property[] 
             {
                 new Property(
                     @get: () => Core.Version,

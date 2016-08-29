@@ -15,15 +15,7 @@ namespace IsometricCore.Modules
 
         public static ActionsProcessor Instance
         {
-            get
-            {
-                if (_instance == null)
-                {
-                    _instance = new ActionsProcessor();
-                }
-
-                return _instance;
-            }
+            get { return _instance ?? (_instance = new ActionsProcessor()); }
 
             set
             {

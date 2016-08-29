@@ -9,14 +9,7 @@ namespace IsometricCore.Modules
 
         private static GlobalData _instance;
         public static GlobalData Instance {
-            get {
-                if (_instance == null)
-                {
-                    _instance = new GlobalData();
-                }
-
-                return _instance;
-            }
+            get { return _instance ?? (_instance = new GlobalData()); }
             set {
                 if (_instance == null)
                 {

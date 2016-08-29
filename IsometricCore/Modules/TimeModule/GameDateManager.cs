@@ -9,14 +9,7 @@ namespace IsometricCore.Modules.TimeModule
 
         private static GameDateManager _instance;
         public static GameDateManager Instance {
-            get {
-                if (_instance == null)
-                {
-                    _instance = new GameDateManager();
-                }
-
-                return _instance;
-            }
+            get { return _instance ?? (_instance = new GameDateManager()); }
 
             set {
                 if (_instance != null)
@@ -34,9 +27,7 @@ namespace IsometricCore.Modules.TimeModule
 
 
 
-        public static GameDate CurrentDate => Instance.Current;
-
-        private GameDate Current;
+        public GameDate Current;
 
 
 

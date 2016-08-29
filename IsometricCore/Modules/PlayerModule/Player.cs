@@ -20,14 +20,7 @@ namespace IsometricCore.Modules.PlayerModule
         #pragma warning disable 618
 
         public static PlayerData Data {
-            get {
-                if (_data == null)
-                {
-                    _data = new PlayerData();
-                }
-
-                return _data;
-            }
+            get { return _data ?? (_data = new PlayerData()); }
 
             set {
                 #if DEBUG
@@ -56,7 +49,7 @@ namespace IsometricCore.Modules.PlayerModule
 
         public Building[] GetOwnedBuildings() => _ownedBuildings?.ToArray();
 
-        private List<Building> _ownedBuildings { get; }
+        private readonly List<Building> _ownedBuildings;
 
 
 

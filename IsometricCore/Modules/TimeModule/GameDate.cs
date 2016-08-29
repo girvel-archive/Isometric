@@ -14,14 +14,7 @@ namespace IsometricCore.Modules.TimeModule
         #pragma warning disable 0618
 
         public static TimeData Data {
-            get {
-                if (_data == null)
-                {
-                    _data = new TimeData();
-                }
-
-                return _data;
-            }
+            get { return _data ?? (_data = new TimeData()); }
 
             set {
                 #if DEBUG

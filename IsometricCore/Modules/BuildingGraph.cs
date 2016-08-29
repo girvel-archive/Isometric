@@ -11,14 +11,7 @@ namespace IsometricCore.Modules
 
         private static Graph<BuildingPattern> _instance;
         public static Graph<BuildingPattern> Instance {
-            get {
-                if (_instance == null)
-                {
-                    _instance = new Graph<BuildingPattern>(true);
-                }
-
-                return _instance;
-            }
+            get { return _instance ?? (_instance = new Graph<BuildingPattern>(true)); }
 
             set {
                 if (_instance != null)

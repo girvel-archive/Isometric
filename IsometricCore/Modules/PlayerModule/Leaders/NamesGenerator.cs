@@ -10,14 +10,7 @@ namespace IsometricCore.Modules.PlayerModule.Leaders
 
         private static NamesGenerator _instance;
         public static NamesGenerator Instance {
-            get {
-                if (_instance == null)
-                {
-                    _instance = new NamesGenerator();
-                }
-
-                return _instance;
-            }
+            get { return _instance ?? (_instance = new NamesGenerator()); }
 
             set {
 #if DEBUG

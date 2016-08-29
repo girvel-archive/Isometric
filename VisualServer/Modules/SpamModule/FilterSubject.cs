@@ -16,15 +16,7 @@ namespace VisualServer.Modules.SpamModule
 
         public static SpamFilterData Data
         {
-            get
-            {
-                if (_data == null)
-                {
-                    _data = new SpamFilterData();
-                }
-
-                return _data;
-            }
+            get { return _data ?? (_data = new SpamFilterData()); }
 
             set
             {
@@ -54,8 +46,6 @@ namespace VisualServer.Modules.SpamModule
         /// <summary>
         /// Analyzes result of last command execution and changes account reputation
         /// </summary>
-        /// <param name="result">result of last command execution</param>
-        /// <returns><c>true</c> if user was banned and <c>false</c> if not</returns>
         public bool Add(CommandResult result, Socket socket)
         {
             var step = 0f;
@@ -72,6 +62,9 @@ namespace VisualServer.Modules.SpamModule
                 case CommandResult.Spam:
                     step = Data.ReputationStepSpam;
                     break;
+
+                default:
+                    throw new NotImplementedException();
             }
 
             Reputation = Math.Min(Data.ReputationMaximal, Reputation + step);

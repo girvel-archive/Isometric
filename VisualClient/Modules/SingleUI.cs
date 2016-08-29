@@ -5,16 +5,7 @@ namespace VisualClient.Modules
     public static class SingleUI
     {
         private static ConsoleUI _instance;
-        public static ConsoleUI Instance {
-            get {
-                if (_instance == null)
-                {
-                    _instance = _getInstance();
-                }
-
-                return _instance;
-            }
-        }
+        public static ConsoleUI Instance => _instance ?? (_instance = _getInstance());
 
         private static ConsoleUI _getInstance() 
         {

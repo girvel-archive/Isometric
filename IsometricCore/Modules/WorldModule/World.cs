@@ -18,14 +18,7 @@ namespace IsometricCore.Modules.WorldModule
         #pragma warning disable 0618
 
         public static WorldData Data {
-            get {
-                if (_data == null)
-                {
-                    _data = new WorldData();
-                }
-
-                return _data;
-            }
+            get { return _data ?? (_data = new WorldData()); }
 
             set {
                 #if DEBUG
@@ -51,15 +44,7 @@ namespace IsometricCore.Modules.WorldModule
         private static World _instance;
         public static World Instance 
         {
-            get 
-            {
-                if (_instance == null)
-                {
-                    _instance = new World(SingleRandom.Instance.Next());
-                }
-
-                return _instance;
-            }
+            get { return _instance ?? (_instance = new World(SingleRandom.Instance.Next())); }
 
             set
             {

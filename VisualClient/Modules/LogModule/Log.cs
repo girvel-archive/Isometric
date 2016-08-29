@@ -16,14 +16,7 @@ namespace VisualClient.Modules.LogModule
         #pragma warning disable 0618
 
         public static Log Instance {
-            get {
-                if (_instance == null)
-                {
-                    _instance = new Log();
-                }
-
-                return _instance;
-            }
+            get { return _instance ?? (_instance = new Log()); }
 
             set {
         #if DEBUG
@@ -55,7 +48,7 @@ namespace VisualClient.Modules.LogModule
                 Directory.CreateDirectory(FileFolder);
             }
 
-            _currentPath = $"{FileFolder}\\{DateTime.Now}";
+            _currentPath = $"{FileFolder}/{DateTime.Now:yy-MM-dd}.log";
 
             LogEvents.Init();
         }
@@ -66,7 +59,7 @@ namespace VisualClient.Modules.LogModule
 
         public const string FileFolder = "logs";
 
-        private string _currentPath;
+        private readonly string _currentPath;
 
 
 
@@ -74,17 +67,12 @@ namespace VisualClient.Modules.LogModule
         {
             message = DateTime.Now.ToString("yy.MM.dd hh:mm:ss") + '\t' + message;
 
-            using (var writer = new StreamWriter("log", true, Encoding))
+            using (var writer = new StreamWriter(_currentPath, true, Encoding))
             {
                 writer.WriteLine(message);
             }
 
             Console.WriteLine(message);
-        }
-
-        public void CheckVersion()
-        {
-
         }
 
 

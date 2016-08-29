@@ -15,15 +15,7 @@ namespace IsometricCore.Modules.PlayerModule
 
         public static PlayersManager Instance
         {
-            get
-            {
-                if (_instance == null)
-                {
-                    _instance = new PlayersManager();
-                }
-
-                return _instance;
-            }
+            get { return _instance ?? (_instance = new PlayersManager()); }
 
             set
             {

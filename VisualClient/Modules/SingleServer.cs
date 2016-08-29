@@ -14,15 +14,7 @@ namespace VisualClient.Modules
 
         public static Server Instance
         {
-            get
-            {
-                if (_instance == null)
-                {
-                    _instance = new Server();
-                }
-
-                return _instance;
-            }
+            get { return _instance ?? (_instance = new Server()); }
 
             set
             {

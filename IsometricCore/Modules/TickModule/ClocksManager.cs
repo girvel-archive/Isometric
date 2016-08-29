@@ -15,14 +15,7 @@ namespace IsometricCore.Modules.TickModule
         #pragma warning disable 0618
 
         public static TickData Data {
-            get {
-                if (_data == null)
-                {
-                    _data = new TickData();
-                }
-
-                return _data;
-            }
+            get { return _data ?? (_data = new TickData()); }
 
             set {
                 #if DEBUG
@@ -46,14 +39,7 @@ namespace IsometricCore.Modules.TickModule
 
         private static ClocksManager _instance;
         public static ClocksManager Instance {
-            get {
-                if (_instance == null)
-                {
-                    _instance = new ClocksManager();
-                }
-
-                return _instance;
-            }
+            get { return _instance ?? (_instance = new ClocksManager()); }
 
             set {
                 #if DEBUG
