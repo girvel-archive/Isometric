@@ -1,0 +1,9 @@
+D:\projects\isometric\IsometricCore\bin\Release\IsometricCore.dll
+D:\projects\isometric\IsometricCore\bin\Release\IsometricCore.pdb
+D:\projects\isometric\IsometricCore\bin\Release\CommonStructures.dll
+D:\projects\isometric\IsometricCore\bin\Release\VectorNet.pdb
+D:\projects\isometric\IsometricCore\bin\Release\EnumerableExtensions.pdb
+D:\projects\isometric\IsometricCore\obj\Release\IsometricCore.csprojResolveAssemblyReference.cache
+D:\projects\isometric\IsometricCore\obj\Release\IsometricCore.dll
+D:\projects\isometric\IsometricCore\obj\Release\IsometricCore.pdb
+D:\projects\isometric\IsometricCore\bin\Release\VectorNet.dll

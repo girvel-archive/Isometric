@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
+using BinarySerializationExtensions;
+using CommonStructures;
 using IsometricCore.Modules;
 using VisualServer.Modules.CommandModule.Server;
 using SocketExtensions;
@@ -65,10 +68,13 @@ namespace VisualServer
             CurrentConnections = new List<Connection>();
 
             #if DEBUG
+            var banned = new Account("banned", "", "-", AccountPermission.User);
             Accounts = new List<Account> 
             {
-                new Account("usr", "1", "", AccountPermission.User)
+                new Account("usr", "1", "", AccountPermission.User),
+                banned,
             };
+            banned.PermanentlyBanned = true;
             #endif
         }
 
@@ -76,15 +82,15 @@ namespace VisualServer
 
         public bool TryToAutoConnect()
         {
-            foreach (var ip in Dns.GetHostEntry(Dns.GetHostName()).AddressList)
+            return new[]
             {
-                if (TryToConnect(ip))
-                {
-                    return true;
-                }
+                AddressFamily.InterNetwork,
+                AddressFamily.InterNetworkV6,
             }
-
-            return false;
+            .SelectMany(currentFamily => Dns.GetHostEntry(Dns.GetHostName())
+            .AddressList
+            .Where(a => a.AddressFamily == currentFamily))
+            .Any(TryToConnect);
         }
 
         public bool TryToConnect(string address)
@@ -119,7 +125,8 @@ namespace VisualServer
         {
             if (!Connected)
             {
-                throw new InvalidOperationException("Server is not connected. Use TryToAutoConnect() and TryToConnect()");
+                throw new InvalidOperationException(
+                    "Server is not connected. Use TryToAutoConnect() and TryToConnect()");
             }
 
             while (true)
@@ -129,8 +136,8 @@ namespace VisualServer
                     var socket = _listenSocket.Accept();
                     OnAcceptedConnection?.Invoke();
 
-                    CommandManager.Instance.Interface.GetFunc(
-                        socket.ReceiveAll(this.Encoding), 
+                    CommandManager.Instance.Interface.GetExecutor(
+                        socket.ReceiveAll(Encoding),
                         new NetArgs(socket, this))();
 
                     // TODO 1.1 spamfilter using
@@ -147,14 +154,6 @@ namespace VisualServer
                 }
             }
         }
-
-
-
-
-
-        // Main interface
-        // @account
-
     }
 }
 

@@ -2,13 +2,16 @@
 using VisualServer.Modules.SpamModule;
 using CommandInterface;
 using System.Collections.Generic;
+using System.IO;
 using CommonStructures;
 using BinarySerializationExtensions;
 using IsometricCore.Modules;
 using System.Linq;
 using _Connection = VisualServer.Connection;
 using System.Net.Sockets;
+using System.Runtime.Serialization.Formatters.Binary;
 using System.Text.RegularExpressions;
+using CommandInterface.Extensions;
 using SocketExtensions;
 
 namespace VisualServer.Modules.CommandModule.Server
@@ -62,12 +65,18 @@ namespace VisualServer.Modules.CommandModule.Server
 
         private CommandResult _login(Dictionary<string, string> args, NetArgs netArgs)
         {
-            var receivedAccount = netArgs.Server.Encoding.GetBytes(args["account"])
-                .ByteDeserialize<CommonAccount>();
+            CommonAccount receivedAccount;
 
+            using (var stream = new MemoryStream(netArgs.Encoding.GetBytes(args["account"])))
+            {
+                receivedAccount = (CommonAccount)new BinaryFormatter().Deserialize(stream);
+            }
+            
             var suitableAccounts = netArgs.Server.Accounts.Where(
                 a => a.Email == receivedAccount.Email
-                && a.Password == receivedAccount.Password);
+                     && a.Password == receivedAccount.Password).ToArray();
+
+            Console.WriteLine(suitableAccounts.Any());
 
             var successful = suitableAccounts.Any();
             LoginResult result;
@@ -75,8 +84,9 @@ namespace VisualServer.Modules.CommandModule.Server
             if (successful)
             {
                 if (suitableAccounts.First().Banned)
-                { 
+                {
                     result = LoginResult.Banned;
+                    successful = false;
                 }
                 else
                 {
@@ -88,7 +98,7 @@ namespace VisualServer.Modules.CommandModule.Server
                 result = LoginResult.Unsuccessful;
             }
 
-            netArgs.Send("ln-r".CreateCommand(((byte)result).ToString()));
+            netArgs.Send("login-result".CreateCommand(((byte)result).ToString()));
 
             OnLoginAttempt?.Invoke(receivedAccount.Email, result);
 
@@ -121,9 +131,9 @@ namespace VisualServer.Modules.CommandModule.Server
                 foreach (var command in new[] { "code-set", "account-set" })
                 {
                     var i = 0;
-                    Func<CommandResult> result;
+                    Executor<CommandResult> result;
 
-                    while (!Interface.TryGetFunc(netArgs.ReceiveAll(), netArgs, out result, command)
+                    while (!Interface.TryGetExecutor(netArgs.ReceiveAll(), netArgs, out result, command)
                        || result() != CommandResult.Successful)
                     {
                         if (++i >= 3)

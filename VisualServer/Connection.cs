@@ -4,6 +4,7 @@ using System.Text;
 using System.Threading;
 using BinarySerializationExtensions;
 using CommandInterface;
+using CommandInterface.Extensions;
 using IsometricCore.Modules;
 using IsometricCore.Modules.PlayerModule;
 using VisualServer.Modules.CommandModule.Connection;
@@ -22,9 +23,6 @@ namespace VisualServer
         public Server ParentServer { get; set; }
 
         public Account Account { get; set; }
-
-        public int SpamCounter { get; private set; }
-        public int SpamCounterMax { get; set; }
 
         public Encoding Encoding => ParentServer.Encoding;
 
@@ -47,6 +45,7 @@ namespace VisualServer
         {
             Socket = socket;
             Account = account;
+            ParentServer = server;
         }
 
         ~Connection()
@@ -78,8 +77,8 @@ namespace VisualServer
 
                         OnDataReceived?.Invoke(receivedString, Account);
 
-                        Func<CommandResult> cmdUse;
-                        if (CommandManager.Instance.Interface.TryGetFunc(
+                        Executor<CommandResult> cmdUse;
+                        if (CommandManager.Instance.CommandInterface.TryGetExecutor(
                                 receivedString, new NetArgs(Socket, this), out cmdUse))
                         {
                             cmdUse();
@@ -129,7 +128,7 @@ namespace VisualServer
         internal void SendResources(Player owner)
         {
             // FIXME Unity r -> refresh
-            Send("refresh".CreateCommand(owner.CurrentResources.SerializeToString(Encoding)));
+            Send("refresh".CreateCommand(owner.CurrentResources.Serialize(Encoding)));
         }
     }
 }

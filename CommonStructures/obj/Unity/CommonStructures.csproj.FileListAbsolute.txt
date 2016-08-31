@@ -1,0 +1,5 @@
+D:\projects\isometric\CommonStructures\bin\Unity\CommonStructures.dll
+D:\projects\isometric\CommonStructures\obj\Unity\CommonStructures.dll
+D:\projects\isometric\CommonStructures\bin\Unity\VectorNet.dll
+D:\projects\isometric\CommonStructures\bin\Unity\VectorNet.pdb
+D:\projects\isometric\CommonStructures\obj\Unity\CommonStructures.csprojResolveAssemblyReference.cache

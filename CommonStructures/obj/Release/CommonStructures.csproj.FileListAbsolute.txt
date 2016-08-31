@@ -1,0 +1,4 @@
+D:\projects\isometric\CommonStructures\bin\Release\CommonStructures.dll
+D:\projects\isometric\CommonStructures\bin\Release\VectorNet.dll
+D:\projects\isometric\CommonStructures\bin\Release\VectorNet.pdb
+D:\projects\isometric\CommonStructures\obj\Release\CommonStructures.dll

@@ -100,7 +100,7 @@ namespace VisualClient.Modules.LogModule
 
         private static void _onSuccessfulAction(string action)
         {
-            Log.Instance.Write($"{action} successful ending");
+            Log.Instance.Write($"{action} successfully");
         }
 
         private static void _onSerializationException(string process, Exception exception)

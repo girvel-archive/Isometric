@@ -1,0 +1,12 @@
+D:\projects\isometric\IsometricImplementation\obj\Release\IsometricImplementation.csprojResolveAssemblyReference.cache
+D:\projects\isometric\IsometricImplementation\bin\Release\IsometricImplementation.dll
+D:\projects\isometric\IsometricImplementation\bin\Release\IsometricImplementation.pdb
+D:\projects\isometric\IsometricImplementation\bin\Release\CommonStructures.dll
+D:\projects\isometric\IsometricImplementation\bin\Release\IsometricCore.dll
+D:\projects\isometric\IsometricImplementation\bin\Release\VectorNet.dll
+D:\projects\isometric\IsometricImplementation\bin\Release\EnumerableExtensions.dll
+D:\projects\isometric\IsometricImplementation\bin\Release\IsometricCore.pdb
+D:\projects\isometric\IsometricImplementation\bin\Release\VectorNet.pdb
+D:\projects\isometric\IsometricImplementation\bin\Release\EnumerableExtensions.pdb
+D:\projects\isometric\IsometricImplementation\obj\Release\IsometricImplementation.dll
+D:\projects\isometric\IsometricImplementation\obj\Release\IsometricImplementation.pdb

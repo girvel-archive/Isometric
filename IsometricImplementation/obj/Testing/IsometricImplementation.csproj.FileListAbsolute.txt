@@ -1,0 +1,13 @@
+D:\projects\isometric\IsometricImplementation\bin\Testing\IsometricImplementation.dll
+D:\projects\isometric\IsometricImplementation\bin\Testing\IsometricImplementation.pdb
+D:\projects\isometric\IsometricImplementation\bin\Testing\CommonStructures.dll
+D:\projects\isometric\IsometricImplementation\bin\Testing\IsometricCore.dll
+D:\projects\isometric\IsometricImplementation\bin\Testing\VectorNet.dll
+D:\projects\isometric\IsometricImplementation\bin\Testing\EnumerableExtensions.dll
+D:\projects\isometric\IsometricImplementation\bin\Testing\IsometricCore.pdb
+D:\projects\isometric\IsometricImplementation\bin\Testing\VectorNet.pdb
+D:\projects\isometric\IsometricImplementation\bin\Testing\RandomExtensions.pdb
+D:\projects\isometric\IsometricImplementation\bin\Testing\EnumerableExtensions.pdb
+D:\projects\isometric\IsometricImplementation\obj\Testing\IsometricImplementation.csprojResolveAssemblyReference.cache
+D:\projects\isometric\IsometricImplementation\obj\Testing\IsometricImplementation.dll
+D:\projects\isometric\IsometricImplementation\obj\Testing\IsometricImplementation.pdb

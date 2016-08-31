@@ -13,7 +13,7 @@ namespace IsometricImplementation.Modules.PatternsRealization
         public static BuildingPattern Forest { get; }
         public static BuildingPattern WoodHouse { get; }
         public static BuildingPattern WoodHouse2 { get; }
-
+            
 
 
         static BuildingPatterns()

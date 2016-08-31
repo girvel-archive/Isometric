@@ -45,6 +45,17 @@
     <LangVersion>6</LangVersion>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="BinarySerializationExtensions, Version=1.0.6074.17949, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\tools\CsTools\BinarySerializationExtensions\bin\Release\BinarySerializationExtensions.dll</HintPath>
+    </Reference>
+    <Reference Include="CommandInterface, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\tools\CommandInterface\Library\bin\Release\CommandInterface.dll</HintPath>
+    </Reference>
+    <Reference Include="SocketExtensions">
+      <HintPath>..\..\tools\CsTools\SocketExtensions\bin\Release\SocketExtensions.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -53,23 +64,15 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
-    <Reference Include="CommandInterface">
-      <HintPath>..\..\CommandInterface\bin\Release\CommandInterface.dll</HintPath>
-    </Reference>
-    <Reference Include="VectorNet">
-      <HintPath>..\..\CsTools\VectorNet\bin\Release\VectorNet.dll</HintPath>
-    </Reference>
-    <Reference Include="BinarySerializationExtensions">
-      <HintPath>..\..\CsTools\BinarySerializationExtensions\bin\Release\BinarySerializationExtensions.dll</HintPath>
-    </Reference>
     <Reference Include="MathExtensions">
       <HintPath>..\..\CsTools\MathExtensions\bin\Release\MathExtensions.dll</HintPath>
     </Reference>
+    <Reference Include="VectorNet, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\tools\VectorNet\Library\bin\Release\VectorNet.dll</HintPath>
+    </Reference>
     <Reference Include="VisualConsole">
       <HintPath>..\..\VisualConsole\bin\Release\VisualConsole.dll</HintPath>
-    </Reference>
-    <Reference Include="SocketExtensions">
-      <HintPath>..\..\CsTools\SocketExtensions\bin\Release\SocketExtensions.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -92,7 +95,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CommonStructures\CommonStructures.csproj">
-      <Project>{64EE5B69-4B32-4080-82A7-9E5F419DAFAA}</Project>
+      <Project>{64ee5b69-4b32-4080-82a7-9e5f419dafaa}</Project>
       <Name>CommonStructures</Name>
     </ProjectReference>
     <ProjectReference Include="..\IsometricCore\IsometricCore.csproj">
@@ -108,12 +111,5 @@
   <Target Name="AfterBuild">
   </Target>
   -->
-  <ItemGroup>
-    <Folder Include="Modules\" />
-    <Folder Include="Modules\SpamModule\" />
-    <Folder Include="Extensions\" />
-    <Folder Include="Modules\CommandModule\" />
-    <Folder Include="Modules\CommandModule\Connection\" />
-    <Folder Include="Modules\CommandModule\Server\" />
-  </ItemGroup>
+  <ItemGroup />
 </Project>

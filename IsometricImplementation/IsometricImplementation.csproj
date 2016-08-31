@@ -50,11 +50,12 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
-    <Reference Include="VectorNet">
-      <HintPath>..\..\CsTools\VectorNet\bin\Release\VectorNet.dll</HintPath>
-    </Reference>
     <Reference Include="RandomExtensions">
       <HintPath>..\..\CsTools\RandomExtensions\bin\Release\RandomExtensions.dll</HintPath>
+    </Reference>
+    <Reference Include="VectorNet, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\tools\VectorNet\Library\bin\Release\VectorNet.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -80,10 +81,7 @@
   <Target Name="AfterBuild">
   </Target>
   -->
-  <ItemGroup>
-    <Folder Include="Modules\" />
-    <Folder Include="Modules\DataRealization\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\IsometricCore\IsometricCore.csproj">
       <Project>{5E853DD8-DDC3-4F8C-9966-52CA5881CBCE}</Project>

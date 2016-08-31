@@ -61,35 +61,35 @@ namespace VisualClient.Modules
         public delegate object Accessor();
         public delegate void Mutator(object value);
 
-        public Property[] SerializationList { get; set; } = 
+        public Property[] SerializationList { get; set; } =
             {
                 new Property(
-                    @get: () => Core.Version,
-                    @set: value => Core.SavingVersion = value),
+                    get: () => Core.Version,
+                    set: value => Core.SavingVersion = value),
 
                 new Property(
-                    @get: () => Realization.Version,
-                    @set: value => Realization.SavingVersion = value),
+                    get: () => Realization.Version,
+                    set: value => Realization.SavingVersion = value),
 
                 new Property(
-                    @get: () => Client.Version,
-                    @set: value => Client.SavingVersion = value),
+                    get: () => Client.Version,
+                    set: value => Client.SavingVersion = value),
 
                 new Property(
-                    @get: () => Server.Version,
-                    @set: value => Server.SavingVersion = value),
+                    get: () => Server.Version,
+                    set: value => Server.SavingVersion = value),
 
                 new Property(
-                    @get: () => SingleServer.Instance,
-                    @set: value => SingleServer.Instance = value),
+                    get: () => SingleServer.Instance,
+                    set: value => SingleServer.Instance = value),
 
                 new Property(
-                    @get: () => World.Instance,
-                    @set: value => World.Instance = value),
+                    get: () => World.Instance,
+                    set: value => World.Instance = value),
 
                 new Property(
-                    @get: () => Instance.SavingPeriodMilliseconds,
-                    @set: value => Instance.SavingPeriodMilliseconds = value),
+                    get: () => Instance.SavingPeriodMilliseconds,
+                    set: value => Instance.SavingPeriodMilliseconds = value),
             };
 
 
@@ -98,41 +98,38 @@ namespace VisualClient.Modules
 
         public bool TrySave()
         {
+        #if !DEBUG
             try
+        #endif
             {
                 if (!Directory.Exists(SavingDirectory))
                 {
                     Directory.CreateDirectory(SavingDirectory);
                 }
 
-                using (FileStream mainStream = File.OpenWrite($"{SavingDirectory}/{SavingFile}"))
-                {
-                    var serializer = new BinaryFormatter();
+                var serializer = new BinaryFormatter();
 
+                using (var stream = File.OpenWrite($"{SavingDirectory}/{SavingFile}"))
+                {
                     foreach (var property in SerializationList)
                     { 
-                        serializer.Serialize(mainStream, property.Get());
+                        // TODO fix saving
+                        //serializer.Serialize(stream, property.Get());
                     }
-
-                    OnSuccessfulSaving?.Invoke();
-
-                    return true;
                 }
+
+                OnSuccessfulSaving?.Invoke();
+
+                return true;
             }
+        #if !DEBUG
             catch (Exception ex)
             {
                 OnSavingException?.Invoke(ex);
 
-                #if DEBUG
-
-                throw;
-
-                #else
-
                 return false;
-
-                #endif
             }
+        #endif
         } 
 
         public bool TryOpen()
@@ -162,7 +159,7 @@ namespace VisualClient.Modules
             {
                 OnOpeningException?.Invoke(ex);
 
-                #if DEBUG
+#if DEBUG
 
                 if (ex.Message != "Attempting to deserialize an empty stream.")
                 {
@@ -173,11 +170,11 @@ namespace VisualClient.Modules
                     return false;
                 }
 
-                #else
+#else
 
                 return false;
 
-                #endif
+#endif
             }
         }
     }

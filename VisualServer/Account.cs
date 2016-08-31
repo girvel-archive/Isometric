@@ -17,22 +17,8 @@ namespace VisualServer
 
         public bool PermanentlyBanned { get; set; }
 
-        public bool Banned {
-            get {
-                if (BannedFor == TimeSpan.Zero)
-                {
-                    return false;
-                }
-
-                if (BannedFrom + BannedFor < DateTime.Now)
-                {
-                    BannedFor = TimeSpan.Zero;
-                    return PermanentlyBanned;
-                }
-
-                return true;
-            }
-        }
+        public bool Banned 
+            => PermanentlyBanned || BannedFrom + BannedFor > DateTime.Now;
 
         public int SpamErrorTimes { get; set; }
 

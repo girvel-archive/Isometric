@@ -1,5 +1,6 @@
-D:\projects\isometric\CommonStructures\bin\Debug\CompressedStructures.dll
-D:\projects\isometric\CommonStructures\bin\Debug\CompressedStructures.pdb
-D:\projects\isometric\CommonStructures\obj\Debug\CommonStructures.csprojResolveAssemblyReference.cache
-D:\projects\isometric\CommonStructures\obj\Debug\CompressedStructures.dll
-D:\projects\isometric\CommonStructures\obj\Debug\CompressedStructures.pdb
+D:\projects\isometric\CommonStructures\bin\Debug\VectorNet.dll
+D:\projects\isometric\CommonStructures\bin\Debug\VectorNet.pdb
+D:\projects\isometric\CommonStructures\bin\Debug\CommonStructures.dll
+D:\projects\isometric\CommonStructures\bin\Debug\CommonStructures.pdb
+D:\projects\isometric\CommonStructures\obj\Debug\CommonStructures.dll
+D:\projects\isometric\CommonStructures\obj\Debug\CommonStructures.pdb

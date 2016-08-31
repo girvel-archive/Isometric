@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -30,11 +30,12 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
-    <Reference Include="VectorNet">
-      <HintPath>..\..\CsTools\VectorNet\bin\Release\VectorNet.dll</HintPath>
-    </Reference>
     <Reference Include="EnumerableExtensions">
       <HintPath>..\..\CsTools\EnumerableExtensions\bin\Release\EnumerableExtensions.dll</HintPath>
+    </Reference>
+    <Reference Include="VectorNet, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\tools\VectorNet\Library\bin\Release\VectorNet.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -74,18 +75,7 @@
     <Compile Include="Modules\ActionsProcessor.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
-  <ItemGroup>
-    <Folder Include="Modules\" />
-    <Folder Include="Structures\" />
-    <Folder Include="Modules\WorldModule\" />
-    <Folder Include="Modules\WorldModule\Buildings\" />
-    <Folder Include="Modules\WorldModule\Interfaces\" />
-    <Folder Include="Modules\PlayerModule\" />
-    <Folder Include="Extensions\" />
-    <Folder Include="Modules\WorldModule\Land\" />
-    <Folder Include="Modules\TickModule\" />
-    <Folder Include="Modules\PlayerModule\Leaders\" />
-  </ItemGroup>
+  <ItemGroup />
   <ProjectExtensions>
     <MonoDevelop>
       <Properties>

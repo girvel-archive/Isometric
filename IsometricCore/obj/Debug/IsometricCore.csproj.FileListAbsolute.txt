@@ -1,7 +1,9 @@
 D:\projects\isometric\IsometricCore\bin\Debug\IsometricCore.dll
 D:\projects\isometric\IsometricCore\bin\Debug\IsometricCore.pdb
-D:\projects\isometric\IsometricCore\bin\Debug\CompressedStructures.dll
-D:\projects\isometric\IsometricCore\bin\Debug\CompressedStructures.pdb
 D:\projects\isometric\IsometricCore\obj\Debug\IsometricCore.csprojResolveAssemblyReference.cache
 D:\projects\isometric\IsometricCore\obj\Debug\IsometricCore.dll
 D:\projects\isometric\IsometricCore\obj\Debug\IsometricCore.pdb
+D:\projects\isometric\IsometricCore\bin\Debug\VectorNet.dll
+D:\projects\isometric\IsometricCore\bin\Debug\VectorNet.pdb
+D:\projects\isometric\IsometricCore\bin\Debug\CommonStructures.dll
+D:\projects\isometric\IsometricCore\bin\Debug\CommonStructures.pdb

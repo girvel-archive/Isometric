@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -26,9 +26,18 @@
     <Externalconsole>true</Externalconsole>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="BinarySerializationExtensions, Version=1.0.6074.17949, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\tools\CsTools\BinarySerializationExtensions\bin\Release\BinarySerializationExtensions.dll</HintPath>
+    </Reference>
+    <Reference Include="CommandInterface, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\tools\CommandInterface\Library\bin\Release\CommandInterface.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
-    <Reference Include="CommandInterface">
-      <HintPath>..\..\CommandInterface\bin\Release\CommandInterface.dll</HintPath>
+    <Reference Include="VectorNet, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\tools\VectorNet\Library\bin\Release\VectorNet.dll</HintPath>
     </Reference>
     <Reference Include="VisualConsole">
       <HintPath>..\..\VisualConsole\bin\Release\VisualConsole.dll</HintPath>
@@ -37,12 +46,6 @@
       <HintPath>..\..\CustomProperty\CustomProperty\bin\Release\CustomProperty.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
-    <Reference Include="BinarySerializationExtensions">
-      <HintPath>..\..\CsTools\BinarySerializationExtensions\bin\Release\BinarySerializationExtensions.dll</HintPath>
-    </Reference>
-    <Reference Include="VectorNet">
-      <HintPath>..\..\CsTools\VectorNet\bin\Release\VectorNet.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -77,10 +80,5 @@
       <Name>IsometricImplementation</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Modules\" />
-    <Folder Include="Modules\BuildingGraphics\" />
-    <Folder Include="Modules\LogModule\" />
-    <Folder Include="Tools\" />
-  </ItemGroup>
+  <ItemGroup />
 </Project>

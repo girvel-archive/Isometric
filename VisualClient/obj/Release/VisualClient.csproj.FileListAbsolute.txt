@@ -1,0 +1,17 @@
+D:\projects\isometric\VisualClient\obj\Release\VisualClient.exe
+D:\projects\isometric\VisualClient\obj\Release\VisualClient.csprojResolveAssemblyReference.cache
+D:\projects\isometric\VisualClient\bin\Release\VisualClient.exe
+D:\projects\isometric\VisualClient\bin\Release\BinarySerializationExtensions.dll
+D:\projects\isometric\VisualClient\bin\Release\CommonStructures.dll
+D:\projects\isometric\VisualClient\bin\Release\IsometricCore.dll
+D:\projects\isometric\VisualClient\bin\Release\IsometricImplementation.dll
+D:\projects\isometric\VisualClient\bin\Release\VectorNet.dll
+D:\projects\isometric\VisualClient\bin\Release\VisualServer.dll
+D:\projects\isometric\VisualClient\bin\Release\SocketExtensions.dll
+D:\projects\isometric\VisualClient\bin\Release\EnumerableExtensions.dll
+D:\projects\isometric\VisualClient\bin\Release\VisualServer.pdb
+D:\projects\isometric\VisualClient\bin\Release\IsometricCore.pdb
+D:\projects\isometric\VisualClient\bin\Release\IsometricImplementation.pdb
+D:\projects\isometric\VisualClient\bin\Release\VectorNet.pdb
+D:\projects\isometric\VisualClient\bin\Release\SocketExtensions.pdb
+D:\projects\isometric\VisualClient\bin\Release\EnumerableExtensions.pdb

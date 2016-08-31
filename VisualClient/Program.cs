@@ -78,7 +78,8 @@ namespace VisualClient
                 "IP set as " +
                 SingleServer.Instance.ServerAddress
                     .GetAddressBytes()
-                    .Aggregate("", (sum, b) => sum + "." + b));
+                    .Aggregate("", (sum, b) => sum + "." + b)
+                    .Substring(1));
         }
 
         private static void OpenOrGenerate()
@@ -115,7 +116,7 @@ namespace VisualClient
 
                 #if DEBUG
 
-                throw;
+                //throw;
 
                 #endif
             }
@@ -126,11 +127,11 @@ namespace VisualClient
             NetThread = new Thread(SingleServer.Instance.ServerLoop);
             NetThread.Start();
 
-            RefreshThread = new Thread(ClocksManager.Instance.TickLoop);
-            RefreshThread.Start();
+            //RefreshThread = new Thread(ClocksManager.Instance.TickLoop);
+            //RefreshThread.Start();
 
-            SavingThread = new Thread(_savingLoop);
-            SavingThread.Start();
+            //SavingThread = new Thread(_savingLoop);
+            //SavingThread.Start();
         }
 
 
@@ -140,7 +141,7 @@ namespace VisualClient
             while (true)
             {
                 Log.Instance.Write(SerializationManager.Instance.TrySave()
-                    ? "Game was saved successful"
+                    ? "Game was saved successfully"
                     : "Problem with game saving");
 
                 Thread.Sleep(SavingPeriodMilliseconds);

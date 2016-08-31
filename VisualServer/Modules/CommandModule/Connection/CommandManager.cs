@@ -9,6 +9,7 @@ using IsometricCore.Modules;
 using BinarySerializationExtensions;
 using VectorNet;
 using System.Linq;
+using CommandInterface.Extensions;
 using SocketExtensions;
 
 namespace VisualServer.Modules.CommandModule.Connection
@@ -47,13 +48,13 @@ namespace VisualServer.Modules.CommandModule.Connection
 
 
 
-        public Interface<NetArgs, CommandResult> Interface { get; set; }
+        public Interface<NetArgs, CommandResult> CommandInterface { get; set; }
 
 
 
         private CommandManager _setDefault()
         {
-            Interface = new Interface<NetArgs, CommandResult>(
+            CommandInterface = new Interface<NetArgs, CommandResult>(
                 new Command<NetArgs, CommandResult>(
                     "get-territory", new string[0],
                     _getTerritory),
@@ -83,23 +84,24 @@ namespace VisualServer.Modules.CommandModule.Connection
             return CommandResult.Successful;
         }
 
+        
         private CommandResult _getTerritory(
                 Dictionary<string, string> args, NetArgs netArgs)
         {
-            // FIXME unity st@size,buildings -> set-territory@common_territory
             netArgs.Send("set-territory".CreateCommand(
-                netArgs.Connection.Account.Player.Territory.ToCommon().SerializeToString(
+                netArgs.Connection.Account.Player.Territory.ToCommon().Serialize(
                     netArgs.Connection.Encoding)));
 
             return CommandResult.Successful;
         }
+
 
         // @building
         private CommandResult _getBuildingContextActions(
                 Dictionary<string, string> args, NetArgs netArgs)
         {
             var position = netArgs.Connection.Encoding.GetBytes(args["building"])
-                .ByteDeserialize<IntVector>();
+                .Deserialize<IntVector>();
             var building = netArgs.Connection.Account.Player.Territory[position];
             var pattern = building.Pattern;
             var patternNodes = BuildingGraph.Instance.Find(pattern);
@@ -115,18 +117,20 @@ namespace VisualServer.Modules.CommandModule.Connection
                             $"Upgrade to {c.Value.Name}",
                             new CommonBuilding(position),
                             pattern.ID))
-                    .SerializeToString(netArgs.Connection.Encoding)));
+                    .ToList()
+                    .Serialize(netArgs.Connection.Encoding)));
             }
 
             return CommandResult.Successful;
         }
+
 
         // @action
         private CommandResult _useBuildingContextAction(
                 Dictionary<string, string> args, NetArgs netArgs)
         {
             var action = netArgs.Connection.Encoding.GetBytes(args["message"])
-                .ByteDeserialize<CommonBuildingAction>();
+                .Deserialize<CommonBuildingAction>();
             var subject = netArgs.Connection.Account.Player.Territory[action.Subject.Position];
             var upgrade = BuildingPattern.Find(action.Upgrade);
 
