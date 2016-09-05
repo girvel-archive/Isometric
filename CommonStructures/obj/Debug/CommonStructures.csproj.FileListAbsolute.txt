@@ -4,3 +4,10 @@ D:\projects\isometric\CommonStructures\bin\Debug\CommonStructures.dll
 D:\projects\isometric\CommonStructures\bin\Debug\CommonStructures.pdb
 D:\projects\isometric\CommonStructures\obj\Debug\CommonStructures.dll
 D:\projects\isometric\CommonStructures\obj\Debug\CommonStructures.pdb
+E:\projects\isometric\CommonStructures\bin\Debug\CommonStructures.dll
+E:\projects\isometric\CommonStructures\bin\Debug\CommonStructures.pdb
+E:\projects\isometric\CommonStructures\bin\Debug\VectorNet.dll
+E:\projects\isometric\CommonStructures\bin\Debug\VectorNet.pdb
+E:\projects\isometric\CommonStructures\obj\Debug\CommonStructures.dll
+E:\projects\isometric\CommonStructures\obj\Debug\CommonStructures.pdb
+E:\projects\isometric\CommonStructures\obj\Debug\CommonStructures.csprojResolveAssemblyReference.cache

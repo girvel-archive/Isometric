@@ -3,7 +3,7 @@
 namespace CommonStructures
 {
     [Serializable]
-    public class CommonBuildingAction
+    public struct CommonBuildingAction
     {
         public bool Active { get; set; }
         public string Name { get; set; }
@@ -20,8 +20,5 @@ namespace CommonStructures
             Subject = subject;
             Upgrade = upgrade;
         }
-
-        [Obsolete("using serialization ctor", true)]
-        public CommonBuildingAction() {}
     }
 }

@@ -3,3 +3,8 @@ D:\projects\isometric\CommonStructures\obj\Unity\CommonStructures.dll
 D:\projects\isometric\CommonStructures\bin\Unity\VectorNet.dll
 D:\projects\isometric\CommonStructures\bin\Unity\VectorNet.pdb
 D:\projects\isometric\CommonStructures\obj\Unity\CommonStructures.csprojResolveAssemblyReference.cache
+E:\projects\isometric\CommonStructures\bin\Unity\CommonStructures.dll
+E:\projects\isometric\CommonStructures\bin\Unity\VectorNet.dll
+E:\projects\isometric\CommonStructures\bin\Unity\VectorNet.pdb
+E:\projects\isometric\CommonStructures\obj\Unity\CommonStructures.csprojResolveAssemblyReference.cache
+E:\projects\isometric\CommonStructures\obj\Unity\CommonStructures.dll

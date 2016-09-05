@@ -4,8 +4,6 @@ using System.Linq;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
-using BinarySerializationExtensions;
-using CommonStructures;
 using IsometricCore.Modules;
 using VisualServer.Modules.CommandModule.Server;
 using SocketExtensions;
@@ -25,7 +23,7 @@ namespace VisualServer
         [NonSerialized]
         public List<Connection> CurrentConnections;
 
-        public Encoding Encoding { get; } = Encoding.ASCII;
+        public Encoding Encoding { get; } = Encoding.GetEncoding(1251);
 
         public IPAddress ServerAddress { get; set; }
 

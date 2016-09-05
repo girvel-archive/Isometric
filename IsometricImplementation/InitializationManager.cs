@@ -1,16 +1,28 @@
-﻿using IsometricImplementation.Modules.DataRealization;
+﻿using System;
+using IsometricImplementation.Modules.DataRealization;
+using IsometricImplementation.Modules.PatternsRealization;
 
 namespace IsometricImplementation
 {
-    public class InitializationManager
+    public static class InitializationManager
     {
+        private static readonly Action[] Inits =
+        {
+            BuildingPatterns.Init,
+            BuildingGraphRealization.Init,
+            TimeDataRealization.Init,
+            GlobalDataRealization.Init,
+            PlayerDataRealization.Init,
+            TickDataRealization.Init,
+            WorldDataRealization.Init,
+        };
+
         public static void Init()
         {
-            TimeDataRealization.Init();
-            GlobalDataRealization.Init();
-            PlayerDataRealization.Init();
-            TickDataRealization.Init();
-            WorldDataRealization.Init();
+            foreach (var init in Inits)
+            {
+                init();
+            }
         }
     }
 }

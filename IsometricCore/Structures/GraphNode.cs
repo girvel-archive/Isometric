@@ -4,12 +4,21 @@ using System.Linq;
 
 namespace IsometricCore.Structures
 {
+    public static class GraphNode
+    {
+        public static GraphNode<T> Create<T>(T value, Graph<T> parentGraph)
+        {
+            return new GraphNode<T>(value, parentGraph);
+        }
+    }
+
     [Serializable]
     public class GraphNode<T>
     {
         public T Value { get; set; }
         public Graph<T> ParentGraph { get; set; }
-        public List<GraphNode<T>> Children { get; set; }
+
+        private readonly List<GraphNode<T>> _children;
 
 
 
@@ -23,7 +32,7 @@ namespace IsometricCore.Structures
         {
             Value = value;
             ParentGraph = parentGraph;
-            Children = new List<GraphNode<T>>();
+            _children = new List<GraphNode<T>>();
         } 
 
 
@@ -34,21 +43,23 @@ namespace IsometricCore.Structures
             ParentGraph.TryAddNode(child);
             #else
             if (!ParentGraph.TryAddNode(child)
-                && Children.Contains(child) 
+                && _children.Contains(child) 
                 && ParentGraph.CheckIdentity)
             {
                 throw new ArgumentException("Node already has this child");
             }
             #endif
 
-            Children.Add(child);
+            _children.Add(child);
         }
+
+        public GraphNode<T>[] GetChildren() => _children.ToArray();
 
 
 
         public bool IsParentOf(T item)
         {
-            return Children.Any(c => c.Value.Equals(item));
+            return _children.Any(c => c.Value.Equals(item));
         }
     }
 }

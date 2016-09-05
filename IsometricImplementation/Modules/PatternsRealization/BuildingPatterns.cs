@@ -7,16 +7,16 @@ namespace IsometricImplementation.Modules.PatternsRealization
     [Serializable]
     public static class BuildingPatterns
     {
-        public static BuildingPattern Plain { get; }
-        public static BuildingPattern Rock { get; }
-        public static BuildingPattern Water { get; }
-        public static BuildingPattern Forest { get; }
-        public static BuildingPattern WoodHouse { get; }
-        public static BuildingPattern WoodHouse2 { get; }
+        public static BuildingPattern Plain { get; private set; }
+        public static BuildingPattern Rock { get; private set; }
+        public static BuildingPattern Water { get; private set; }
+        public static BuildingPattern Forest { get; private set; }
+        public static BuildingPattern WoodHouse { get; private set; }
+        public static BuildingPattern WoodHouse2 { get; private set; }
             
 
 
-        static BuildingPatterns()
+        internal static void Init()
         {
             Plain = new BuildingPattern(
                 "Plain",

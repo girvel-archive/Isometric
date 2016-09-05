@@ -71,7 +71,11 @@ namespace VisualServer
             {
                 while (true)
                 {
+                #if DEBUG
+
                     try
+
+                #endif
                     {
                         var receivedString = Socket.ReceiveAll(ParentServer.Encoding);
 
@@ -88,16 +92,14 @@ namespace VisualServer
                             OnWrongCommand?.Invoke(receivedString, Account);
                         }
                     }
+                #if DEBUG
+
                     catch (Exception e)
                     {
                         GlobalData.Instance.OnUnknownException?.Invoke(e);
-
-                        #if DEBUG
-
-                        throw;
-
-                        #endif
                     }
+
+                #endif
                 }
             }
             catch (SocketException)

@@ -59,6 +59,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Modules\DataRealization\BuildingGraphRealization.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Modules\DataRealization\TimeDataRealization.cs" />
     <Compile Include="Modules\DataRealization\TickDataRealization.cs" />

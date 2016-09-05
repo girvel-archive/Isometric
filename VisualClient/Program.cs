@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Linq;
 using System.Threading;
-using IsometricCore.Modules.TickModule;
 using IsometricCore.Modules.WorldModule;
 using IsometricCore.Modules.WorldModule.Land;
 using IsometricImplementation;

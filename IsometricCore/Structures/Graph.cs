@@ -12,11 +12,21 @@ namespace IsometricCore.Structures
 
         public GraphNode<T> Root {
             get { return _root; }
-            set {
-                if (!_nodes.Contains(value))
+            set
+            {
+                if (_root == value)
+                    return;
+
+                if (_root != null)
+                {
+                    _nodes.Remove(_root);
+                }
+
+                if (value != null)
                 {
                     _nodes.Add(value);
                 }
+
                 _root = value;
             }
         }
@@ -67,14 +77,9 @@ namespace IsometricCore.Structures
                 (from node in this
                     where predicate(node.Value)
                     select node).ToArray();
-        } 
-
-        /// <summary>
-        /// Tries to add node to node list;
-        /// </summary>
-        /// <returns><c>true</c>, if add node was tryed, <c>false</c> if list already contains it.</returns>
-        /// <param name="item">new item</param>
-        public bool TryAddNode(GraphNode<T> item)
+        }
+        
+        internal bool TryAddNode(GraphNode<T> item)
         {
             if (!_nodes.Contains(item))
             {
@@ -85,7 +90,7 @@ namespace IsometricCore.Structures
             return false;
         }
 
-        public bool TryRemoveNode(GraphNode<T> node)
+        internal bool TryRemoveNode(GraphNode<T> node)
         {
             if (_nodes.Contains(node))
             {

@@ -11,7 +11,7 @@ namespace IsometricImplementation.Modules.DataRealization
     {
         internal static void Init()
         {
-            World.Data = new WorldData() 
+            World.Data = new WorldData 
                 {
                     TerritorySize = 32,
 
@@ -20,10 +20,7 @@ namespace IsometricImplementation.Modules.DataRealization
                     },
 
                     GenerateTerritory = 
-                        (land, x, y, seed) =>
-                        {
-                            return new Territory(TerritoryPatterns.Forest, seed);
-                        },
+                        (land, x, y, seed) => new Territory(TerritoryPatterns.Forest, seed),
 
                     NewPlayerTerritory = 
                         (owner, territory) =>
@@ -34,7 +31,8 @@ namespace IsometricImplementation.Modules.DataRealization
                                 {
                                     var randomPosition = SingleRandom.Next(World.Data.TerritoryVectorSize);
 
-                                    if (!World.Data.StartBuildings.Any(b => b.Pattern == territory[randomPosition]?.Pattern))
+                                    if (!World.Data.StartBuildings.Any(
+                                        b => b.Pattern == territory[randomPosition]?.Pattern))
                                     {
                                         territory[randomPosition] = new Building(
                                             randomPosition, owner, territory, building.Pattern);

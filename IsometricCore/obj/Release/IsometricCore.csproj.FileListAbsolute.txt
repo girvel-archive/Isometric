@@ -7,3 +7,12 @@ D:\projects\isometric\IsometricCore\obj\Release\IsometricCore.csprojResolveAssem
 D:\projects\isometric\IsometricCore\obj\Release\IsometricCore.dll
 D:\projects\isometric\IsometricCore\obj\Release\IsometricCore.pdb
 D:\projects\isometric\IsometricCore\bin\Release\VectorNet.dll
+E:\projects\isometric\IsometricCore\bin\Release\IsometricCore.dll
+E:\projects\isometric\IsometricCore\bin\Release\IsometricCore.pdb
+E:\projects\isometric\IsometricCore\bin\Release\CommonStructures.dll
+E:\projects\isometric\IsometricCore\bin\Release\VectorNet.dll
+E:\projects\isometric\IsometricCore\bin\Release\EnumerableExtensions.pdb
+E:\projects\isometric\IsometricCore\bin\Release\VectorNet.pdb
+E:\projects\isometric\IsometricCore\obj\Release\IsometricCore.csprojResolveAssemblyReference.cache
+E:\projects\isometric\IsometricCore\obj\Release\IsometricCore.dll
+E:\projects\isometric\IsometricCore\obj\Release\IsometricCore.pdb

@@ -3,7 +3,6 @@ using CommandInterface;
 using VisualServer.Modules.SpamModule;
 using System.Collections.Generic;
 using CommonStructures;
-using IsometricCore.Modules.WorldModule.Buildings;
 using VisualServer.Extensions;
 using IsometricCore.Modules;
 using BinarySerializationExtensions;
@@ -60,7 +59,7 @@ namespace VisualServer.Modules.CommandModule.Connection
                     _getTerritory),
 
                 new Command<NetArgs, CommandResult>(
-                    "get-building-action", new[] { "building" },
+                    "get-building-actions", new[] { "building" },
                     _getBuildingContextActions),
             
                 new Command<NetArgs, CommandResult>(
@@ -100,25 +99,27 @@ namespace VisualServer.Modules.CommandModule.Connection
         private CommandResult _getBuildingContextActions(
                 Dictionary<string, string> args, NetArgs netArgs)
         {
-            var position = netArgs.Connection.Encoding.GetBytes(args["building"])
-                .Deserialize<IntVector>();
-            var building = netArgs.Connection.Account.Player.Territory[position];
+            var commonBuilding = args["building"]
+                .Deserialize<CommonBuilding>(netArgs.Connection.Encoding);
+
+            var building = netArgs.Connection.Account.Player.Territory[commonBuilding.Position];
+
             var pattern = building.Pattern;
             var patternNodes = BuildingGraph.Instance.Find(pattern);
 
             if (patternNodes.Any())
             {
-                // FIXME Unity sba -> set-building-actions
                 netArgs.Send("set-building-actions".CreateCommand(
-                    patternNodes[0].Children.Select(
-                        c => new CommonBuildingAction(
-                            netArgs.Connection.Account.Player.CurrentResources.Enough(c.Value.NeedResources) 
+                    patternNodes[0].GetChildren().Select(
+                            c => new CommonBuildingAction(
+                                netArgs.Connection.Account.Player.CurrentResources
+                                    .Enough(c.Value.NeedResources)
                                 && c.Value.UpgradePossible(pattern, building),
-                            $"Upgrade to {c.Value.Name}",
-                            new CommonBuilding(position),
-                            pattern.ID))
-                    .ToList()
-                    .Serialize(netArgs.Connection.Encoding)));
+                                $"Upgrade to {c.Value.Name}",
+                                new CommonBuilding(commonBuilding.Position),
+                                pattern.ID))
+                        .ToList()
+                        .Serialize(netArgs.Connection.Encoding)));
             }
 
             return CommandResult.Successful;
@@ -129,14 +130,16 @@ namespace VisualServer.Modules.CommandModule.Connection
         private CommandResult _useBuildingContextAction(
                 Dictionary<string, string> args, NetArgs netArgs)
         {
-            var action = netArgs.Connection.Encoding.GetBytes(args["message"])
-                .Deserialize<CommonBuildingAction>();
-            var subject = netArgs.Connection.Account.Player.Territory[action.Subject.Position];
-            var upgrade = BuildingPattern.Find(action.Upgrade);
+            //var action = netArgs.Connection.Encoding.GetBytes(args["action"])
+            //    .Deserialize<CommonBuildingAction>();
+            //var subject = netArgs.Connection.Account.Player.Territory[action.Subject.Position];
+            //var upgrade = BuildingPattern.Find(action.Upgrade);
 
-            return subject.TryUpgrade(upgrade) 
-                ? CommandResult.Successful 
-                : CommandResult.Unsuccessful;
+            //return subject.TryUpgrade(upgrade) 
+            //    ? CommandResult.Successful 
+            //    : CommandResult.Unsuccessful;
+
+            return CommandResult.Successful;
         }
     }
 }

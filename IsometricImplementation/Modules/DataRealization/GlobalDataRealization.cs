@@ -2,7 +2,7 @@
 
 namespace IsometricImplementation.Modules.DataRealization
 {
-    public static class GlobalDataRealization
+    internal static class GlobalDataRealization
     {
         internal static void Init()
         {

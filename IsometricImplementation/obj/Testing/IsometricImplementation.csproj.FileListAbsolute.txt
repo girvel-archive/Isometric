@@ -11,3 +11,16 @@ D:\projects\isometric\IsometricImplementation\bin\Testing\EnumerableExtensions.p
 D:\projects\isometric\IsometricImplementation\obj\Testing\IsometricImplementation.csprojResolveAssemblyReference.cache
 D:\projects\isometric\IsometricImplementation\obj\Testing\IsometricImplementation.dll
 D:\projects\isometric\IsometricImplementation\obj\Testing\IsometricImplementation.pdb
+E:\projects\isometric\IsometricImplementation\bin\Testing\IsometricImplementation.dll
+E:\projects\isometric\IsometricImplementation\bin\Testing\IsometricImplementation.pdb
+E:\projects\isometric\IsometricImplementation\bin\Testing\CommonStructures.dll
+E:\projects\isometric\IsometricImplementation\bin\Testing\IsometricCore.dll
+E:\projects\isometric\IsometricImplementation\bin\Testing\VectorNet.dll
+E:\projects\isometric\IsometricImplementation\bin\Testing\EnumerableExtensions.dll
+E:\projects\isometric\IsometricImplementation\bin\Testing\IsometricCore.pdb
+E:\projects\isometric\IsometricImplementation\bin\Testing\RandomExtensions.pdb
+E:\projects\isometric\IsometricImplementation\bin\Testing\VectorNet.pdb
+E:\projects\isometric\IsometricImplementation\bin\Testing\EnumerableExtensions.pdb
+E:\projects\isometric\IsometricImplementation\obj\Testing\IsometricImplementation.csprojResolveAssemblyReference.cache
+E:\projects\isometric\IsometricImplementation\obj\Testing\IsometricImplementation.dll
+E:\projects\isometric\IsometricImplementation\obj\Testing\IsometricImplementation.pdb
