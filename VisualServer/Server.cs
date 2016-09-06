@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
+using System.Threading;
 using IsometricCore.Modules;
 using VisualServer.Modules.CommandModule.Server;
 using SocketExtensions;
@@ -51,7 +52,7 @@ namespace VisualServer
 
         [NonSerialized] 
         private Socket _listenSocket;
-
+        
 
 
         public event Action OnWrongIP;
@@ -66,6 +67,7 @@ namespace VisualServer
             CurrentConnections = new List<Connection>();
 
             #if DEBUG
+
             var banned = new Account("banned", "", "-", AccountPermission.User);
             Accounts = new List<Account> 
             {
@@ -73,6 +75,7 @@ namespace VisualServer
                 banned,
             };
             banned.PermanentlyBanned = true;
+
             #endif
         }
 
@@ -95,13 +98,13 @@ namespace VisualServer
         {
             IPAddress ip;
 
-            if (!IPAddress.TryParse(address, out ip))
+            if (IPAddress.TryParse(address, out ip))
             {
-                OnWrongIP?.Invoke();
-                return false;
+                return TryToConnect(ip);
             }
 
-            return TryToConnect(ip);
+            OnWrongIP?.Invoke();
+            return false;
         }
 
         public bool TryToConnect(IPAddress ip)
@@ -119,7 +122,8 @@ namespace VisualServer
             return true;
         }
 
-        public void ServerLoop()
+
+        public void Start()
         {
             if (!Connected)
             {
@@ -129,7 +133,9 @@ namespace VisualServer
 
             while (true)
             {
+#if !DEBUG
                 try
+#endif
                 {
                     var socket = _listenSocket.Accept();
                     OnAcceptedConnection?.Invoke();
@@ -140,16 +146,14 @@ namespace VisualServer
 
                     // TODO 1.1 spamfilter using
                 }
+
+#if !DEBUG
                 catch (Exception e)
                 {
                     GlobalData.Instance.OnUnknownException?.Invoke(e);
-
-                    #if DEBUG
-
-                    throw;
-
-                    #endif
                 }
+
+#endif
             }
         }
     }

@@ -123,7 +123,7 @@ namespace VisualClient
 
         private static void StartThreads()
         {
-            NetThread = new Thread(SingleServer.Instance.ServerLoop);
+            NetThread = new Thread(SingleServer.Instance.Start);
             NetThread.Start();
 
             //RefreshThread = new Thread(ClocksManager.Instance.TickLoop);
@@ -132,7 +132,6 @@ namespace VisualClient
             //SavingThread = new Thread(_savingLoop);
             //SavingThread.Start();
         }
-
 
 
         private static void _savingLoop()

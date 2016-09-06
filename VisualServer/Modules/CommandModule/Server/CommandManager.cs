@@ -112,7 +112,7 @@ namespace VisualServer.Modules.CommandModule.Server
 
             netArgs.Server.CurrentConnections.Add(newConnection);
 
-            newConnection.StartThread();
+            newConnection.Start();
 
             return CommandResult.Successful;
         }

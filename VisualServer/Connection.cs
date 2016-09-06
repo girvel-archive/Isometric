@@ -17,9 +17,6 @@ namespace VisualServer
     {
         public bool Active { get; set; }
 
-        public Thread Thread { get; set; }
-
-        public Socket Socket { get; set; }
         public Server ParentServer { get; set; }
 
         public Account Account { get; set; }
@@ -38,12 +35,18 @@ namespace VisualServer
 
 
 
+        private readonly Socket _socket;
+
+        private Thread _thread { get; set; }
+
+
+
         #region Ctors, finalizers
 
         public Connection(
             Socket socket, Account account, Server server)
         {
-            Socket = socket;
+            _socket = socket;
             Account = account;
             ParentServer = server;
         }
@@ -57,33 +60,41 @@ namespace VisualServer
 
 
 
-        public void StartThread()
+        public void Start()
         {
-            Thread = new Thread(Start);
-            Thread.Start();
+            _thread = new Thread(_loop);
+            _thread.Start();
 
             Account.Player.OnTick += SendResources;
         }
 
-        public void Start()
+        public void Stop()
+        {
+            _socket.Close();
+            _thread.Abort();
+
+            Account.Player.OnTick -= SendResources;
+        }
+
+        private void _loop()
         {
             try
             {
                 while (true)
                 {
-                #if DEBUG
+#if !DEBUG
 
                     try
 
-                #endif
+#endif
                     {
-                        var receivedString = Socket.ReceiveAll(ParentServer.Encoding);
+                        var receivedString = _socket.ReceiveAll(ParentServer.Encoding);
 
                         OnDataReceived?.Invoke(receivedString, Account);
 
                         Executor<CommandResult> cmdUse;
                         if (CommandManager.Instance.CommandInterface.TryGetExecutor(
-                                receivedString, new NetArgs(Socket, this), out cmdUse))
+                                receivedString, new NetArgs(_socket, this), out cmdUse))
                         {
                             cmdUse();
                         }
@@ -92,14 +103,14 @@ namespace VisualServer
                             OnWrongCommand?.Invoke(receivedString, Account);
                         }
                     }
-                #if DEBUG
+#if !DEBUG
 
                     catch (Exception e)
                     {
                         GlobalData.Instance.OnUnknownException?.Invoke(e);
                     }
 
-                #endif
+#endif
                 }
             }
             catch (SocketException)
@@ -112,19 +123,13 @@ namespace VisualServer
             }
         }
 
-        public void Stop()
-        {
-            Socket.Close();
-            Thread.Abort();
 
-            Account.Player.OnTick -= SendResources;
-        }
 
         protected void Send(string message)
         {
-            Socket.Send(Encoding.GetBytes(message));
+            _socket.Send(Encoding.GetBytes(message));
         }
-        
+
 
 
         internal void SendResources(Player owner)
