@@ -135,7 +135,7 @@ namespace VisualServer
         internal void SendResources(Player owner)
         {
             // FIXME Unity r -> refresh
-            Send("refresh".CreateCommand(owner.CurrentResources.Serialize(Encoding)));
+            Send("resources".CreateCommand(owner.CurrentResources.Serialize(Encoding)));
         }
     }
 }

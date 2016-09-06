@@ -76,8 +76,6 @@ namespace VisualServer.Modules.CommandModule.Server
                 a => a.Email == receivedAccount.Email
                      && a.Password == receivedAccount.Password).ToArray();
 
-            Console.WriteLine(suitableAccounts.Any());
-
             var successful = suitableAccounts.Any();
             LoginResult result;
 
