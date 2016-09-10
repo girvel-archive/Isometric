@@ -47,13 +47,15 @@ namespace IsometricImplementation.Modules.PatternsRealization
                 "Wood house I",
                 new Resources(),
                 new Resources(wood: 500),
-                new TimeSpan(0, 1, 0));
+                new TimeSpan(0, 1, 0),
+                BuildingType.Building);
 
             WoodHouse2 = new BuildingPattern(
                 "Wood house II", 
                 new Resources(),
                 new Resources(wood: 300, stone: 100),
-                new TimeSpan(0, 1, 0));
+                new TimeSpan(0, 1, 0),
+                BuildingType.Building);
         }
     }
 }

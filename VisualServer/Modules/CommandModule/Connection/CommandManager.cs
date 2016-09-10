@@ -8,7 +8,9 @@ using IsometricCore.Modules;
 using BinarySerializationExtensions;
 using VectorNet;
 using System.Linq;
+using System.Text;
 using CommandInterface.Extensions;
+using IsometricCore.Modules.WorldModule.Buildings;
 using SocketExtensions;
 
 namespace VisualServer.Modules.CommandModule.Connection
@@ -63,8 +65,8 @@ namespace VisualServer.Modules.CommandModule.Connection
                     _getBuildingContextActions),
             
                 new Command<NetArgs, CommandResult>(
-                    "use-building-action", new[] { "action" },
-                    _useBuildingContextAction),
+                    "upgrade", new[] { "action" },
+                    _upgrade),
             
                 new Command<NetArgs, CommandResult>(
                     "get-resources", new string[0],
@@ -78,8 +80,7 @@ namespace VisualServer.Modules.CommandModule.Connection
         private CommandResult _sendResources(
                 Dictionary<string, string> args, NetArgs netArgs)
         {
-            netArgs.Connection.SendResources(netArgs.Connection.Account.Player);
-
+            SendResources(netArgs);
             return CommandResult.Successful;
         }
 
@@ -111,13 +112,14 @@ namespace VisualServer.Modules.CommandModule.Connection
             {
                 netArgs.Send("set-building-actions".CreateCommand(
                     patternNodes[0].GetChildren().Select(
-                            c => new CommonBuildingAction(
-                                netArgs.Connection.Account.Player.CurrentResources
-                                    .Enough(c.Value.NeedResources)
-                                && c.Value.UpgradePossible(pattern, building),
-                                $"Upgrade to {c.Value.Name}",
-                                new CommonBuilding(commonBuilding.Position),
-                                pattern.ID))
+                        c => new CommonBuildingAction(
+                            c.Value.UpgradePossible(
+                                netArgs.Connection.Account.Player.CurrentResources,
+                                pattern,
+                                building),
+                            $"Upgrade to {c.Value.Name}",
+                            new CommonBuilding(commonBuilding.Position),
+                            c.Value.ID))
                         .ToList()
                         .Serialize(netArgs.Connection.Encoding)));
             }
@@ -127,19 +129,44 @@ namespace VisualServer.Modules.CommandModule.Connection
 
 
         // @action
-        private CommandResult _useBuildingContextAction(
+        private CommandResult _upgrade(
                 Dictionary<string, string> args, NetArgs netArgs)
         {
-            //var action = netArgs.Connection.Encoding.GetBytes(args["action"])
-            //    .Deserialize<CommonBuildingAction>();
-            //var subject = netArgs.Connection.Account.Player.Territory[action.Subject.Position];
-            //var upgrade = BuildingPattern.Find(action.Upgrade);
+            var action = netArgs.Connection.Encoding.GetBytes(args["action"])
+                .Deserialize<CommonBuildingAction>();
+            var subject = netArgs.Connection.Account.Player.Territory[action.Subject.Position];
+            var upgrade = BuildingPattern.Find(action.UpgradeTo);
 
-            //return subject.TryUpgrade(upgrade) 
-            //    ? CommandResult.Successful 
-            //    : CommandResult.Unsuccessful;
+            var result = subject.TryUpgrade(upgrade)
+                ? CommandResult.Successful
+                : CommandResult.Unsuccessful;
 
-            return CommandResult.Successful;
+            if (result == CommandResult.Successful)
+            {
+                netArgs.Send(
+                    "upgrade-result".CreateCommand(
+                        new UpgradeResult(
+                            subject.Pattern.ID,
+                            subject.Position)
+                            .Serialize(netArgs.Encoding)));
+
+                SendResources(netArgs);
+            }
+            else
+            {
+                netArgs.Send(
+                    "upgrade-result".CreateCommand("-1"));
+            }
+            
+
+            return result;
+        }
+
+
+
+        protected void SendResources(NetArgs netArgs)
+        {
+            netArgs.Connection.SendResources(netArgs.Connection.Account.Player);
         }
     }
 }

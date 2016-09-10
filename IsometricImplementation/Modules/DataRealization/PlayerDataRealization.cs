@@ -15,7 +15,8 @@ namespace IsometricImplementation.Modules.DataRealization
                     MinimalLeaderLifeDuration = new GameDate(45, 0, 0),
                     MaximalLeaderLifeDuration = new GameDate(55, 0, 0),
 
-                    DefaultPlayerResources = new Resources(gold: 1000, meat: 1000, wood: 1000),
+                    DefaultPlayerResources = new Resources(gold: 999999, meat: 999999, wood: 999999, stone: 999999),
+                    // TODO change start resources
                 };
 
             Player.Data.RefreshDependentValues();

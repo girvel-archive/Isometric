@@ -15,3 +15,4 @@ D:\projects\isometric\VisualClient\bin\Release\IsometricImplementation.pdb
 D:\projects\isometric\VisualClient\bin\Release\VectorNet.pdb
 D:\projects\isometric\VisualClient\bin\Release\SocketExtensions.pdb
 D:\projects\isometric\VisualClient\bin\Release\EnumerableExtensions.pdb
+E:\projects\isometric\VisualClient\obj\Release\VisualClient.exe

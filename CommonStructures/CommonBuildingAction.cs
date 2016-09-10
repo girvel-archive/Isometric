@@ -8,17 +8,17 @@ namespace CommonStructures
         public bool Active { get; set; }
         public string Name { get; set; }
         public CommonBuilding Subject { get; set; }
-        public short Upgrade { get; set; }
+        public short UpgradeTo { get; set; }
 
 
 
         public CommonBuildingAction(
-                bool active, string name, CommonBuilding subject, short upgrade)
+                bool active, string name, CommonBuilding subject, short upgradeTo)
         {
             Active = active;
             Name = name;
             Subject = subject;
-            Upgrade = upgrade;
+            UpgradeTo = upgradeTo;
         }
     }
 }

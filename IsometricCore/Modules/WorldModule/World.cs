@@ -132,7 +132,7 @@ namespace IsometricCore.Modules.WorldModule
 
 
 
-        // FIXME test it
+        // TODO F test it
         protected int SeedForPosition(int x, int y)
         {
             return (int)((decimal)Seed * (x * Data.TerritorySize + y) / (decimal)Math.Pow(Data.TerritorySize, 2));

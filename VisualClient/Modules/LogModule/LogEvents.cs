@@ -84,7 +84,7 @@ namespace VisualClient.Modules.LogModule
 
         private static void _onDataReceived(string data, Account account)
         {
-            Log.Instance.Write($"Data received by {account.Login}.\n{data}");
+            Log.Instance.Write($"Data received by {account.Login}.\n\n{data}\n");
         }
 
         private static void _onWrongCommand(string data, Account account)

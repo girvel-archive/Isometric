@@ -2,7 +2,7 @@
 {
     public enum AccountCreatingResult
     {
-        WrongLogin, // FIXME Unity regex checking before sending login
+        WrongLogin, // TODO F Unity regex checking before sending login
         ExistingLogin,
         ExistingEmail,
         Successful,

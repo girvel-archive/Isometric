@@ -69,8 +69,7 @@ namespace IsometricCore.Modules.WorldModule.Buildings
             var foundedObjects = BuildingGraph.Instance.Find(Pattern);
 
             if (!(foundedObjects[0].IsParentOf(target)
-                && (target.UpgradePossible?.Invoke(Pattern, this) ?? true)
-                && target.NeedResources.Enough(Owner.CurrentResources)))
+                && target.UpgradePossible(Owner.CurrentResources, Pattern, this)))
             {
                 return false;
             }
@@ -86,6 +85,7 @@ namespace IsometricCore.Modules.WorldModule.Buildings
 
         protected void InitFromPattern(BuildingPattern pattern)
         {
+            Pattern = pattern;
             Resources = Pattern.Resources;
         }
 

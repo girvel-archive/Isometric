@@ -159,7 +159,7 @@ namespace VisualServer.Modules.CommandModule.Server
             int code;
             if (!int.TryParse(args["code"], out code))
             {
-                // FIXME Unity code-result
+                // TODO F Unity code-result
                 netArgs.Send("code-result".CreateCommand(
                     ((byte)CodeResult.WrongCommand).ToString()));
                     
@@ -222,7 +222,7 @@ namespace VisualServer.Modules.CommandModule.Server
                     new[] { "account" },
                     _login),
 
-                new Command<NetArgs, CommandResult>( // FIXME Unity email-send-code
+                new Command<NetArgs, CommandResult>( // TODO F Unity email-send-code
                     "email-send-code",
                     new[] { "email" },
                     _emailSendCode))

@@ -29,9 +29,11 @@ namespace IsometricCore.Modules.WorldModule.Buildings
 
 
 
-        public UpgradeCondition UpgradePossible { get; set; } 
+        public UpgradeCondition UpgradeAdditionalCondition { get; set; } 
 
         public Resources NeedResources { get; set; }
+
+
 
         public Resources Resources { get; set; }
 
@@ -40,19 +42,16 @@ namespace IsometricCore.Modules.WorldModule.Buildings
 
 
         private static short _nextID = 0;
-        private static List<BuildingPattern> _patterns 
-            = new List<BuildingPattern>();
+        private static readonly List<BuildingPattern> Patterns = new List<BuildingPattern>();
 
-
-
-
+        
 
         [Obsolete("using serialization ctor", true)]
         public BuildingPattern()
         {
-            if (!_patterns.Contains(this))
+            if (!Patterns.Contains(this))
             {
-                _patterns.Add(this);
+                Patterns.Add(this);
             }
         }
 
@@ -60,20 +59,27 @@ namespace IsometricCore.Modules.WorldModule.Buildings
             string name, Resources resources, Resources needResources, TimeSpan upgradeTimeNormal,
             BuildingType type = BuildingType.Nature)
         {
+            Name = name;
             Resources = resources;
             NeedResources = needResources;
             Type = type;
             UpgradeTimeNormal = upgradeTimeNormal;
 
             ID = _nextID++;
-            _patterns.Add(this);
+            Patterns.Add(this);
         }
 
 
-
+        
         public static BuildingPattern Find(short id)
         {
-            return _patterns.Find(p => p.ID == id);
+            return Patterns.Find(p => p.ID == id);
+        }
+
+        public bool UpgradePossible(Resources playerResources, BuildingPattern previous, Building currentBuilding)
+        {
+            return (UpgradeAdditionalCondition?.Invoke(previous, currentBuilding) ?? true)
+                && playerResources.Enough(NeedResources);
         }
     }
 }
