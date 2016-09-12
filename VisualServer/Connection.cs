@@ -134,7 +134,6 @@ namespace VisualServer
 
         internal void SendResources(Player owner)
         {
-            // TODO F Unity r -> refresh
             Send("resources".CreateCommand(owner.CurrentResources.Serialize(Encoding)));
         }
     }

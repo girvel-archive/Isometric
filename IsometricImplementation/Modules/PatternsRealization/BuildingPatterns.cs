@@ -24,7 +24,7 @@ namespace IsometricImplementation.Modules.PatternsRealization
                 new Resources(),
                 new TimeSpan(0),
                 BuildingType.Space);
-            
+
             Rock = new BuildingPattern(
                 "Rock",
                 new Resources(stone: 10000),
@@ -48,7 +48,10 @@ namespace IsometricImplementation.Modules.PatternsRealization
                 new Resources(),
                 new Resources(wood: 500),
                 new TimeSpan(0, 1, 0),
-                BuildingType.Building);
+                BuildingType.Building)
+            {
+                TickResourcesAction = building => new Resources(meat: 100, wood: 120),
+            };
 
             WoodHouse2 = new BuildingPattern(
                 "Wood house II", 

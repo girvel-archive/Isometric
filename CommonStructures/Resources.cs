@@ -8,15 +8,7 @@ namespace CommonStructures
         private int[] _resourcesArray;
         public int[] ResourcesArray
         {
-            get
-            {
-                if (_resourcesArray == null)
-                {
-                    _resourcesArray = new int[Enum.GetValues(typeof(ResourceType)).Length];
-                }
-
-                return _resourcesArray;
-            }
+            get { return _resourcesArray ?? (_resourcesArray = new int[Enum.GetValues(typeof (ResourceType)).Length]); }
 
             set
             {

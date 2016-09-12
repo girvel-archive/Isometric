@@ -158,7 +158,6 @@ namespace VisualServer.Modules.CommandModule.Connection
                     "upgrade-result".CreateCommand("-1"));
             }
             
-
             return result;
         }
 

@@ -129,8 +129,10 @@ namespace IsometricCore.Modules.PlayerModule
                 subject.Tick(ref resourcesDelta);
             }
 
+            CurrentResources += resourcesDelta;
+
             DelegateExtensions.SafeInvoke(
-                () => OnTick(this),
+                () => OnTick?.Invoke(this),
                 GlobalData.Instance.OnUnknownException);
         }
 

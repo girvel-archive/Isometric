@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Text;
 using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
 using BinarySerializationExtensions;
 
 namespace VisualClient.Modules.LogModule
@@ -36,19 +37,34 @@ namespace VisualClient.Modules.LogModule
 
 
 
-        static Log()
-        {
-            
-        }
-
         private Log() 
         {
-            if (!Directory.Exists(FileFolder))
+            if (!Directory.Exists(LogFolder))
             {
-                Directory.CreateDirectory(FileFolder);
+                Directory.CreateDirectory(LogFolder);
             }
 
-            _currentPath = $"{FileFolder}/{DateTime.Now:yy-MM-dd}.log";
+            if (!Directory.Exists(ExceptionsFolder))
+            {
+                Directory.CreateDirectory(ExceptionsFolder);
+            }
+
+            if (File.Exists(LogSettingsFile))
+            {
+                using (var stream = File.OpenRead(LogSettingsFile))
+                using (var reader = new StreamReader(stream))
+                {
+                    SessionNo = (short)(short.Parse(reader.ReadToEnd()) + 1);
+                }
+            }
+
+            using (var stream = File.OpenWrite(LogSettingsFile))
+            using (var writer = new StreamWriter(stream))
+            {
+                writer.Write(SessionNo);
+            }
+
+            _currentPath = $"{LogFolder}/{DateTime.Now:yy-MM-dd}.log";
 
             LogEvents.Init();
         }
@@ -57,7 +73,15 @@ namespace VisualClient.Modules.LogModule
 
         public Encoding Encoding { get; set; } = Encoding.ASCII;
 
-        public const string FileFolder = "logs";
+        public const string LogFolder = "logs";
+
+        public const string ExceptionsFolder = LogFolder + "/exceptions";
+
+        public const string LogSettingsFile = LogFolder + ".log-settings";
+
+        public short SessionNo { get; }
+
+        public int ExceptionNo { get; set; }
 
         private readonly string _currentPath;
 
@@ -79,9 +103,16 @@ namespace VisualClient.Modules.LogModule
 
         public void Exception(Exception exception, string message = "")
         {
-            Write($"{exception} caught.\n\tMessage: \"{message}\"\n\t" +
-                "Serialized exception:\n" 
-                + Console.OutputEncoding.GetString(exception.Serialize()));
+            var fileName = $"{ExceptionsFolder}/Exception {SessionNo}-{ExceptionNo++}";
+
+            Write($"{exception.GetType()} was caught.\n" +
+                  $"    Message: \"{message}\"\n" +
+                  $"    Exception serialized as: {fileName}");
+
+            using (var stream = File.OpenWrite(fileName))
+            {
+                new BinaryFormatter().Serialize(stream, exception);
+            }
         }
     }
 }

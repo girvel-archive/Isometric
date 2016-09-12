@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Threading;
+using IsometricCore.Modules.TickModule;
 using IsometricCore.Modules.WorldModule;
 using IsometricCore.Modules.WorldModule.Land;
 using IsometricImplementation;
@@ -15,7 +16,7 @@ namespace VisualClient
     {
         public static Thread
             NetThread,
-            RefreshThread,
+            ClocksThread,
             SavingThread;
 
         public static Territory Territory { get; set; }
@@ -126,8 +127,8 @@ namespace VisualClient
             NetThread = new Thread(SingleServer.Instance.Start);
             NetThread.Start();
 
-            //RefreshThread = new Thread(ClocksManager.Instance.TickLoop);
-            //RefreshThread.Start();
+            ClocksThread = new Thread(ClocksManager.Instance.TickLoop);
+            ClocksThread.Start();
 
             //SavingThread = new Thread(_savingLoop);
             //SavingThread.Start();

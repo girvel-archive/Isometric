@@ -70,10 +70,10 @@ namespace IsometricCore.Modules.TickModule
         public ClocksManager()
         {
             Subjects = new IIndependentChanging[]
-                {
-                    PlayersManager.Instance,
-                    World.Instance,
-                };
+            {
+                PlayersManager.Instance,
+                World.Instance,
+            };
         }
 
 
