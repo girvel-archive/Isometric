@@ -4,13 +4,13 @@ using CommandInterface;
 using System.Collections.Generic;
 using System.IO;
 using CommonStructures;
-using BinarySerializationExtensions;
 using IsometricCore.Modules;
 using System.Linq;
 using _Connection = VisualServer.Connection;
 using System.Net.Sockets;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Text.RegularExpressions;
+using BinarySerializationExtensions;
 using CommandInterface.Extensions;
 using SocketExtensions;
 
@@ -53,7 +53,7 @@ namespace VisualServer.Modules.CommandModule.Server
 
         public Interface<NetArgs, CommandResult> Interface { get; set; }
 
-        public Dictionary<Socket, int> SignupCodes { get; set; }
+        public Dictionary<Socket, int> SignupCodes { get; set; } = new Dictionary<Socket, int>();
 
 
 
@@ -182,7 +182,7 @@ namespace VisualServer.Modules.CommandModule.Server
         // @login,account
         private CommandResult _accountSet(Dictionary<string, string> args, NetArgs netArgs)
         {
-            var account = netArgs.Deserialize<CommonAccount>(args["account"]);
+            var account = args["account"].Deserialize<CommonAccount>(netArgs.Encoding);
 
             if (!Regex.IsMatch(args["login"], @"^[\w\s]*$"))
             {
@@ -227,7 +227,7 @@ namespace VisualServer.Modules.CommandModule.Server
                     new[] { "email" },
                     _emailSendCode))
             {
-                UnactiveCommands = new Command<NetArgs, CommandResult>[]
+                UnactiveCommands = new ICommand<NetArgs, CommandResult>[]
                 {
                     new Command<NetArgs, CommandResult>(
                         "code-set",

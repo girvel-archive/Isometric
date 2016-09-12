@@ -42,3 +42,5 @@ E:\projects\isometric\VisualClient\bin\Debug\VisualConsole.pdb
 E:\projects\isometric\VisualClient\bin\Debug\SocketExtensions.pdb
 E:\projects\isometric\VisualClient\obj\Debug\VisualClient.csprojResolveAssemblyReference.cache
 E:\projects\isometric\VisualClient\bin\Debug\CommonStructures.pdb
+E:\projects\isometric\VisualClient\bin\Debug\RandomExtensions.dll
+E:\projects\isometric\VisualClient\bin\Debug\RandomExtensions.pdb

@@ -6,6 +6,7 @@ using IsometricCore.Modules.WorldModule.Land;
 using IsometricCore.Modules.WorldModule.Buildings;
 using IsometricCore.Modules.PlayerModule;
 using IsometricCore.Modules.WorldModule;
+using RandomExtensions;
 
 namespace IsometricImplementation.Modules.PatternsRealization
 {
@@ -19,8 +20,12 @@ namespace IsometricImplementation.Modules.PatternsRealization
         static TerritoryPatterns()
         {
             Forest = new TerritoryPattern(
-                (terr, seed) => _defaultGeneration(terr, seed, new Dictionary<int, BuildingPattern> { 
-                    [1] = BuildingPatterns.Forest,
+                (terr, seed) => _defaultGeneration(terr, seed, new RandomCollection<BuildingPattern>(new Random(seed))
+                { 
+                    new RandomPair<BuildingPattern>(6, BuildingPatterns.Forest),
+                    new RandomPair<BuildingPattern>(2, BuildingPatterns.Plain),
+                    new RandomPair<BuildingPattern>(2, BuildingPatterns.Water),
+                    new RandomPair<BuildingPattern>(1, BuildingPatterns.Rock),
                 }));
         }
 
@@ -28,11 +33,9 @@ namespace IsometricImplementation.Modules.PatternsRealization
     
         private static void _defaultGeneration(
             Territory territory, 
-            int seed, 
-            Dictionary<int, BuildingPattern> chanceCollection)
+            int seed,
+            RandomCollection<BuildingPattern> chanceCollection)
         {
-            var random = new Random(seed);
-
             for (var y = 0; y < World.Data.TerritorySize; y++)
             {
                 for (var x = 0; x < World.Data.TerritorySize; x++)
@@ -41,30 +44,9 @@ namespace IsometricImplementation.Modules.PatternsRealization
 
                     territory[pos] = new Building(
                         pos, Player.Nature, territory,
-                        _getRandomBuildingPattern(random, chanceCollection));
+                        chanceCollection.Get());
                 }
             }
-        }
-
-        // TODO chance library
-        private static BuildingPattern _getRandomBuildingPattern(
-            Random random, Dictionary<int, BuildingPattern> chanceCollection)
-        {
-            var sum = chanceCollection.Sum(pair => pair.Key);
-            var chanceResult = random.NextDouble() * sum;
-
-            foreach (var chanceElement in chanceCollection)
-            {
-                chanceResult -= chanceElement.Key;
-            
-                if (chanceResult <= 0)
-                {
-                    return chanceElement.Value;
-                }
-            }
-
-            throw new NotImplementedException(
-                "_getRandomBuildingPattern: something went wrong");
         }
     }
 }

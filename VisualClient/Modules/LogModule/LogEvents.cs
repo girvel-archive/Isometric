@@ -11,6 +11,7 @@ namespace VisualClient.Modules.LogModule
         internal static void Init()
         {
             SingleServer.Instance.OnAcceptedConnection += _onAcceptedConnection;
+            SingleServer.Instance.OnWrongCommand += _onWrongCommand;
             ServerCommandManager.Instance.OnLoginAttempt += _onLoginAttempt;
 
             Connection.OnConnectionEnd += _onConnectionEnd;
@@ -64,6 +65,11 @@ namespace VisualClient.Modules.LogModule
             }
 
             Log.Instance.Write(message + $"\n\tEmail: {email}");
+        }
+
+        private static void _onWrongCommand(string command)
+        {
+            Log.Instance.Write(command);
         }
 
         #endregion

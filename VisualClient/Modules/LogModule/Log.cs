@@ -73,17 +73,19 @@ namespace VisualClient.Modules.LogModule
 
         public Encoding Encoding { get; set; } = Encoding.ASCII;
 
-        public const string LogFolder = "logs";
-
-        public const string ExceptionsFolder = LogFolder + "/exceptions";
-
-        public const string LogSettingsFile = LogFolder + ".log-settings";
-
         public short SessionNo { get; }
 
         public int ExceptionNo { get; set; }
 
         private readonly string _currentPath;
+
+
+
+        private const string LogFolder = "logs";
+
+        private const string ExceptionsFolder = LogFolder + "/exceptions";
+
+        private const string LogSettingsFile = LogFolder + ".log-settings";
 
 
 

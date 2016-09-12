@@ -24,3 +24,4 @@ E:\projects\isometric\IsometricImplementation\bin\Debug\VectorNet.pdb
 E:\projects\isometric\IsometricImplementation\obj\Debug\IsometricImplementation.csprojResolveAssemblyReference.cache
 E:\projects\isometric\IsometricImplementation\obj\Debug\IsometricImplementation.dll
 E:\projects\isometric\IsometricImplementation\obj\Debug\IsometricImplementation.pdb
+E:\projects\isometric\IsometricImplementation\bin\Debug\RandomExtensions.dll

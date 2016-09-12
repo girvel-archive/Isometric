@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Sockets;
+using System.Runtime.Remoting.Messaging;
 using System.Text;
 using System.Threading;
+using CommandInterface;
 using IsometricCore.Modules;
 using VisualServer.Modules.CommandModule.Server;
 using SocketExtensions;
-
+using VisualServer.Modules.SpamModule;
 
 
 namespace VisualServer
@@ -54,9 +56,10 @@ namespace VisualServer
         private Socket _listenSocket;
         
 
-
-        public event Action OnWrongIP;
+        
         public event Action OnAcceptedConnection;
+        public event Action OnWrongIp;
+        public event Action<string> OnWrongCommand;
 
 
 
@@ -103,7 +106,7 @@ namespace VisualServer
                 return TryToConnect(ip);
             }
 
-            OnWrongIP?.Invoke();
+            OnWrongIp?.Invoke();
             return false;
         }
 
@@ -133,27 +136,37 @@ namespace VisualServer
 
             while (true)
             {
-#if !DEBUG
+            #if !DEBUG
                 try
-#endif
+            #endif
                 {
                     var socket = _listenSocket.Accept();
                     OnAcceptedConnection?.Invoke();
 
-                    CommandManager.Instance.Interface.GetExecutor(
-                        socket.ReceiveAll(Encoding),
-                        new NetArgs(socket, this))();
+                    string data;
+                    Executor<CommandResult> executor;
+
+                    if (CommandManager.Instance.Interface.TryGetExecutor(
+                        data = socket.ReceiveAll(Encoding),
+                        new NetArgs(socket, this),
+                        out executor))
+                    {
+                        executor();
+                    }
+                    else
+                    {
+                        OnWrongCommand?.Invoke(data);
+                    }
 
                     // TODO 1.1 spamfilter using
                 }
 
-#if !DEBUG
+            #if !DEBUG
                 catch (Exception e)
                 {
                     GlobalData.Instance.OnUnknownException?.Invoke(e);
                 }
-
-#endif
+            #endif
             }
         }
     }

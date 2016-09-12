@@ -55,13 +55,11 @@ namespace VisualServer.Modules
         {
             return new SmtpManager
             {
-                ConstructMailSignup = (to, code) => {
-                    return new MailMessage(
-                        Instance.From,
-                        to,
+                ConstructMailSignup =
+                    (to, code) => new MailMessage(
+                        Instance.From, to,
                         "Isometric game registration",
-                        "Your code: " + code);
-                },
+                        "Your code: " + code),
             };
         }
 
