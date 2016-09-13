@@ -10,9 +10,7 @@ namespace IsometricCore.Modules
         #region Singleton-part
 
         private static Random _instance;
-        public static Random Instance {
-            get { return _instance ?? (_instance = CustomSeed ? new Random(Seed) : new Random()); }
-        }
+        public static Random Instance => _instance ?? (_instance = CustomSeed ? new Random(Seed) : new Random());
 
         private SingleRandom() {}
 

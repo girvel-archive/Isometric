@@ -8,7 +8,7 @@ using IsometricCore.Modules.PlayerModule;
 using IsometricCore.Modules.WorldModule;
 using RandomExtensions;
 
-namespace IsometricImplementation.Modules.PatternsRealization
+namespace IsometricImplementation.Modules.PatternsImplementation
 {
     [Serializable]
     public static class TerritoryPatterns

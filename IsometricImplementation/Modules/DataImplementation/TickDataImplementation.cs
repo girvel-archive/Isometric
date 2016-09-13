@@ -1,8 +1,8 @@
 ﻿using IsometricCore.Modules.TickModule;
 
-namespace IsometricImplementation.Modules.DataRealization
+namespace IsometricImplementation.Modules.DataImplementation
 {
-    public static class TickDataRealization
+    public static class TickDataImplementation
     {
         internal static void Init()
         {

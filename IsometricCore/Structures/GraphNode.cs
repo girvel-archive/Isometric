@@ -37,7 +37,7 @@ namespace IsometricCore.Structures
 
 
 
-        public void Add(GraphNode<T> child)
+        public GraphNode<T> Add(GraphNode<T> child)
         {
             #if !DEBUG
             ParentGraph.TryAddNode(child);
@@ -51,6 +51,13 @@ namespace IsometricCore.Structures
             #endif
 
             _children.Add(child);
+
+            return child;
+        }
+
+        public GraphNode<T> Add(T childContent)
+        {
+            return Add(new GraphNode<T>(childContent, ParentGraph));
         }
 
         public GraphNode<T>[] GetChildren() => _children.ToArray();

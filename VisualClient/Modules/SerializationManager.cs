@@ -68,8 +68,8 @@ namespace VisualClient.Modules
                     set: value => Core.SavingVersion = value),
 
                 new Property(
-                    get: () => Realization.Version,
-                    set: value => Realization.SavingVersion = value),
+                    get: () => Implementation.Version,
+                    set: value => Implementation.SavingVersion = value),
 
                 new Property(
                     get: () => Client.Version,
@@ -141,8 +141,7 @@ namespace VisualClient.Modules
                     return false;
                 }
 
-                using (FileStream mainStream = File.OpenRead(
-                    $"{SavingDirectory}/{SavingFile}"))
+                using (var mainStream = File.OpenRead($"{SavingDirectory}/{SavingFile}"))
                 {
                     var serializer = new BinaryFormatter();
 

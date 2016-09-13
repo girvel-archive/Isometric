@@ -10,3 +10,17 @@ D:\projects\isometric\IsometricImplementation\bin\Release\VectorNet.pdb
 D:\projects\isometric\IsometricImplementation\bin\Release\EnumerableExtensions.pdb
 D:\projects\isometric\IsometricImplementation\obj\Release\IsometricImplementation.dll
 D:\projects\isometric\IsometricImplementation\obj\Release\IsometricImplementation.pdb
+E:\projects\isometric\IsometricImplementation\bin\Release\IsometricImplementation.dll
+E:\projects\isometric\IsometricImplementation\bin\Release\IsometricImplementation.pdb
+E:\projects\isometric\IsometricImplementation\bin\Release\CommonStructures.dll
+E:\projects\isometric\IsometricImplementation\bin\Release\IsometricCore.dll
+E:\projects\isometric\IsometricImplementation\bin\Release\RandomExtensions.dll
+E:\projects\isometric\IsometricImplementation\bin\Release\VectorNet.dll
+E:\projects\isometric\IsometricImplementation\bin\Release\EnumerableExtensions.dll
+E:\projects\isometric\IsometricImplementation\bin\Release\IsometricCore.pdb
+E:\projects\isometric\IsometricImplementation\bin\Release\RandomExtensions.pdb
+E:\projects\isometric\IsometricImplementation\bin\Release\VectorNet.pdb
+E:\projects\isometric\IsometricImplementation\bin\Release\EnumerableExtensions.pdb
+E:\projects\isometric\IsometricImplementation\obj\Release\IsometricImplementation.csprojResolveAssemblyReference.cache
+E:\projects\isometric\IsometricImplementation\obj\Release\IsometricImplementation.dll
+E:\projects\isometric\IsometricImplementation\obj\Release\IsometricImplementation.pdb

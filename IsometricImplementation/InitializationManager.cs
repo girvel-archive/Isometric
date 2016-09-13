@@ -1,6 +1,6 @@
 ﻿using System;
-using IsometricImplementation.Modules.DataRealization;
-using IsometricImplementation.Modules.PatternsRealization;
+using IsometricImplementation.Modules.DataImplementation;
+using IsometricImplementation.Modules.PatternsImplementation;
 
 namespace IsometricImplementation
 {
@@ -9,12 +9,12 @@ namespace IsometricImplementation
         private static readonly Action[] Inits =
         {
             BuildingPatterns.Init,
-            BuildingGraphRealization.Init,
-            TimeDataRealization.Init,
-            GlobalDataRealization.Init,
-            PlayerDataRealization.Init,
-            TickDataRealization.Init,
-            WorldDataRealization.Init,
+            BuildingGraphImplementation.Init,
+            TimeDataImplementation.Init,
+            GlobalDataImplementation.Init,
+            PlayerDataImplementation.Init,
+            TickDataImplementation.Init,
+            WorldDataImplementation.Init,
         };
 
         public static void Init()

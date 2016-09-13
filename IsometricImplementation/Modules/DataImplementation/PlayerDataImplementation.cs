@@ -2,9 +2,9 @@
 using CommonStructures;
 using IsometricCore.Modules.TimeModule;
 
-namespace IsometricImplementation.Modules.DataRealization
+namespace IsometricImplementation.Modules.DataImplementation
 {
-    public static class PlayerDataRealization
+    public static class PlayerDataImplementation
     {
         internal static void Init()
         {

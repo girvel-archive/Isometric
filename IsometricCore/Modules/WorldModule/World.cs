@@ -9,32 +9,8 @@ namespace IsometricCore.Modules.WorldModule
     [Serializable]
     public class World : IIndependentChanging
     {
-        #region Data singleton
-
-        [Obsolete("using backing field")]
         [NonSerialized]
-        private static WorldData _data;
-
-        #pragma warning disable 0618
-
-        public static WorldData Data {
-            get { return _data ?? (_data = new WorldData()); }
-
-            set {
-                #if DEBUG
-                if (_data != null)
-                {
-                    throw new ArgumentException("Data is already set");
-                }
-                #endif
-
-                _data = value;
-            }
-        }
-
-        #pragma warning restore 0618
-
-        #endregion
+        public static WorldData Data;
 
 
 

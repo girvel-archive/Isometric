@@ -65,12 +65,7 @@ namespace VisualServer.Modules.CommandModule.Server
 
         private CommandResult _login(Dictionary<string, string> args, NetArgs netArgs)
         {
-            CommonAccount receivedAccount;
-
-            using (var stream = new MemoryStream(netArgs.Encoding.GetBytes(args["account"])))
-            {
-                receivedAccount = (CommonAccount)new BinaryFormatter().Deserialize(stream);
-            }
+            var receivedAccount = args["account"].Deserialize<CommonAccount>(netArgs.Encoding);
             
             var suitableAccounts = netArgs.Server.Accounts.Where(
                 a => a.Email == receivedAccount.Email

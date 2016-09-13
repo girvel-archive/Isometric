@@ -33,14 +33,11 @@ namespace IsometricCore.Structures
 
         public GraphNode<T>[] NodesCopy => _nodes.ToArray();
 
-        private List<GraphNode<T>> _nodes = new List<GraphNode<T>>();
+        private readonly List<GraphNode<T>> _nodes = new List<GraphNode<T>>();
         private GraphNode<T> _root;
 
 
         
-        /// <summary>
-        /// Serialization ctor. Don't use it in code!
-        /// </summary>
         [Obsolete("using serialization ctor", true)]
         public Graph() {}
 
@@ -77,6 +74,11 @@ namespace IsometricCore.Structures
                 (from node in this
                     where predicate(node.Value)
                     select node).ToArray();
+        }
+
+        public GraphNode<T> SetRoot(T nodeElement)
+        {
+            return Root = new GraphNode<T>(nodeElement, this);
         }
         
         internal bool TryAddNode(GraphNode<T> item)

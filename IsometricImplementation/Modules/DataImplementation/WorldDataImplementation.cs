@@ -1,13 +1,13 @@
 ﻿using IsometricCore.Modules.WorldModule;
 using IsometricCore.Modules.WorldModule.Land;
-using IsometricImplementation.Modules.PatternsRealization;
+using IsometricImplementation.Modules.PatternsImplementation;
 using IsometricCore.Modules;
 using IsometricCore.Modules.WorldModule.Buildings;
 using System.Linq;
 
-namespace IsometricImplementation.Modules.DataRealization
+namespace IsometricImplementation.Modules.DataImplementation
 {
-    internal static class WorldDataRealization
+    internal static class WorldDataImplementation
     {
         internal static void Init()
         {

@@ -12,31 +12,7 @@ namespace IsometricCore.Modules.PlayerModule
     [Serializable]
     public class Player : IIndependentChanging
     {
-        #region Data singleton
-
-        [Obsolete("using backing field")]
-        private static PlayerData _data;
-
-        #pragma warning disable 618
-
-        public static PlayerData Data {
-            get { return _data ?? (_data = new PlayerData()); }
-
-            set {
-                #if DEBUG
-                if (_data != null)
-                {
-                    throw new ArgumentException("Data is already set");
-                }
-                #endif
-
-                _data = value;
-            }
-        }
-
-        #pragma warning restore 618
-
-                          #endregion
+        public static PlayerData Data { get; set; }
 
 
 

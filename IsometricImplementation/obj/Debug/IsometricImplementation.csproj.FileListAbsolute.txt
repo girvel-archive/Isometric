@@ -25,3 +25,6 @@ E:\projects\isometric\IsometricImplementation\obj\Debug\IsometricImplementation.
 E:\projects\isometric\IsometricImplementation\obj\Debug\IsometricImplementation.dll
 E:\projects\isometric\IsometricImplementation\obj\Debug\IsometricImplementation.pdb
 E:\projects\isometric\IsometricImplementation\bin\Debug\RandomExtensions.dll
+E:\projects\isometric\IsometricImplementation\bin\Debug\Newtonsoft.Json.dll
+E:\projects\isometric\IsometricImplementation\bin\Debug\Newtonsoft.Json.pdb
+E:\projects\isometric\IsometricImplementation\bin\Debug\Newtonsoft.Json.xml
