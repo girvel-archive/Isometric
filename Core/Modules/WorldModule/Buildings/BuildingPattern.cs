@@ -31,7 +31,7 @@ namespace Isometric.Core.Modules.WorldModule.Buildings
 
         public UpgradeCondition UpgradeAdditionalCondition { get; set; } 
 
-        public Resources NeedResources { get; set; }
+        public Resources Price { get; set; }
 
 
 
@@ -56,12 +56,12 @@ namespace Isometric.Core.Modules.WorldModule.Buildings
         }
 
         public BuildingPattern(
-            string name, Resources resources, Resources needResources, TimeSpan upgradeTimeNormal,
+            string name, Resources resources, Resources price, TimeSpan upgradeTimeNormal,
             BuildingType type = BuildingType.Nature)
         {
             Name = name;
             Resources = resources;
-            NeedResources = needResources;
+            Price = price;
             Type = type;
             UpgradeTimeNormal = upgradeTimeNormal;
 
@@ -79,7 +79,7 @@ namespace Isometric.Core.Modules.WorldModule.Buildings
         public bool UpgradePossible(Resources playerResources, BuildingPattern previous, Building currentBuilding)
         {
             return (UpgradeAdditionalCondition?.Invoke(previous, currentBuilding) ?? true)
-                && playerResources.Enough(NeedResources);
+                && playerResources.Enough(Price);
         }
     }
 }

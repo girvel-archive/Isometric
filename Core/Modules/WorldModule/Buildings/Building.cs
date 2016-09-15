@@ -76,7 +76,7 @@ namespace Isometric.Core.Modules.WorldModule.Buildings
             }
             Owner = player;
 
-            Owner.CurrentResources -= target.NeedResources;
+            Owner.CurrentResources -= target.Price;
             // TODO 1.1 upgrade duration (this.properties + ActionsProcessor)
             InitFromPattern(target);
 

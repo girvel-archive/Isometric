@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 
 namespace Isometric.CommonStructures
 {
@@ -18,61 +19,61 @@ namespace Isometric.CommonStructures
 
         public int Gold {
             get {
-                return _resourcesArray[(byte)ResourceType.Gold];
+                return ResourcesArray[(byte)ResourceType.Gold];
             }
 
             set {
-                _resourcesArray[(byte)ResourceType.Gold] = value;
+                ResourcesArray[(byte)ResourceType.Gold] = value;
             }
         }
 
         public int Meat {
             get {
-                return _resourcesArray[(byte)ResourceType.Meat];
+                return ResourcesArray[(byte)ResourceType.Meat];
             }
 
             set {
-                _resourcesArray[(byte)ResourceType.Meat] = value;
+                ResourcesArray[(byte)ResourceType.Meat] = value;
             }
         }
 
         public int Corn {
             get {
-                return _resourcesArray[(byte)ResourceType.Corn];
+                return ResourcesArray[(byte)ResourceType.Corn];
             }
 
             set {
-                _resourcesArray[(byte)ResourceType.Corn] = value;
+                ResourcesArray[(byte)ResourceType.Corn] = value;
             }
         }
 
         public int Stone {
             get {
-                return _resourcesArray[(byte)ResourceType.Stone];
+                return ResourcesArray[(byte)ResourceType.Stone];
             }
 
             set {
-                _resourcesArray[(byte)ResourceType.Stone] = value;
+                ResourcesArray[(byte)ResourceType.Stone] = value;
             }
         }
 
         public int Wood {
             get {
-                return _resourcesArray[(byte)ResourceType.Wood];
+                return ResourcesArray[(byte)ResourceType.Wood];
             }
 
             set {
-                _resourcesArray[(byte)ResourceType.Wood] = value;
+                ResourcesArray[(byte)ResourceType.Wood] = value;
             }
         }
 
         public int People {
             get {
-                return _resourcesArray[(byte)ResourceType.People];
+                return ResourcesArray[(byte)ResourceType.People];
             }
 
             set {
-                _resourcesArray[(byte)ResourceType.People] = value;
+                ResourcesArray[(byte)ResourceType.People] = value;
             }
         }
 
@@ -100,17 +101,8 @@ namespace Isometric.CommonStructures
 
         public bool Enough(Resources resources)
         {
-            for (var i = 0; i < ResourcesArray.Length; i++)
-            {
-                if (ResourcesArray[i] < resources.ResourcesArray[i])
-                {
-                    return false;
-                }
-            }
-
-            return true;
+            return !ResourcesArray.Where((t, i) => t < resources.ResourcesArray[i]).Any();
         }
-
 
 
         public static Resources operator +(Resources r1, Resources r2)
