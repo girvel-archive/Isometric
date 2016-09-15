@@ -18,3 +18,7 @@ E:\projects\isometric\Editor\bin\Debug\EnumerableExtensions.dll
 E:\projects\isometric\Editor\bin\Debug\Isometric.CommonStructures.pdb
 E:\projects\isometric\Editor\bin\Debug\Isometric.Core.pdb
 E:\projects\isometric\Editor\bin\Debug\VectorNet.pdb
+E:\projects\isometric\Editor\obj\Debug\Isometric.Editor_MarkupCompile.lref
+E:\projects\isometric\Editor\obj\Debug\CustomControls\ResourcesTextBox.g.cs
+E:\projects\isometric\Editor\obj\Debug\CustomControls\ResourcesTextBox.baml
+E:\projects\isometric\Editor\obj\Debug\GeneratedInternalTypeHelper.g.cs

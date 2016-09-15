@@ -127,44 +127,24 @@ namespace Isometric.Editor
                     BuildingTypeComboBox.SelectedItem.ToString());
         }
 
-        private void ResourcesTextBox_OnTextChanged(object sender, TextChangedEventArgs e)
+        private void ResourcesTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if (ResourcesTextBox.Text == string.Empty || !ResourcesTextBox.IsEnabled)
+            if (SelectedPattern == null)
             {
                 return;
             }
 
-            Resources resources;
-
-            if (ResourcesTextBox.Text.TryParse(out resources) && SelectedPattern != null)
-            {
-                ResourcesTextBox.Background = Brushes.White;
-                SelectedPattern.Resources = resources;
-            }
-            else
-            {
-                ResourcesTextBox.Background = Brushes.MistyRose;
-            }
+            SelectedPattern.Resources = ResourcesTextBox.GameResources;
         }
 
-        private void PriceTextBox_OnTextChanged(object sender, TextChangedEventArgs e)
+        private void PriceTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if (PriceTextBox.Text == string.Empty || !PriceTextBox.IsEnabled)
+            if (SelectedPattern == null)
             {
                 return;
             }
 
-            Resources resources;
-
-            if (PriceTextBox.Text.TryParse(out resources) && SelectedPattern != null)
-            {
-                PriceTextBox.Background = Brushes.White;
-                SelectedPattern.Price = resources;
-            }
-            else
-            {
-                PriceTextBox.Background = Brushes.MistyRose;
-            }
+            SelectedPattern.Price = PriceTextBox.GameResources;
         }
     }
 }
