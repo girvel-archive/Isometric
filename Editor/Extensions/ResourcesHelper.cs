@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text.RegularExpressions;
 using Isometric.CommonStructures;
@@ -31,6 +32,29 @@ namespace Isometric.Editor.Extensions
             }
 
             return true;
+        }
+
+        public static string GetValueString(this Resources resources)
+        {
+            if (resources.Empty)
+            {
+                return "";
+            }
+
+            var i = 0;
+            var result = string.Empty;
+
+            foreach (var resource in resources.ResourcesArray)
+            {
+                if (resource != 0)
+                {
+                    result += $"{(result == "" ? "" : ", ")}{((ResourceType) i).ToString().ToLower()}: {resource}";
+                }
+
+                i++;
+            }
+
+            return result;
         }
     }
 }

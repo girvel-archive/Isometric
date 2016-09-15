@@ -1,10 +1,13 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Runtime.Serialization.Formatters.Binary;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using Isometric.CommonStructures;
 using Isometric.Core.Modules.WorldModule.Buildings;
 using Isometric.Editor.Extensions;
+using Microsoft.Win32;
 
 namespace Isometric.Editor
 {
@@ -14,6 +17,15 @@ namespace Isometric.Editor
         protected int SelectedPatternListIndex = -1;
 
         protected readonly Control[] BuildingSettingsControls;
+
+        protected SaveFileDialog SaveFileDialog
+            = new SaveFileDialog();
+
+        protected OpenFileDialog OpenFileDialog
+            = new OpenFileDialog();
+
+        private const string DefaultFilter 
+            = "Isometric buildings|*.isob|All files|*.*";
 
 
 
@@ -25,6 +37,9 @@ namespace Isometric.Editor
             {
                 BuildingTypeComboBox.Items.Add(type);
             }
+
+            SaveFileDialog.Filter = DefaultFilter;
+            OpenFileDialog.Filter = DefaultFilter;
 
             BuildingSettingsControls = new Control[]
             {
@@ -48,7 +63,7 @@ namespace Isometric.Editor
         public void AddBuilding(string name)
         {
             BuildingsListBox.Items.Add(name);
-            BuildingPatternCollection.Instance.CurrentPatterns.Add(
+            BuildingPatternCollection.Instance.Add(
                 new BuildingPattern(
                     name,
                     new Resources(),
@@ -58,7 +73,7 @@ namespace Isometric.Editor
 
         public void SelectBuilding(string name, int listIndex)
         {
-            SelectedPattern = BuildingPatternCollection.Instance.CurrentPatterns.Find(p => p.Name == name);
+            SelectedPattern = BuildingPatternCollection.Instance.Find(p => p.Name == name);
             SelectedPatternListIndex = listIndex;
 
             foreach (var control in BuildingSettingsControls)
@@ -76,8 +91,10 @@ namespace Isometric.Editor
             }
 
             NameTextBox.Text = SelectedPattern.Name;
-            IdTextBox.Text = SelectedPattern.ID.ToString();
+            IdTextBox.Text = SelectedPattern.Id.ToString();
             BuildingTypeComboBox.SelectedItem = SelectedPattern.Type.ToString();
+            ResourcesTextBox.Text = SelectedPattern.Resources.GetValueString();
+            PriceTextBox.Text = SelectedPattern.Price.GetValueString();
         }
 
         public void ResetBuildingSelection()
@@ -145,6 +162,51 @@ namespace Isometric.Editor
             }
 
             SelectedPattern.Price = PriceTextBox.GameResources;
+        }
+
+        private void SaveMenuItem_OnClick(object sender, RoutedEventArgs e)
+        {
+            SaveFileDialog.OverwritePrompt = true;
+            SaveFileDialog.ShowDialog(this);
+
+            try
+            {
+                using (var stream = SaveFileDialog.OpenFile())
+                {
+                    new BinaryFormatter().Serialize(
+                        stream,
+                        BuildingPatternCollection.Instance.ToArray());
+                }
+            }
+            catch (InvalidOperationException) { }
+
+            SaveFileDialog.Reset();
+        }
+
+        private void OpenMenuItem_OnClick(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog.ShowDialog(this);
+
+            try
+            {
+                using (var stream = OpenFileDialog.OpenFile())
+                {
+                    BuildingsListBox.Items.Clear();
+                    BuildingPatternCollection.Instance
+                        = new List<BuildingPattern>((BuildingPattern[]) new BinaryFormatter().Deserialize(stream));
+                }
+            }
+            catch (InvalidOperationException)
+            {
+                return;
+            }
+
+            OpenFileDialog.Reset();
+
+            foreach (var pattern in BuildingPatternCollection.Instance)
+            {
+                BuildingsListBox.Items.Add(pattern.Name);
+            }
         }
     }
 }

@@ -119,7 +119,7 @@ namespace Isometric.Server.Modules.CommandModule.Connection
                                 building),
                             $"Upgrade to {c.Value.Name}",
                             new CommonBuilding(commonBuilding.Position),
-                            c.Value.ID))
+                            c.Value.Id))
                         .ToList()
                         .Serialize(netArgs.Connection.Encoding)));
             }
@@ -146,7 +146,7 @@ namespace Isometric.Server.Modules.CommandModule.Connection
                 netArgs.Send(
                     "upgrade-result".CreateCommand(
                         new UpgradeResult(
-                            subject.Pattern.ID,
+                            subject.Pattern.Id,
                             subject.Position)
                             .Serialize(netArgs.Encoding)));
 

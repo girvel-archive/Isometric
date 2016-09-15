@@ -13,7 +13,7 @@ namespace Isometric.Core.Modules.WorldModule.Buildings
 
 
 
-        public short ID { get; set; }
+        public int Id { get; set; } = -1;
 
         public string Name { get; set; } 
 
@@ -40,8 +40,7 @@ namespace Isometric.Core.Modules.WorldModule.Buildings
         public TimeSpan UpgradeTimeNormal { get; set; }
 
 
-
-        private static short _nextID = 0;
+        
         private static readonly List<BuildingPattern> Patterns = new List<BuildingPattern>();
 
         
@@ -64,16 +63,15 @@ namespace Isometric.Core.Modules.WorldModule.Buildings
             Price = price;
             Type = type;
             UpgradeTimeNormal = upgradeTimeNormal;
-
-            ID = _nextID++;
+            
             Patterns.Add(this);
         }
 
 
         
-        public static BuildingPattern Find(short id)
+        public static BuildingPattern Find(int id)
         {
-            return Patterns.Find(p => p.ID == id);
+            return Patterns.Find(p => p.Id == id);
         }
 
         public bool UpgradePossible(Resources playerResources, BuildingPattern previous, Building currentBuilding)

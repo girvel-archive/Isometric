@@ -5,9 +5,9 @@ namespace Isometric.CommonStructures
     [Serializable]
     public struct CommonTerritory
     {
-        public short[,] PatternIDs { get; set; }
+        public int[,] PatternIDs { get; set; }
 
-        public CommonTerritory(short[,] patternIDs)
+        public CommonTerritory(int[,] patternIDs)
         {
             PatternIDs = patternIDs;
         }

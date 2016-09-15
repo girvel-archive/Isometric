@@ -7,7 +7,7 @@ namespace Isometric.Server.Extensions
     {
         public static CommonTerritory ToCommon(this Territory territory)
         {
-            return new CommonTerritory(territory.BuildingGrid.TwoDimSelect(b => b.Pattern.ID));
+            return new CommonTerritory(territory.BuildingGrid.TwoDimSelect(b => b.Pattern.Id));
         }
     }
 }

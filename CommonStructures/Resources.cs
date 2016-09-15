@@ -79,6 +79,10 @@ namespace Isometric.CommonStructures
 
 
 
+        public bool Empty => _resourcesArray == null || _resourcesArray.All(r => r == 0);
+
+
+
         public Resources(
             int gold = 0, 
             int meat = 0, 

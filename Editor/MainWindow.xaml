@@ -7,27 +7,36 @@
         xmlns:customControls="clr-namespace:Isometric.Editor.CustomControls"
         x:Name="MainWindow1" x:Class="Isometric.Editor.MainWindow"
         mc:Ignorable="d"
-        Title="Isometric Editor" Height="322.821" Width="525">
+        Title="Isometric Editor" Height="342.78" Width="525">
     <Grid Margin="0,0,0,1">
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="127*"/>
             <ColumnDefinition Width="87*"/>
             <ColumnDefinition Width="303*"/>
         </Grid.ColumnDefinitions>
 
-        <ListBox x:Name="BuildingsListBox" HorizontalAlignment="Left" Height="232" Margin="10,10,0,0" VerticalAlignment="Top" Width="107" SelectionChanged="BuildingsListBox_OnSelectionChanged"/>
-        <Button Grid.Column="0" x:Name="AddButton" Content="Add" HorizontalAlignment="Left" Margin="10,247,0,0" VerticalAlignment="Top" Width="50" Height="22" Click="AddButton_Click"/>
-        <Button Grid.Column="0" x:Name="RemoveButton" Content="Remove" HorizontalAlignment="Left" Margin="65,247,0,0" VerticalAlignment="Top" Width="52" Height="22"/>
-        <TextBox x:Name="NameTextBox" HorizontalAlignment="Left" Height="23" Margin="10,10,0,0" TextWrapping="Wrap" Text="Name" VerticalAlignment="Top" Width="283" Grid.Column="2" TextChanged="NameTextBox_OnTextChanged"/>
-        <TextBox x:Name="IdTextBox" Grid.Column="2" HorizontalAlignment="Left" Height="23" Margin="10,44,0,0" TextWrapping="Wrap" Text="ID" VerticalAlignment="Top" Width="283" IsReadOnly="True" RenderTransformOrigin="0.554,2.736"/>
-        <ComboBox x:Name="BuildingTypeComboBox" Grid.Column="2" HorizontalAlignment="Left" Margin="10,76,0,0" VerticalAlignment="Top" Width="120" AlternationCount="1" SelectionChanged="BuildingTypeComboBox_OnSelectionChanged"/>
-        <Label x:Name="NameLabel" Content="Name" Grid.Column="1" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="ResourcesLabel" Content="Resources" Grid.Column="1" HorizontalAlignment="Left" Margin="10,103,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="TypeLabel" Content="Type" Grid.Column="1" HorizontalAlignment="Left" Margin="10,72,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="IdLabel" Content="ID" Grid.Column="1" HorizontalAlignment="Left" Margin="10,41,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="PriceLabel" Content="Price" Grid.Column="1" HorizontalAlignment="Left" Margin="10,134,0,0" VerticalAlignment="Top"/>
-        <customControls:ResourcesTextBox x:Name="ResourcesTextBox" Grid.Column="2" HorizontalAlignment="Left" Margin="10,107,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="283" Background="White" TextChanged="ResourcesTextBox_TextChanged"/>
-        <customControls:ResourcesTextBox x:Name="PriceTextBox" Grid.Column="2" HorizontalAlignment="Left" Margin="10,140,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="283" Background="White" TextChanged="PriceTextBox_TextChanged"/>
+        <ListBox x:Name="BuildingsListBox" HorizontalAlignment="Left" Height="232" Margin="10,35,0,0" VerticalAlignment="Top" Width="107" SelectionChanged="BuildingsListBox_OnSelectionChanged"/>
+        <Button Grid.Column="0" x:Name="AddButton" Content="Add" HorizontalAlignment="Left" Margin="10,272,0,0" VerticalAlignment="Top" Width="50" Height="22" Click="AddButton_Click"/>
+        <Button Grid.Column="0" x:Name="RemoveButton" Content="Remove" HorizontalAlignment="Left" Margin="65,272,0,0" VerticalAlignment="Top" Width="52" Height="22"/>
+        <TextBox x:Name="NameTextBox" HorizontalAlignment="Left" Height="23" Margin="10,35,0,0" TextWrapping="Wrap" Text="Name" VerticalAlignment="Top" Width="283" Grid.Column="2" TextChanged="NameTextBox_OnTextChanged"/>
+        <TextBox x:Name="IdTextBox" Grid.Column="2" HorizontalAlignment="Left" Height="23" Margin="10,69,0,0" TextWrapping="Wrap" Text="Id" VerticalAlignment="Top" Width="283" IsReadOnly="True" RenderTransformOrigin="0.554,2.736"/>
+        <ComboBox x:Name="BuildingTypeComboBox" Grid.Column="2" HorizontalAlignment="Left" Margin="10,101,0,0" VerticalAlignment="Top" Width="120" AlternationCount="1" SelectionChanged="BuildingTypeComboBox_OnSelectionChanged" Height="22"/>
+        <Label x:Name="NameLabel" Content="Name" Grid.Column="1" HorizontalAlignment="Left" Margin="10,35,0,0" VerticalAlignment="Top" Height="26" Width="42"/>
+        <Label x:Name="ResourcesLabel" Content="Resources" Grid.Column="1" HorizontalAlignment="Left" Margin="10,128,0,0" VerticalAlignment="Top" Height="26" Width="63"/>
+        <Label x:Name="TypeLabel" Content="Type" Grid.Column="1" HorizontalAlignment="Left" Margin="10,97,0,0" VerticalAlignment="Top" Height="26" Width="35"/>
+        <Label x:Name="IdLabel" Content="Id" Grid.Column="1" HorizontalAlignment="Left" Margin="10,66,0,0" VerticalAlignment="Top" Height="26" Width="22"/>
+        <Label x:Name="PriceLabel" Content="Price" Grid.Column="1" HorizontalAlignment="Left" Margin="10,159,0,0" VerticalAlignment="Top" Height="26" Width="36"/>
+        <customControls:ResourcesTextBox x:Name="ResourcesTextBox" Grid.Column="2" HorizontalAlignment="Left" Margin="10,132,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="283" Background="White" TextChanged="ResourcesTextBox_TextChanged" Height="20"/>
+        <customControls:ResourcesTextBox x:Name="PriceTextBox" Grid.Column="2" HorizontalAlignment="Left" Margin="10,165,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="283" Background="White" TextChanged="PriceTextBox_TextChanged" Height="20"/>
+        <Menu x:Name="menu" HorizontalAlignment="Left" Height="24" VerticalAlignment="Top" Width="517" Grid.ColumnSpan="3" Background="#FFF3F3F3">
+            <MenuItem Header="File" Height="24" Foreground="Black">
+                <MenuItem x:Name="SaveMenuItem" Header="Save" Click="SaveMenuItem_OnClick"/>
+                <MenuItem x:Name="OpenMenuItem" Header="Open" Click="OpenMenuItem_OnClick"></MenuItem>
+            </MenuItem>
+        </Menu>
 
     </Grid>
 </Window>

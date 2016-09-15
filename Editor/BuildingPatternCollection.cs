@@ -3,12 +3,9 @@ using Isometric.Core.Modules.WorldModule.Buildings;
 
 namespace Isometric.Editor
 {
-    public class BuildingPatternCollection
+    public static class BuildingPatternCollection
     {
-        public static BuildingPatternCollection Instance { get; } 
-            = new BuildingPatternCollection();
-
-        public List<BuildingPattern> CurrentPatterns { get; }
+        public static List<BuildingPattern> Instance { get; set; }
             = new List<BuildingPattern>();
     }
 }

@@ -6,15 +6,15 @@ namespace Isometric.CommonStructures
     [Serializable]
     public class UpgradeResult
     {
-        public short ID { get; set; }
+        public int Id { get; set; }
 
         public IntVector Position { get; set; }
 
 
 
-        public UpgradeResult(short id, IntVector position)
+        public UpgradeResult(int id, IntVector position)
         {
-            ID = id;
+            Id = id;
             Position = position;
         }
 

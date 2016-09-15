@@ -39,6 +39,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Modules\WorldModule\Buildings\BuildingPatternCollection.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Modules\GlobalData.cs" />
     <Compile Include="Modules\SingleRandom.cs" />
