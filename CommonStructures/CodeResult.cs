@@ -1,4 +1,4 @@
-﻿namespace CommonStructures
+﻿namespace Isometric.CommonStructures
 {
     public enum CodeResult
     {

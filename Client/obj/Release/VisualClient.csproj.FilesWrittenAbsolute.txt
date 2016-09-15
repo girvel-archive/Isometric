@@ -1,0 +1,5 @@
+/media/nik/Doc/projects/isogame/Visual/VisualClient/obj/Release/.NETFramework,Version=v4.5.AssemblyAttribute.cs
+/media/nik/Doc/projects/isogame/Visual/VisualClient/bin/Release/VisualClient.exe.mdb
+/media/nik/Doc/projects/isogame/Visual/VisualClient/bin/Release/VisualClient.exe
+/media/nik/Doc/projects/isogame/Visual/VisualClient/obj/Release/VisualClient.exe
+/media/nik/Doc/projects/isogame/Visual/VisualClient/obj/Release/VisualClient.exe.mdb

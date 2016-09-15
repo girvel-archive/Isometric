@@ -1,7 +1,7 @@
 ﻿using System;
 using VectorNet;
 
-namespace CommonStructures
+namespace Isometric.CommonStructures
 {
     [Serializable]
     public class UpgradeResult

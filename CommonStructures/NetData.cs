@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Text;
 
-namespace CommonStructures
+namespace Isometric.CommonStructures
 {
     public struct NetData
     {

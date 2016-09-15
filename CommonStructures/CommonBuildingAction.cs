@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace CommonStructures
+namespace Isometric.CommonStructures
 {
     [Serializable]
     public struct CommonBuildingAction

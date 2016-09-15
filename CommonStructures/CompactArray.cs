@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Runtime.Serialization;
 
-namespace CommonStructures
+namespace Isometric.CommonStructures
 {
     [Serializable]
     public struct CompactArray<T> : ISerializable
