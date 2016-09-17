@@ -117,6 +117,10 @@
       <Project>{5E853DD8-DDC3-4F8C-9966-52CA5881CBCE}</Project>
       <Name>Isometric.Core</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Implementation\Isometric.Implementation.csproj">
+      <Project>{9e79462d-fc84-4bf7-a345-e152b10b996a}</Project>
+      <Name>Isometric.Implementation</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

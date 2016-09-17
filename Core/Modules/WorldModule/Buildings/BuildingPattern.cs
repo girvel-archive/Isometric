@@ -54,9 +54,8 @@ namespace Isometric.Core.Modules.WorldModule.Buildings
             }
         }
 
-        public BuildingPattern(
-            string name, Resources resources, Resources price, TimeSpan upgradeTimeNormal,
-            BuildingType type = BuildingType.Nature)
+        internal BuildingPattern(
+            string name, Resources resources, Resources price, TimeSpan upgradeTimeNormal, BuildingType type)
         {
             Name = name;
             Resources = resources;

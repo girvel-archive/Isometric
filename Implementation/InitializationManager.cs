@@ -1,6 +1,7 @@
 ﻿using System;
+using System.IO;
 using Isometric.Implementation.Modules.DataImplementation;
-using Isometric.Implementation.Modules.PatternsImplementation;
+using Isometric.Implementation.Modules.GameData;
 
 namespace Isometric.Implementation
 {
@@ -8,8 +9,6 @@ namespace Isometric.Implementation
     {
         private static readonly Action[] Inits =
         {
-            BuildingPatterns.Init,
-            BuildingGraphImplementation.Init,
             TimeDataImplementation.Init,
             GlobalDataImplementation.Init,
             PlayerDataImplementation.Init,
@@ -17,12 +16,14 @@ namespace Isometric.Implementation
             WorldDataImplementation.Init,
         };
 
-        public static void Init()
+        public static void Init(Stream stream)
         {
             foreach (var init in Inits)
             {
                 init();
             }
+
+            GameDataManager.Instance = new GameDataManager(stream);
         }
     }
 }

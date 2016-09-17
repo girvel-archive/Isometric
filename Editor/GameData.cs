@@ -1,10 +1,9 @@
-﻿using System.Collections.Generic;
-using System.IO;
+﻿using System.IO;
 using System.Linq;
 using System.Runtime.Serialization.Formatters.Binary;
 using Girvel.Graph;
-using Isometric.Core.Modules;
 using Isometric.Core.Modules.WorldModule.Buildings;
+using SaveGameData = Isometric.Implementation.Modules.GameData.GameData;
 
 namespace Isometric.Editor
 {
@@ -14,7 +13,7 @@ namespace Isometric.Editor
 
 
 
-        public List<BuildingPattern> BuildingPatterns { get; set; }
+        public BuildingPatternCollection BuildingPatterns { get; set; }
 
         public Graph<BuildingPattern> BuildingGraph { get; set; }
 
@@ -22,26 +21,27 @@ namespace Isometric.Editor
 
         public GameData()
         {
-            BuildingPatterns = new List<BuildingPattern>();
+            BuildingPatterns = new BuildingPatternCollection();
             BuildingGraph = new Graph<BuildingPattern>();
         }
         
         public GameData(Stream stream)
         {
-            var formatter = new BinaryFormatter();
+            var data = (SaveGameData)new BinaryFormatter().Deserialize(stream);
 
-            BuildingPatterns = ((BuildingPattern[]) formatter.Deserialize(stream)).ToList();
-            BuildingGraph = (Graph<BuildingPattern>) formatter.Deserialize(stream);
+            BuildingPatterns = new BuildingPatternCollection(data.Patterns);
+            BuildingGraph = data.BuildingGraph;
         }
 
 
 
         public void SerializeData(Stream stream)
         {
-            var formatter = new BinaryFormatter();
-
-            formatter.Serialize(stream, BuildingPatterns.ToArray());
-            formatter.Serialize(stream, BuildingGraph);
+            new BinaryFormatter().Serialize(
+                stream, 
+                new SaveGameData(
+                    BuildingPatterns.ToArray(), 
+                    BuildingGraph));
         }
     }
 }

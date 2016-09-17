@@ -66,14 +66,14 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Modules\DataImplementation\BuildingGraphImplementation.cs" />
+    <Compile Include="Modules\GameData\GameData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Modules\DataImplementation\TimeDataImplementation.cs" />
     <Compile Include="Modules\DataImplementation\TickDataImplementation.cs" />
     <Compile Include="Modules\DataImplementation\PlayerDataImplementation.cs" />
     <Compile Include="Modules\DataImplementation\WorldDataImplementation.cs" />
     <Compile Include="Modules\DataImplementation\GlobalDataImplementation.cs" />
-    <Compile Include="Modules\PatternsImplementation\BuildingPatterns.cs" />
+    <Compile Include="Modules\GameData\GameDataManager.cs" />
     <Compile Include="Modules\PatternsImplementation\TerritoryPatterns.cs" />
     <Compile Include="InitializationManager.cs" />
     <Compile Include="Modules\Realization.cs" />

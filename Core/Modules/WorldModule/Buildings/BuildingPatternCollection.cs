@@ -21,16 +21,28 @@ namespace Isometric.Core.Modules.WorldModule.Buildings
 
         public BuildingPatternCollection(IEnumerable<BuildingPattern> patterns)
         {
-            patterns = new List<BuildingPattern>(patterns);
+            _buildingPatterns = new List<BuildingPattern>(patterns);
+            _lastId = _buildingPatterns.Max(pattern => pattern.Id);
         }
 
 
 
         public BuildingPattern NewPattern(
-            string name, Resources resources, Resources price, TimeSpan upgradeTimeNormal, 
+            string name, 
+            Resources resources = new Resources(), 
+            Resources price = new Resources(), 
+            TimeSpan upgradeTimeNormal = new TimeSpan(), 
             BuildingType type = BuildingType.Nature)
         {
-            return new BuildingPattern(name, resources, price, upgradeTimeNormal, type) { Id = ++_lastId};
+            if (_buildingPatterns.Any(pattern => pattern.Name == name))
+            {
+                throw new ArgumentException("Pattern with this name already exists", nameof(name));
+            }
+
+            var result = new BuildingPattern(name, resources, price, upgradeTimeNormal, type) {Id = ++_lastId};
+            _buildingPatterns.Add(result);
+
+            return result;
         }
         
 

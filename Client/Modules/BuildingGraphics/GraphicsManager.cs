@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq;
 using Isometric.Core.Modules.WorldModule.Buildings;
-using Isometric.Implementation.Modules.PatternsImplementation;
+using Isometric.Implementation.Modules.GameData;
 using VisualConsole;
 
 namespace Isometric.Client.Modules.BuildingGraphics
@@ -48,27 +48,27 @@ namespace Isometric.Client.Modules.BuildingGraphics
                 {
                     new GraphicsPair(
                         new ConsolePoint('f', ConsoleColor.DarkGreen), 
-                        BuildingPatterns.Forest),
+                        GameDataManager.Instance.GetPattern("Forest")),
 
                     new GraphicsPair(
                         new ConsolePoint('~', ConsoleColor.DarkBlue),
-                        BuildingPatterns.Water),
+                        GameDataManager.Instance.GetPattern("Water")),
 
                     new GraphicsPair(
                         new ConsolePoint('.', ConsoleColor.DarkMagenta),
-                        BuildingPatterns.Plain),
+                        GameDataManager.Instance.GetPattern("Plain")),
 
                     new GraphicsPair(
                         new ConsolePoint('r', ConsoleColor.DarkGray),
-                        BuildingPatterns.Rock),
+                        GameDataManager.Instance.GetPattern("Rock")),
 
                     new GraphicsPair(
                         new ConsolePoint('H', ConsoleColor.Yellow),
-                        BuildingPatterns.WoodHouse),
+                        GameDataManager.Instance.GetPattern("WoodHouse")),
 
                     new GraphicsPair(
                         new ConsolePoint('H', ConsoleColor.Yellow),
-                        BuildingPatterns.WoodHouse2),
+                        GameDataManager.Instance.GetPattern("WoodHouse2")),
                 };
         }
 

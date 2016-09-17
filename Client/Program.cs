@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Linq;
 using System.Threading;
 using Isometric.Client.Modules;
@@ -23,15 +24,20 @@ namespace Isometric.Client
 
         public static int SavingPeriodMilliseconds { get; set; } = 60000;
 
-        public static string SavingDirectory { get; set; } = @"saves";
-        public static string SavingFile { get; set; } = @"server-save";
-        public static string SavingPathLog { get; set; } = @"server-log";
+        public const string 
+            GameDataFile = @"game-data.isob",
+            SavingDirectory = @"saves",
+            SavingFile = @"server-save",
+            SavingPathLog = @"server-log";
 
 
 
         static Program()
         {
-            InitializationManager.Init();
+            using (var stream = File.OpenRead(GameDataFile))
+            {
+                InitializationManager.Init(stream);
+            }
         }
 
 

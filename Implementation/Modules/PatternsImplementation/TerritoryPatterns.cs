@@ -3,6 +3,7 @@ using Isometric.Core.Modules.PlayerModule;
 using Isometric.Core.Modules.WorldModule;
 using Isometric.Core.Modules.WorldModule.Buildings;
 using Isometric.Core.Modules.WorldModule.Land;
+using Isometric.Implementation.Modules.GameData;
 using RandomExtensions;
 using VectorNet;
 
@@ -20,10 +21,10 @@ namespace Isometric.Implementation.Modules.PatternsImplementation
             Forest = new TerritoryPattern(
                 (terr, seed) => _defaultGeneration(terr, seed, new RandomCollection<BuildingPattern>(new Random(seed))
                 { 
-                    new RandomPair<BuildingPattern>(6, BuildingPatterns.Forest),
-                    new RandomPair<BuildingPattern>(2, BuildingPatterns.Plain),
-                    new RandomPair<BuildingPattern>(2, BuildingPatterns.Water),
-                    new RandomPair<BuildingPattern>(1, BuildingPatterns.Rock),
+                    new RandomPair<BuildingPattern>(6, GameDataManager.Instance.GetPattern("Forest")),
+                    new RandomPair<BuildingPattern>(2, GameDataManager.Instance.GetPattern("Plain")),
+                    new RandomPair<BuildingPattern>(2, GameDataManager.Instance.GetPattern("Water")),
+                    new RandomPair<BuildingPattern>(1, GameDataManager.Instance.GetPattern("Rock")),
                 }));
         }
 

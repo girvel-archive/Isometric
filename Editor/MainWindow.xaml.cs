@@ -1,12 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.Serialization.Formatters.Binary;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Media;
 using Girvel.Graph;
-using Isometric.CommonStructures;
 using Isometric.Core.Modules.WorldModule.Buildings;
 using Isometric.Editor.Extensions;
 using Microsoft.Win32;
@@ -67,24 +64,17 @@ namespace Isometric.Editor
 
 
 
-        public void AddBuilding(string name)
+        public void AddBuilding(BuildingPattern pattern)
         {
-            BuildingsListBox.Items.Add(name);
+            BuildingsListBox.Items.Add(pattern.Name);
 
-            BuildingPattern pattern;
-            GameData.Instance.BuildingPatterns.Add(
-                pattern = new BuildingPattern(
-                    name,
-                    new Resources(),
-                    new Resources(), 
-                    new TimeSpan()));
-
-            _nodes[pattern] = GameData.Instance.BuildingGraph.NewNode(pattern);
+            _nodes[pattern] = GameData.Instance.BuildingGraph.FirstOrDefault(node => node.Value.Name == pattern.Name)
+                ?? GameData.Instance.BuildingGraph.NewNode(pattern);
         }
 
         public void SelectBuilding(string name, int listIndex)
         {
-            SelectedPattern = GameData.Instance.BuildingPatterns.Find(p => p.Name == name);
+            SelectedPattern = GameData.Instance.BuildingPatterns.First(p => p.Name == name);
             SelectedPatternListIndex = listIndex;
 
             foreach (var control in BuildingSettingsControls)
@@ -153,7 +143,9 @@ namespace Isometric.Editor
 
         private void AddButton_Click(object sender, RoutedEventArgs e)
         {
-            AddBuilding($"building{BuildingsListBox.Items.Count}");
+            AddBuilding(
+                GameData.Instance.BuildingPatterns.NewPattern(
+                    $"building{BuildingsListBox.Items.Count}"));
         }
 
         private void BuildingsListBox_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -240,6 +232,10 @@ namespace Isometric.Editor
             }
 
             OpenFileDialog.Reset();
+            foreach (var pattern in GameData.Instance.BuildingPatterns)
+            {
+                AddBuilding(pattern);
+            }
         }
 
         private void UpgradesAddButton_OnClick(object sender, RoutedEventArgs e)
