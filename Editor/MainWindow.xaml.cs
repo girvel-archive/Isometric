@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
+using Girvel.Graph;
 using Isometric.CommonStructures;
 using Isometric.Core.Modules.WorldModule.Buildings;
 using Isometric.Editor.Extensions;
@@ -27,12 +29,17 @@ namespace Isometric.Editor
         private const string DefaultFilter 
             = "Isometric buildings|*.isob|All files|*.*";
 
+        private Dictionary<BuildingPattern, GraphNode<BuildingPattern>> _nodes
+            = new Dictionary<BuildingPattern, GraphNode<BuildingPattern>>(); 
+
 
 
         public MainWindow()
         {
             InitializeComponent();
             
+            GameData.Instance = new GameData();
+
             foreach (var type in typeof (BuildingType).GetEnumNames())
             {
                 BuildingTypeComboBox.Items.Add(type);
@@ -63,17 +70,21 @@ namespace Isometric.Editor
         public void AddBuilding(string name)
         {
             BuildingsListBox.Items.Add(name);
-            BuildingPatternCollection.Instance.Add(
-                new BuildingPattern(
+
+            BuildingPattern pattern;
+            GameData.Instance.BuildingPatterns.Add(
+                pattern = new BuildingPattern(
                     name,
                     new Resources(),
                     new Resources(), 
                     new TimeSpan()));
+
+            _nodes[pattern] = GameData.Instance.BuildingGraph.NewNode(pattern);
         }
 
         public void SelectBuilding(string name, int listIndex)
         {
-            SelectedPattern = BuildingPatternCollection.Instance.Find(p => p.Name == name);
+            SelectedPattern = GameData.Instance.BuildingPatterns.Find(p => p.Name == name);
             SelectedPatternListIndex = listIndex;
 
             foreach (var control in BuildingSettingsControls)
@@ -95,6 +106,27 @@ namespace Isometric.Editor
             BuildingTypeComboBox.SelectedItem = SelectedPattern.Type.ToString();
             ResourcesTextBox.Text = SelectedPattern.Resources.GetValueString();
             PriceTextBox.Text = SelectedPattern.Price.GetValueString();
+
+            UpgradesComboBox.Items.Clear();
+            UpgradesListBox.Items.Clear();
+
+            foreach (
+                var obj 
+                    in BuildingsListBox.Items
+                        .Cast<object>()
+                        .Where(item =>
+                            item.ToString() != SelectedPattern.Name
+                            && _nodes[SelectedPattern]
+                                .GetChildren()
+                                .All(node => node.Value.Name != item.ToString())))
+            {
+                UpgradesComboBox.Items.Add(obj);
+            }
+
+            foreach (var child in _nodes[SelectedPattern].GetChildren())
+            {
+                UpgradesListBox.Items.Add(child.Value.Name);
+            }
         }
 
         public void ResetBuildingSelection()
@@ -106,6 +138,15 @@ namespace Isometric.Editor
             {
                 control.IsEnabled = false;
             }
+        }
+
+        public void AddUpgrade(string name)
+        {
+            _nodes[SelectedPattern].AddChild(
+                _nodes.First(pair => pair.Value.Value.Name == UpgradesComboBox.Text).Value);
+
+            UpgradesListBox.Items.Add(name);
+            UpgradesComboBox.Items.Remove(name);
         }
 
 
@@ -173,9 +214,7 @@ namespace Isometric.Editor
             {
                 using (var stream = SaveFileDialog.OpenFile())
                 {
-                    new BinaryFormatter().Serialize(
-                        stream,
-                        BuildingPatternCollection.Instance.ToArray());
+                    GameData.Instance.SerializeData(stream);
                 }
             }
             catch (InvalidOperationException) { }
@@ -192,8 +231,7 @@ namespace Isometric.Editor
                 using (var stream = OpenFileDialog.OpenFile())
                 {
                     BuildingsListBox.Items.Clear();
-                    BuildingPatternCollection.Instance
-                        = new List<BuildingPattern>((BuildingPattern[]) new BinaryFormatter().Deserialize(stream));
+                    GameData.Instance = new GameData(stream);
                 }
             }
             catch (InvalidOperationException)
@@ -202,10 +240,13 @@ namespace Isometric.Editor
             }
 
             OpenFileDialog.Reset();
+        }
 
-            foreach (var pattern in BuildingPatternCollection.Instance)
+        private void UpgradesAddButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            if (UpgradesComboBox.SelectedIndex != -1)
             {
-                BuildingsListBox.Items.Add(pattern.Name);
+                AddUpgrade(UpgradesComboBox.SelectedItem.ToString());
             }
         }
     }

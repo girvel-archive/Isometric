@@ -8,12 +8,12 @@ namespace Isometric.CommonStructures
         public bool Active { get; set; }
         public string Name { get; set; }
         public CommonBuilding Subject { get; set; }
-        public short UpgradeTo { get; set; }
+        public int UpgradeTo { get; set; }
 
 
 
         public CommonBuildingAction(
-                bool active, string name, CommonBuilding subject, short upgradeTo)
+                bool active, string name, CommonBuilding subject, int upgradeTo)
         {
             Active = active;
             Name = name;

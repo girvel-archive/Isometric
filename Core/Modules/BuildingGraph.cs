@@ -1,6 +1,6 @@
 ﻿using System;
+using Girvel.Graph;
 using Isometric.Core.Modules.WorldModule.Buildings;
-using Isometric.Core.Structures;
 
 namespace Isometric.Core.Modules
 {

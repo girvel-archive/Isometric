@@ -53,6 +53,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\tools\CommandInterface\Library\bin\Release\CommandInterface.dll</HintPath>
     </Reference>
+    <Reference Include="Girvel.Graph">
+      <HintPath>..\..\tools\Girvel.Graph\Library\bin\Release\Girvel.Graph.dll</HintPath>
+    </Reference>
     <Reference Include="SocketExtensions">
       <HintPath>..\..\tools\CsTools\SocketExtensions\bin\Release\SocketExtensions.dll</HintPath>
     </Reference>

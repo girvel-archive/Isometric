@@ -22,3 +22,5 @@ E:\projects\isometric\Editor\obj\Debug\Isometric.Editor_MarkupCompile.lref
 E:\projects\isometric\Editor\obj\Debug\CustomControls\ResourcesTextBox.g.cs
 E:\projects\isometric\Editor\obj\Debug\CustomControls\ResourcesTextBox.baml
 E:\projects\isometric\Editor\obj\Debug\GeneratedInternalTypeHelper.g.cs
+E:\projects\isometric\Editor\bin\Debug\Girvel.Graph.dll
+E:\projects\isometric\Editor\bin\Debug\Girvel.Graph.pdb

@@ -22,3 +22,5 @@ E:\projects\isometric\Client\bin\Debug\RandomExtensions.pdb
 E:\projects\isometric\Client\obj\Debug\Isometric.Client.csprojResolveAssemblyReference.cache
 E:\projects\isometric\Client\obj\Debug\Isometric.Client.exe
 E:\projects\isometric\Client\obj\Debug\Isometric.Client.pdb
+E:\projects\isometric\Client\bin\Debug\Girvel.Graph.dll
+E:\projects\isometric\Client\bin\Debug\Girvel.Graph.pdb

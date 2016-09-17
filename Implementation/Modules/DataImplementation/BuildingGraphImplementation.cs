@@ -1,6 +1,6 @@
-﻿using Isometric.Core.Modules;
+﻿using Girvel.Graph;
+using Isometric.Core.Modules;
 using Isometric.Core.Modules.WorldModule.Buildings;
-using Isometric.Core.Structures;
 using Isometric.Implementation.Modules.PatternsImplementation;
 
 namespace Isometric.Implementation.Modules.DataImplementation
@@ -9,19 +9,17 @@ namespace Isometric.Implementation.Modules.DataImplementation
     {
         internal static void Init()
         {
-            var g = BuildingGraph.Instance = new Graph<BuildingPattern>(true);
+            GraphNode<BuildingPattern> woodHouse1;
+            var g = BuildingGraph.Instance = new Graph<BuildingPattern>();
 
-            g.SetRoot(BuildingPatterns.Plain);
+            var plain = g.NewNode(BuildingPatterns.Plain);
 
-            g.Root
-                .Add(BuildingPatterns.WoodHouse)
-                .Add(BuildingPatterns.WoodHouse2);
+            plain.AddChild(woodHouse1 = g.NewNode(BuildingPatterns.WoodHouse));
 
-            GraphNode.Create(BuildingPatterns.Forest, g)
-                .Add(g.Root);
+            woodHouse1.AddChild(g.NewNode(BuildingPatterns.WoodHouse2));
 
-            GraphNode.Create(BuildingPatterns.Water, g)
-                .Add(g.Root);
+            g.NewNode(BuildingPatterns.Forest).AddChild(plain);
+            g.NewNode(BuildingPatterns.Water).AddChild(plain);
         }
     }
 }

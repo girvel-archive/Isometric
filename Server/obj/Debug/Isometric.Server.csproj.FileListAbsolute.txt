@@ -15,3 +15,5 @@ E:\projects\isometric\Server\bin\Debug\VectorNet.pdb
 E:\projects\isometric\Server\obj\Debug\Isometric.Server.csprojResolveAssemblyReference.cache
 E:\projects\isometric\Server\obj\Debug\Isometric.Server.dll
 E:\projects\isometric\Server\obj\Debug\Isometric.Server.pdb
+E:\projects\isometric\Server\bin\Debug\Girvel.Graph.dll
+E:\projects\isometric\Server\bin\Debug\Girvel.Graph.pdb

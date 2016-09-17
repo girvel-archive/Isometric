@@ -29,6 +29,9 @@
     <ConsolePause>false</ConsolePause>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Girvel.Graph">
+      <HintPath>..\..\tools\Girvel.Graph\Library\bin\Release\Girvel.Graph.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="EnumerableExtensions">
       <HintPath>..\..\CsTools\EnumerableExtensions\bin\Release\EnumerableExtensions.dll</HintPath>
@@ -48,8 +51,6 @@
     <Compile Include="Modules\WorldModule\Buildings\BuildingType.cs" />
     <Compile Include="Modules\WorldModule\Interfaces\IRefreshable.cs" />
     <Compile Include="Modules\PlayerModule\Player.cs" />
-    <Compile Include="Structures\Graph.cs" />
-    <Compile Include="Structures\GraphNode.cs" />
     <Compile Include="Modules\BuildingGraph.cs" />
     <Compile Include="Modules\WorldModule\Land\Territory.cs" />
     <Compile Include="Modules\WorldModule\Land\TerritoryGenerationType.cs" />
@@ -73,7 +74,6 @@
     <Compile Include="Modules\TickModule\TickData.cs" />
     <Compile Include="Modules\PlayerModule\PlayersManager.cs" />
     <Compile Include="Modules\Core.cs" />
-    <Compile Include="Modules\ActionsProcessor.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup />

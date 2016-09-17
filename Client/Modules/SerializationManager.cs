@@ -55,9 +55,6 @@ namespace Isometric.Client.Modules
 
 
 
-        public delegate object Accessor();
-        public delegate void Mutator(object value);
-
         public Property[] SerializationList { get; set; } =
             {
                 new Property(

@@ -106,12 +106,12 @@ namespace Isometric.Server.Modules.CommandModule.Connection
             var building = netArgs.Connection.Account.Player.Territory[commonBuilding.Position];
 
             var pattern = building.Pattern;
-            var patternNodes = BuildingGraph.Instance.Find(pattern);
+            var patternNode = BuildingGraph.Instance.FirstOrDefault(node => node.Value == pattern);
 
-            if (patternNodes.Any())
+            if (patternNode != null)
             {
                 netArgs.Send("set-building-actions".CreateCommand(
-                    patternNodes[0].GetChildren().Select(
+                    patternNode.GetChildren().Select(
                         c => new CommonBuildingAction(
                             c.Value.UpgradePossible(
                                 netArgs.Connection.Account.Player.CurrentResources,
