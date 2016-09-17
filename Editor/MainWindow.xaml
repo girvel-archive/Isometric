@@ -28,7 +28,7 @@
             </ListBox.RenderTransform>
         </ListBox>
         <Button Grid.Column="0" x:Name="AddButton" Content="Add" HorizontalAlignment="Left" Margin="10,272,0,0" VerticalAlignment="Top" Width="50" Height="22" Click="AddButton_Click"/>
-        <Button Grid.Column="0" x:Name="RemoveButton" Content="Remove" HorizontalAlignment="Left" Margin="65,272,0,0" VerticalAlignment="Top" Width="52" Height="22"/>
+        <Button Grid.Column="0" x:Name="RemoveButton" Content="Remove" HorizontalAlignment="Left" Margin="65,272,0,0" VerticalAlignment="Top" Width="52" Height="22" Click="RemoveButton_Click"/>
         <TextBox x:Name="NameTextBox" HorizontalAlignment="Left" Height="23" Margin="10,35,0,0" TextWrapping="Wrap" Text="Name" VerticalAlignment="Top" Width="283" Grid.Column="2" TextChanged="NameTextBox_OnTextChanged"/>
         <TextBox x:Name="IdTextBox" Grid.Column="2" HorizontalAlignment="Left" Height="23" Margin="10,69,0,0" TextWrapping="Wrap" Text="Id" VerticalAlignment="Top" Width="283" IsReadOnly="True" RenderTransformOrigin="0.554,2.736"/>
         <ComboBox x:Name="BuildingTypeComboBox" Grid.Column="2" HorizontalAlignment="Left" Margin="10,101,0,0" VerticalAlignment="Top" Width="120" AlternationCount="1" SelectionChanged="BuildingTypeComboBox_OnSelectionChanged" Height="22"/>
@@ -48,7 +48,7 @@
         <Label x:Name="UpgradesLabel" Content="Upgrades:" Grid.Column="1" HorizontalAlignment="Left" Margin="10,190,0,0" VerticalAlignment="Top"/>
         <ListBox x:Name="UpgradesListBox" Grid.Column="2" HorizontalAlignment="Left" Height="104" Margin="10,190,0,0" VerticalAlignment="Top" Width="152"/>
         <Button x:Name="UpgradesAddButton" Content="Add" Grid.Column="2" HorizontalAlignment="Left" Margin="169,221,0,0" VerticalAlignment="Top" Width="65" Click="UpgradesAddButton_OnClick"/>
-        <Button x:Name="UpgradesRemoveButton" Content="Remove" Grid.Column="2" HorizontalAlignment="Left" Margin="169,248,0,0" VerticalAlignment="Top" Width="65"/>
+        <Button x:Name="UpgradesRemoveButton" Content="Remove" Grid.Column="2" HorizontalAlignment="Left" Margin="169,248,0,0" VerticalAlignment="Top" Width="65" Click="UpgradesRemoveButton_Click"/>
         <ComboBox x:Name="UpgradesComboBox" Grid.Column="2" HorizontalAlignment="Left" Margin="169,194,0,0" VerticalAlignment="Top" Width="124" AlternationCount="1" SelectionChanged="BuildingTypeComboBox_OnSelectionChanged" Height="22"/>
 
     </Grid>

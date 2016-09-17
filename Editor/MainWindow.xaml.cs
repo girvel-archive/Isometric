@@ -30,7 +30,7 @@ namespace Isometric.Editor
             = new Dictionary<BuildingPattern, GraphNode<BuildingPattern>>(); 
 
 
-
+        
         public MainWindow()
         {
             InitializeComponent();
@@ -70,6 +70,14 @@ namespace Isometric.Editor
 
             _nodes[pattern] = GameData.Instance.BuildingGraph.FirstOrDefault(node => node.Value.Name == pattern.Name)
                 ?? GameData.Instance.BuildingGraph.NewNode(pattern);
+        }
+
+        public void RemoveBuilding(BuildingPattern pattern)
+        {
+            BuildingsListBox.Items.Remove(pattern.Name);
+
+            _nodes.Remove(pattern);
+            GameData.Instance.BuildingPatterns.Remove(pattern);
         }
 
         public void SelectBuilding(string name, int listIndex)
@@ -133,19 +141,46 @@ namespace Isometric.Editor
         public void AddUpgrade(string name)
         {
             _nodes[SelectedPattern].AddChild(
-                _nodes.First(pair => pair.Value.Value.Name == UpgradesComboBox.Text).Value);
+                _nodes.First(pair => pair.Value.Value.Name == name).Value);
 
             UpgradesListBox.Items.Add(name);
             UpgradesComboBox.Items.Remove(name);
+        }
+
+        public void RemoveUpgrade(string name)
+        {
+            _nodes[SelectedPattern].RemoveChild(
+                _nodes.First(pair => pair.Value.Value.Name == name).Value);
+            
+            UpgradesListBox.Items.Remove(name);
+            UpgradesComboBox.Items.Add(name);
         }
 
 
 
         private void AddButton_Click(object sender, RoutedEventArgs e)
         {
-            AddBuilding(
-                GameData.Instance.BuildingPatterns.NewPattern(
-                    $"building{BuildingsListBox.Items.Count}"));
+            string name;
+            int i = BuildingsListBox.Items.Count;
+
+            do
+            {
+                name = $"building{i++}";
+            } while (GameData.Instance.BuildingPatterns.Any(pattern => pattern.Name == name));
+
+            AddBuilding(GameData.Instance.BuildingPatterns.NewPattern(name));
+        }
+
+        private void RemoveButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (BuildingsListBox.SelectedIndex == -1)
+            {
+                return;
+            }
+
+            RemoveBuilding(
+                GameData.Instance.BuildingPatterns.First(
+                    pattern => pattern.Name == BuildingsListBox.SelectedItem.ToString()));
         }
 
         private void BuildingsListBox_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -244,6 +279,16 @@ namespace Isometric.Editor
             {
                 AddUpgrade(UpgradesComboBox.SelectedItem.ToString());
             }
+        }
+
+        private void UpgradesRemoveButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (UpgradesListBox.SelectedIndex == -1)
+            {
+                return;
+            }
+
+            RemoveUpgrade(UpgradesListBox.SelectedItem.ToString());
         }
     }
 }
