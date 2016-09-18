@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
@@ -138,6 +139,28 @@ namespace Isometric.Editor
             }
         }
 
+        public void IncrementId(BuildingPattern pattern, int step)
+        {
+            if (pattern.Id + step > GameData.Instance.BuildingPatterns.LastId
+                || pattern.Id + step < 0
+                || step == 0)
+            {
+                return;
+            }
+
+            var pattern2 = GameData.Instance.BuildingPatterns.First(p => p.Id == pattern.Id + step);
+
+            pattern.Id += step;
+            pattern2.Id -= step;
+
+            Sort();
+
+            if (pattern == SelectedPattern)
+            {
+                IdTextBox.Text = (int.Parse(IdTextBox.Text) + step).ToString();
+            }
+        }
+
         public void AddUpgrade(string name)
         {
             _nodes[SelectedPattern].AddChild(
@@ -154,6 +177,22 @@ namespace Isometric.Editor
             
             UpgradesListBox.Items.Remove(name);
             UpgradesComboBox.Items.Add(name);
+        }
+
+        public void Sort()
+        {
+            BuildingsListBox.Items.Clear();
+            var patterns = new BuildingPattern[GameData.Instance.BuildingPatterns.LastId + 1];
+
+            foreach (var pattern in GameData.Instance.BuildingPatterns)
+            {
+                patterns[pattern.Id] = pattern;
+            }
+
+            foreach (var pattern in patterns)
+            {
+                BuildingsListBox.Items.Add(pattern.Name);
+            }
         }
 
 
@@ -289,6 +328,16 @@ namespace Isometric.Editor
             }
 
             RemoveUpgrade(UpgradesListBox.SelectedItem.ToString());
+        }
+
+        private void IdIncrementButton_Click(object sender, RoutedEventArgs e)
+        {
+            IncrementId(SelectedPattern, 1);
+        }
+
+        private void IdDecrementButton_Click(object sender, RoutedEventArgs e)
+        {
+            IncrementId(SelectedPattern, -1);
         }
     }
 }

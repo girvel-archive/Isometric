@@ -8,7 +8,7 @@ namespace Isometric.Core.Modules.WorldModule.Buildings
 {
     public class BuildingPatternCollection : IList<BuildingPattern>
     {
-        private int _lastId = -1;
+        public int LastId { get; private set; } = -1;
 
         private readonly List<BuildingPattern> _buildingPatterns;
 
@@ -22,7 +22,7 @@ namespace Isometric.Core.Modules.WorldModule.Buildings
         public BuildingPatternCollection(IEnumerable<BuildingPattern> patterns)
         {
             _buildingPatterns = new List<BuildingPattern>(patterns);
-            _lastId = _buildingPatterns.Max(pattern => pattern.Id);
+            LastId = _buildingPatterns.Max(pattern => pattern.Id);
         }
 
 
@@ -39,10 +39,15 @@ namespace Isometric.Core.Modules.WorldModule.Buildings
                 throw new ArgumentException("Pattern with this name already exists", nameof(name));
             }
 
-            var result = new BuildingPattern(name, resources, price, upgradeTimeNormal, type) {Id = ++_lastId};
+            var result = new BuildingPattern(name, resources, price, upgradeTimeNormal, type) {Id = ++LastId};
             _buildingPatterns.Add(result);
 
             return result;
+        }
+
+        public BuildingPattern Get(int id)
+        {
+            return _buildingPatterns[id];
         }
         
 
