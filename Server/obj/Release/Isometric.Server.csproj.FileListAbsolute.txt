@@ -1,0 +1,1 @@
+E:\projects\isometric\Server\obj\Release\Isometric.Server.csprojResolveAssemblyReference.cache

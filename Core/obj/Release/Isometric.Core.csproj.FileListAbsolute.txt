@@ -7,3 +7,5 @@ E:\projects\isometric\Core\bin\Release\VectorNet.pdb
 E:\projects\isometric\Core\obj\Release\Isometric.Core.csprojResolveAssemblyReference.cache
 E:\projects\isometric\Core\obj\Release\Isometric.Core.dll
 E:\projects\isometric\Core\obj\Release\Isometric.Core.pdb
+E:\projects\isometric\Core\bin\Release\Girvel.Graph.dll
+E:\projects\isometric\Core\bin\Release\Girvel.Graph.pdb

@@ -18,12 +18,12 @@ namespace Isometric.Implementation
 
         public static void Init(Stream stream)
         {
+            GameDataManager.Instance = new GameDataManager(stream);
+
             foreach (var init in Inits)
             {
                 init();
             }
-
-            GameDataManager.Instance = new GameDataManager(stream);
         }
     }
 }

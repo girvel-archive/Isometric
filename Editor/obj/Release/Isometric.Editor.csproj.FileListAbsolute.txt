@@ -18,3 +18,13 @@ E:\projects\isometric\Editor\obj\Release\Isometric.Editor.Properties.Resources.r
 E:\projects\isometric\Editor\obj\Release\Isometric.Editor.csproj.GenerateResource.Cache
 E:\projects\isometric\Editor\obj\Release\Isometric.Editor.exe
 E:\projects\isometric\Editor\obj\Release\Isometric.Editor.pdb
+E:\projects\isometric\Editor\bin\Release\Girvel.Graph.dll
+E:\projects\isometric\Editor\bin\Release\Isometric.Implementation.dll
+E:\projects\isometric\Editor\bin\Release\RandomExtensions.dll
+E:\projects\isometric\Editor\bin\Release\Isometric.Implementation.pdb
+E:\projects\isometric\Editor\bin\Release\Girvel.Graph.pdb
+E:\projects\isometric\Editor\bin\Release\RandomExtensions.pdb
+E:\projects\isometric\Editor\obj\Release\CustomControls\ResourcesTextBox.g.cs
+E:\projects\isometric\Editor\obj\Release\GeneratedInternalTypeHelper.g.cs
+E:\projects\isometric\Editor\obj\Release\Isometric.Editor_MarkupCompile.lref
+E:\projects\isometric\Editor\obj\Release\CustomControls\ResourcesTextBox.baml

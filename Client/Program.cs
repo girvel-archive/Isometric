@@ -25,7 +25,7 @@ namespace Isometric.Client
         public static int SavingPeriodMilliseconds { get; set; } = 60000;
 
         public const string 
-            GameDataFile = @"game-data.isob",
+            GameDataFile = @"../game-data.isob",
             SavingDirectory = @"saves",
             SavingFile = @"server-save",
             SavingPathLog = @"server-log";
