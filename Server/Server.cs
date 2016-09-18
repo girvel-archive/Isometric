@@ -5,6 +5,7 @@ using System.Net;
 using System.Net.Sockets;
 using System.Text;
 using CommandInterface;
+using Isometric.Core.Modules;
 using Isometric.Server.Modules.CommandModule.Server;
 using Isometric.Server.Modules.SpamModule;
 using SocketExtensions;

@@ -35,8 +35,6 @@ namespace Isometric.Editor
         public MainWindow()
         {
             InitializeComponent();
-            
-            GameData.Instance = new GameData();
 
             foreach (var type in typeof (BuildingType).GetEnumNames())
             {
@@ -53,17 +51,33 @@ namespace Isometric.Editor
                 PriceLabel,
                 ResourcesLabel,
                 TypeLabel,
+                UpgradesLabel,
                 IdTextBox,
                 NameTextBox,
                 PriceTextBox,
                 ResourcesTextBox,
                 BuildingTypeComboBox,
+                IdIncrementButton,
+                IdDecrementButton,
+                UpgradesComboBox,
+                UpgradesAddButton,
+                UpgradesRemoveButton,
+                UpgradesListBox,
             };
 
-            ResetBuildingSelection();
+            Reset();
         }
 
 
+
+        public void Reset()
+        {
+            BuildingsListBox.Items.Clear();
+
+            GameData.Instance = new GameData();
+
+            ResetBuildingSelection();
+        }
 
         public void AddBuilding(BuildingPattern pattern)
         {
@@ -148,10 +162,14 @@ namespace Isometric.Editor
                 return;
             }
 
-            var pattern2 = GameData.Instance.BuildingPatterns.First(p => p.Id == pattern.Id + step);
+            var pattern2 = GameData.Instance.BuildingPatterns.FirstOrDefault(p => p.Id == pattern.Id + step);
 
             pattern.Id += step;
-            pattern2.Id -= step;
+
+            if (pattern2 != null)
+            {
+                pattern2.Id -= step;
+            }
 
             Sort();
 
@@ -189,7 +207,7 @@ namespace Isometric.Editor
                 patterns[pattern.Id] = pattern;
             }
 
-            foreach (var pattern in patterns)
+            foreach (var pattern in patterns.Where(p => p != null))
             {
                 BuildingsListBox.Items.Add(pattern.Name);
             }
@@ -338,6 +356,11 @@ namespace Isometric.Editor
         private void IdDecrementButton_Click(object sender, RoutedEventArgs e)
         {
             IncrementId(SelectedPattern, -1);
+        }
+
+        private void NewMenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            Reset();
         }
     }
 }

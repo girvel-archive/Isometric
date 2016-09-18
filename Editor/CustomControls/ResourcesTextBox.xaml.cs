@@ -26,7 +26,13 @@ namespace Isometric.Editor.CustomControls
         private void ResourcesTextBox_OnTextChanged(object sender, TextChangedEventArgs e)
         {
             Background = Brushes.White;
-            if (Text == string.Empty || !IsEnabled)
+            if (Text == string.Empty)
+            {
+                GameResources = new Resources();
+                return;
+            }
+
+            if (!IsEnabled)
             {
                 return;
             }

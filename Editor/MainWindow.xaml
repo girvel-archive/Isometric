@@ -42,6 +42,7 @@
         <customControls:ResourcesTextBox x:Name="PriceTextBox" Grid.Column="2" HorizontalAlignment="Left" Margin="10,165,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="283" Background="White" TextChanged="PriceTextBox_TextChanged" Height="20" Grid.ColumnSpan="2"/>
         <Menu x:Name="menu" HorizontalAlignment="Left" Height="24" VerticalAlignment="Top" Width="517" Grid.ColumnSpan="4" Background="#FFF3F3F3">
             <MenuItem Header="File" Height="24" Foreground="Black">
+                <MenuItem x:Name="NewMenuItem" Header="New" Click="NewMenuItem_Click"/>
                 <MenuItem x:Name="OpenMenuItem" Header="Open" Click="OpenMenuItem_OnClick"/>
                 <MenuItem x:Name="SaveMenuItem" Header="Save" Click="SaveMenuItem_OnClick"/>
             </MenuItem>
