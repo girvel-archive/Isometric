@@ -35,6 +35,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EnumerableExtensions, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\tools\CsTools\EnumerableExtensions\bin\Release\EnumerableExtensions.dll</HintPath>
+    </Reference>
     <Reference Include="Girvel.Graph, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\tools\Girvel.Graph\Library\bin\Release\Girvel.Graph.dll</HintPath>

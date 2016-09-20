@@ -28,3 +28,4 @@ E:\projects\isometric\Editor\bin\Debug\Isometric.Implementation.dll
 E:\projects\isometric\Editor\bin\Debug\RandomExtensions.dll
 E:\projects\isometric\Editor\bin\Debug\Isometric.Implementation.pdb
 E:\projects\isometric\Editor\bin\Debug\RandomExtensions.pdb
+E:\projects\isometric\Editor\bin\Debug\EnumerableExtensions.pdb

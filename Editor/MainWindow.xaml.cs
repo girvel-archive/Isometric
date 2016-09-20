@@ -4,6 +4,8 @@ using System.ComponentModel;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
+using EnumerableExtensions;
 using Girvel.Graph;
 using Isometric.Core.Modules.WorldModule.Buildings;
 using Isometric.Editor.Extensions;
@@ -16,7 +18,13 @@ namespace Isometric.Editor
         protected BuildingPattern SelectedPattern;
         protected int SelectedPatternListIndex = -1;
 
-        protected readonly Control[] BuildingSettingsControls;
+        private readonly Control[] _buildingSettingsControls;
+
+        private readonly Control[] _buildingControls;
+
+        private Control[] _constantControls;
+
+        private readonly Control[][] _controlGroups;
 
         protected SaveFileDialog SaveFileDialog
             = new SaveFileDialog();
@@ -27,7 +35,7 @@ namespace Isometric.Editor
         private const string DefaultFilter 
             = "Isometric buildings|*.isob|All files|*.*";
 
-        private Dictionary<BuildingPattern, GraphNode<BuildingPattern>> _nodes
+        private readonly Dictionary<BuildingPattern, GraphNode<BuildingPattern>> _nodes
             = new Dictionary<BuildingPattern, GraphNode<BuildingPattern>>(); 
 
 
@@ -44,7 +52,7 @@ namespace Isometric.Editor
             SaveFileDialog.Filter = DefaultFilter;
             OpenFileDialog.Filter = DefaultFilter;
 
-            BuildingSettingsControls = new Control[]
+            _buildingSettingsControls = new Control[]
             {
                 IdLabel,
                 NameLabel,
@@ -64,6 +72,19 @@ namespace Isometric.Editor
                 UpgradesRemoveButton,
                 UpgradesListBox,
             };
+
+            _buildingControls = EnumerableHelper.Add(
+                _buildingSettingsControls,
+                new Control[]
+                {
+                    BuildingsListBox,
+                    AddBuildingButton,
+                    RemoveBuildingButton,
+                });
+
+            _constantControls = new Control[0];
+
+            _controlGroups = new[] {_buildingControls, _constantControls};
 
             Reset();
         }
@@ -100,7 +121,7 @@ namespace Isometric.Editor
             SelectedPattern = GameData.Instance.BuildingPatterns.First(p => p.Name == name);
             SelectedPatternListIndex = listIndex;
 
-            foreach (var control in BuildingSettingsControls)
+            foreach (var control in _buildingSettingsControls)
             {
                 control.IsEnabled = true;
             }
@@ -147,7 +168,7 @@ namespace Isometric.Editor
             SelectedPatternListIndex = -1;
             SelectedPattern = null;
 
-            foreach (var control in BuildingSettingsControls)
+            foreach (var control in _buildingSettingsControls)
             {
                 control.IsEnabled = false;
             }
@@ -171,7 +192,7 @@ namespace Isometric.Editor
                 pattern2.Id -= step;
             }
 
-            Sort();
+            SortBuildings();
 
             if (pattern == SelectedPattern)
             {
@@ -197,7 +218,7 @@ namespace Isometric.Editor
             UpgradesComboBox.Items.Add(name);
         }
 
-        public void Sort()
+        public void SortBuildings()
         {
             BuildingsListBox.Items.Clear();
             var patterns = new BuildingPattern[GameData.Instance.BuildingPatterns.LastId + 1];
@@ -210,6 +231,22 @@ namespace Isometric.Editor
             foreach (var pattern in patterns.Where(p => p != null))
             {
                 BuildingsListBox.Items.Add(pattern.Name);
+            }
+        }
+
+        public void ShowControlsGroup(Control[] showingGroup)
+        {
+            SelectedPatternListIndex = -1;
+            SelectedPattern = null;
+
+            foreach (var control in _controlGroups.Where(group => @group != showingGroup).SelectMany(group => group))
+            {
+                control.Visibility = Visibility.Hidden;
+            }
+
+            foreach (var control in showingGroup)
+            {
+                control.Visibility = Visibility.Visible;
             }
         }
 
@@ -316,7 +353,7 @@ namespace Isometric.Editor
                 AddBuilding(pattern);
             }
 
-            Sort();
+            SortBuildings();
         }
 
         private void SaveMenuItem_Click(object sender, RoutedEventArgs e)
@@ -362,6 +399,30 @@ namespace Isometric.Editor
         private void IdDecrementButton_Click(object sender, RoutedEventArgs e)
         {
             IncrementId(SelectedPattern, -1);
+        }
+
+        private void MainTabControl_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (e.AddedItems.Count < 1)
+            {
+                return;
+            }
+            Control[] group;
+
+            if (e.AddedItems[0].Equals(BuildingsTabItem))
+            {
+                group = _buildingControls;
+            }
+            else if (e.AddedItems[0].Equals(ConstantsTabItem))
+            {
+                group = _constantControls;
+            }
+            else
+            {
+                throw new NotImplementedException();
+            }
+
+            ShowControlsGroup(group);
         }
     }
 }
