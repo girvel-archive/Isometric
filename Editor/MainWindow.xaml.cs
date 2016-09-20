@@ -20,12 +20,6 @@ namespace Isometric.Editor
 
         private readonly Control[] _buildingSettingsControls;
 
-        private readonly Control[] _buildingControls;
-
-        private Control[] _constantControls;
-
-        private readonly Control[][] _controlGroups;
-
         protected SaveFileDialog SaveFileDialog
             = new SaveFileDialog();
 
@@ -72,19 +66,6 @@ namespace Isometric.Editor
                 UpgradesRemoveButton,
                 UpgradesListBox,
             };
-
-            _buildingControls = EnumerableHelper.Add(
-                _buildingSettingsControls,
-                new Control[]
-                {
-                    BuildingsListBox,
-                    AddBuildingButton,
-                    RemoveBuildingButton,
-                });
-
-            _constantControls = new Control[0];
-
-            _controlGroups = new[] {_buildingControls, _constantControls};
 
             Reset();
         }
@@ -231,22 +212,6 @@ namespace Isometric.Editor
             foreach (var pattern in patterns.Where(p => p != null))
             {
                 BuildingsListBox.Items.Add(pattern.Name);
-            }
-        }
-
-        public void ShowControlsGroup(Control[] showingGroup)
-        {
-            SelectedPatternListIndex = -1;
-            SelectedPattern = null;
-
-            foreach (var control in _controlGroups.Where(group => @group != showingGroup).SelectMany(group => group))
-            {
-                control.Visibility = Visibility.Hidden;
-            }
-
-            foreach (var control in showingGroup)
-            {
-                control.Visibility = Visibility.Visible;
             }
         }
 
@@ -399,30 +364,6 @@ namespace Isometric.Editor
         private void IdDecrementButton_Click(object sender, RoutedEventArgs e)
         {
             IncrementId(SelectedPattern, -1);
-        }
-
-        private void MainTabControl_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            if (e.AddedItems.Count < 1)
-            {
-                return;
-            }
-            Control[] group;
-
-            if (e.AddedItems[0].Equals(BuildingsTabItem))
-            {
-                group = _buildingControls;
-            }
-            else if (e.AddedItems[0].Equals(ConstantsTabItem))
-            {
-                group = _constantControls;
-            }
-            else
-            {
-                throw new NotImplementedException();
-            }
-
-            ShowControlsGroup(group);
         }
     }
 }
