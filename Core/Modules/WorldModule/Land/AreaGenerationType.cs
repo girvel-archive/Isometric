@@ -1,6 +1,6 @@
 ﻿namespace Isometric.Core.Modules.WorldModule.Land
 {
-    public enum TerritoryGenerationType
+    public enum AreaGenerationType
     {
         Wild,
         EnemyVillage,

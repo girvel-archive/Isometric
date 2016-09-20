@@ -6,9 +6,9 @@ using VectorNet;
 namespace Isometric.Core.Modules.WorldModule.Land
 {
     [Serializable]
-    public class Territory : IIndependentChanging
+    public class Area : IIndependentChanging
     {
-        public TerritoryPattern Pattern { get; set; }
+        public AreaPattern Pattern { get; set; }
 
         public Building[,] BuildingGrid { get; }
 
@@ -28,20 +28,20 @@ namespace Isometric.Core.Modules.WorldModule.Land
 
         public int Seed { get; }
 
-        public TerritoryGenerationType Type { get; set; } = TerritoryGenerationType.Wild;
+        public AreaGenerationType Type { get; set; } = AreaGenerationType.Wild;
 
         protected Random Random;
 
 
 
-        public Territory(TerritoryPattern pattern, int seed) 
+        public Area(AreaPattern pattern, int seed) 
         {
             Pattern = pattern;
             Seed = seed;
 
             Random = new Random(Seed);
 
-            BuildingGrid = new Building[World.Data.TerritorySize, World.Data.TerritorySize];
+            BuildingGrid = new Building[World.Data.AreaSize, World.Data.AreaSize];
 
             Pattern.Generate(this, seed);
         }

@@ -19,7 +19,7 @@ namespace Isometric.Core.Modules.WorldModule.Buildings
 
         public Player Owner { get; set; }
 
-        public Territory Territory { get; set; }
+        public Area Area { get; set; }
 
 
 
@@ -39,11 +39,11 @@ namespace Isometric.Core.Modules.WorldModule.Buildings
 
         public Building() {}
 
-        public Building(IntVector position, Player owner, Territory territory, BuildingPattern pattern)
+        public Building(IntVector position, Player owner, Area territory, BuildingPattern pattern)
         {
             Position = position;
             Owner = owner;
-            Territory = territory;
+            Area = territory;
             Pattern = pattern;
 
             InitFromPattern(pattern);

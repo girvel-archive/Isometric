@@ -12,7 +12,7 @@ namespace Isometric.Client.Modules
             return new ConsoleUI();
 //                getGrid = () =>
 //                {
-//                    Program.Territory.BuildingGrid.TwoDimSelect(b => GraphicsManager.Instance.GetGraphics(b));
+//                    Program.Area.BuildingGrid.TwoDimSelect(b => GraphicsManager.Instance.GetGraphics(b));
 //                },
 //                new List<Command>
         }

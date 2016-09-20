@@ -14,24 +14,24 @@ namespace Isometric.Implementation.Modules.DataImplementation
         {
             World.Data = new WorldData
             {
-                TerritorySize = 32,
+                AreaSize = 32,
 
                 StartBuildings = new[]
                 {
-                    new WorldData.DefaultBuilding(5, GameDataManager.Instance.GetPattern("Wood house")),
+                    new WorldData.DefaultBuilding(5, GameDataManager.Instance.GetBuildingPattern("Wood house")),
                 },
 
-                GenerateTerritory =
-                    (land, x, y, seed) => new Territory(TerritoryPatterns.Forest, seed),
+                GenerateArea =
+                    (land, x, y, seed) => new Area(AreaPatterns.Forest, seed),
 
-                NewPlayerTerritory =
+                NewPlayerArea =
                     (owner, territory) =>
                     {
                         foreach (var building in World.Data.StartBuildings)
                         {
                             for (var i = 0; i < building.Number; i++)
                             {
-                                var randomPosition = SingleRandom.Next(World.Data.TerritoryVectorSize);
+                                var randomPosition = SingleRandom.Next(World.Data.AreaVectorSize);
 
                                 if (!World.Data.StartBuildings.Any(
                                     b => b.Pattern == territory[randomPosition]?.Pattern))

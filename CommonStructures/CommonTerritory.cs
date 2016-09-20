@@ -3,11 +3,11 @@
 namespace Isometric.CommonStructures
 {
     [Serializable]
-    public struct CommonTerritory
+    public struct CommonArea
     {
         public int[,] PatternIDs { get; set; }
 
-        public CommonTerritory(int[,] patternIDs)
+        public CommonArea(int[,] patternIDs)
         {
             PatternIDs = patternIDs;
         }

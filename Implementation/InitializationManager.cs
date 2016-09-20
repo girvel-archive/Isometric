@@ -7,23 +7,16 @@ namespace Isometric.Implementation
 {
     public static class InitializationManager
     {
-        private static readonly Action[] Inits =
-        {
-            TimeDataImplementation.Init,
-            GlobalDataImplementation.Init,
-            PlayerDataImplementation.Init,
-            TickDataImplementation.Init,
-            WorldDataImplementation.Init,
-        };
-
         public static void Init(Stream stream)
         {
             GameDataManager.Instance = new GameDataManager(stream);
 
-            foreach (var init in Inits)
-            {
-                init();
-            }
+            TimeDataImplementation.Init();
+            GlobalDataImplementation.Init();
+            PlayerDataImplementation.Init();
+            TickDataImplementation.Init();
+            WorldDataImplementation.Init();
+            GameConstantsManager.SetConstants();
         }
     }
 }

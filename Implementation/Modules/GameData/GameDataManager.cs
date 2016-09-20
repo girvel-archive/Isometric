@@ -25,6 +25,6 @@ namespace Isometric.Implementation.Modules.GameData
             BuildingGraph.Instance = data.BuildingGraph;
         }
 
-        public BuildingPattern GetPattern(string name) => Patterns.First(p => p.Name == name);
+        public BuildingPattern GetBuildingPattern(string name) => Patterns.First(p => p.Name == name);
     }
 }

@@ -58,8 +58,8 @@ namespace Isometric.Client.Modules
         public Property[] SerializationList { get; set; } =
             {
                 new Property(
-                    get: () => Core.Modules.Core.Version,
-                    set: value => Core.Modules.Core.SavingVersion = value),
+                    get: () => Core.Core.Version,
+                    set: value => Core.Core.SavingVersion = value),
 
                 new Property(
                     get: () => Implementation.Modules.Implementation.Version,

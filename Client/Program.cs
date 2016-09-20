@@ -5,6 +5,7 @@ using System.Threading;
 using Isometric.Client.Modules;
 using Isometric.Client.Modules.LogModule;
 using Isometric.Client.Tools;
+using Isometric.Core.Modules.SettingsModule;
 using Isometric.Core.Modules.TickModule;
 using Isometric.Core.Modules.WorldModule;
 using Isometric.Core.Modules.WorldModule.Land;
@@ -20,7 +21,7 @@ namespace Isometric.Client
             ClocksThread,
             SavingThread;
 
-        public static Territory Territory { get; set; }
+        public static Area Area { get; set; }
 
         public static int SavingPeriodMilliseconds { get; set; } = 60000;
 
@@ -47,7 +48,7 @@ namespace Isometric.Client
             Console.Clear();
 
             OpenOrGenerate();
-            SelectIP();
+            SelectIp();
             SmtpInitialize();
             StartThreads();
 
@@ -57,7 +58,7 @@ namespace Isometric.Client
 
 
 
-        private static void SelectIP()
+        private static void SelectIp()
         {
             if (SingleServer.Instance.TryToAutoConnect())
             {
@@ -100,7 +101,7 @@ namespace Isometric.Client
 
             #endif
             {
-                Territory = World.Instance.LazyGetTerritory(0, 0);
+                Area = World.Instance.LazyGetArea(0, 0);
                 Log.Instance.Write("Main territory is generated");
             }
         }

@@ -56,7 +56,7 @@ namespace Isometric.Server.Modules.CommandModule.Connection
             CommandInterface = new Interface<NetArgs, CommandResult>(
                 new Command<NetArgs, CommandResult>(
                     "get-territory", new string[0],
-                    _getTerritory),
+                    _getArea),
 
                 new Command<NetArgs, CommandResult>(
                     "get-building-actions", new[] { "building" },
@@ -83,12 +83,12 @@ namespace Isometric.Server.Modules.CommandModule.Connection
         }
 
         
-        private CommandResult _getTerritory(
+        private CommandResult _getArea(
                 Dictionary<string, string> args, NetArgs netArgs)
         {
             netArgs.Send("set-territory"
                 .CreateCommand(
-                    netArgs.Connection.Account.Player.Territory
+                    netArgs.Connection.Account.Player.Area
                         .ToCommon()
                         .Serialize(netArgs.Connection.Encoding)));
 
@@ -103,7 +103,7 @@ namespace Isometric.Server.Modules.CommandModule.Connection
             var commonBuilding = args["building"]
                 .Deserialize<CommonBuilding>(netArgs.Connection.Encoding);
 
-            var building = netArgs.Connection.Account.Player.Territory[commonBuilding.Position];
+            var building = netArgs.Connection.Account.Player.Area[commonBuilding.Position];
 
             var pattern = building.Pattern;
             var patternNode = BuildingGraph.Instance.FirstOrDefault(node => node.Value == pattern);
@@ -134,7 +134,7 @@ namespace Isometric.Server.Modules.CommandModule.Connection
         {
             var action = netArgs.Connection.Encoding.GetBytes(args["action"])
                 .Deserialize<CommonBuildingAction>();
-            var subject = netArgs.Connection.Account.Player.Territory[action.Subject.Position];
+            var subject = netArgs.Connection.Account.Player.Area[action.Subject.Position];
             var upgrade = BuildingPattern.Find(action.UpgradeTo);
 
             var result = subject.TryUpgrade(upgrade, netArgs.Connection.Account.Player)

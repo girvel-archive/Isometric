@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Isometric.Core.Modules
+namespace Isometric.Core
 {
     public static class Core
     {

@@ -5,9 +5,9 @@ namespace Isometric.Server.Extensions
 {
     public static class CommonExtensions
     {
-        public static CommonTerritory ToCommon(this Territory territory)
+        public static CommonArea ToCommon(this Area territory)
         {
-            return new CommonTerritory(territory.BuildingGrid.TwoDimSelect(b => b.Pattern.Id));
+            return new CommonArea(territory.BuildingGrid.TwoDimSelect(b => b.Pattern.Id));
         }
     }
 }

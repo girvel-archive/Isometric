@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Linq;
 using Isometric.Core.Modules.PlayerModule;
+using Isometric.Core.Modules.SettingsModule;
 using Isometric.Core.Modules.TickModule;
 using Isometric.Core.Modules.WorldModule.Land;
 using VectorNet;
@@ -11,6 +13,9 @@ namespace Isometric.Core.Modules.WorldModule
     {
         [NonSerialized]
         public static WorldData Data;
+
+        [GameConstant]
+        private static int AreaSize { get; set; }
 
 
 
@@ -43,7 +48,7 @@ namespace Isometric.Core.Modules.WorldModule
 
         public World(int seed) 
         {
-            LandGrid = new Territory[Data.TerritorySize, Data.TerritorySize];
+            LandGrid = new Area[Data.AreaSize, Data.AreaSize];
 
             Seed = seed;
             Random = new Random(Seed);
@@ -51,7 +56,7 @@ namespace Isometric.Core.Modules.WorldModule
 
 
 
-        public Territory[,] LandGrid { get; }
+        public Area[,] LandGrid { get; }
 
         public int Seed { get; }
 
@@ -64,29 +69,24 @@ namespace Isometric.Core.Modules.WorldModule
 
         }
 
-        public Territory LazyGetTerritory(IntVector position) => LazyGetTerritory(position.X, position.Y);
+        public Area LazyGetArea(IntVector position) => LazyGetArea(position.X, position.Y);
 
-        public Territory LazyGetTerritory(int x, int y)
+        public Area LazyGetArea(int x, int y)
         {
-            if (LandGrid[x, y] == null)
-            {
-                LandGrid[x, y] = Data.GenerateTerritory(LandGrid, x, y, SeedForPosition(x, y));
-            }
-
-            return LandGrid[x, y];
+            return LandGrid[x, y] ?? (LandGrid[x, y] = Data.GenerateArea(LandGrid, x, y, SeedForPosition(x, y)));
         }
 
-        public Territory NewPlayerTerritory(Player player)
+        public Area NewPlayerArea(Player player)
         {
-            Territory result;
+            Area result;
             do
             {
-                result = LazyGetTerritory(SingleRandom.Next(Data.TerritoryVectorSize));
+                result = LazyGetArea(SingleRandom.Next(Data.AreaVectorSize));
             }
-            while (result.Type != TerritoryGenerationType.Wild);
+            while (result.Type != AreaGenerationType.Wild);
 
-            Data.NewPlayerTerritory(player, result);
-            result.Type = TerritoryGenerationType.Wild;
+            Data.NewPlayerArea(player, result);
+            result.Type = AreaGenerationType.Wild;
 
             return result;
         }
@@ -95,23 +95,17 @@ namespace Isometric.Core.Modules.WorldModule
 
         public void Tick()
         {
-            foreach (IIndependentChanging territory in LandGrid)
+            foreach (var territory in LandGrid.Cast<IIndependentChanging>().Where(territory => territory != null))
             {
-                if (territory == null)
-                {
-                    continue;
-                }
-
                 territory.Tick();
             }
         }
 
 
-
         // TODO F test it
         protected int SeedForPosition(int x, int y)
         {
-            return (int)((decimal)Seed * (x * Data.TerritorySize + y) / (decimal)Math.Pow(Data.TerritorySize, 2));
+            return (int)((decimal)Seed * (x * Data.AreaSize + y) / (decimal)Math.Pow(Data.AreaSize, 2));
         }
     }
 }

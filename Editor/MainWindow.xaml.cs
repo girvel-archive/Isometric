@@ -240,7 +240,7 @@ namespace Isometric.Editor
                     pattern => pattern.Name == BuildingsListBox.SelectedItem.ToString()));
         }
 
-        private void BuildingsListBox_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void BuildingsListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (e.AddedItems.Count == 0)
             {
@@ -250,7 +250,7 @@ namespace Isometric.Editor
             SelectBuilding(BuildingsListBox.SelectedItem.ToString(), BuildingsListBox.SelectedIndex);
         }
 
-        private void NameTextBox_OnTextChanged(object sender, TextChangedEventArgs e)
+        private void NameTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
             if (SelectedPattern == null || SelectedPatternListIndex == -1)
             {
@@ -261,7 +261,7 @@ namespace Isometric.Editor
             BuildingsListBox.Items[SelectedPatternListIndex] = NameTextBox.Text;
         }
 
-        private void BuildingTypeComboBox_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void BuildingTypeComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             SelectedPattern.Type = 
                 (BuildingType) Enum.Parse(
@@ -289,7 +289,37 @@ namespace Isometric.Editor
             SelectedPattern.Price = PriceTextBox.GameResources;
         }
 
-        private void SaveMenuItem_OnClick(object sender, RoutedEventArgs e)
+        private void NewMenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            Reset();
+        }
+
+        private void OpenMenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog.ShowDialog(this);
+
+            try
+            {
+                using (var stream = OpenFileDialog.OpenFile())
+                {
+                    Reset();
+                    GameData.Instance = new GameData(stream);
+                }
+            }
+            catch (InvalidOperationException)
+            {
+                return;
+            }
+
+            foreach (var pattern in GameData.Instance.BuildingPatterns)
+            {
+                AddBuilding(pattern);
+            }
+
+            Sort();
+        }
+
+        private void SaveMenuItem_Click(object sender, RoutedEventArgs e)
         {
             SaveFileDialog.OverwritePrompt = true;
             SaveFileDialog.ShowDialog(this);
@@ -306,31 +336,7 @@ namespace Isometric.Editor
             SaveFileDialog.Reset();
         }
 
-        private void OpenMenuItem_OnClick(object sender, RoutedEventArgs e)
-        {
-            OpenFileDialog.ShowDialog(this);
-
-            try
-            {
-                using (var stream = OpenFileDialog.OpenFile())
-                {
-                    BuildingsListBox.Items.Clear();
-                    GameData.Instance = new GameData(stream);
-                }
-            }
-            catch (InvalidOperationException)
-            {
-                return;
-            }
-
-            OpenFileDialog.Reset();
-            foreach (var pattern in GameData.Instance.BuildingPatterns)
-            {
-                AddBuilding(pattern);
-            }
-        }
-
-        private void UpgradesAddButton_OnClick(object sender, RoutedEventArgs e)
+        private void UpgradesAddButton_Click(object sender, RoutedEventArgs e)
         {
             if (UpgradesComboBox.SelectedIndex != -1)
             {
@@ -356,11 +362,6 @@ namespace Isometric.Editor
         private void IdDecrementButton_Click(object sender, RoutedEventArgs e)
         {
             IncrementId(SelectedPattern, -1);
-        }
-
-        private void NewMenuItem_Click(object sender, RoutedEventArgs e)
-        {
-            Reset();
         }
     }
 }

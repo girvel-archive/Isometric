@@ -48,27 +48,27 @@ namespace Isometric.Client.Modules.BuildingGraphics
                 {
                     new GraphicsPair(
                         new ConsolePoint('f', ConsoleColor.DarkGreen), 
-                        GameDataManager.Instance.GetPattern("Forest")),
+                        GameDataManager.Instance.GetBuildingPattern("Forest")),
 
                     new GraphicsPair(
                         new ConsolePoint('~', ConsoleColor.DarkBlue),
-                        GameDataManager.Instance.GetPattern("Water")),
+                        GameDataManager.Instance.GetBuildingPattern("Water")),
 
                     new GraphicsPair(
                         new ConsolePoint('.', ConsoleColor.DarkMagenta),
-                        GameDataManager.Instance.GetPattern("Plain")),
+                        GameDataManager.Instance.GetBuildingPattern("Plain")),
 
                     new GraphicsPair(
                         new ConsolePoint('r', ConsoleColor.DarkGray),
-                        GameDataManager.Instance.GetPattern("Rock")),
+                        GameDataManager.Instance.GetBuildingPattern("Rock")),
 
                     new GraphicsPair(
                         new ConsolePoint('H', ConsoleColor.Yellow),
-                        GameDataManager.Instance.GetPattern("WoodHouse")),
+                        GameDataManager.Instance.GetBuildingPattern("WoodHouse")),
 
                     new GraphicsPair(
                         new ConsolePoint('H', ConsoleColor.Yellow),
-                        GameDataManager.Instance.GetPattern("WoodHouse2")),
+                        GameDataManager.Instance.GetBuildingPattern("WoodHouse2")),
                 };
         }
 

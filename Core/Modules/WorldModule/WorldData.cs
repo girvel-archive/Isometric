@@ -25,8 +25,8 @@ namespace Isometric.Core.Modules.WorldModule
 
 
 
-        public short TerritorySize;
-        public IntVector TerritoryVectorSize { get; private set; }
+        public short AreaSize;
+        public IntVector AreaVectorSize { get; private set; }
 
         public DefaultBuilding[] StartBuildings;
 
@@ -35,22 +35,22 @@ namespace Isometric.Core.Modules.WorldModule
         /// <summary>
         /// Generates on existing territory player's village
         /// </summary>
-        public VillageGenerator NewPlayerTerritory { get; set; }
+        public VillageGenerator NewPlayerArea { get; set; }
 
-        public delegate void VillageGenerator(Player owner, Territory territory);
+        public delegate void VillageGenerator(Player owner, Area territory);
 
         /// <summary>
         /// Creates new territory
         /// </summary>
-        public TerritoryGenerator GenerateTerritory { get; set; } 
+        public AreaGenerator GenerateArea { get; set; } 
 
-        public delegate Territory TerritoryGenerator(Territory[,] landGrid, int x, int y, int seed);
+        public delegate Area AreaGenerator(Area[,] landGrid, int x, int y, int seed);
 
 
 
         public void RefreshDependentValues()
         {
-            TerritoryVectorSize = new IntVector(TerritorySize, TerritorySize);
+            AreaVectorSize = new IntVector(AreaSize, AreaSize);
         }
     }
 }

@@ -3,21 +3,21 @@
 namespace Isometric.Core.Modules.WorldModule.Land
 {
     [Serializable]
-    public class TerritoryPattern
+    public class AreaPattern
     {
         public ushort ID { get; }
         private static ushort _nextID;
 
-        public Action<Territory, int> Generate { get; set; } 
+        public Action<Area, int> Generate { get; set; } 
 
-        public Action<Territory> Tick { get; set; }
+        public Action<Area> Tick { get; set; }
 
 
 
-        public TerritoryPattern() {}
+        public AreaPattern() {}
 
-        public TerritoryPattern(
-            Action<Territory, int> generate)
+        public AreaPattern(
+            Action<Area, int> generate)
             : this()
         {
             Generate = generate;

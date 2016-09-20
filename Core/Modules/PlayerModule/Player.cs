@@ -34,7 +34,7 @@ namespace Isometric.Core.Modules.PlayerModule
 
         public Resources CurrentResources { get; set; }
 
-        public Territory Territory { get; set; }
+        public Area Area { get; set; }
 
         public event Action<Player> OnTick;
 
@@ -81,7 +81,7 @@ namespace Isometric.Core.Modules.PlayerModule
             Name = name;
             _ownedBuildings = new List<Building>();
 
-            this.Territory = World.Instance.NewPlayerTerritory(this);
+            this.Area = World.Instance.NewPlayerArea(this);
 
             CurrentResources = Data.DefaultPlayerResources;
         }

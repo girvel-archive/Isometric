@@ -19,11 +19,14 @@ namespace Isometric.Core.Modules
 
 
         private static int _seed;
-        public static int Seed {
-            get {
+        public static int Seed
+        {
+            get
+            {
                 return _seed;
             }
-            set {
+            set
+            {
 #if DEBUG
                 if (_instance != null)
                 {
@@ -57,7 +60,7 @@ namespace Isometric.Core.Modules
                 throw new ArgumentException("min and max vectors have different numbers of dimensions");
             }
 #endif
-            IntVector result = new IntVector(min.Coordinates);
+            var result = new IntVector(min.Coordinates);
             for (var i = 0; i < min.Dimensions; i++)
             {
 #if DEBUG
