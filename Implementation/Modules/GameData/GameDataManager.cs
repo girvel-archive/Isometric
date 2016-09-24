@@ -19,7 +19,7 @@ namespace Isometric.Implementation.Modules.GameData
 
         public GameDataManager(Stream stream)
         {
-            var data = (GameData) new BinaryFormatter().Deserialize(stream);
+            var data = (GameDataContainer) new BinaryFormatter().Deserialize(stream);
 
             Patterns = data.Patterns;
             BuildingGraph.Instance = data.BuildingGraph;

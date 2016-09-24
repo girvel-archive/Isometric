@@ -1,9 +1,12 @@
-﻿using System.IO;
+﻿using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Runtime.Serialization.Formatters.Binary;
 using Girvel.Graph;
+using Isometric.Core.Modules.SettingsModule;
 using Isometric.Core.Modules.WorldModule.Buildings;
-using SaveGameData = Isometric.Implementation.Modules.GameData.GameData;
+using Isometric.Editor.Containers;
+using Isometric.Implementation.Modules.GameData;
 
 namespace Isometric.Editor
 {
@@ -17,17 +20,25 @@ namespace Isometric.Editor
 
         public Graph<BuildingPattern> BuildingGraph { get; set; }
 
+        public Dictionary<string, ConstantContainer> Constants { get; set; } 
+
 
 
         public GameData()
         {
             BuildingPatterns = new BuildingPatternCollection();
             BuildingGraph = new Graph<BuildingPattern>();
+            Constants = new Dictionary<string, ConstantContainer>();
+
+            foreach (var property in GameConstantAttribute.GetProperties())
+            {
+                Constants[property.Name] = new ConstantContainer(null, property.PropertyType);
+            }
         }
         
         public GameData(Stream stream)
         {
-            var data = (SaveGameData)new BinaryFormatter().Deserialize(stream);
+            var data = (GameDataContainer)new BinaryFormatter().Deserialize(stream);
 
             BuildingPatterns = new BuildingPatternCollection(data.Patterns);
             BuildingGraph = data.BuildingGraph;
@@ -39,9 +50,12 @@ namespace Isometric.Editor
         {
             new BinaryFormatter().Serialize(
                 stream, 
-                new SaveGameData(
+                new GameDataContainer(
                     BuildingPatterns.ToArray(), 
-                    BuildingGraph));
+                    BuildingGraph,
+                    Constants.ToDictionary(
+                        pair => pair.Key,
+                        pair => pair.Value.Value)));
         }
     }
 }

@@ -12,7 +12,7 @@
             <RowDefinition Height="24*"/>
             <RowDefinition Height="307*"/>
         </Grid.RowDefinitions>
-        <Menu x:Name="TopMenu" Height="24" VerticalAlignment="Top" Background="#FFF3F3F3">
+        <Menu x:Name="TopMenu" Background="#FFF3F3F3">
             <MenuItem Header="File" Height="24" Foreground="Black">
                 <MenuItem x:Name="NewMenuItem" Header="New" Click="NewMenuItem_Click"/>
                 <MenuItem x:Name="OpenMenuItem" Header="Open" Click="OpenMenuItem_Click"/>
@@ -29,7 +29,15 @@
                         <ColumnDefinition Width="88*"/>
                         <ColumnDefinition Width="313*"/>
                     </Grid.ColumnDefinitions>
-                    <ListBox x:Name="BuildingsListBox" HorizontalAlignment="Left" Height="232" Margin="10,10,0,0" VerticalAlignment="Top" Width="107" SelectionChanged="BuildingsListBox_SelectionChanged" RenderTransformOrigin="0.5,0.5"/>
+                    <ListBox 
+                        x:Name="BuildingsListBox" 
+                        HorizontalAlignment="Left" 
+                        Height="232" 
+                        Margin="10,10,0,0" 
+                        VerticalAlignment="Top"
+                        Width="107" 
+                        SelectionChanged="BuildingsListBox_SelectionChanged" 
+                        RenderTransformOrigin="0.5,0.5"/>
                     <Button 
                         Grid.Column="0" 
                         x:Name="AddBuildingButton" 
@@ -167,7 +175,7 @@
                         Background="White" 
                         TextChanged="ResourcesTextBox_TextChanged" 
                         Height="20"
-                        Grid.Column="2" />
+                        Grid.Column="2"/>
                     <customControls:ResourcesTextBox 
                         x:Name="PriceTextBox" 
                         HorizontalAlignment="Left" 

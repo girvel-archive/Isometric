@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 E:\projects\isometric\Editor\App.xaml
-2-410435152
+31493676895
 
-8-1427748834
+12-684598823
 18-406991291
-MainWindow.xaml;CustomControls\ResourcesTextBox.xaml;
+CustomControls\LabeledTextBox.xaml;MainWindow.xaml;CustomControls\ResourcesTextBox.xaml;
 
 False
 

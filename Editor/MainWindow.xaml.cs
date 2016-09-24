@@ -3,11 +3,15 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Windows;
+using System.Windows.Automation.Peers;
 using System.Windows.Controls;
 using System.Windows.Input;
 using EnumerableExtensions;
 using Girvel.Graph;
+using Isometric.Core.Modules.SettingsModule;
 using Isometric.Core.Modules.WorldModule.Buildings;
+using Isometric.Editor.Containers;
+using Isometric.Editor.CustomControls;
 using Isometric.Editor.Extensions;
 using Microsoft.Win32;
 
@@ -19,6 +23,8 @@ namespace Isometric.Editor
         protected int SelectedPatternListIndex = -1;
 
         private readonly Control[] _buildingSettingsControls;
+
+        private readonly LabeledTextBox[] _constantTextBoxes;
 
         protected SaveFileDialog SaveFileDialog
             = new SaveFileDialog();
@@ -45,6 +51,24 @@ namespace Isometric.Editor
 
             SaveFileDialog.Filter = DefaultFilter;
             OpenFileDialog.Filter = DefaultFilter;
+
+            var properties = GameConstantAttribute.GetProperties();
+            _constantTextBoxes = new LabeledTextBox[properties.Length];
+
+            var i = 0;
+            foreach (var property in properties)
+            {
+                var newBox = _constantTextBoxes[i] = new LabeledTextBox
+                {
+                    LabelText = property.Name,
+                    VerticalAlignment = VerticalAlignment.Top,
+                };
+
+                ((Grid) ConstantsTabItem.Content).Children.Add(newBox);
+                newBox.TextBox.TextChanged += ConstantBoxEvents.GenerateTextChangedEventHandler(property.Name);
+
+                i++;
+            }
 
             _buildingSettingsControls = new Control[]
             {
@@ -85,7 +109,7 @@ namespace Isometric.Editor
         {
             BuildingsListBox.Items.Add(pattern.Name);
 
-            _nodes[pattern] = GameData.Instance.BuildingGraph.FirstOrDefault(node => node.Value.Name == pattern.Name)
+            _nodes[pattern] = GameData.Instance.BuildingGraph.FirstOrDefault(node => node.Value == pattern)
                 ?? GameData.Instance.BuildingGraph.NewNode(pattern);
         }
 
