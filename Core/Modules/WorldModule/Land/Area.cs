@@ -61,6 +61,9 @@ namespace Isometric.Core.Modules.WorldModule.Land
         }
 
         #endregion
+
+        public override string ToString()
+            => $"{typeof (World).Name}; Pattern: {{{Pattern}}}, Seed: {Seed}, Type: {Type}";
     }
 }
 

@@ -78,6 +78,9 @@ namespace Isometric.Core.Modules.WorldModule.Buildings
             return (UpgradeAdditionalCondition?.Invoke(previous, currentBuilding) ?? true)
                 && playerResources.Enough(Price);
         }
+
+
+        public override string ToString() => $"{typeof (BuildingPattern).Name}; Name: {Name}, Id: {Id}";
     }
 }
 

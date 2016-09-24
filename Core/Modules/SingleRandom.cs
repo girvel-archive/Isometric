@@ -48,8 +48,8 @@ namespace Isometric.Core.Modules
         {
             return new GameDate(
                 Instance.Next(
-                    min.TotalDays,
-                    max.TotalDays));
+                    min.TotalDay,
+                    max.TotalDay));
         }
 
         public static IntVector Next(IntVector min, IntVector max)

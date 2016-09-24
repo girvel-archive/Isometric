@@ -129,6 +129,9 @@ namespace Isometric.Core.Modules.PlayerModule
             ResourceSubjects.Remove(building);
             ResourceBonusSubjects.Remove(building);
         }
+
+
+        public override string ToString() => $"{typeof (Player).Name}; Name: {Name}";
     }
 }
 

@@ -115,6 +115,9 @@ namespace Isometric.Core.Modules.WorldModule.Buildings
         }
 
         #endregion
+
+        public override string ToString()
+            => $"{typeof (Building).Name}; Pattern: {Pattern}, Position: {Position}, Owner: {Owner}";
     }
 }
 

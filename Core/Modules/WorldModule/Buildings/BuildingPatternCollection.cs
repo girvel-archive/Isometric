@@ -123,5 +123,7 @@ namespace Isometric.Core.Modules.WorldModule.Buildings
         }
 
         #endregion
+
+        public override string ToString() => $"{typeof (BuildingPatternCollection).Name}; LastId: {LastId}";
     }
 }

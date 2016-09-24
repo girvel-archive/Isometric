@@ -5,8 +5,8 @@ namespace Isometric.Core.Modules.WorldModule.Land
     [Serializable]
     public class AreaPattern
     {
-        public ushort ID { get; }
-        private static ushort _nextID;
+        public ushort Id { get; }
+        private static ushort _nextId;
 
         public Action<Area, int> Generate { get; set; } 
 
@@ -16,14 +16,16 @@ namespace Isometric.Core.Modules.WorldModule.Land
 
         public AreaPattern() {}
 
-        public AreaPattern(
-            Action<Area, int> generate)
+        public AreaPattern(Action<Area, int> generate)
             : this()
         {
             Generate = generate;
 
-            ID = _nextID++;
+            Id = _nextId++;
         }
+
+
+        public override string ToString() => $"{typeof (AreaPattern).Name}; Id: {Id}";
     }
 }
 

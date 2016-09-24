@@ -107,6 +107,9 @@ namespace Isometric.Core.Modules.WorldModule
         {
             return (int)((decimal)Seed * (x * Data.AreaSize + y) / (decimal)Math.Pow(Data.AreaSize, 2));
         }
+
+
+        public override string ToString() => $"{typeof (World).Name}; Seed: {Seed}";
     }
 }
 

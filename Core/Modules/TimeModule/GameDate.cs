@@ -34,60 +34,88 @@ namespace Isometric.Core.Modules.TimeModule
 
 
 
-        public int TotalDays;
+        public int TotalDay;
 
-        public int Year => (int)Math.Floor((double)TotalDays / Data.DaysInYear);
 
-        public int TotalMonth => (int)Math.Floor((double)TotalDays / Data.DaysInMonth);
+
+        public int Year => (int)Math.Floor((double)TotalDay / Data.DaysInYear);
+
+        public int TotalMonth => (int)Math.Floor((double)TotalDay / Data.DaysInMonth);
 
         public int Month => (int)TotalMonth % Data.MonthsInYear;
 
-        public int TotalWeek => (int)Math.Floor((double)TotalDays / Data.DaysInWeek);
+        public int TotalWeek => (int)Math.Floor((double)TotalDay / Data.DaysInWeek);
 
         public int Week => TotalWeek % (int)Math.Floor(Data.WeeksInYear);
 
-        public GameSeason Season => (GameSeason)Math.Floor((double)TotalDays / Data.DaysInSeason);
+        public int Day => TotalDay % Data.DaysInMonth;
+
+        public GameSeason Season => (GameSeason)Math.Floor((double)TotalDay / Data.DaysInSeason);
 
 
 
-        public GameDate(int totalDays)
+        private const string
+            DayFormatSpecifier = "d",
+            WeekFormatSpecifier = "w",
+            MonthFormatSpecifier = "m",
+            YearFormatSpecifier = "y",
+            TotalDayFormatSpecifier = "D",
+            TotalWeekFormatSpecifier = "W",
+            TotalMonthFormatSpecifier = "M";
+
+        public GameDate(int totalDay)
         {
-            TotalDays = totalDays;
+            TotalDay = totalDay;
         }
 
         public GameDate(int years, int months, int days)
         {
-            TotalDays = Data.DaysInYear * years + Data.DaysInYear * months + days;
+            TotalDay = Data.DaysInYear * years + Data.DaysInYear * months + days;
         }
 
         public static GameDate operator +(GameDate d1, GameDate d2)
         {
-            return new GameDate(d1.TotalDays + d2.TotalDays);
+            return new GameDate(d1.TotalDay + d2.TotalDay);
         }
 
         public static GameDate operator -(GameDate d1, GameDate d2)
         {
-            return new GameDate(d1.TotalDays - d2.TotalDays);
+            return new GameDate(d1.TotalDay - d2.TotalDay);
         }
 
         public static GameDate operator +(GameDate d, int days)
         {
-            return new GameDate(d.TotalDays + days);
+            return new GameDate(d.TotalDay + days);
         }
 
         public static GameDate operator -(GameDate d, int days)
         {
-            return new GameDate(d.TotalDays - days);
+            return new GameDate(d.TotalDay - days);
         }
 
         public static bool operator >(GameDate d1, GameDate d2)
         {
-            return d1.TotalDays > d2.TotalDays;
+            return d1.TotalDay > d2.TotalDay;
         }
 
         public static bool operator <(GameDate d1, GameDate d2)
         {
-            return d1.TotalDays < d2.TotalDays;
+            return d1.TotalDay < d2.TotalDay;
+        }
+
+
+        public override string ToString() => $"{typeof (GameDate).Name}; {Year}.{Month}.{TotalDay} ({Week})";
+
+        public string ToString(string format)
+        {
+            return format
+                .Replace(DayFormatSpecifier, Day.ToString())
+                .Replace(WeekFormatSpecifier, Week.ToString())
+                .Replace(MonthFormatSpecifier, Month.ToString())
+                .Replace(YearFormatSpecifier, Year.ToString())
+                .Replace(TotalDayFormatSpecifier, TotalDay.ToString())
+                .Replace(TotalWeekFormatSpecifier, TotalWeek.ToString())
+                .Replace(TotalMonthFormatSpecifier, TotalMonth.ToString());
         }
     }
 }
