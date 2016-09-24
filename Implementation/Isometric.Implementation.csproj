@@ -67,6 +67,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Modules\DataImplementation\GameConstantsManager.cs" />
+    <Compile Include="Modules\GameData\Exceptions\InvalidGameDataException.cs" />
     <Compile Include="Modules\GameData\GameDataContainer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Modules\DataImplementation\TimeDataImplementation.cs" />

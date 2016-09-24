@@ -5,11 +5,11 @@ using System.Threading;
 using Isometric.Client.Modules;
 using Isometric.Client.Modules.LogModule;
 using Isometric.Client.Tools;
-using Isometric.Core.Modules.SettingsModule;
 using Isometric.Core.Modules.TickModule;
 using Isometric.Core.Modules.WorldModule;
 using Isometric.Core.Modules.WorldModule.Land;
 using Isometric.Implementation;
+using Isometric.Implementation.Modules.GameData.Exceptions;
 using Isometric.Server.Modules;
 
 namespace Isometric.Client
@@ -35,9 +35,19 @@ namespace Isometric.Client
 
         static Program()
         {
-            using (var stream = File.OpenRead(GameDataFile))
+            try
             {
-                InitializationManager.Init(stream);
+                using (var stream = File.OpenRead(GameDataFile))
+                {
+                    InitializationManager.Init(stream);
+                }
+            }
+            catch (InvalidGameDataException ex)
+            {
+                Log.Instance.Exception(ex, $"Invalid game data: '{ex.Message}'");
+                Console.WriteLine("Press any key to continue");
+                Console.ReadKey(true);
+                Environment.Exit(0);
             }
         }
 
@@ -52,7 +62,9 @@ namespace Isometric.Client
             SmtpInitialize();
             StartThreads();
 
-//            SingleUI.Instance.Control();
+            LogEvents.Init();
+
+            //            SingleUI.Instance.Control();
             Console.ReadKey();
         }
 

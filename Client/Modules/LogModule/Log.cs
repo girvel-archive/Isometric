@@ -15,20 +15,7 @@ namespace Isometric.Client.Modules.LogModule
 
         #pragma warning disable 0618
 
-        public static Log Instance {
-            get { return _instance ?? (_instance = new Log()); }
-
-            set {
-        #if DEBUG
-                if (_instance != null)
-                {
-                    throw new ArgumentException("Instance is already set");
-                }
-        #endif
-
-                _instance = value;
-            }
-        }
+        public static Log Instance => _instance ?? (_instance = new Log());
 
         #pragma warning restore 0618
 
@@ -64,8 +51,6 @@ namespace Isometric.Client.Modules.LogModule
             }
 
             _currentPath = $"{LogFolder}/{DateTime.Now:yy-MM-dd}.log";
-
-            LogEvents.Init();
         }
 
 
