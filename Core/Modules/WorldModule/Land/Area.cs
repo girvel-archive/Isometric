@@ -41,7 +41,7 @@ namespace Isometric.Core.Modules.WorldModule.Land
 
             Random = new Random(Seed);
 
-            BuildingGrid = new Building[World.Data.AreaSize, World.Data.AreaSize];
+            BuildingGrid = new Building[World.AreaSize, World.AreaSize];
 
             Pattern.Generate(this, seed);
         }

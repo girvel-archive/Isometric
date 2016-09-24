@@ -28,3 +28,5 @@ E:\projects\isometric\Editor\obj\Release\CustomControls\ResourcesTextBox.g.cs
 E:\projects\isometric\Editor\obj\Release\GeneratedInternalTypeHelper.g.cs
 E:\projects\isometric\Editor\obj\Release\Isometric.Editor_MarkupCompile.lref
 E:\projects\isometric\Editor\obj\Release\CustomControls\ResourcesTextBox.baml
+E:\projects\isometric\Editor\obj\Release\CustomControls\LabeledTextBox.g.cs
+E:\projects\isometric\Editor\obj\Release\CustomControls\LabeledTextBox.baml

@@ -32,9 +32,9 @@ namespace Isometric.Implementation.Modules.PatternsImplementation
     
         private static void _defaultGeneration(Area area, int seed, RandomCollection<BuildingPattern> chanceCollection)
         {
-            for (var y = 0; y < World.Data.AreaSize; y++)
+            for (var y = 0; y < World.AreaSize; y++)
             {
-                for (var x = 0; x < World.Data.AreaSize; x++)
+                for (var x = 0; x < World.AreaSize; x++)
                 {
                     var pos = new IntVector(x, y); 
 

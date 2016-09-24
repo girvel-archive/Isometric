@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Windows;
 using System.Windows.Automation.Peers;
@@ -244,7 +245,7 @@ namespace Isometric.Editor
         private void AddButton_Click(object sender, RoutedEventArgs e)
         {
             string name;
-            int i = BuildingsListBox.Items.Count;
+            var i = BuildingsListBox.Items.Count;
 
             do
             {

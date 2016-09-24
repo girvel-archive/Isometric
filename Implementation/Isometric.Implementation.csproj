@@ -72,7 +72,6 @@
     <Compile Include="Modules\DataImplementation\TimeDataImplementation.cs" />
     <Compile Include="Modules\DataImplementation\TickDataImplementation.cs" />
     <Compile Include="Modules\DataImplementation\PlayerDataImplementation.cs" />
-    <Compile Include="Modules\DataImplementation\WorldDataImplementation.cs" />
     <Compile Include="Modules\DataImplementation\GlobalDataImplementation.cs" />
     <Compile Include="Modules\GameData\GameDataManager.cs" />
     <Compile Include="Modules\PatternsImplementation\AreaPatterns.cs" />

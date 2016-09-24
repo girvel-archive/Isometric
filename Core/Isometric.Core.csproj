@@ -69,7 +69,6 @@
     <Compile Include="Modules\PlayerModule\Leaders\Name.cs" />
     <Compile Include="Modules\PlayerModule\Leaders\NamesGenerator.cs" />
     <Compile Include="Extensions\DelegateExtensions.cs" />
-    <Compile Include="Modules\WorldModule\WorldData.cs" />
     <Compile Include="Modules\PlayerModule\PlayerData.cs" />
     <Compile Include="Modules\TimeModule\TimeData.cs" />
     <Compile Include="Modules\TickModule\TickData.cs" />
