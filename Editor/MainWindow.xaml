@@ -229,14 +229,7 @@
             </TabItem>
             <TabItem x:Name="ConstantsTabItem" Header="Constants">
                 <Grid Background="#FFE5E5E5" RenderTransformOrigin="0.5,0.5">
-                    <Grid.RenderTransform>
-                        <TransformGroup>
-                            <ScaleTransform/>
-                            <SkewTransform/>
-                            <RotateTransform/>
-                            <TranslateTransform/>
-                        </TransformGroup>
-                    </Grid.RenderTransform>
+                    <StackPanel x:Name="ConstantsStackPanel" HorizontalAlignment="Left" Height="280" VerticalAlignment="Top" Width="526"/>
                 </Grid>
             </TabItem>
         </TabControl>

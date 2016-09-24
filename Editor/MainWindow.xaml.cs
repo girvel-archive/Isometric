@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.Globalization;
 using System.Linq;
 using System.Windows;
 using System.Windows.Automation.Peers;
@@ -57,15 +59,15 @@ namespace Isometric.Editor
             _constantTextBoxes = new LabeledTextBox[properties.Length];
 
             var i = 0;
-            foreach (var property in properties)
+            foreach (var property in properties.OrderBy(property => $"{property.DeclaringType.Name}.{property.Name}"))
             {
                 var newBox = _constantTextBoxes[i] = new LabeledTextBox
                 {
-                    LabelText = property.Name,
+                    LabelText = $"{property.DeclaringType.Name}.{property.Name}",
                     VerticalAlignment = VerticalAlignment.Top,
                 };
 
-                ((Grid) ConstantsTabItem.Content).Children.Add(newBox);
+                ConstantsStackPanel.Children.Add(newBox);
                 newBox.TextBox.TextChanged += ConstantBoxEvents.GenerateTextChangedEventHandler(property.Name);
 
                 i++;
