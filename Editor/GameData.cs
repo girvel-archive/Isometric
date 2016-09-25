@@ -1,12 +1,15 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
 using Girvel.Graph;
 using Isometric.Core.Modules.SettingsModule;
 using Isometric.Core.Modules.WorldModule.Buildings;
 using Isometric.Editor.Containers;
 using Isometric.Implementation.Modules.GameData;
+using Isometric.Implementation.Modules.GameData.Exceptions;
 
 namespace Isometric.Editor
 {
@@ -36,12 +39,24 @@ namespace Isometric.Editor
             }
         }
         
+        /// <exception cref="InvalidGameDataException">Thrown when loading data is invalid</exception>
         public GameData(Stream stream)
         {
-            var data = (GameDataContainer)new BinaryFormatter().Deserialize(stream);
+            GameDataContainer container;
+            try
+            {
+                container = (GameDataContainer)new BinaryFormatter().Deserialize(stream);
+            }
+            catch (SerializationException ex)
+            {
+                throw new InvalidGameDataException("Game data can not be deserialized"); 
+            }
 
-            BuildingPatterns = new BuildingPatternCollection(data.Patterns);
-            BuildingGraph = data.BuildingGraph;
+            BuildingPatterns = new BuildingPatternCollection(container.Patterns);
+            BuildingGraph = container.BuildingGraph;
+            Constants = container.Constants.ToDictionary(
+                pair => pair.Key, 
+                pair => new ConstantContainer(pair.Value, pair.Value.GetType()));
         }
 
 

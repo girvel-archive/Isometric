@@ -16,6 +16,7 @@ using Isometric.Core.Modules.WorldModule.Buildings;
 using Isometric.Editor.Containers;
 using Isometric.Editor.CustomControls;
 using Isometric.Editor.Extensions;
+using Isometric.Implementation.Modules.GameData.Exceptions;
 using Microsoft.Win32;
 
 namespace Isometric.Editor
@@ -339,10 +340,20 @@ namespace Isometric.Editor
             {
                 return;
             }
+            catch (InvalidGameDataException)
+            {
+                MessageBox.Show("Invalid file");
+                return;
+            }
 
             foreach (var pattern in GameData.Instance.BuildingPatterns)
             {
                 AddBuilding(pattern);
+            }
+
+            foreach (var constantPair in GameData.Instance.Constants)
+            {
+                _constantTextBoxes.First(box => box.LabelText == constantPair.Key).Text = constantPair.Value.Value.GetValueString();
             }
 
             SortBuildings();
