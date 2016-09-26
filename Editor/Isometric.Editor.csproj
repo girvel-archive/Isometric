@@ -43,6 +43,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\tools\Girvel.Graph\Library\bin\Release\Girvel.Graph.dll</HintPath>
     </Reference>
+    <Reference Include="RandomExtensions, Version=1.0.6099.38079, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\tools\CsTools\RandomExtensions\bin\Release\RandomExtensions.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
@@ -82,7 +86,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Extensions\AreaGeneratorHelper.cs" />
+    <Compile Include="Extensions\RandomCollectionHelper.cs" />
     <Compile Include="Extensions\ConstantBoxEvents.cs" />
     <Compile Include="Extensions\UniversalParser.cs" />
     <Compile Include="GameData.cs" />

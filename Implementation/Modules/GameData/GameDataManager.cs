@@ -6,8 +6,11 @@ using System.Runtime.Serialization.Formatters.Binary;
 using Girvel.Graph;
 using Isometric.Core.Modules;
 using Isometric.Core.Modules.SettingsModule;
+using Isometric.Core.Modules.WorldModule;
 using Isometric.Core.Modules.WorldModule.Buildings;
+using Isometric.Core.Modules.WorldModule.Land;
 using Isometric.Implementation.Modules.GameData.Exceptions;
+using Isometric.Implementation.Modules.PatternsImplementation;
 
 namespace Isometric.Implementation.Modules.GameData
 {
@@ -43,6 +46,7 @@ namespace Isometric.Implementation.Modules.GameData
                 {
                     throw new InvalidGameDataException("Game data does not contain all game constants");
                 }
+
                 property.SetValue(null, data.Constants[property.Name]);
             }
         }
@@ -51,6 +55,15 @@ namespace Isometric.Implementation.Modules.GameData
 
 
 
+        protected static object ToPropertyValue(string name, object data)
+        {
+            if (name == nameof(World.GenerateArea))
+            {
+                return new World.AreaGenerator(
+                    (grid, x, y, seed) => new Area(AreaPatterns.Forest, seed));
+            }
 
+            return data;
+        }
     }
 }

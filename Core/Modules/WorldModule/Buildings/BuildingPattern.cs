@@ -45,7 +45,7 @@ namespace Isometric.Core.Modules.WorldModule.Buildings
 
         
 
-        [Obsolete("using serialization ctor", true)]
+        [Obsolete("using serialization ctor")]
         public BuildingPattern()
         {
             if (!Patterns.Contains(this))

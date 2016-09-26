@@ -22,7 +22,6 @@
     		Height="23"
     		Margin="10,5,13,7" 
     		TextWrapping="Wrap" 
-    		Text="ContentBox" 
     		VerticalAlignment="Center" Grid.Column="1"/>
     </Grid>
 </UserControl>

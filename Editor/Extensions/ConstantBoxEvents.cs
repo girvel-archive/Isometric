@@ -1,4 +1,5 @@
 ﻿using System.Windows.Controls;
+using System.Windows.Media;
 using Isometric.Editor.CustomControls;
 
 namespace Isometric.Editor.Extensions
@@ -11,7 +12,9 @@ namespace Isometric.Editor.Extensions
             {
                 var sender = (TextBox) objectSender;
 
-                GameData.Instance.Constants[name].TrySet(sender.Text);
+                sender.Background = GameData.Instance.Constants[name].TrySet(sender.Text)
+                    ? Brushes.White
+                    : Brushes.MistyRose;
             };
         }
     }

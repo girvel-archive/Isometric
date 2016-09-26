@@ -9,6 +9,7 @@ using System.Windows;
 using System.Windows.Automation.Peers;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Media;
 using EnumerableExtensions;
 using Girvel.Graph;
 using Isometric.Core.Modules.SettingsModule;
@@ -67,6 +68,8 @@ namespace Isometric.Editor
                     LabelText = $"{property.DeclaringType.Name}.{property.Name}",
                     VerticalAlignment = VerticalAlignment.Top,
                 };
+
+                newBox.TextBox.FontFamily = new FontFamily("Consolas");
 
                 ConstantsStackPanel.Children.Add(newBox);
                 newBox.TextBox.TextChanged += ConstantBoxEvents.GenerateTextChangedEventHandler(property.Name);
