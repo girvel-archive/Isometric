@@ -90,7 +90,6 @@
     <Compile Include="Extensions\ConstantBoxEvents.cs" />
     <Compile Include="Extensions\UniversalParser.cs" />
     <Compile Include="GameData.cs" />
-    <Compile Include="Extensions\ResourcesHelper.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -140,6 +139,10 @@
     <ProjectReference Include="..\Implementation\Isometric.Implementation.csproj">
       <Project>{9e79462d-fc84-4bf7-a345-e152b10b996a}</Project>
       <Name>Isometric.Implementation</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Isometric.Parser\Isometric.Parser.csproj">
+      <Project>{6c500f06-5610-4527-872b-379d51cf7627}</Project>
+      <Name>Isometric.Parser</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

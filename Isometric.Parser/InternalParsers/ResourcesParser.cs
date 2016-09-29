@@ -2,11 +2,19 @@
 using System.Text.RegularExpressions;
 using Isometric.CommonStructures;
 
-namespace Isometric.Editor.Extensions
+namespace Isometric.Parser.InternalParsers
 {
-    public static class ResourcesHelper
+    internal class ResourcesParser : IParser<Resources>
     {
-        public static bool TryParse(this string str, out Resources result)
+        private static ResourcesParser _instance;
+        public static ResourcesParser Instance => _instance ?? (_instance = new ResourcesParser());
+
+
+        private ResourcesParser() { }
+
+
+
+        public bool TryParse(string str, out Resources result)
         {
             result = new Resources();
 
@@ -14,25 +22,25 @@ namespace Isometric.Editor.Extensions
             {
                 return false;
             }
-            
+
             foreach (var type in typeof(ResourceType).GetEnumNames())
             {
                 int resource;
                 var resourceParts =
                     Regex.Match(str, type.ToLower() + @": \d*")
-                        .ToString()
-                        .Split(' ');
+                         .ToString()
+                         .Split(' ');
 
                 if (resourceParts.Length == 2 && int.TryParse(resourceParts[1], out resource))
                 {
-                    result.ResourcesArray[(int) (ResourceType) Enum.Parse(typeof(ResourceType), type)] = resource;
+                    result.ResourcesArray[(int)(ResourceType)Enum.Parse(typeof(ResourceType), type)] = resource;
                 }
             }
 
             return true;
         }
 
-        public static string GetValueString(this Resources resources)
+        public string GetValueString(Resources resources)
         {
             if (resources.Empty)
             {
@@ -46,7 +54,7 @@ namespace Isometric.Editor.Extensions
             {
                 if (resource != 0)
                 {
-                    result += $"{(result == "" ? "" : ", ")}{((ResourceType) i).ToString().ToLower()}: {resource}";
+                    result += $"{(result == "" ? "" : ", ")}{((ResourceType)i).ToString().ToLower()}: {resource}";
                 }
 
                 i++;

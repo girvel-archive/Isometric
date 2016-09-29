@@ -1,5 +1,6 @@
 ﻿using System;
 using Isometric.Editor.Extensions;
+using Isometric.Parser;
 
 namespace Isometric.Editor.Containers
 {
@@ -24,7 +25,8 @@ namespace Isometric.Editor.Containers
 
         public bool TrySet(string strValue)
         {
-            return strValue.TryParse(Type, out _value);
+            throw new NotImplementedException();
+            //return strValue.TryParse(Type, out _value);
         }
     }
 }

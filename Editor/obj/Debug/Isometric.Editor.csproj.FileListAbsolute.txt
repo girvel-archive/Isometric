@@ -31,3 +31,5 @@ E:\projects\isometric\Editor\bin\Debug\RandomExtensions.pdb
 E:\projects\isometric\Editor\bin\Debug\EnumerableExtensions.pdb
 E:\projects\isometric\Editor\obj\Debug\CustomControls\LabeledTextBox.g.cs
 E:\projects\isometric\Editor\obj\Debug\CustomControls\LabeledTextBox.baml
+E:\projects\isometric\Editor\bin\Debug\Isometric.Parser.dll
+E:\projects\isometric\Editor\bin\Debug\Isometric.Parser.pdb

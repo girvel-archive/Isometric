@@ -142,6 +142,34 @@ namespace Isometric.CommonStructures
 
             return result;
         }
+
+
+
+        public override bool Equals(object obj)
+        {
+            if (!(obj is Resources))
+            {
+                return base.Equals(obj);
+            }
+
+            var r2 = (Resources)obj;
+
+            if (r2.Empty ^ Empty)
+            {
+                return false;
+            }
+
+            if (r2.Empty && Empty)
+            {
+                return true;
+            }
+
+            return !ResourcesArray.Where((t, i) => t != r2.ResourcesArray[i]).Any();
+        }
+
+        public static bool operator ==(Resources r1, Resources r2) => r1.Equals(r2);
+
+        public static bool operator !=(Resources r1, Resources r2) => !(r1 == r2);
     }
 }
 

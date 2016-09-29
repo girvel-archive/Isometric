@@ -1,9 +1,6 @@
-﻿using Isometric.Editor.Extensions;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.Globalization;
 using Isometric.CommonStructures;
-using Isometric.Core.Modules.WorldModule;
 using Isometric.Core.Modules.WorldModule.Buildings;
 using RandomExtensions;
 
@@ -11,14 +8,16 @@ namespace Isometric.Editor.Extensions
 {
     public static class UniversalParser
     {
-        public static bool TryParse(this string str, Type type, out object obj)
+        private static bool TryParse(this string str, Type type, out object obj)
         {
+            throw new NotImplementedException("method has to be deleted");
+
             obj = null;
             bool result;
             if (type == typeof (Resources))
             {
                 Resources resources;
-                result = str.TryParse(out resources);
+                //result = str.TryParse(out resources);
                 obj = resources;
             }
             else if (type == typeof (int))
@@ -38,13 +37,15 @@ namespace Isometric.Editor.Extensions
                 throw new NotImplementedException("type not supported");
             }
 
-            return result;
+            return obj != null && result;
         }
 
 
 
         public static string GetValueString(this object obj)
         {
+            throw new NotImplementedException("method has to be deleted");
+
             {
                 var convertible = obj as IConvertible;
                 if (convertible != null)

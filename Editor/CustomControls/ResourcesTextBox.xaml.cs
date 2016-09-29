@@ -2,6 +2,7 @@
 using System.Windows.Media;
 using Isometric.CommonStructures;
 using Isometric.Editor.Extensions;
+using Isometric.Parser;
 
 namespace Isometric.Editor.CustomControls
 {
