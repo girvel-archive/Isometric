@@ -43,6 +43,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="InternalParsers\ConvertiblesParser.cs" />
     <Compile Include="InternalParsers\EnumerableParser.cs" />
     <Compile Include="InternalParsers\IParser.cs" />
     <Compile Include="InternalParsers\ResourcesParser.cs" />

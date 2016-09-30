@@ -1,10 +1,7 @@
 ﻿using System;
-using System.Globalization;
 using System.Linq;
-using Isometric.CommonStructures;
-using Isometric.Core.Modules.WorldModule.Buildings;
+using System.Reflection;
 using Isometric.Parser.InternalParsers;
-using RandomExtensions;
 
 namespace Isometric.Parser
 {
@@ -19,6 +16,7 @@ namespace Isometric.Parser
             Parsers = new IParser[]
             {
                 ResourcesParser.Instance,
+                ConvertiblesParser.Instance,
             };
         }
 
@@ -26,11 +24,8 @@ namespace Isometric.Parser
 
         public static bool TryParse<T>(this string str, out T obj)
         {
-            obj = default(T);
-            var result = false;
-            
             var parser = Parsers.OfType<IParser<T>>().FirstOrDefault();
-            if (parser != null)
+            if (parser != null) 
             {
                 return parser.TryParse(str, out obj);
             }

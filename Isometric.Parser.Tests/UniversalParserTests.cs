@@ -11,16 +11,17 @@ namespace Isometric.Parser.Tests
         {
             // arrange
             const int value = 123;
-            var command = value.ToString();
+            var str = value.ToString();
 
             // act
             int result;
-            var success = command.TryParse(out result);
+            var success = str.TryParse(out result);
 
             // assert
             Assert.IsTrue(success);
             Assert.AreEqual(result, value);
         }
+
 
 
         [TestMethod]
@@ -40,6 +41,7 @@ namespace Isometric.Parser.Tests
         }
 
 
+
         [TestMethod]
         public void GetValueString_TryParse_Resources_Equality()
         {
@@ -53,6 +55,24 @@ namespace Isometric.Parser.Tests
             // assert
             Assert.IsTrue(success);
             Assert.AreEqual(result, value);
+        }
+
+
+
+        [TestMethod]
+        public void String_TryParse_Resources_Equality()
+        {
+            // arrange
+            var value = "meat: 200 corn: 100";
+            var necessaryResult = new Resources(meat: 200, corn: 100);
+
+            // act
+            Resources result;
+            var success = value.TryParse(out result);
+
+            // assert
+            Assert.IsTrue(success);
+            Assert.AreEqual(result, necessaryResult);
         }
     }
 }
