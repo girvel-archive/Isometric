@@ -12,3 +12,5 @@ E:\projects\isometric\Isometric.GameDataTools\bin\Debug\Isometric.CommonStructur
 E:\projects\isometric\Isometric.GameDataTools\obj\Debug\Isometric.GameDataTools.csprojResolveAssemblyReference.cache
 E:\projects\isometric\Isometric.GameDataTools\obj\Debug\Isometric.GameDataTools.dll
 E:\projects\isometric\Isometric.GameDataTools\obj\Debug\Isometric.GameDataTools.pdb
+E:\projects\isometric\Isometric.GameDataTools\bin\Debug\RandomExtensions.dll
+E:\projects\isometric\Isometric.GameDataTools\bin\Debug\RandomExtensions.pdb

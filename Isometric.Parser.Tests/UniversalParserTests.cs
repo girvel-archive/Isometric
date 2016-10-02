@@ -14,12 +14,12 @@ namespace Isometric.Parser.Tests
             var str = value.ToString();
 
             // act
-            int result;
-            var success = str.TryParse(out result);
+            object result;
+            var success = str.TryParse(typeof(int), out result);
 
             // assert
             Assert.IsTrue(success);
-            Assert.AreEqual(result, value);
+            Assert.AreEqual((int) result, value);
         }
 
 
@@ -29,15 +29,15 @@ namespace Isometric.Parser.Tests
         {
             // arrange
             const int value = 123;
-            var command = value.GetValueString();
+            var command = value.GetValueString(typeof(int));
 
             // act
-            int result;
-            var success = command.TryParse(out result);
+            object result;
+            var success = command.TryParse(typeof(int), out result);
 
             // assert
             Assert.IsTrue(success);
-            Assert.AreEqual(result, value);
+            Assert.AreEqual((int)result, value);
         }
 
 
@@ -49,12 +49,12 @@ namespace Isometric.Parser.Tests
             var value = new Resources(corn: 400, gold: 200, people: 20, meat: 20);
 
             // act
-            Resources result;
-            var success = value.GetValueString().TryParse(out result);
+            object result;
+            var success = value.GetValueString(typeof(Resources)).TryParse(typeof(Resources), out result);
 
             // assert
             Assert.IsTrue(success);
-            Assert.AreEqual(result, value);
+            Assert.AreEqual((Resources)result, value);
         }
 
 
@@ -67,12 +67,12 @@ namespace Isometric.Parser.Tests
             var necessaryResult = new Resources(meat: 200, corn: 100);
 
             // act
-            Resources result;
-            var success = value.TryParse(out result);
+            object result;
+            var success = value.TryParse(typeof(Resources), out result);
 
             // assert
             Assert.IsTrue(success);
-            Assert.AreEqual(result, necessaryResult);
+            Assert.AreEqual((Resources) result, necessaryResult);
         }
     }
 }

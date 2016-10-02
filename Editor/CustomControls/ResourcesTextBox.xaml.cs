@@ -38,11 +38,11 @@ namespace Isometric.Editor.CustomControls
                 return;
             }
 
-            Resources resources;
+            object resources;
 
-            if (Text.TryParse(out resources))
+            if (Text.TryParse(typeof(Resources), out resources))
             {
-                GameResources = resources;
+                GameResources = (Resources) resources;
             }
             else
             {

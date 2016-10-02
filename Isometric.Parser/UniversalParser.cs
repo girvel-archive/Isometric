@@ -17,15 +17,15 @@ namespace Isometric.Parser
             Parsers = new IParser[]
             {
                 ResourcesParser.Instance,
-                ConvertiblesParser.Instance,
+                IntParser.Instance,
             };
         }
 
 
 
-        public static bool TryParse<T>(this string str, out T obj)
+        public static bool TryParse(this string str, Type type, out object obj)
         {
-            var parser = Parsers.OfType<IParser<T>>().FirstOrDefault();
+            var parser = Parsers.FirstOrDefault(p => p.Type == type);
             if (parser != null)
             {
                 return parser.TryParse(str, out obj);
@@ -36,9 +36,9 @@ namespace Isometric.Parser
 
 
 
-        public static string GetValueString<T>(this T obj)
+        public static string GetValueString(this object obj, Type type)
         {
-            var parser = Parsers.OfType<IParser<T>>().FirstOrDefault();
+            var parser = Parsers.FirstOrDefault(p => p.Type == type);
             if (parser != null)
             {
                 return parser.GetValueString(obj);

@@ -24,3 +24,6 @@ E:\projects\isometric\Client\obj\Debug\Isometric.Client.exe
 E:\projects\isometric\Client\obj\Debug\Isometric.Client.pdb
 E:\projects\isometric\Client\bin\Debug\Girvel.Graph.dll
 E:\projects\isometric\Client\bin\Debug\Girvel.Graph.pdb
+E:\projects\isometric\Client\bin\Debug\Isometric.Client.exe.config
+E:\projects\isometric\Client\bin\Debug\Isometric.GameDataTools.dll
+E:\projects\isometric\Client\bin\Debug\Isometric.GameDataTools.pdb

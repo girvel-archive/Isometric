@@ -12,12 +12,14 @@ using System.Windows.Input;
 using System.Windows.Media;
 using EnumerableExtensions;
 using Girvel.Graph;
+using Isometric.CommonStructures;
 using Isometric.Core.Modules.SettingsModule;
 using Isometric.Core.Modules.WorldModule.Buildings;
 using Isometric.Editor.Containers;
 using Isometric.Editor.CustomControls;
 using Isometric.Editor.Extensions;
 using Isometric.GameDataTools.Exceptions;
+using Isometric.Parser;
 using Microsoft.Win32;
 
 namespace Isometric.Editor
@@ -150,8 +152,8 @@ namespace Isometric.Editor
             NameTextBox.Text = SelectedPattern.Name;
             IdTextBox.Text = SelectedPattern.Id.ToString();
             BuildingTypeComboBox.SelectedItem = SelectedPattern.Type.ToString();
-            ResourcesTextBox.Text = SelectedPattern.Resources.GetValueString();
-            PriceTextBox.Text = SelectedPattern.Price.GetValueString();
+            ResourcesTextBox.Text = SelectedPattern.Resources.GetValueString(typeof(Resources));
+            PriceTextBox.Text = SelectedPattern.Price.GetValueString(typeof(Resources));
 
             UpgradesComboBox.Items.Clear();
             UpgradesListBox.Items.Clear();
@@ -356,7 +358,7 @@ namespace Isometric.Editor
 
             foreach (var constantPair in GameData.Instance.Constants)
             {
-                _constantTextBoxes.First(box => box.LabelText == constantPair.Key).Text = constantPair.Value.Value.GetValueString();
+                _constantTextBoxes.First(box => box.LabelText == constantPair.Key).Text = constantPair.Value.Value.GetValueString(constantPair.Value.Type);
             }
 
             SortBuildings();

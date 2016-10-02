@@ -4,19 +4,23 @@ using Isometric.CommonStructures;
 
 namespace Isometric.Parser.InternalParsers
 {
-    internal class ResourcesParser : IParser<Resources>
+    internal class ResourcesParser : IParser
     {
         private static ResourcesParser _instance;
         public static ResourcesParser Instance => _instance ?? (_instance = new ResourcesParser());
-
-
+        
         private ResourcesParser() { }
 
 
 
-        public bool TryParse(string str, out Resources result)
+        public Type Type => typeof (Resources);
+
+
+
+        public bool TryParse(string str, out object obj)
         {
-            result = new Resources();
+            obj = null;
+            var result = new Resources();
 
             if (!Regex.IsMatch(str, @"^ *(\w*: *\d{1,},? *)*(\w*: *\d{1,})? *$"))
             {
@@ -37,11 +41,13 @@ namespace Isometric.Parser.InternalParsers
                 }
             }
 
+            obj = result;
             return true;
         }
 
-        public string GetValueString(Resources resources)
+        public string GetValueString(object obj)
         {
+            var resources = (Resources) obj;
             if (resources.Empty)
             {
                 return "";

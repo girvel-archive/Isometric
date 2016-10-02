@@ -1,11 +1,13 @@
-﻿namespace Isometric.Parser.InternalParsers
+﻿using System;
+
+namespace Isometric.Parser.InternalParsers
 {
-    internal interface IParser { }
-
-    internal interface IParser<T> : IParser
+    internal interface IParser
     {
-        bool TryParse(string str, out T result);
+        Type Type { get; }
 
-        string GetValueString(T subject);
+        bool TryParse(string str, out object result);
+
+        string GetValueString(object subject);
     }
 }

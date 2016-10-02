@@ -24,9 +24,7 @@ E:\projects\isometric\Editor\obj\Debug\CustomControls\ResourcesTextBox.baml
 E:\projects\isometric\Editor\obj\Debug\GeneratedInternalTypeHelper.g.cs
 E:\projects\isometric\Editor\bin\Debug\Girvel.Graph.dll
 E:\projects\isometric\Editor\bin\Debug\Girvel.Graph.pdb
-E:\projects\isometric\Editor\bin\Debug\Isometric.Implementation.dll
 E:\projects\isometric\Editor\bin\Debug\RandomExtensions.dll
-E:\projects\isometric\Editor\bin\Debug\Isometric.Implementation.pdb
 E:\projects\isometric\Editor\bin\Debug\RandomExtensions.pdb
 E:\projects\isometric\Editor\bin\Debug\EnumerableExtensions.pdb
 E:\projects\isometric\Editor\obj\Debug\CustomControls\LabeledTextBox.g.cs
