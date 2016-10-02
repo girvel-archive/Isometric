@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Globalization;
 using System.Linq;
-using System.Reflection;
-using System.Runtime.Remoting.Messaging;
 
 namespace Isometric.Parser.InternalParsers
 {

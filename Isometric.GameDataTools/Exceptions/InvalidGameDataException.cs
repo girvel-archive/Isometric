@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Runtime.Serialization;
 
-namespace Isometric.Implementation.Modules.GameData.Exceptions
+namespace Isometric.GameDataTools.Exceptions
 {
     [Serializable]
     public class InvalidGameDataException : Exception

@@ -8,8 +8,8 @@ using Isometric.Client.Tools;
 using Isometric.Core.Modules.TickModule;
 using Isometric.Core.Modules.WorldModule;
 using Isometric.Core.Modules.WorldModule.Land;
+using Isometric.GameDataTools.Exceptions;
 using Isometric.Implementation;
-using Isometric.Implementation.Modules.GameData.Exceptions;
 using Isometric.Server.Modules;
 
 namespace Isometric.Client

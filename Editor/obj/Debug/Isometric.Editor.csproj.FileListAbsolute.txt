@@ -33,3 +33,5 @@ E:\projects\isometric\Editor\obj\Debug\CustomControls\LabeledTextBox.g.cs
 E:\projects\isometric\Editor\obj\Debug\CustomControls\LabeledTextBox.baml
 E:\projects\isometric\Editor\bin\Debug\Isometric.Parser.dll
 E:\projects\isometric\Editor\bin\Debug\Isometric.Parser.pdb
+E:\projects\isometric\Editor\bin\Debug\Isometric.GameDataTools.dll
+E:\projects\isometric\Editor\bin\Debug\Isometric.GameDataTools.pdb

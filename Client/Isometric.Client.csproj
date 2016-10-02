@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project DefaultTargets="Build" ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
@@ -7,7 +7,8 @@
     <OutputType>Exe</OutputType>
     <RootNamespace>Isometric.Client</RootNamespace>
     <AssemblyName>Isometric.Client</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugCharacters>true</DebugCharacters>
@@ -63,6 +64,10 @@
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
+    <ProjectReference Include="..\Isometric.GameDataTools\Isometric.GameDataTools.csproj">
+      <Project>{9B90CA08-E75E-4A95-BB3B-EAB83579E18A}</Project>
+      <Name>Isometric.GameDataTools</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Server\Isometric.Server.csproj">
       <Project>{DCAE2467-5ADF-4B9F-AAD6-E2323F50D94C}</Project>
       <Name>Isometric.Server</Name>
@@ -80,5 +85,7 @@
       <Name>Isometric.Implementation</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="app.config" />
+  </ItemGroup>
 </Project>

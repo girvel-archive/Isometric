@@ -1,9 +1,6 @@
 ﻿namespace Isometric.Parser.InternalParsers
 {
-    internal interface IParser
-    {
-
-    }
+    internal interface IParser { }
 
     internal interface IParser<T> : IParser
     {

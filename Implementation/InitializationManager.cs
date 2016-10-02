@@ -1,8 +1,8 @@
 ﻿using System;
 using System.IO;
+using Isometric.GameDataTools.Exceptions;
 using Isometric.Implementation.Modules.DataImplementation;
 using Isometric.Implementation.Modules.GameData;
-using Isometric.Implementation.Modules.GameData.Exceptions;
 
 namespace Isometric.Implementation
 {

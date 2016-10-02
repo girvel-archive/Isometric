@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Girvel.Graph;
 using Isometric.Core.Modules.WorldModule.Buildings;
 
-namespace Isometric.Implementation.Modules.GameData
+namespace Isometric.GameDataTools
 {
     [Serializable]
     public class GameDataContainer

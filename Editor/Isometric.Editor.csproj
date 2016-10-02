@@ -136,9 +136,9 @@
       <Project>{5E853DD8-DDC3-4F8C-9966-52CA5881CBCE}</Project>
       <Name>Isometric.Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Implementation\Isometric.Implementation.csproj">
-      <Project>{9e79462d-fc84-4bf7-a345-e152b10b996a}</Project>
-      <Name>Isometric.Implementation</Name>
+    <ProjectReference Include="..\Isometric.GameDataTools\Isometric.GameDataTools.csproj">
+      <Project>{9B90CA08-E75E-4A95-BB3B-EAB83579E18A}</Project>
+      <Name>Isometric.GameDataTools</Name>
     </ProjectReference>
     <ProjectReference Include="..\Isometric.Parser\Isometric.Parser.csproj">
       <Project>{6c500f06-5610-4527-872b-379d51cf7627}</Project>

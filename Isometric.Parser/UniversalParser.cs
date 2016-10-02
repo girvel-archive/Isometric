@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Linq;
 using System.Reflection;
 using Isometric.Parser.InternalParsers;
@@ -25,7 +26,7 @@ namespace Isometric.Parser
         public static bool TryParse<T>(this string str, out T obj)
         {
             var parser = Parsers.OfType<IParser<T>>().FirstOrDefault();
-            if (parser != null) 
+            if (parser != null)
             {
                 return parser.TryParse(str, out obj);
             }

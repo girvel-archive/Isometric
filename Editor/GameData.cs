@@ -9,8 +9,8 @@ using Isometric.Core.Modules.SettingsModule;
 using Isometric.Core.Modules.WorldModule;
 using Isometric.Core.Modules.WorldModule.Buildings;
 using Isometric.Editor.Containers;
-using Isometric.Implementation.Modules.GameData;
-using Isometric.Implementation.Modules.GameData.Exceptions;
+using Isometric.GameDataTools;
+using Isometric.GameDataTools.Exceptions;
 using RandomExtensions;
 
 namespace Isometric.Editor
@@ -29,21 +29,6 @@ namespace Isometric.Editor
 
 
 
-        private static readonly Dictionary<Type, Type> DelegateTypes;
-
-
-
-        static GameData()
-        {
-            DelegateTypes = new Dictionary<Type, Type>
-            {
-                [typeof(World.AreaGenerator)] = typeof(RandomCollection<BuildingPattern>),
-                [typeof(World.VillageGenerator)] = typeof(World.DefaultBuilding[]),
-            };
-        }
-
-
-
         /// <summary>
         /// Creates empty game data
         /// </summary>
@@ -57,7 +42,7 @@ namespace Isometric.Editor
             {
                 Type type;
 
-                if (!DelegateTypes.TryGetValue(property.PropertyType, out type))
+                if (!DelegateTypesConverter.Instance.DataByDelegate.TryGetValue(property.PropertyType, out type))
                 {
                     type = property.PropertyType;
                 }
@@ -118,9 +103,11 @@ namespace Isometric.Editor
 
         protected Type GetEditableType(object obj)
         {
-            Type type = obj.GetType();
+            var type = obj.GetType();
 
-            return DelegateTypes.ContainsKey(type) ? DelegateTypes[type] : type;
+            return DelegateTypesConverter.Instance.DataByDelegate.ContainsKey(type) 
+                ? DelegateTypesConverter.Instance.DataByDelegate[type] 
+                : type;
         }
     }
 }

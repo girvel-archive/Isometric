@@ -17,7 +17,7 @@ using Isometric.Core.Modules.WorldModule.Buildings;
 using Isometric.Editor.Containers;
 using Isometric.Editor.CustomControls;
 using Isometric.Editor.Extensions;
-using Isometric.Implementation.Modules.GameData.Exceptions;
+using Isometric.GameDataTools.Exceptions;
 using Microsoft.Win32;
 
 namespace Isometric.Editor

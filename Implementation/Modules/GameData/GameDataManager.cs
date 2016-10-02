@@ -9,7 +9,8 @@ using Isometric.Core.Modules.SettingsModule;
 using Isometric.Core.Modules.WorldModule;
 using Isometric.Core.Modules.WorldModule.Buildings;
 using Isometric.Core.Modules.WorldModule.Land;
-using Isometric.Implementation.Modules.GameData.Exceptions;
+using Isometric.GameDataTools;
+using Isometric.GameDataTools.Exceptions;
 using Isometric.Implementation.Modules.PatternsImplementation;
 
 namespace Isometric.Implementation.Modules.GameData
