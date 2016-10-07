@@ -37,9 +37,9 @@ namespace Isometric.Client.Modules.LogModule
 
 
 
-        private static void _reportError(string message)
+        private static void _reportError(string message, Exception ex)
         {
-            Log.Instance.Write($"ERROR REPORT: {message}");
+            Log.Instance.Exception(ex, $"ERROR REPORT: {message}");
         }
 
 

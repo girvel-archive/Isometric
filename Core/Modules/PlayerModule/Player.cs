@@ -107,9 +107,14 @@ namespace Isometric.Core.Modules.PlayerModule
 
             CurrentResources += resourcesDelta;
 
-            DelegateExtensions.SafeInvoke(
-                () => OnTick?.Invoke(this),
-                GlobalData.Instance.OnUnknownException);
+            try
+            {
+                OnTick?.Invoke(this);
+            }
+            catch (Exception ex)
+            {
+                ErrorReporter.Instance.ReportError($"Unknown error during {nameof(OnTick)}");
+            }
         }
 
         public void AddOwnedBuilding(Building building) 

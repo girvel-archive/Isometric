@@ -13,7 +13,6 @@ namespace Isometric.Game
             GameDataManager.Instance = new GameDataManager(stream);
 
             TimeDataImplementation.Init();
-            GlobalDataImplementation.Init();
             PlayerDataImplementation.Init();
             TickDataImplementation.Init();
         }

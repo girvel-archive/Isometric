@@ -9,13 +9,13 @@ namespace Isometric.Core.Modules
 
 
 
-        public event Action<string> OnError;
+        public event Action<string, Exception> OnError;
 
 
 
-        public void ReportError(string message)
+        public void ReportError(string message, Exception ex = null)
         {
-            OnError?.Invoke(message);
+            OnError?.Invoke(message, ex);
         }
     }
 }
