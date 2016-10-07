@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Linq;
+using Isometric.Core.Modules;
 using Isometric.Core.Modules.WorldModule.Buildings;
 using Isometric.Implementation.Modules.GameData;
+using Isometric.Implementation.Modules.GameData.Defaults;
 using VisualConsole;
 
 namespace Isometric.Client.Modules.BuildingGraphics
@@ -47,28 +49,28 @@ namespace Isometric.Client.Modules.BuildingGraphics
             GraphicsArray = new[]
                 {
                     new GraphicsPair(
-                        new ConsolePoint('f', ConsoleColor.DarkGreen), 
-                        GameDataManager.Instance.GetBuildingPattern("Forest")),
+                        new ConsolePoint('f', ConsoleColor.DarkGreen),
+                        MainBuildingList.Instance.First(b => b.Name == BuildingNames.Forest)),
 
                     new GraphicsPair(
                         new ConsolePoint('~', ConsoleColor.DarkBlue),
-                        GameDataManager.Instance.GetBuildingPattern("Water")),
+                        MainBuildingList.Instance.First(b => b.Name == BuildingNames.Water)),
 
                     new GraphicsPair(
                         new ConsolePoint('.', ConsoleColor.DarkMagenta),
-                        GameDataManager.Instance.GetBuildingPattern("Plain")),
+                        MainBuildingList.Instance.First(b => b.Name == BuildingNames.Plain)),
 
                     new GraphicsPair(
                         new ConsolePoint('r', ConsoleColor.DarkGray),
-                        GameDataManager.Instance.GetBuildingPattern("Rock")),
+                        MainBuildingList.Instance.First(b => b.Name == BuildingNames.Rock)),
 
                     new GraphicsPair(
                         new ConsolePoint('H', ConsoleColor.Yellow),
-                        GameDataManager.Instance.GetBuildingPattern("WoodHouse")),
+                        MainBuildingList.Instance.First(b => b.Name == BuildingNames.WoodHouse)),
 
                     new GraphicsPair(
                         new ConsolePoint('H', ConsoleColor.Yellow),
-                        GameDataManager.Instance.GetBuildingPattern("WoodHouse2")),
+                        MainBuildingList.Instance.First(b => b.Name == BuildingNames.WoodHouse2)),
                 };
         }
 

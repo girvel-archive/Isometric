@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections;
 using System.Linq;
-using System.Reflection;
 using Isometric.Parser.InternalParsers;
 
 namespace Isometric.Parser
@@ -23,12 +21,12 @@ namespace Isometric.Parser
 
 
 
-        public static bool TryParse(this string str, Type type, out object obj)
+        public static bool TryParse(this string str, Type type, object additionalData, out object obj)
         {
             var parser = Parsers.FirstOrDefault(p => p.Type == type);
             if (parser != null)
             {
-                return parser.TryParse(str, out obj);
+                return parser.TryParse(str, additionalData, out obj);
             }
 
             throw new NotImplementedException("type not supported");

@@ -3,4 +3,5 @@
   &lt;Assembly Path="D:\projects\CommandInterface\bin\Release\CommandInterface.dll" /&gt;&#xD;
   &lt;Assembly Path="D:\projects\isometric\VisualServer\bin\Release\CommandInterface.dll" /&gt;&#xD;
   &lt;Assembly Path="D:\projects\tools\CommandInterface\Library\bin\Release\CommandInterface.dll" /&gt;&#xD;
+  &lt;Assembly Path="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.5.2\mscorlib.dll" /&gt;&#xD;
 &lt;/AssemblyExplorer&gt;</s:String></wpf:ResourceDictionary>

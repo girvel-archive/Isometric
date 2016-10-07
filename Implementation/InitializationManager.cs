@@ -17,7 +17,6 @@ namespace Isometric.Implementation
             GlobalDataImplementation.Init();
             PlayerDataImplementation.Init();
             TickDataImplementation.Init();
-            GameConstantsManager.SetConstants();
         }
     }
 }

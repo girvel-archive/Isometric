@@ -19,7 +19,7 @@ namespace Isometric.Parser.InternalParsers
 
 
 
-        public bool TryParse(string str, out object obj)
+        public bool TryParse(string str, object additionalData, out object obj)
         {
             int result;
             var success = int.TryParse(str, out result);

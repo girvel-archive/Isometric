@@ -17,7 +17,7 @@ namespace Isometric.Parser.InternalParsers
 
 
 
-        public bool TryParse(string str, out object obj)
+        public bool TryParse(string str, object additionalData, out object obj)
         {
             obj = null;
             var result = new Resources();
@@ -27,17 +27,17 @@ namespace Isometric.Parser.InternalParsers
                 return false;
             }
 
-            foreach (var type in typeof(ResourceType).GetEnumNames())
+            foreach (var name in typeof(ResourceType).GetEnumNames())
             {
                 int resource;
                 var resourceParts =
-                    Regex.Match(str, type.ToLower() + @": \d*")
+                    Regex.Match(str, name.ToLower() + @": \d*")
                          .ToString()
                          .Split(' ');
 
                 if (resourceParts.Length == 2 && int.TryParse(resourceParts[1], out resource))
                 {
-                    result.ResourcesArray[(int)(ResourceType)Enum.Parse(typeof(ResourceType), type)] = resource;
+                    result.ResourcesArray[(int)(ResourceType)Enum.Parse(typeof(ResourceType), name)] = resource;
                 }
             }
 

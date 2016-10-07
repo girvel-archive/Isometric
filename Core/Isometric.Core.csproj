@@ -42,6 +42,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Modules\ErrorReporter.cs" />
+    <Compile Include="Modules\MainBuildingList.cs" />
     <Compile Include="Modules\SettingsModule\GameConstantAttribute.cs" />
     <Compile Include="Modules\WorldModule\Buildings\BuildingPatternCollection.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

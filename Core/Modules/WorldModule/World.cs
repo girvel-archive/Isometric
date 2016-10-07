@@ -29,6 +29,7 @@ namespace Isometric.Core.Modules.WorldModule
         /// <summary>
         /// Generates on existing territory player's village
         /// </summary>
+        [GameConstant]
         public static VillageGenerator NewPlayerVillage { get; set; }
 
 

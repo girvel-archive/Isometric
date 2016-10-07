@@ -21,3 +21,4 @@ E:\projects\isometric\Client\bin\Release\Girvel.Graph.pdb
 E:\projects\isometric\Client\bin\Release\EnumerableExtensions.pdb
 E:\projects\isometric\Client\bin\Release\RandomExtensions.pdb
 E:\projects\isometric\Client\obj\Release\Isometric.Client.exe
+E:\projects\isometric\Client\bin\Release\Isometric.Client.exe.config

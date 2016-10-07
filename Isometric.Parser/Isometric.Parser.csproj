@@ -43,6 +43,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ArrayHelper.cs" />
+    <Compile Include="InternalParsers\DefaultBuildingArrayParser.cs" />
     <Compile Include="InternalParsers\IntParser.cs" />
     <Compile Include="InternalParsers\IParser.cs" />
     <Compile Include="InternalParsers\ResourcesParser.cs" />

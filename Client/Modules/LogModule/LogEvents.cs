@@ -1,5 +1,6 @@
 ﻿using System;
 using Isometric.CommonStructures;
+using Isometric.Core.Modules;
 using Isometric.Core.Modules.TickModule;
 using Isometric.Server;
 using ServerCommandManager = Isometric.Server.Modules.CommandModule.Server.CommandManager;
@@ -10,6 +11,8 @@ namespace Isometric.Client.Modules.LogModule
     {
         internal static void Init()
         {
+            ErrorReporter.Instance.OnError += _reportError;
+
             SingleServer.Instance.OnAcceptedConnection += _onAcceptedConnection;
             SingleServer.Instance.OnWrongCommand += _onWrongCommand;
             ServerCommandManager.Instance.OnLoginAttempt += _onLoginAttempt;
@@ -30,6 +33,13 @@ namespace Isometric.Client.Modules.LogModule
                 ex => _onSerializationException("Opening", ex);
 
             ClocksManager.OnTick += _onTick;
+        }
+
+
+
+        private static void _reportError(string message)
+        {
+            Log.Instance.Write($"ERROR REPORT: {message}");
         }
 
 

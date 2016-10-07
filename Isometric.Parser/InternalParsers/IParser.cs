@@ -6,7 +6,7 @@ namespace Isometric.Parser.InternalParsers
     {
         Type Type { get; }
 
-        bool TryParse(string str, out object result);
+        bool TryParse(string str, object additionalData, out object result);
 
         string GetValueString(object subject);
     }

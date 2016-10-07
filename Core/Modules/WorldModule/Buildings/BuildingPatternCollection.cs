@@ -49,6 +49,11 @@ namespace Isometric.Core.Modules.WorldModule.Buildings
         {
             return _buildingPatterns[id];
         }
+
+        public BuildingPattern Get(string name)
+        {
+            return _buildingPatterns.First(p => p.Name == name);
+        }
         
 
 
@@ -85,11 +90,16 @@ namespace Isometric.Core.Modules.WorldModule.Buildings
         {
             _buildingPatterns.RemoveAt(index);
         }
-
-        [Obsolete("not supported", true)]
+        
         public void Add(BuildingPattern item)
         {
-            throw new InvalidOperationException("not supported");
+            if (_buildingPatterns.Contains(item))
+            {
+                throw new ArgumentException("Collection already contains this item", nameof(item));
+            }
+
+            _buildingPatterns.Add(item);
+            item.Id = ++LastId;
         }
 
         public void Clear()

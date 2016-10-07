@@ -11,3 +11,14 @@ E:\projects\isometric\Isometric.Parser.Tests\bin\Debug\Isometric.CommonStructure
 E:\projects\isometric\Isometric.Parser.Tests\bin\Debug\VectorNet.dll
 E:\projects\isometric\Isometric.Parser.Tests\bin\Debug\Isometric.CommonStructures.pdb
 E:\projects\isometric\Isometric.Parser.Tests\bin\Debug\VectorNet.pdb
+E:\projects\isometric\Isometric.Parser.Tests\bin\Debug\Castle.Core.dll
+E:\projects\isometric\Isometric.Parser.Tests\bin\Debug\Isometric.Core.dll
+E:\projects\isometric\Isometric.Parser.Tests\bin\Debug\Moq.dll
+E:\projects\isometric\Isometric.Parser.Tests\bin\Debug\RandomExtensions.dll
+E:\projects\isometric\Isometric.Parser.Tests\bin\Debug\Girvel.Graph.dll
+E:\projects\isometric\Isometric.Parser.Tests\bin\Debug\EnumerableExtensions.dll
+E:\projects\isometric\Isometric.Parser.Tests\bin\Debug\Isometric.Core.pdb
+E:\projects\isometric\Isometric.Parser.Tests\bin\Debug\Castle.Core.xml
+E:\projects\isometric\Isometric.Parser.Tests\bin\Debug\Moq.xml
+E:\projects\isometric\Isometric.Parser.Tests\bin\Debug\RandomExtensions.pdb
+E:\projects\isometric\Isometric.Parser.Tests\bin\Debug\Girvel.Graph.pdb

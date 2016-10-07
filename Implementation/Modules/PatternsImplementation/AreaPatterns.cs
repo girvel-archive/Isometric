@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Linq;
+using Isometric.Core.Modules;
 using Isometric.Core.Modules.PlayerModule;
 using Isometric.Core.Modules.WorldModule;
 using Isometric.Core.Modules.WorldModule.Buildings;
@@ -21,10 +23,7 @@ namespace Isometric.Implementation.Modules.PatternsImplementation
             Forest = new AreaPattern(
                 (terr, seed) => _defaultGeneration(terr, seed, new RandomCollection<BuildingPattern>(new Random(seed))
                 {
-                    new RandomPair<BuildingPattern>(6, GameDataManager.Instance.GetBuildingPattern("Forest")),
-                    new RandomPair<BuildingPattern>(2, GameDataManager.Instance.GetBuildingPattern("Plain")),
-                    new RandomPair<BuildingPattern>(2, GameDataManager.Instance.GetBuildingPattern("Water")),
-                    new RandomPair<BuildingPattern>(1, GameDataManager.Instance.GetBuildingPattern("Rock")),
+                    new RandomPair<BuildingPattern>(6, MainBuildingList.Instance.First(b => b.Name == "Forest")),
                 }));
         }
 

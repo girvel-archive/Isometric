@@ -40,7 +40,7 @@ namespace Isometric.Editor.CustomControls
 
             object resources;
 
-            if (Text.TryParse(typeof(Resources), out resources))
+            if (Text.TryParse(typeof(Resources), null, out resources))
             {
                 GameResources = (Resources) resources;
             }

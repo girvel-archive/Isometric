@@ -11,6 +11,7 @@ using Isometric.Core.Modules.WorldModule.Buildings;
 using Isometric.Core.Modules.WorldModule.Land;
 using Isometric.GameDataTools;
 using Isometric.GameDataTools.Exceptions;
+using Isometric.Implementation.Modules.GameData.Defaults;
 using Isometric.Implementation.Modules.PatternsImplementation;
 
 namespace Isometric.Implementation.Modules.GameData
@@ -20,39 +21,51 @@ namespace Isometric.Implementation.Modules.GameData
     {
         public static GameDataManager Instance { get; set; }
 
-        public BuildingPattern[] Patterns { get; }
-
 
 
         /// <exception cref="InvalidGameDataException">Thrown when data in stream is invalid</exception>
         public GameDataManager(Stream stream)
         {
-            GameDataContainer data;
-
-            try
-            {
-                data = (GameDataContainer) new BinaryFormatter().Deserialize(stream);
-            }
-            catch (SerializationException ex)
-            {
-                throw new InvalidGameDataException("Game data can not be deserialized", ex);
-            }
-
-            Patterns = data.Patterns;
-            BuildingGraph.Instance = data.BuildingGraph;
+            MainBuildingList.Instance = DefaultBuildings.Instance.GetPatterns();
 
             foreach (var property in GameConstantAttribute.GetProperties())
             {
-                if (!data.Constants.ContainsKey(property.Name))
+                if (DefaultConstants.Instance.ConstantValues.ContainsKey(property.Name))
                 {
-                    throw new InvalidGameDataException("Game data does not contain all game constants");
+                    property.SetValue(null, DefaultConstants.Instance.ConstantValues[property.Name]);
                 }
-
-                property.SetValue(null, data.Constants[property.Name]);
+                else
+                {
+                    throw new NotImplementedException("DefaultConstants.ConstantValues does not contain all expected values");
+                }
             }
-        }
 
-        public BuildingPattern GetBuildingPattern(string name) => Patterns.First(p => p.Name == name);
+            // TODO decomment loader
+
+            //GameDataContainer data;
+
+            //try
+            //{
+            //    data = (GameDataContainer) new BinaryFormatter().Deserialize(stream);
+            //}
+            //catch (SerializationException ex)
+            //{
+            //    throw new InvalidGameDataException("Game data can not be deserialized", ex);
+            //}
+
+            //Patterns = data.Patterns;
+            //BuildingGraph.Instance = data.BuildingGraph;
+
+            //foreach (var property in GameConstantAttribute.GetProperties())
+            //{
+            //    if (!data.Constants.ContainsKey(property.Name))
+            //    {
+            //        throw new InvalidGameDataException("Game data does not contain all game constants");
+            //    }
+
+            //    property.SetValue(null, data.Constants[property.Name]);
+            //}
+        }
 
 
 

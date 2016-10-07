@@ -1,5 +1,8 @@
 ﻿using Isometric.CommonStructures;
+using Isometric.Core.Modules.WorldModule.Buildings;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Moq;
+using RandomExtensions;
 
 namespace Isometric.Parser.Tests
 {
@@ -15,7 +18,7 @@ namespace Isometric.Parser.Tests
 
             // act
             object result;
-            var success = str.TryParse(typeof(int), out result);
+            var success = str.TryParse(typeof(int), null, out result);
 
             // assert
             Assert.IsTrue(success);
@@ -33,7 +36,7 @@ namespace Isometric.Parser.Tests
 
             // act
             object result;
-            var success = command.TryParse(typeof(int), out result);
+            var success = command.TryParse(typeof(int), null, out result);
 
             // assert
             Assert.IsTrue(success);
@@ -50,7 +53,7 @@ namespace Isometric.Parser.Tests
 
             // act
             object result;
-            var success = value.GetValueString(typeof(Resources)).TryParse(typeof(Resources), out result);
+            var success = value.GetValueString(typeof(Resources)).TryParse(typeof(Resources), null, out result);
 
             // assert
             Assert.IsTrue(success);
@@ -63,16 +66,31 @@ namespace Isometric.Parser.Tests
         public void String_TryParse_Resources_Equality()
         {
             // arrange
-            var value = "meat: 200 corn: 100";
-            var necessaryResult = new Resources(meat: 200, corn: 100);
+            const string str = "meat: 200 corn: 100";
+            var expectedResult = new Resources(meat: 200, corn: 100);
 
             // act
             object result;
-            var success = value.TryParse(typeof(Resources), out result);
+            var success = str.TryParse(typeof(Resources), null, out result);
 
             // assert
             Assert.IsTrue(success);
-            Assert.AreEqual((Resources) result, necessaryResult);
+            Assert.AreEqual(expectedResult, (Resources) result);
         }
+
+
+
+        //[TestMethod]
+        //public void String_TryParse_RandomCollection_Equality()
+        //{
+        //    // arrange
+        //    const string str = "Forest: 8 Rock: 1";
+        //    var forest = Mock.Of<BuildingPattern>(p => p.Id == 0 && p.);
+            
+        //    var expectedResult = new[]
+        //    {
+        //        new RandomPair<BuildingPattern>(8, Buildin)
+        //    };
+        //}
     }
 }
