@@ -1,0 +1,4 @@
+E:\projects\isometric\ServerUi\bin\Debug\Isometric.Client.exe.config
+E:\projects\isometric\ServerUi\obj\Debug\Isometric.Client.exe
+E:\projects\isometric\ServerUi\obj\Debug\Isometric.Client.pdb
+E:\projects\isometric\ServerUi\obj\Debug\Isometric.ServerUi.csprojResolveAssemblyReference.cache

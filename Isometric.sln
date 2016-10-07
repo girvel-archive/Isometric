@@ -5,21 +5,21 @@ VisualStudioVersion = 14.0.23107.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Isometric.CommonStructures", "CommonStructures\Isometric.CommonStructures.csproj", "{64EE5B69-4B32-4080-82A7-9E5F419DAFAA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Isometric.Client", "Client\Isometric.Client.csproj", "{76AF96A9-3B70-4DB1-8AF7-E9F41EC6E198}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Isometric.Core", "Core\Isometric.Core.csproj", "{5E853DD8-DDC3-4F8C-9966-52CA5881CBCE}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Isometric.Editor", "Editor\Isometric.Editor.csproj", "{AF05F352-6E73-42A6-9038-D16C9A81C614}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Isometric.Implementation", "Implementation\Isometric.Implementation.csproj", "{9E79462D-FC84-4BF7-A345-E152B10B996A}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Isometric.Server", "Server\Isometric.Server.csproj", "{DCAE2467-5ADF-4B9F-AAD6-E2323F50D94C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Isometric.Parser", "Isometric.Parser\Isometric.Parser.csproj", "{6C500F06-5610-4527-872B-379D51CF7627}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Isometric.ServerUi", "ServerUi\Isometric.ServerUi.csproj", "{76AF96A9-3B70-4DB1-8AF7-E9F41EC6E198}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Isometric.Parser.Tests", "Isometric.Parser.Tests\Isometric.Parser.Tests.csproj", "{A095F5AA-E085-469E-A4C1-F1C4F8A45358}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Isometric.GameDataTools", "GameDataTools\Isometric.GameDataTools.csproj", "{9B90CA08-E75E-4A95-BB3B-EAB83579E18A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Isometric.GameDataTools", "Isometric.GameDataTools\Isometric.GameDataTools.csproj", "{9B90CA08-E75E-4A95-BB3B-EAB83579E18A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Isometric.Game", "Game\Isometric.Game.csproj", "{9E79462D-FC84-4BF7-A345-E152B10B996A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Isometric.Parser", "Parser\Isometric.Parser.csproj", "{6C500F06-5610-4527-872B-379D51CF7627}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Isometric.Parser.Tests", "Parser.Tests\Isometric.Parser.Tests.csproj", "{A095F5AA-E085-469E-A4C1-F1C4F8A45358}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -34,12 +34,6 @@ Global
 		{64EE5B69-4B32-4080-82A7-9E5F419DAFAA}.Release|Any CPU.Build.0 = Release|Any CPU
 		{64EE5B69-4B32-4080-82A7-9E5F419DAFAA}.Testing|Any CPU.ActiveCfg = Unity|Any CPU
 		{64EE5B69-4B32-4080-82A7-9E5F419DAFAA}.Testing|Any CPU.Build.0 = Unity|Any CPU
-		{76AF96A9-3B70-4DB1-8AF7-E9F41EC6E198}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{76AF96A9-3B70-4DB1-8AF7-E9F41EC6E198}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{76AF96A9-3B70-4DB1-8AF7-E9F41EC6E198}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{76AF96A9-3B70-4DB1-8AF7-E9F41EC6E198}.Release|Any CPU.Build.0 = Release|Any CPU
-		{76AF96A9-3B70-4DB1-8AF7-E9F41EC6E198}.Testing|Any CPU.ActiveCfg = Release|Any CPU
-		{76AF96A9-3B70-4DB1-8AF7-E9F41EC6E198}.Testing|Any CPU.Build.0 = Release|Any CPU
 		{5E853DD8-DDC3-4F8C-9966-52CA5881CBCE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{5E853DD8-DDC3-4F8C-9966-52CA5881CBCE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5E853DD8-DDC3-4F8C-9966-52CA5881CBCE}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -52,18 +46,30 @@ Global
 		{AF05F352-6E73-42A6-9038-D16C9A81C614}.Release|Any CPU.Build.0 = Release|Any CPU
 		{AF05F352-6E73-42A6-9038-D16C9A81C614}.Testing|Any CPU.ActiveCfg = Release|Any CPU
 		{AF05F352-6E73-42A6-9038-D16C9A81C614}.Testing|Any CPU.Build.0 = Release|Any CPU
-		{9E79462D-FC84-4BF7-A345-E152B10B996A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{9E79462D-FC84-4BF7-A345-E152B10B996A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{9E79462D-FC84-4BF7-A345-E152B10B996A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{9E79462D-FC84-4BF7-A345-E152B10B996A}.Release|Any CPU.Build.0 = Release|Any CPU
-		{9E79462D-FC84-4BF7-A345-E152B10B996A}.Testing|Any CPU.ActiveCfg = Testing|Any CPU
-		{9E79462D-FC84-4BF7-A345-E152B10B996A}.Testing|Any CPU.Build.0 = Testing|Any CPU
 		{DCAE2467-5ADF-4B9F-AAD6-E2323F50D94C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{DCAE2467-5ADF-4B9F-AAD6-E2323F50D94C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DCAE2467-5ADF-4B9F-AAD6-E2323F50D94C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DCAE2467-5ADF-4B9F-AAD6-E2323F50D94C}.Release|Any CPU.Build.0 = Release|Any CPU
 		{DCAE2467-5ADF-4B9F-AAD6-E2323F50D94C}.Testing|Any CPU.ActiveCfg = Testing|Any CPU
 		{DCAE2467-5ADF-4B9F-AAD6-E2323F50D94C}.Testing|Any CPU.Build.0 = Testing|Any CPU
+		{76AF96A9-3B70-4DB1-8AF7-E9F41EC6E198}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{76AF96A9-3B70-4DB1-8AF7-E9F41EC6E198}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{76AF96A9-3B70-4DB1-8AF7-E9F41EC6E198}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{76AF96A9-3B70-4DB1-8AF7-E9F41EC6E198}.Release|Any CPU.Build.0 = Release|Any CPU
+		{76AF96A9-3B70-4DB1-8AF7-E9F41EC6E198}.Testing|Any CPU.ActiveCfg = Release|Any CPU
+		{76AF96A9-3B70-4DB1-8AF7-E9F41EC6E198}.Testing|Any CPU.Build.0 = Release|Any CPU
+		{9B90CA08-E75E-4A95-BB3B-EAB83579E18A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9B90CA08-E75E-4A95-BB3B-EAB83579E18A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9B90CA08-E75E-4A95-BB3B-EAB83579E18A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9B90CA08-E75E-4A95-BB3B-EAB83579E18A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9B90CA08-E75E-4A95-BB3B-EAB83579E18A}.Testing|Any CPU.ActiveCfg = Release|Any CPU
+		{9B90CA08-E75E-4A95-BB3B-EAB83579E18A}.Testing|Any CPU.Build.0 = Release|Any CPU
+		{9E79462D-FC84-4BF7-A345-E152B10B996A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9E79462D-FC84-4BF7-A345-E152B10B996A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9E79462D-FC84-4BF7-A345-E152B10B996A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9E79462D-FC84-4BF7-A345-E152B10B996A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9E79462D-FC84-4BF7-A345-E152B10B996A}.Testing|Any CPU.ActiveCfg = Testing|Any CPU
+		{9E79462D-FC84-4BF7-A345-E152B10B996A}.Testing|Any CPU.Build.0 = Testing|Any CPU
 		{6C500F06-5610-4527-872B-379D51CF7627}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{6C500F06-5610-4527-872B-379D51CF7627}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6C500F06-5610-4527-872B-379D51CF7627}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -76,12 +82,6 @@ Global
 		{A095F5AA-E085-469E-A4C1-F1C4F8A45358}.Release|Any CPU.Build.0 = Release|Any CPU
 		{A095F5AA-E085-469E-A4C1-F1C4F8A45358}.Testing|Any CPU.ActiveCfg = Release|Any CPU
 		{A095F5AA-E085-469E-A4C1-F1C4F8A45358}.Testing|Any CPU.Build.0 = Release|Any CPU
-		{9B90CA08-E75E-4A95-BB3B-EAB83579E18A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{9B90CA08-E75E-4A95-BB3B-EAB83579E18A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{9B90CA08-E75E-4A95-BB3B-EAB83579E18A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{9B90CA08-E75E-4A95-BB3B-EAB83579E18A}.Release|Any CPU.Build.0 = Release|Any CPU
-		{9B90CA08-E75E-4A95-BB3B-EAB83579E18A}.Testing|Any CPU.ActiveCfg = Release|Any CPU
-		{9B90CA08-E75E-4A95-BB3B-EAB83579E18A}.Testing|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
