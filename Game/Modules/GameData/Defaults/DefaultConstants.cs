@@ -6,7 +6,6 @@ using Isometric.Core.Modules.PlayerModule;
 using Isometric.Core.Modules.WorldModule;
 using Isometric.Core.Modules.WorldModule.Buildings;
 using Isometric.Core.Modules.WorldModule.Land;
-using Isometric.Game.Modules.PatternsImplementation;
 
 namespace Isometric.Game.Modules.GameData.Defaults
 {
@@ -30,19 +29,21 @@ namespace Isometric.Game.Modules.GameData.Defaults
                 [nameof(World.NewPlayerVillage)] = new World.VillageGenerator(_newPlayerTerritory),
                 [nameof(World.StartBuildings)] = new[]
                 {
-                    new World.DefaultBuilding(5, MainBuildingList.Instance.First(b => b.Name == BuildingNames.WoodHouse))
+                    new World.DefaultBuilding(5, BuildingPatternList.Instance.First(b => b.Name == BuildingPatternNames.WoodHouse))
                 },
             };
         }
 
 
 
-        private Area _generateArea(Area[,] landGrid, int x, int y, int seed)
+        private static Area _generateArea(Area[,] landGrid, int x, int y, int seed)
         {
-            return new Area(AreaPatterns.Forest, seed);
+            return new Area(
+                AreaPatternList.Instance.First(p => p.Name == AreaPatternNames.Forest), 
+                seed);
         }
 
-        private void _newPlayerTerritory(Player owner, Area area)
+        private static void _newPlayerTerritory(Player owner, Area area)
         {
             const int iMax = ushort.MaxValue;
             const string iMaxErrorMessage = "Wrong generation algorythm: iteration maximum was exceeded";

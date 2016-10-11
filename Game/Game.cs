@@ -1,8 +1,8 @@
 ﻿using System;
 
-namespace Isometric.Client.Modules
+namespace Isometric.Game
 {
-    public static class Client
+    public static class Game
     {
         public static readonly Version Version = new Version(0, 4);
         public static Version SavingVersion;

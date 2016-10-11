@@ -5,7 +5,6 @@ using Isometric.Core.Modules.SettingsModule;
 using Isometric.Core.Modules.WorldModule;
 using Isometric.Core.Modules.WorldModule.Land;
 using Isometric.Game.Modules.GameData.Defaults;
-using Isometric.Game.Modules.PatternsImplementation;
 using Isometric.GameDataTools.Exceptions;
 
 namespace Isometric.Game.Modules.GameData
@@ -20,7 +19,9 @@ namespace Isometric.Game.Modules.GameData
         /// <exception cref="InvalidGameDataException">Thrown when data in stream is invalid</exception>
         public GameDataManager(Stream stream)
         {
-            MainBuildingList.Instance = DefaultBuildings.Instance.GetPatterns();
+            BuildingPatternList.Instance = DefaultBuildingPatterns.Instance.GetPatterns();
+            BuildingGraph.Instance = DefaultBuildingGraph.Instance.Graph;
+            
 
             foreach (var property in GameConstantAttribute.GetProperties())
             {
@@ -65,13 +66,15 @@ namespace Isometric.Game.Modules.GameData
 
         protected static object ToPropertyValue(string name, object data)
         {
-            if (name == nameof(World.GenerateArea))
-            {
-                return new World.AreaGenerator(
-                    (grid, x, y, seed) => new Area(AreaPatterns.Forest, seed));
-            }
+            throw new NotImplementedException();
 
-            return data;
+            //if (name == nameof(World.GenerateArea))
+            //{
+            //    return new World.AreaGenerator(
+            //        (grid, x, y, seed) => new Area(AreaPatterns.Forest, seed));
+            //}
+
+            //return data;
         }
     }
 }

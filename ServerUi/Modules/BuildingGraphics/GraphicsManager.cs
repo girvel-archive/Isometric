@@ -49,27 +49,27 @@ namespace Isometric.Client.Modules.BuildingGraphics
                 {
                     new GraphicsPair(
                         new ConsolePoint('f', ConsoleColor.DarkGreen),
-                        MainBuildingList.Instance.First(b => b.Name == BuildingNames.Forest)),
+                        BuildingPatternList.Instance.First(b => b.Name == BuildingPatternNames.Forest)),
 
                     new GraphicsPair(
                         new ConsolePoint('~', ConsoleColor.DarkBlue),
-                        MainBuildingList.Instance.First(b => b.Name == BuildingNames.Water)),
+                        BuildingPatternList.Instance.First(b => b.Name == BuildingPatternNames.Water)),
 
                     new GraphicsPair(
                         new ConsolePoint('.', ConsoleColor.DarkMagenta),
-                        MainBuildingList.Instance.First(b => b.Name == BuildingNames.Plain)),
+                        BuildingPatternList.Instance.First(b => b.Name == BuildingPatternNames.Plain)),
 
                     new GraphicsPair(
                         new ConsolePoint('r', ConsoleColor.DarkGray),
-                        MainBuildingList.Instance.First(b => b.Name == BuildingNames.Rock)),
+                        BuildingPatternList.Instance.First(b => b.Name == BuildingPatternNames.Rock)),
 
                     new GraphicsPair(
                         new ConsolePoint('H', ConsoleColor.Yellow),
-                        MainBuildingList.Instance.First(b => b.Name == BuildingNames.WoodHouse)),
+                        BuildingPatternList.Instance.First(b => b.Name == BuildingPatternNames.WoodHouse)),
 
                     new GraphicsPair(
                         new ConsolePoint('H', ConsoleColor.Yellow),
-                        MainBuildingList.Instance.First(b => b.Name == BuildingNames.WoodHouse2)),
+                        BuildingPatternList.Instance.First(b => b.Name == BuildingPatternNames.WoodHouse2)),
                 };
         }
 

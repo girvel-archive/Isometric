@@ -62,8 +62,8 @@ namespace Isometric.Client.Modules
                     set: value => Core.Core.SavingVersion = value),
 
                 new Property(
-                    get: () => Game.Modules.Game.Version,
-                    set: value => Game.Modules.Game.SavingVersion = value),
+                    get: () => Game.Game.Version,
+                    set: value => Game.Game.SavingVersion = value),
 
                 new Property(
                     get: () => Client.Version,
