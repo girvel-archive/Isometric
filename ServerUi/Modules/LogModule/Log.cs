@@ -75,11 +75,26 @@ namespace Isometric.Client.Modules.LogModule
 
         public void Write(string message)
         {
-            message = DateTime.Now.ToString("yy.MM.dd hh:mm:ss") + '\t' + message;
+            message = FormatMessage(DateTime.Now, message);
 
-            using (var writer = new StreamWriter(_currentPath, true, Encoding))
+            const int iMax = 128;
+            var i = 0;
+            trying:
+            try
             {
-                writer.WriteLine(message);
+                using (var writer = new StreamWriter(_currentPath, true, Encoding))
+                {
+                    writer.WriteLine(message);
+                }
+            }
+            catch (IOException)
+            {
+                if (++i < iMax)
+                {
+                    goto trying;
+                }
+
+                Console.WriteLine(FormatMessage(DateTime.Now, "Can't write to log file"));
             }
 
             Console.WriteLine(message);
@@ -99,6 +114,13 @@ namespace Isometric.Client.Modules.LogModule
             {
                 new BinaryFormatter().Serialize(stream, exception);
             }
+        }
+
+
+
+        private static string FormatMessage(DateTime dateTime, string message)
+        {
+            return dateTime.ToString("yy.MM.dd hh:mm:ss") + '\t' + message;
         }
     }
 }

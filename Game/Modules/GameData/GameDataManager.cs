@@ -20,6 +20,7 @@ namespace Isometric.Game.Modules.GameData
         public GameDataManager(Stream stream)
         {
             BuildingPatternList.Instance = DefaultBuildingPatterns.Instance.GetPatterns();
+            AreaPatternList.Instance = DefaultAreaPatterns.Instance.Areas;
             BuildingGraph.Instance = DefaultBuildingGraph.Instance.Graph;
             
 
