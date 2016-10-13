@@ -43,11 +43,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Modules\ErrorReporter.cs" />
-    <Compile Include="Modules\MainBuildingList.cs" />
+    <Compile Include="Modules\AreaPatternList.cs" />
+    <Compile Include="Modules\BuildingPatternList.cs" />
     <Compile Include="Modules\SettingsModule\GameConstantAttribute.cs" />
     <Compile Include="Modules\WorldModule\Buildings\BuildingPatternCollection.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Modules\GlobalData.cs" />
     <Compile Include="Modules\SingleRandom.cs" />
     <Compile Include="Modules\WorldModule\Buildings\Building.cs" />
     <Compile Include="Modules\WorldModule\Buildings\BuildingPattern.cs" />
@@ -66,14 +66,6 @@
     <Compile Include="Modules\TickModule\ClocksManager.cs" />
     <Compile Include="Modules\TickModule\IResourcesBonusChanging.cs" />
     <Compile Include="Modules\TickModule\IResourcesChanging.cs" />
-    <Compile Include="Modules\PlayerModule\Leaders\Leader.cs" />
-    <Compile Include="Modules\PlayerModule\Leaders\LeaderPattern.cs" />
-    <Compile Include="Modules\PlayerModule\Leaders\Name.cs" />
-    <Compile Include="Modules\PlayerModule\Leaders\NamesGenerator.cs" />
-    <Compile Include="Extensions\DelegateExtensions.cs" />
-    <Compile Include="Modules\PlayerModule\PlayerData.cs" />
-    <Compile Include="Modules\TimeModule\TimeData.cs" />
-    <Compile Include="Modules\TickModule\TickData.cs" />
     <Compile Include="Modules\PlayerModule\PlayersManager.cs" />
     <Compile Include="Core.cs" />
   </ItemGroup>

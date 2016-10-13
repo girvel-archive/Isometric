@@ -5,6 +5,8 @@ namespace Isometric.Core.Modules.WorldModule.Land
     [Serializable]
     public class AreaPattern
     {
+        public string Name { get; set; }
+
         public ushort Id { get; }
         private static ushort _nextId;
 
@@ -14,11 +16,15 @@ namespace Isometric.Core.Modules.WorldModule.Land
 
 
 
+        [Obsolete("serialization ctor")]
         public AreaPattern() {}
 
-        public AreaPattern(Action<Area, int> generate)
+        public AreaPattern(string name, Action<Area, int> generate)
+#pragma warning disable 618
             : this()
+#pragma warning restore 618
         {
+            Name = name;
             Generate = generate;
 
             Id = _nextId++;

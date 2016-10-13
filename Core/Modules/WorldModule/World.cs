@@ -40,33 +40,6 @@ namespace Isometric.Core.Modules.WorldModule
 
 
 
-        #region Singleton-part
-
-        [NonSerialized]
-        private static World _instance;
-        public static World Instance 
-        {
-            get { return _instance ?? (_instance = new World(SingleRandom.Instance.Next())); }
-
-            set
-            {
-                #if DEBUG
-
-                if (_instance != null)
-                {
-                    throw new ArgumentException("Instance is already set");
-                }
-
-                #endif
-
-                _instance = value;
-            }
-        }
-
-        #endregion
-
-
-
         public World(int seed) 
         {
             LandGrid = new Area[AreaSize, AreaSize];

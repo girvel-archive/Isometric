@@ -1,41 +1,22 @@
 ﻿using System;
 using System.Threading;
 using Isometric.Core.Modules.PlayerModule;
+using Isometric.Core.Modules.SettingsModule;
 using Isometric.Core.Modules.WorldModule;
 
 namespace Isometric.Core.Modules.TickModule
 {
     public class ClocksManager
     {
-        public static TickData Data { get; set; }
+        public event Action OnTick;
 
+        [GameConstant]
+        // ReSharper disable once UnusedAutoPropertyAccessor.Local
+        public static short DaysInTick { get; private set; }
 
-
-        #region Singleton-part
-
-        private static ClocksManager _instance;
-        public static ClocksManager Instance {
-            get { return _instance ?? (_instance = new ClocksManager()); }
-
-            set {
-                #if DEBUG
-
-                if (_instance != null)
-                {
-                    throw new ArgumentException("ClocksManager.Instance is already set");
-                }
-
-                #endif
-
-                _instance = value;
-            }
-        }
-
-        #endregion
-
-
-
-        public static event Action OnTick;
+        [GameConstant]
+        // ReSharper disable once UnusedAutoPropertyAccessor.Local
+        public static int TickLengthMilliseconds { get; private set; }
 
 
 
@@ -43,12 +24,12 @@ namespace Isometric.Core.Modules.TickModule
 
 
 
-        public ClocksManager()
+        public ClocksManager(World world)
         {
             Subjects = new IIndependentChanging[]
             {
                 PlayersManager.Instance,
-                World.Instance,
+                world,
             };
         }
 
@@ -68,7 +49,7 @@ namespace Isometric.Core.Modules.TickModule
             {
                 Tick();
                 OnTick?.Invoke();
-                Thread.Sleep(Data.TickLengthMilliseconds);
+                Thread.Sleep(TickLengthMilliseconds);
             }
         }
     }

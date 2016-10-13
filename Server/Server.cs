@@ -6,6 +6,8 @@ using System.Net.Sockets;
 using System.Text;
 using CommandInterface;
 using Isometric.Core.Modules;
+using Isometric.Core.Modules.PlayerModule;
+using Isometric.Core.Modules.WorldModule;
 using Isometric.Server.Modules.CommandModule.Server;
 using Isometric.Server.Modules.SpamModule;
 using SocketExtensions;
@@ -48,9 +50,13 @@ namespace Isometric.Server
         public const int ServerPort = 8005;
 
 
+        internal World World { get; set; }
 
-        [NonSerialized] 
-        private Socket _listenSocket;
+
+
+        [NonSerialized] private Socket _listenSocket;
+
+        [NonSerialized] private CommandManager _commandManager;
         
 
         
@@ -62,18 +68,23 @@ namespace Isometric.Server
 
         static Server() {}
 
-        public Server()
+        public Server(World world)
         {
+            World = world;
+
             CurrentConnections = new List<Connection>();
+            _commandManager = new CommandManager(this);
 
             #if DEBUG
 
-            var banned = new Account("banned", "", "-", AccountPermission.User);
+            string name;
+            var banned = new Account(name = "banned", "", "-", AccountPermission.User, new Player(name, world));
             Accounts = new List<Account> 
             {
-                new Account("usr", "1", "", AccountPermission.User),
+                new Account(name = "usr", "1", "", AccountPermission.User, new Player(name, World)),
                 banned,
             };
+
             banned.PermanentlyBanned = true;
 
             #endif
@@ -143,7 +154,7 @@ namespace Isometric.Server
                     string data;
                     Executor<CommandResult> executor;
 
-                    if (CommandManager.Instance.Interface.TryGetExecutor(
+                    if (_commandManager.Interface.TryGetExecutor(
                         data = socket.ReceiveAll(Encoding),
                         new NetArgs(socket, this),
                         out executor))

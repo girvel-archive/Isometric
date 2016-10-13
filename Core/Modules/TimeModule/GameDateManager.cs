@@ -14,7 +14,7 @@ namespace Isometric.Core.Modules.TimeModule
 
         void IIndependentChanging.Tick()
         {
-            Current.TotalDay += ClocksManager.Data.DaysInTick;
+            Current += ClocksManager.DaysInTick;
         }
     }
 }

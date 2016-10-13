@@ -29,24 +29,24 @@ namespace Isometric.Server
         [Obsolete("using serialization ctor", true)]
         public Account() {}
 
-        public Account(string login, string password, string email, AccountPermission permission)
+        public Account(string login, string password, string email, AccountPermission permission, Player player)
         {
             Login = login;
             Password = password;
             Email = email;
             Permission = permission;
 
-            Player = new Player(Login);
+            Player = player;
         }
 
-        public Account(string login, CommonAccount common)
+        public Account(string login, CommonAccount common, Player player)
         {
             Login = login;
             Email = common.Email;
             Password = common.Password;
             Permission = AccountPermission.User;
 
-            Player = new Player(Login);
+            Player = player;
         }
 
 

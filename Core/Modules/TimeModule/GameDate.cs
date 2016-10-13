@@ -1,4 +1,5 @@
 ﻿using System;
+using Isometric.Core.Modules.SettingsModule;
 
 namespace Isometric.Core.Modules.TimeModule
 {
@@ -6,51 +7,23 @@ namespace Isometric.Core.Modules.TimeModule
     [Serializable]
     public struct GameDate
     {
-        #region Data singleton
-
-        [Obsolete("using backing field")]
-        private static TimeData _data;
-
-        #pragma warning disable 0618
-
-        public static TimeData Data {
-            get { return _data ?? (_data = new TimeData()); }
-
-            set {
-                #if DEBUG
-                if (_data != null)
-                {
-                    throw new ArgumentException("Data is already set");
-                }
-                #endif
-
-                _data = value;
-            }
-        }
-
-        #pragma warning restore 0618
-
-        #endregion
+        public readonly int TotalDay;
 
 
 
-        public int TotalDay;
+        public int Year => (int)Math.Floor((double)TotalDay / DaysInYear);
 
+        public int TotalMonth => (int)Math.Floor((double)TotalDay / DaysInMonth);
 
+        public int Month => (int)TotalMonth % MonthsInYear;
 
-        public int Year => (int)Math.Floor((double)TotalDay / Data.DaysInYear);
+        public int TotalWeek => (int)Math.Floor((double)TotalDay / DaysInWeek);
 
-        public int TotalMonth => (int)Math.Floor((double)TotalDay / Data.DaysInMonth);
+        public int Week => TotalWeek % (int)Math.Floor(WeeksInYear);
 
-        public int Month => (int)TotalMonth % Data.MonthsInYear;
+        public int Day => TotalDay % DaysInMonth;
 
-        public int TotalWeek => (int)Math.Floor((double)TotalDay / Data.DaysInWeek);
-
-        public int Week => TotalWeek % (int)Math.Floor(Data.WeeksInYear);
-
-        public int Day => TotalDay % Data.DaysInMonth;
-
-        public GameSeason Season => (GameSeason)Math.Floor((double)TotalDay / Data.DaysInSeason);
+        public GameSeason Season => (GameSeason)Math.Floor((double)TotalDay / DaysInSeason);
 
 
 
@@ -63,6 +36,28 @@ namespace Isometric.Core.Modules.TimeModule
             TotalWeekFormatSpecifier = "W",
             TotalMonthFormatSpecifier = "M";
 
+
+        [GameConstant]
+        // ReSharper disable once UnusedAutoPropertyAccessor.Local
+        public static byte DaysInMonth { get; private set; }
+
+        [GameConstant]
+        // ReSharper disable once UnusedAutoPropertyAccessor.Local
+        public static byte DaysInWeek { get; private set; }
+
+        [GameConstant]
+        // ReSharper disable once UnusedAutoPropertyAccessor.Local
+        public static byte MonthsInYear { get; private set; }
+        
+
+        public static short DaysInSeason => (short)(DaysInYear / typeof(GameSeason).GetEnumValues().Length);
+
+        public static short DaysInYear => (short)(DaysInMonth * MonthsInYear);
+
+        public static double WeeksInYear => (double)DaysInYear / DaysInWeek;
+
+
+
         public GameDate(int totalDay)
         {
             TotalDay = totalDay;
@@ -70,8 +65,10 @@ namespace Isometric.Core.Modules.TimeModule
 
         public GameDate(int years, int months, int days)
         {
-            TotalDay = Data.DaysInYear * years + Data.DaysInYear * months + days;
+            TotalDay = DaysInYear * years + DaysInYear * months + days;
         }
+
+
 
         public static GameDate operator +(GameDate d1, GameDate d2)
         {
@@ -104,6 +101,7 @@ namespace Isometric.Core.Modules.TimeModule
         }
 
 
+
         public override string ToString() => $"{typeof (GameDate).Name}; {Year}.{Month}.{TotalDay} ({Week})";
 
         public string ToString(string format)
@@ -116,6 +114,21 @@ namespace Isometric.Core.Modules.TimeModule
                 .Replace(TotalDayFormatSpecifier, TotalDay.ToString())
                 .Replace(TotalWeekFormatSpecifier, TotalWeek.ToString())
                 .Replace(TotalMonthFormatSpecifier, TotalMonth.ToString());
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (!(obj is GameDate))
+            {
+                return base.Equals(obj);
+            }
+
+            return TotalDay == ((GameDate) obj).TotalDay;
+        }
+
+        public override int GetHashCode()
+        {
+            return TotalDay.GetHashCode();
         }
     }
 }

@@ -8,6 +8,8 @@ using CommandInterface;
 using CommandInterface.Extensions;
 using Isometric.CommonStructures;
 using Isometric.Core.Modules;
+using Isometric.Core.Modules.PlayerModule;
+using Isometric.Core.Modules.WorldModule;
 using Isometric.Server.Modules.SpamModule;
 using SocketExtensions;
 using _Connection = Isometric.Server.Connection;
@@ -17,47 +19,49 @@ namespace Isometric.Server.Modules.CommandModule.Server
     [Serializable]
     public class CommandManager
     {
-        #region Singleton-part
-
-        [Obsolete("using backing field")]
-        private static CommandManager _instance;
-
-        #pragma warning disable 618
-
-        public static CommandManager Instance
-        {
-            get { return _instance ?? (_instance = new CommandManager()._setDefault()); }
-
-            set
-            {
-                #if DEBUG
-
-                if (_instance != null)
-                {
-                    throw new ArgumentException("Instance is already set");
-                }
-
-                #endif
-
-                _instance = value;
-            }
-        }
-
-        #pragma warning restore 618
-
-        #endregion
-
-
-
         public Interface<NetArgs, CommandResult> Interface { get; set; }
 
         public Dictionary<Socket, int> SignupCodes { get; set; } = new Dictionary<Socket, int>();
+
+        private Isometric.Server.Server _parentServer;
 
 
 
         public delegate void LoginEvent(string email, LoginResult result);
 
-        public event LoginEvent OnLoginAttempt;
+        public static event LoginEvent OnLoginAttempt;
+
+
+
+        internal CommandManager(Isometric.Server.Server server)
+        {
+            _parentServer = server;
+
+            Interface = new Interface<NetArgs, CommandResult>(
+                new Command<NetArgs, CommandResult>(
+                    "login",
+                    new[] { "account" },
+                    _login),
+
+                new Command<NetArgs, CommandResult>( // TODO F Unity email-send-code
+                    "email-send-code",
+                    new[] { "email" },
+                    _emailSendCode))
+            {
+                UnactiveCommands = new ICommand<NetArgs, CommandResult>[]
+                {
+                    new Command<NetArgs, CommandResult>(
+                        "code-set",
+                        new[] { "code" },
+                        _codeSet),
+
+                    new Command<NetArgs, CommandResult>(
+                        "account-set",
+                        new[] { "login", "account" },
+                        _accountSet),
+                }
+            };
+        }
 
 
 
@@ -146,8 +150,7 @@ namespace Isometric.Server.Modules.CommandModule.Server
         }
 
         // @code
-        private CommandResult _codeSet(
-            Dictionary<string, string> args, NetArgs netArgs)
+        private CommandResult _codeSet(Dictionary<string, string> args, NetArgs netArgs)
         {
             int code;
             if (!int.TryParse(args["code"], out code))
@@ -199,42 +202,11 @@ namespace Isometric.Server.Modules.CommandModule.Server
                 return CommandResult.Unsuccessful;
             }
 
-            netArgs.Server.Accounts.Add(new Account(args["login"], account));
+            var name = args["login"];
+            netArgs.Server.Accounts.Add(new Account(name, account, new Player(name, _parentServer.World)));
             netArgs.Send("account-result".CreateCommand(((byte)AccountCreatingResult.Successful).ToString()));
 
             return CommandResult.Successful;
-        }
-
-
-
-        private CommandManager _setDefault()
-        {
-            Interface = new Interface<NetArgs, CommandResult>(
-                new Command<NetArgs, CommandResult>(
-                    "login",
-                    new[] { "account" },
-                    _login),
-
-                new Command<NetArgs, CommandResult>( // TODO F Unity email-send-code
-                    "email-send-code",
-                    new[] { "email" },
-                    _emailSendCode))
-            {
-                UnactiveCommands = new ICommand<NetArgs, CommandResult>[]
-                {
-                    new Command<NetArgs, CommandResult>(
-                        "code-set",
-                        new[] { "code" },
-                        _codeSet),
-
-                    new Command<NetArgs, CommandResult>(
-                        "account-set",
-                        new[] { "login", "account" },
-                        _accountSet),
-                }
-            };
-
-            return this;
         }
     }
 }

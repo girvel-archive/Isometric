@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using Isometric.CommonStructures;
-using Isometric.Core.Extensions;
+using Isometric.Core.Modules.SettingsModule;
 using Isometric.Core.Modules.TickModule;
+using Isometric.Core.Modules.TimeModule;
 using Isometric.Core.Modules.WorldModule;
 using Isometric.Core.Modules.WorldModule.Buildings;
 using Isometric.Core.Modules.WorldModule.Land;
@@ -13,24 +14,10 @@ namespace Isometric.Core.Modules.PlayerModule
     [Serializable]
     public class Player : IIndependentChanging
     {
-        public static PlayerData Data { get; set; }
-
-
-
         public static Player Nature { get; }
         public static Player Enemy { get; }
 
         public string Name { get; set; }
-
-
-
-        public Building[] GetOwnedBuildings() => _ownedBuildings?.ToArray();
-
-        private readonly List<Building> _ownedBuildings;
-
-
-
-        // TODO 1.x Player's leader
 
         public Resources CurrentResources { get; set; }
 
@@ -45,6 +32,18 @@ namespace Isometric.Core.Modules.PlayerModule
         public List<IResourcesChanging> ResourceSubjects { get; set; }
 
         public List<IResourcesBonusChanging> ResourceBonusSubjects { get; set; }
+
+
+
+        public Building[] GetOwnedBuildings() => _ownedBuildings?.ToArray();
+
+        private readonly List<Building> _ownedBuildings;
+
+
+        
+        [GameConstant]
+        // ReSharper disable once UnusedAutoPropertyAccessor.Local
+        public static Resources DefaultPlayerResources { get; private set; }
 
 
 
@@ -74,16 +73,16 @@ namespace Isometric.Core.Modules.PlayerModule
 
         #pragma warning disable 618 // closing is inside
 
-        public Player(string name) : this()
+        public Player(string name, World world) : this()
         {
             #pragma warning restore 618
 
             Name = name;
             _ownedBuildings = new List<Building>();
 
-            this.Area = World.Instance.NewPlayerArea(this);
+            Area = world.NewPlayerArea(this);
 
-            CurrentResources = Data.DefaultPlayerResources;
+            CurrentResources = DefaultPlayerResources;
         }
 
 
@@ -113,7 +112,7 @@ namespace Isometric.Core.Modules.PlayerModule
             }
             catch (Exception ex)
             {
-                ErrorReporter.Instance.ReportError($"Unknown error during {nameof(OnTick)}");
+                ErrorReporter.Instance.ReportError($"Unknown error during {nameof(OnTick)}", ex);
             }
         }
 

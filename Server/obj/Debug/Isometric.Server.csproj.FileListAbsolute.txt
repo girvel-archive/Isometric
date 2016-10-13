@@ -17,3 +17,4 @@ E:\projects\isometric\Server\obj\Debug\Isometric.Server.dll
 E:\projects\isometric\Server\obj\Debug\Isometric.Server.pdb
 E:\projects\isometric\Server\bin\Debug\Girvel.Graph.dll
 E:\projects\isometric\Server\bin\Debug\Girvel.Graph.pdb
+E:\projects\isometric\Server\bin\Debug\EnumerableExtensions.pdb

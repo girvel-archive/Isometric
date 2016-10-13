@@ -37,7 +37,7 @@ namespace Isometric.Server
 
         private readonly Socket _socket;
 
-        private Thread _thread { get; set; }
+        private Thread _thread;
 
 
 
@@ -71,9 +71,9 @@ namespace Isometric.Server
         public void Stop()
         {
             _socket.Close();
-            _thread.Abort();
-
             Account.Player.OnTick -= SendResources;
+
+            _thread.Abort();
         }
 
         private void _loop()
@@ -107,6 +107,11 @@ namespace Isometric.Server
 
                     catch (Exception e)
                     {
+                        if (e is SocketException || e is ThreadAbortException)
+                        {
+                            throw;
+                        }
+
                         GlobalData.Instance.OnUnknownException?.Invoke(e);
                     }
 
@@ -116,6 +121,8 @@ namespace Isometric.Server
             catch (SocketException)
             {
                 OnConnectionEnd?.Invoke(this);
+                ParentServer.CurrentConnections.Remove(this);
+                Stop();
             }
             catch (ThreadAbortException)
             {
