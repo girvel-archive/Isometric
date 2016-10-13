@@ -60,10 +60,6 @@ namespace Isometric.Core.Modules.PlayerModule
         [Obsolete("using serialization ctor")]
         public Player() 
         {
-            PlayersManager.Instance.Players.Add(this);
-
-            // TODO 1.x progress subject
-            // TODO 1.x leader subject
             IndependentSubjects = new List<IIndependentChanging>();
             ResourceSubjects = new List<IResourcesChanging>();
             ResourceBonusSubjects = new List<IResourcesBonusChanging>();
@@ -73,7 +69,7 @@ namespace Isometric.Core.Modules.PlayerModule
 
         #pragma warning disable 618 // closing is inside
 
-        public Player(string name, World world) : this()
+        public Player(string name, World world, PlayersManager manager) : this()
         {
             #pragma warning restore 618
 
@@ -83,6 +79,7 @@ namespace Isometric.Core.Modules.PlayerModule
             Area = world.NewPlayerArea(this);
 
             CurrentResources = DefaultPlayerResources;
+            manager.Players.Add(this);
         }
 
 

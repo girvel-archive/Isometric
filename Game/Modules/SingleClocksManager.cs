@@ -2,7 +2,7 @@
 
 namespace Isometric.Game.Modules
 {
-    public class SingleClocksManager
+    public static class SingleClocksManager
     {
         private static ClocksManager _instance;
         public static ClocksManager Instance => _instance ?? (_instance = _getClocksManager());
@@ -11,7 +11,7 @@ namespace Isometric.Game.Modules
 
         private static ClocksManager _getClocksManager()
         {
-            return new ClocksManager(SingleWorld.Instance);
+            return new ClocksManager(SingleWorld.Instance, SinglePlayersManager.Instance);
         }
     }
 }

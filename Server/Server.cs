@@ -52,6 +52,8 @@ namespace Isometric.Server
 
         internal World World { get; set; }
 
+        internal PlayersManager PlayersManager { get; set; }
+
 
 
         [NonSerialized] private Socket _listenSocket;
@@ -68,9 +70,10 @@ namespace Isometric.Server
 
         static Server() {}
 
-        public Server(World world)
+        public Server(World world, PlayersManager playersManager)
         {
             World = world;
+            PlayersManager = playersManager;
 
             CurrentConnections = new List<Connection>();
             _commandManager = new CommandManager(this);
@@ -78,10 +81,10 @@ namespace Isometric.Server
             #if DEBUG
 
             string name;
-            var banned = new Account(name = "banned", "", "-", AccountPermission.User, new Player(name, world));
+            var banned = new Account(name = "banned", "", "-", AccountPermission.User, new Player(name, World, PlayersManager));
             Accounts = new List<Account> 
             {
-                new Account(name = "usr", "1", "", AccountPermission.User, new Player(name, World)),
+                new Account(name = "usr", "1", "", AccountPermission.User, new Player(name, World, PlayersManager)),
                 banned,
             };
 

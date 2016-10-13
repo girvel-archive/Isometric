@@ -14,7 +14,7 @@ namespace Isometric.Client.Modules
 
         public static Server.Server Instance
         {
-            get { return _instance ?? (_instance = new Server.Server(SingleWorld.Instance)); }
+            get { return _instance ?? (_instance = new Server.Server(SingleWorld.Instance, SinglePlayersManager.Instance)); }
 
             set
             {

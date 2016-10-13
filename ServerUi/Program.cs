@@ -5,8 +5,6 @@ using System.Threading;
 using Isometric.Client.Modules;
 using Isometric.Client.Modules.LogModule;
 using Isometric.Client.Tools;
-using Isometric.Core.Modules.TickModule;
-using Isometric.Core.Modules.WorldModule;
 using Isometric.Core.Modules.WorldModule.Land;
 using Isometric.Game;
 using Isometric.Game.Modules;

@@ -203,7 +203,7 @@ namespace Isometric.Server.Modules.CommandModule.Server
             }
 
             var name = args["login"];
-            netArgs.Server.Accounts.Add(new Account(name, account, new Player(name, _parentServer.World)));
+            netArgs.Server.Accounts.Add(new Account(name, account, new Player(name, _parentServer.World, _parentServer.PlayersManager)));
             netArgs.Send("account-result".CreateCommand(((byte)AccountCreatingResult.Successful).ToString()));
 
             return CommandResult.Successful;
