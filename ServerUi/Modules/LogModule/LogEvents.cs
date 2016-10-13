@@ -2,6 +2,7 @@
 using Isometric.CommonStructures;
 using Isometric.Core.Modules;
 using Isometric.Core.Modules.TickModule;
+using Isometric.Game.Modules;
 using Isometric.Server;
 using ServerCommandManager = Isometric.Server.Modules.CommandModule.Server.CommandManager;
 
@@ -32,7 +33,7 @@ namespace Isometric.Client.Modules.LogModule
             SerializationManager.OnOpeningException +=
                 ex => _onSerializationException("Opening", ex);
 
-            ClocksManager.OnTick += _onTick;
+            SingleClocksManager.Instance.OnTick += _onTick;
         }
 
 

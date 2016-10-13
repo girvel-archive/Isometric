@@ -147,7 +147,7 @@ namespace Isometric.Client
             NetThread = new Thread(SingleServer.Instance.Start);
             NetThread.Start();
 
-            ClocksThread = new Thread(ClocksManager.Instance.TickLoop);
+            ClocksThread = new Thread(SingleClocksManager.Instance.TickLoop);
             ClocksThread.Start();
 
             //SavingThread = new Thread(_savingLoop);

@@ -12,8 +12,6 @@ namespace Isometric.Game
         public static void Init(Stream stream)
         {
             GameDataManager.Instance = new GameDataManager(stream);
-
-            ClocksManager.Instance = new ClocksManager(SingleWorld.Instance);
         }
     }
 }

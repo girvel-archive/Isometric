@@ -73,6 +73,7 @@
     <Compile Include="Modules\GameData\Defaults\DefaultBuildingPatterns.cs" />
     <Compile Include="Modules\GameData\Defaults\DefaultConstants.cs" />
     <Compile Include="Modules\GameData\Defaults\DefaultBuildingGraph.cs" />
+    <Compile Include="Modules\SingleClocksManager.cs" />
     <Compile Include="Modules\SingleWorld.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Modules\GameDataManager.cs" />
