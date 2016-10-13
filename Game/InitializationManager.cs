@@ -1,4 +1,6 @@
 ﻿using System.IO;
+using Isometric.Core.Modules.TickModule;
+using Isometric.Game.Modules;
 using Isometric.Game.Modules.GameData;
 using Isometric.GameDataTools.Exceptions;
 
@@ -10,6 +12,8 @@ namespace Isometric.Game
         public static void Init(Stream stream)
         {
             GameDataManager.Instance = new GameDataManager(stream);
+
+            ClocksManager.Instance = new ClocksManager(SingleWorld.Instance);
         }
     }
 }

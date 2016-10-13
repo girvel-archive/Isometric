@@ -2,12 +2,10 @@
 using System.IO;
 using Isometric.Core.Modules;
 using Isometric.Core.Modules.SettingsModule;
-using Isometric.Core.Modules.WorldModule;
-using Isometric.Core.Modules.WorldModule.Land;
 using Isometric.Game.Modules.GameData.Defaults;
 using Isometric.GameDataTools.Exceptions;
 
-namespace Isometric.Game.Modules.GameData
+namespace Isometric.Game.Modules
 {
     [Serializable]
     public class GameDataManager

@@ -9,6 +9,7 @@ using Isometric.Core.Modules.TickModule;
 using Isometric.Core.Modules.WorldModule;
 using Isometric.Core.Modules.WorldModule.Land;
 using Isometric.Game;
+using Isometric.Game.Modules;
 using Isometric.GameDataTools.Exceptions;
 using Isometric.Server.Modules;
 
@@ -113,7 +114,7 @@ namespace Isometric.Client
 
             #endif
             {
-                Area = World.Instance.LazyGetArea(0, 0);
+                Area = SingleWorld.Instance.LazyGetArea(0, 0);
                 Log.Instance.Write("Main territory is generated");
             }
         }

@@ -1,4 +1,5 @@
 ﻿using System;
+using Isometric.Game.Modules;
 
 namespace Isometric.Client.Modules
 {
@@ -13,7 +14,7 @@ namespace Isometric.Client.Modules
 
         public static Server.Server Instance
         {
-            get { return _instance ?? (_instance = new Server.Server()); }
+            get { return _instance ?? (_instance = new Server.Server(SingleWorld.Instance)); }
 
             set
             {

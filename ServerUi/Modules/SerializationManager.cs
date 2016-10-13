@@ -48,7 +48,9 @@ namespace Isometric.Client.Modules
 
 
         public static event Action OnSuccessfulSaving;
+#pragma warning disable 67
         public static event Action<Exception> OnSavingException;
+#pragma warning restore 67
 
         public static event Action OnSuccessfulOpening;
         public static event Action<Exception> OnOpeningException;
@@ -77,9 +79,10 @@ namespace Isometric.Client.Modules
                     get: () => SingleServer.Instance,
                     set: value => SingleServer.Instance = value),
 
-                new Property(
-                    get: () => World.Instance,
-                    set: value => World.Instance = value),
+                // TODO: move SerializationManager Core -> Game
+                //new Property(
+                //    get: () => World.Instance,
+                //    set: value => World.Instance = value),
 
                 new Property(
                     get: () => Instance.SavingPeriodMilliseconds,
@@ -92,9 +95,9 @@ namespace Isometric.Client.Modules
 
         public bool TrySave()
         {
-        #if !DEBUG
+#if !DEBUG
             try
-        #endif
+#endif
             {
                 if (!Directory.Exists(SavingDirectory))
                 {
@@ -116,14 +119,14 @@ namespace Isometric.Client.Modules
 
                 return true;
             }
-        #if !DEBUG
+#if !DEBUG
             catch (Exception ex)
             {
                 OnSavingException?.Invoke(ex);
 
                 return false;
             }
-        #endif
+#endif
         } 
 
         public bool TryOpen()

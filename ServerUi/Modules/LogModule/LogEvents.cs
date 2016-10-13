@@ -15,7 +15,7 @@ namespace Isometric.Client.Modules.LogModule
 
             SingleServer.Instance.OnAcceptedConnection += _onAcceptedConnection;
             SingleServer.Instance.OnWrongCommand += _onWrongCommand;
-            ServerCommandManager.Instance.OnLoginAttempt += _onLoginAttempt;
+            ServerCommandManager.OnLoginAttempt += _onLoginAttempt;
 
             Connection.OnConnectionEnd += _onConnectionEnd;
             Connection.OnConnectionAbort += _onConnectionAbort;
