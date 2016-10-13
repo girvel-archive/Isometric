@@ -1,5 +1,4 @@
 ﻿using System.IO;
-using Isometric.Game.Modules.DataImplementation;
 using Isometric.Game.Modules.GameData;
 using Isometric.GameDataTools.Exceptions;
 
@@ -11,10 +10,6 @@ namespace Isometric.Game
         public static void Init(Stream stream)
         {
             GameDataManager.Instance = new GameDataManager(stream);
-
-            TimeDataImplementation.Init();
-            PlayerDataImplementation.Init();
-            TickDataImplementation.Init();
         }
     }
 }

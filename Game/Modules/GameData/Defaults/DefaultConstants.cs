@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Isometric.CommonStructures;
 using Isometric.Core.Modules;
 using Isometric.Core.Modules.PlayerModule;
+using Isometric.Core.Modules.TickModule;
+using Isometric.Core.Modules.TimeModule;
 using Isometric.Core.Modules.WorldModule;
 using Isometric.Core.Modules.WorldModule.Buildings;
 using Isometric.Core.Modules.WorldModule.Land;
@@ -29,8 +32,16 @@ namespace Isometric.Game.Modules.GameData.Defaults
                 [nameof(World.NewPlayerVillage)] = new World.VillageGenerator(_newPlayerTerritory),
                 [nameof(World.StartBuildings)] = new[]
                 {
-                    new World.DefaultBuilding(5, BuildingPatternList.Instance.First(b => b.Name == BuildingPatternNames.WoodHouse))
+                    new World.DefaultBuilding(
+                        5,
+                        BuildingPatternList.Instance.First(b => b.Name == BuildingPatternNames.WoodHouse))
                 },
+                [nameof(Player.DefaultPlayerResources)] = new Resources(wood: 1000, gold: 100, meat: 2000),
+                [nameof(ClocksManager.DaysInTick)] = (short) 60,
+                [nameof(ClocksManager.TickLengthMilliseconds)] = 1000,
+                [nameof(GameDate.DaysInMonth)] = (byte) 60,
+                [nameof(GameDate.MonthsInYear)] = (byte) 6,
+                [nameof(GameDate.DaysInWeek)] = (byte) 6,
             };
         }
 

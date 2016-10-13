@@ -20,7 +20,6 @@ E:\projects\isometric\GameDataTools\bin\Debug\Girvel.Graph.dll
 E:\projects\isometric\GameDataTools\bin\Debug\Isometric.Core.dll
 E:\projects\isometric\GameDataTools\bin\Debug\VectorNet.dll
 E:\projects\isometric\GameDataTools\bin\Debug\Isometric.CommonStructures.dll
-E:\projects\isometric\GameDataTools\bin\Debug\EnumerableExtensions.dll
 E:\projects\isometric\GameDataTools\bin\Debug\Isometric.Core.pdb
 E:\projects\isometric\GameDataTools\bin\Debug\Girvel.Graph.pdb
 E:\projects\isometric\GameDataTools\bin\Debug\VectorNet.pdb

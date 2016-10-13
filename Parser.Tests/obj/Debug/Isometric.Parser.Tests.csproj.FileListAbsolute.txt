@@ -33,7 +33,6 @@ E:\projects\isometric\Parser.Tests\bin\Debug\Moq.dll
 E:\projects\isometric\Parser.Tests\bin\Debug\RandomExtensions.dll
 E:\projects\isometric\Parser.Tests\bin\Debug\VectorNet.dll
 E:\projects\isometric\Parser.Tests\bin\Debug\Girvel.Graph.dll
-E:\projects\isometric\Parser.Tests\bin\Debug\EnumerableExtensions.dll
 E:\projects\isometric\Parser.Tests\bin\Debug\Isometric.CommonStructures.pdb
 E:\projects\isometric\Parser.Tests\bin\Debug\Isometric.Core.pdb
 E:\projects\isometric\Parser.Tests\bin\Debug\Isometric.Parser.pdb

@@ -23,7 +23,6 @@ namespace Isometric.Game.Modules.GameData
             AreaPatternList.Instance = DefaultAreaPatterns.Instance.Areas;
             BuildingGraph.Instance = DefaultBuildingGraph.Instance.Graph;
             
-
             foreach (var property in GameConstantAttribute.GetProperties())
             {
                 if (DefaultConstants.Instance.ConstantValues.ContainsKey(property.Name))

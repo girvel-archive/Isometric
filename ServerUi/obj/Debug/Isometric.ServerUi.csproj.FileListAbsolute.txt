@@ -26,3 +26,4 @@ E:\projects\isometric\ServerUi\bin\Debug\VectorNet.pdb
 E:\projects\isometric\ServerUi\bin\Debug\VisualConsole.pdb
 E:\projects\isometric\ServerUi\bin\Debug\Girvel.Graph.pdb
 E:\projects\isometric\ServerUi\bin\Debug\SocketExtensions.pdb
+E:\projects\isometric\ServerUi\bin\Debug\EnumerableExtensions.pdb

@@ -21,7 +21,6 @@ E:\projects\isometric\Parser\bin\Debug\Isometric.Core.dll
 E:\projects\isometric\Parser\bin\Debug\RandomExtensions.dll
 E:\projects\isometric\Parser\bin\Debug\VectorNet.dll
 E:\projects\isometric\Parser\bin\Debug\Girvel.Graph.dll
-E:\projects\isometric\Parser\bin\Debug\EnumerableExtensions.dll
 E:\projects\isometric\Parser\bin\Debug\Isometric.CommonStructures.pdb
 E:\projects\isometric\Parser\bin\Debug\Isometric.Core.pdb
 E:\projects\isometric\Parser\bin\Debug\RandomExtensions.pdb
