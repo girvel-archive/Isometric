@@ -24,13 +24,9 @@ namespace Isometric.Core.Modules.TickModule
 
 
 
-        public ClocksManager(World world, PlayersManager playersManager)
+        public ClocksManager(params IIndependentChanging[] subjects)
         {
-            Subjects = new IIndependentChanging[]
-            {
-                playersManager,
-                world,
-            };
+            Subjects = subjects;
         }
 
 
