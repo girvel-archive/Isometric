@@ -35,6 +35,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\tools\CommandInterface\Library\bin\Release\CommandInterface.dll</HintPath>
     </Reference>
+    <Reference Include="Girvel.Graph, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Server\bin\Debug\Girvel.Graph.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="VectorNet, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>

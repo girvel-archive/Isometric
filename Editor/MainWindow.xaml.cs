@@ -260,7 +260,7 @@ namespace Isometric.Editor
                 name = $"building{i++}";
             } while (GameData.Instance.BuildingPatterns.Any(pattern => pattern.Name == name));
 
-            AddBuilding(GameData.Instance.BuildingPatterns.NewPattern(name));
+            AddBuilding(GameData.Instance.BuildingPatterns.NewPattern(name, GameData.Instance.BuildingGraph));
         }
 
         private void RemoveButton_Click(object sender, RoutedEventArgs e)

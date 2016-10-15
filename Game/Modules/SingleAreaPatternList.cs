@@ -1,8 +1,8 @@
 ﻿using Isometric.Core.Modules.WorldModule.Land;
 
-namespace Isometric.Core.Modules
+namespace Isometric.Game.Modules
 {
-    public static class AreaPatternList
+    public static class SingleAreaPatternList
     {
         public static AreaPattern[] Instance { get; set; }
     }

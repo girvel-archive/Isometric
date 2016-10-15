@@ -67,7 +67,7 @@ namespace Isometric.Core.Modules.WorldModule.Buildings
         public bool TryUpgrade(BuildingPattern target, Player player)
         {
             var foundedObjects =
-                BuildingGraph.Instance
+                Pattern.Graph
                     .GetNodes()
                     .Where(node => node.Value == Pattern
                                    && node.IsParentOf(target));

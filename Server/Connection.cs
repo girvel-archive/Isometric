@@ -37,18 +37,20 @@ namespace Isometric.Server
 
         private readonly Socket _socket;
 
+        private readonly CommandManager _commandManager;
+
         private Thread _thread;
 
 
 
         #region Ctors, finalizers
 
-        public Connection(
-            Socket socket, Account account, Server server)
+        public Connection(Socket socket, Account account, Server server)
         {
             _socket = socket;
             Account = account;
             ParentServer = server;
+            _commandManager = new CommandManager(this);
         }
 
         ~Connection()
@@ -93,7 +95,7 @@ namespace Isometric.Server
                         OnDataReceived?.Invoke(receivedString, Account);
 
                         Executor<CommandResult> cmdUse;
-                        if (CommandManager.Instance.CommandInterface.TryGetExecutor(
+                        if (_commandManager.CommandInterface.TryGetExecutor(
                                 receivedString, new NetArgs(_socket, this), out cmdUse))
                         {
                             cmdUse();

@@ -1,13 +1,10 @@
-﻿using System;
-using Girvel.Graph;
+﻿using Girvel.Graph;
 using Isometric.Core.Modules.WorldModule.Buildings;
 
-namespace Isometric.Core.Modules
+namespace Isometric.Game.Modules
 {
-    [Serializable]
-    public static class BuildingGraph
+    public static class SingleBuildingGraph
     {
         public static Graph<BuildingPattern> Instance { get; set; }
     }
 }
-

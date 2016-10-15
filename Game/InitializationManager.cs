@@ -11,7 +11,7 @@ namespace Isometric.Game
         /// <exception cref="InvalidGameDataException">Thrown when game data from stream is invalid</exception>
         public static void Init(Stream stream)
         {
-            GameDataManager.Instance = new GameDataManager(stream);
+            SingleDataManager.Instance = new SingleDataManager(stream);
         }
     }
 }

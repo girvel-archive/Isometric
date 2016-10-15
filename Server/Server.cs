@@ -5,9 +5,11 @@ using System.Net;
 using System.Net.Sockets;
 using System.Text;
 using CommandInterface;
+using Girvel.Graph;
 using Isometric.Core.Modules;
 using Isometric.Core.Modules.PlayerModule;
 using Isometric.Core.Modules.WorldModule;
+using Isometric.Core.Modules.WorldModule.Buildings;
 using Isometric.Server.Modules.CommandModule.Server;
 using Isometric.Server.Modules.SpamModule;
 using SocketExtensions;
@@ -54,11 +56,13 @@ namespace Isometric.Server
 
         internal PlayersManager PlayersManager { get; set; }
 
+        internal Graph<BuildingPattern> Graph { get; set; }
+
 
 
         [NonSerialized] private Socket _listenSocket;
 
-        [NonSerialized] private CommandManager _commandManager;
+        [NonSerialized] private readonly CommandManager _commandManager;
         
 
         
@@ -70,10 +74,11 @@ namespace Isometric.Server
 
         static Server() {}
 
-        public Server(World world, PlayersManager playersManager)
+        public Server(World world, PlayersManager playersManager, Graph<BuildingPattern> graph)
         {
             World = world;
             PlayersManager = playersManager;
+            Graph = graph;
 
             CurrentConnections = new List<Connection>();
             _commandManager = new CommandManager(this);
@@ -147,9 +152,9 @@ namespace Isometric.Server
 
             while (true)
             {
-            #if !DEBUG
+#if !DEBUG
                 try
-            #endif
+#endif
                 {
                     var socket = _listenSocket.Accept();
                     OnAcceptedConnection?.Invoke();
@@ -172,12 +177,12 @@ namespace Isometric.Server
                     // TODO 1.1 spamfilter using
                 }
 
-            #if !DEBUG
+#if !DEBUG
                 catch (Exception e)
                 {
                     GlobalData.Instance.OnUnknownException?.Invoke(e);
                 }
-            #endif
+#endif
             }
         }
     }

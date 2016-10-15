@@ -8,18 +8,19 @@ using Isometric.GameDataTools.Exceptions;
 namespace Isometric.Game.Modules
 {
     [Serializable]
-    public class GameDataManager
+    public class SingleDataManager
     {
-        public static GameDataManager Instance { get; set; }
+        public static SingleDataManager Instance { get; set; }
 
 
 
         /// <exception cref="InvalidGameDataException">Thrown when data in stream is invalid</exception>
-        public GameDataManager(Stream stream)
+        public SingleDataManager(Stream stream)
         {
             BuildingPatternList.Instance = DefaultBuildingPatterns.Instance.GetPatterns();
-            AreaPatternList.Instance = DefaultAreaPatterns.Instance.Areas;
-            BuildingGraph.Instance = DefaultBuildingGraph.Instance.Graph;
+            SingleAreaPatternList.Instance = DefaultAreaPatterns.Instance.Areas;
+            DefaultBuildingGraph.Instance.Initialize();
+            SingleBuildingGraph.Instance = DefaultBuildingGraph.Instance.Graph;
             
             foreach (var property in GameConstantAttribute.GetProperties())
             {

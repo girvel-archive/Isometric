@@ -43,7 +43,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Modules\ErrorReporter.cs" />
-    <Compile Include="Modules\AreaPatternList.cs" />
     <Compile Include="Modules\BuildingPatternList.cs" />
     <Compile Include="Modules\SettingsModule\GameConstantAttribute.cs" />
     <Compile Include="Modules\WorldModule\Buildings\BuildingPatternCollection.cs" />
@@ -52,9 +51,7 @@
     <Compile Include="Modules\WorldModule\Buildings\Building.cs" />
     <Compile Include="Modules\WorldModule\Buildings\BuildingPattern.cs" />
     <Compile Include="Modules\WorldModule\Buildings\BuildingType.cs" />
-    <Compile Include="Modules\WorldModule\Interfaces\IRefreshable.cs" />
     <Compile Include="Modules\PlayerModule\Player.cs" />
-    <Compile Include="Modules\BuildingGraph.cs" />
     <Compile Include="Modules\WorldModule\Land\Area.cs" />
     <Compile Include="Modules\WorldModule\Land\AreaGenerationType.cs" />
     <Compile Include="Modules\WorldModule\Land\AreaPattern.cs" />

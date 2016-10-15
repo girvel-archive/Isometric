@@ -50,7 +50,7 @@ namespace Isometric.Game.Modules.GameData.Defaults
         private static Area _generateArea(Area[,] landGrid, int x, int y, int seed)
         {
             return new Area(
-                AreaPatternList.Instance.First(p => p.Name == AreaPatternNames.Forest), 
+                SingleAreaPatternList.Instance.First(p => p.Name == AreaPatternNames.Forest), 
                 seed);
         }
 

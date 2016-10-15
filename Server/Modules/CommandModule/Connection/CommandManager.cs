@@ -15,62 +15,32 @@ namespace Isometric.Server.Modules.CommandModule.Connection
 {
     public class CommandManager
     {
-        #region Singleton-part
-
-        [Obsolete("using backing field")]
-        private static CommandManager _instance;
-
-        #pragma warning disable 618
-
-        public static CommandManager Instance
-        {
-            get { return _instance ?? (_instance = new CommandManager()._setDefault()); }
-
-            set
-            {
-                #if DEBUG
-
-                if (_instance != null)
-                {
-                    throw new ArgumentException("Instance is already set");
-                }
-
-                #endif
-
-                _instance = value;
-            }
-        }
-
-        #pragma warning restore 618
-
-        #endregion
-
-
-
         public Interface<NetArgs, CommandResult> CommandInterface { get; set; }
 
+        private readonly Isometric.Server.Connection _connection;
 
 
-        private CommandManager _setDefault()
+
+        public CommandManager(Isometric.Server.Connection connection)
         {
+            _connection = connection;
+
             CommandInterface = new Interface<NetArgs, CommandResult>(
                 new Command<NetArgs, CommandResult>(
                     "get-territory", new string[0],
                     _getArea),
 
                 new Command<NetArgs, CommandResult>(
-                    "get-building-actions", new[] { "building" },
+                    "get-building-actions", new[] {"building"},
                     _getBuildingContextActions),
-            
+
                 new Command<NetArgs, CommandResult>(
-                    "upgrade", new[] { "action" },
+                    "upgrade", new[] {"action"},
                     _upgrade),
-            
+
                 new Command<NetArgs, CommandResult>(
                     "get-resources", new string[0],
                     _sendResources));
-
-            return this;
         }
 
 
@@ -88,9 +58,7 @@ namespace Isometric.Server.Modules.CommandModule.Connection
         {
             netArgs.Send("set-territory"
                 .CreateCommand(
-                    netArgs.Connection.Account.Player.Area
-                        .ToCommon()
-                        .Serialize(netArgs.Connection.Encoding)));
+                    netArgs.Connection.Account.Player.Area.ToCommon()));
 
             return CommandResult.Successful;
         }
@@ -106,7 +74,7 @@ namespace Isometric.Server.Modules.CommandModule.Connection
             var building = netArgs.Connection.Account.Player.Area[commonBuilding.Position];
 
             var pattern = building.Pattern;
-            var patternNode = BuildingGraph.Instance.FirstOrDefault(node => node.Value == pattern);
+            var patternNode = _connection.ParentServer.Graph.FirstOrDefault(node => node.Value == pattern);
 
             if (patternNode != null)
             {

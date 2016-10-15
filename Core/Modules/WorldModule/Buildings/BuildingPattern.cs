@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Girvel.Graph;
 using Isometric.CommonStructures;
 
 namespace Isometric.Core.Modules.WorldModule.Buildings
@@ -40,6 +41,8 @@ namespace Isometric.Core.Modules.WorldModule.Buildings
         public TimeSpan UpgradeTimeNormal { get; set; }
 
 
+
+        internal Graph<BuildingPattern> Graph { get; } 
         
         private static readonly List<BuildingPattern> Patterns = new List<BuildingPattern>();
 
@@ -55,13 +58,18 @@ namespace Isometric.Core.Modules.WorldModule.Buildings
         }
 
         public BuildingPattern(
-            string name, Resources resources, Resources price, TimeSpan upgradeTimeNormal, BuildingType type)
+            string name, Graph<BuildingPattern> graph, 
+            Resources resources = new Resources(), 
+            Resources price = new Resources(), 
+            TimeSpan upgradeTimeNormal = new TimeSpan(), 
+            BuildingType type = BuildingType.Building)
         {
             Name = name;
             Resources = resources;
             Price = price;
             Type = type;
             UpgradeTimeNormal = upgradeTimeNormal;
+            Graph = graph;
             
             Patterns.Add(this);
         }

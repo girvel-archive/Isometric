@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Girvel.Graph;
 using Isometric.CommonStructures;
 
 namespace Isometric.Core.Modules.WorldModule.Buildings
@@ -28,7 +29,7 @@ namespace Isometric.Core.Modules.WorldModule.Buildings
 
 
         public BuildingPattern NewPattern(
-            string name, 
+            string name, Graph<BuildingPattern> graph,
             Resources resources = new Resources(), 
             Resources price = new Resources(), 
             TimeSpan upgradeTimeNormal = new TimeSpan(), 
@@ -39,7 +40,7 @@ namespace Isometric.Core.Modules.WorldModule.Buildings
                 throw new ArgumentException("Pattern with this name already exists", nameof(name));
             }
 
-            var result = new BuildingPattern(name, resources, price, upgradeTimeNormal, type) {Id = ++LastId};
+            var result = new BuildingPattern(name, graph, resources, price, upgradeTimeNormal, type) {Id = ++LastId};
             _buildingPatterns.Add(result);
 
             return result;

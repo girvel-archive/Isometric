@@ -56,6 +56,9 @@
     <Reference Include="Girvel.Graph">
       <HintPath>..\..\tools\Girvel.Graph\Library\bin\Release\Girvel.Graph.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\..\..\downloads\.other\Json90r1\Bin\Net35\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="SocketExtensions">
       <HintPath>..\..\tools\CsTools\SocketExtensions\bin\Release\SocketExtensions.dll</HintPath>
     </Reference>

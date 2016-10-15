@@ -5,7 +5,7 @@ using Isometric.Core.Modules.WorldModule.Buildings;
 
 namespace Isometric.Game.Modules.GameData.Defaults
 {
-    public class DefaultBuildingGraph
+    internal class DefaultBuildingGraph
     {
         private static DefaultBuildingGraph _instance;
         public static DefaultBuildingGraph Instance => _instance ?? (_instance = new DefaultBuildingGraph());
@@ -19,7 +19,12 @@ namespace Isometric.Game.Modules.GameData.Defaults
         private DefaultBuildingGraph()
         {
             Graph = new Graph<BuildingPattern>();
+        }
 
+
+
+        public void Initialize()
+        {
             var plain = Graph.NewNode(BuildingPatternList.Instance.First(p => p.Name == BuildingPatternNames.Plain));
             var house1 = Graph.NewNode(BuildingPatternList.Instance.First(p => p.Name == BuildingPatternNames.WoodHouse));
             var house2 = Graph.NewNode(BuildingPatternList.Instance.First(p => p.Name == BuildingPatternNames.WoodHouse2));

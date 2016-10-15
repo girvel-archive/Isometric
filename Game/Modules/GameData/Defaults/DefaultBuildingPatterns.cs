@@ -1,6 +1,4 @@
-﻿using System;
-using System.Linq;
-using Isometric.CommonStructures;
+﻿using System.Linq;
 using Isometric.Core.Modules.WorldModule.Buildings;
 
 namespace Isometric.Game.Modules.GameData.Defaults
@@ -21,13 +19,13 @@ namespace Isometric.Game.Modules.GameData.Defaults
         private DefaultBuildingPatterns()
         {
             _buildingPatternCollection = new BuildingPatternCollection
-            {
-                new BuildingPattern(BuildingPatternNames.WoodHouse, new Resources(), new Resources(), new TimeSpan(), BuildingType.Building),
-                new BuildingPattern(BuildingPatternNames.WoodHouse2, new Resources(), new Resources(), new TimeSpan(), BuildingType.Building),
-                new BuildingPattern(BuildingPatternNames.Forest, new Resources(), new Resources(), new TimeSpan(), BuildingType.Nature),
-                new BuildingPattern(BuildingPatternNames.Plain, new Resources(), new Resources(), new TimeSpan(), BuildingType.Nature),
-                new BuildingPattern(BuildingPatternNames.Water, new Resources(), new Resources(), new TimeSpan(), BuildingType.Nature),
-                new BuildingPattern(BuildingPatternNames.Rock, new Resources(), new Resources(), new TimeSpan(), BuildingType.Nature),
+            { 
+                new BuildingPattern(BuildingPatternNames.WoodHouse, DefaultBuildingGraph.Instance.Graph),
+                new BuildingPattern(BuildingPatternNames.WoodHouse2, DefaultBuildingGraph.Instance.Graph),
+                new BuildingPattern(BuildingPatternNames.Forest, DefaultBuildingGraph.Instance.Graph, type: BuildingType.Nature),
+                new BuildingPattern(BuildingPatternNames.Plain, DefaultBuildingGraph.Instance.Graph, type: BuildingType.Nature),
+                new BuildingPattern(BuildingPatternNames.Water, DefaultBuildingGraph.Instance.Graph, type: BuildingType.Nature),
+                new BuildingPattern(BuildingPatternNames.Rock, DefaultBuildingGraph.Instance.Graph, type: BuildingType.Nature),
             };
         }
 
