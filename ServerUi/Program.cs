@@ -34,6 +34,8 @@ namespace Isometric.Client
 
         static Program()
         {
+            
+
             try
             {
                 using (var stream = File.OpenRead(GameDataFile))

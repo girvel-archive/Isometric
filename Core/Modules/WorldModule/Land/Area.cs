@@ -1,7 +1,7 @@
 ﻿using System;
 using Isometric.Core.Modules.TickModule;
 using Isometric.Core.Modules.WorldModule.Buildings;
-using VectorNet;
+using Isometric.Vector;
 
 namespace Isometric.Core.Modules.WorldModule.Land
 {

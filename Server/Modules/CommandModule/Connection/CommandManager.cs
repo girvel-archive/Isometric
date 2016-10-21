@@ -9,7 +9,10 @@ using Isometric.Core.Modules;
 using Isometric.Core.Modules.WorldModule.Buildings;
 using Isometric.Server.Extensions;
 using Isometric.Server.Modules.SpamModule;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using SocketExtensions;
+using Isometric.Vector;
 
 namespace Isometric.Server.Modules.CommandModule.Connection
 {
@@ -45,19 +48,17 @@ namespace Isometric.Server.Modules.CommandModule.Connection
 
 
 
-        private CommandResult _sendResources(
-                Dictionary<string, string> args, NetArgs netArgs)
+        private CommandResult _sendResources(Dictionary<string, string> args, NetArgs netArgs)
         {
             SendResources(netArgs);
             return CommandResult.Successful;
         }
 
         
-        private CommandResult _getArea(
-                Dictionary<string, string> args, NetArgs netArgs)
+        private CommandResult _getArea(Dictionary<string, string> args, NetArgs netArgs)
         {
-            netArgs.Send("set-territory"
-                .CreateCommand(
+            netArgs.Send(
+                "set-territory".CreateCommand(
                     netArgs.Connection.Account.Player.Area.ToCommon()));
 
             return CommandResult.Successful;
@@ -65,8 +66,7 @@ namespace Isometric.Server.Modules.CommandModule.Connection
 
 
         // @building
-        private CommandResult _getBuildingContextActions(
-                Dictionary<string, string> args, NetArgs netArgs)
+        private CommandResult _getBuildingContextActions(Dictionary<string, string> args, NetArgs netArgs)
         {
             var commonBuilding = args["building"]
                 .Deserialize<CommonBuilding>(netArgs.Connection.Encoding);
@@ -78,18 +78,21 @@ namespace Isometric.Server.Modules.CommandModule.Connection
 
             if (patternNode != null)
             {
-                netArgs.Send("set-building-actions".CreateCommand(
-                    patternNode.GetChildren().Select(
-                        c => new CommonBuildingAction(
-                            c.Value.UpgradePossible(
-                                netArgs.Connection.Account.Player.CurrentResources,
-                                pattern,
-                                building),
-                            $"Upgrade to {c.Value.Name}",
-                            new CommonBuilding(commonBuilding.Position),
-                            c.Value.Id))
-                        .ToList()
-                        .Serialize(netArgs.Connection.Encoding)));
+                netArgs.Send(
+                    "set-building-actions".CreateCommand(
+                        patternNode
+                            .GetChildren()
+                            .Select(
+                                c => new CommonBuildingAction(
+                                    c.Value.UpgradePossible(
+                                        netArgs.Connection.Account.Player.CurrentResources,
+                                        pattern,
+                                        building),
+                                    $"Upgrade to {c.Value.Name}",
+                                    new CommonBuilding(commonBuilding.Position),
+                                    c.Value.Id))
+                            .ToList()
+                            .Serialize(netArgs.Connection.Encoding)));
             }
 
             return CommandResult.Successful;
@@ -97,13 +100,14 @@ namespace Isometric.Server.Modules.CommandModule.Connection
 
 
         // @action
-        private CommandResult _upgrade(
-                Dictionary<string, string> args, NetArgs netArgs)
+        private CommandResult _upgrade(Dictionary<string, string> args, NetArgs netArgs)
         {
-            var action = netArgs.Connection.Encoding.GetBytes(args["action"])
-                .Deserialize<CommonBuildingAction>();
-            var subject = netArgs.Connection.Account.Player.Area[action.Subject.Position];
-            var upgrade = BuildingPattern.Find(action.UpgradeTo);
+            var action = JObject.Parse(args["action"]);
+
+            var subject =
+                netArgs.Connection.Account.Player.Area[
+                    JsonConvert.DeserializeObject<IntVector>(action["Position"].ToString())];
+            var upgrade = BuildingPattern.Find(int.Parse(action["Upgrade to"].ToString()));
 
             var result = subject.TryUpgrade(upgrade, netArgs.Connection.Account.Player)
                 ? CommandResult.Successful
@@ -122,8 +126,7 @@ namespace Isometric.Server.Modules.CommandModule.Connection
             }
             else
             {
-                netArgs.Send(
-                    "upgrade-result".CreateCommand("-1"));
+                netArgs.Send("upgrade-result".CreateCommand("-1"));
             }
             
             return result;

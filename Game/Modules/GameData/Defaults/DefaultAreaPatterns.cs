@@ -6,7 +6,7 @@ using Isometric.Core.Modules.WorldModule;
 using Isometric.Core.Modules.WorldModule.Buildings;
 using Isometric.Core.Modules.WorldModule.Land;
 using RandomExtensions;
-using VectorNet;
+using Isometric.Vector;
 
 namespace Isometric.Game.Modules.GameData.Defaults
 {

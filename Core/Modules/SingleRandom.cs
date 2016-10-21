@@ -1,6 +1,6 @@
 ﻿using System;
 using Isometric.Core.Modules.TimeModule;
-using VectorNet;
+using Isometric.Vector;
 
 namespace Isometric.Core.Modules
 {

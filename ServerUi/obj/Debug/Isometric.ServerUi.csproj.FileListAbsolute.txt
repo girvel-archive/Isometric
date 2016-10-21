@@ -30,3 +30,6 @@ E:\projects\isometric\ServerUi\bin\Debug\EnumerableExtensions.pdb
 E:\projects\isometric\ServerUi\bin\Debug\Newtonsoft.Json.dll
 E:\projects\isometric\ServerUi\bin\Debug\Newtonsoft.Json.pdb
 E:\projects\isometric\ServerUi\bin\Debug\Newtonsoft.Json.xml
+E:\projects\isometric\ServerUi\bin\Debug\Isometric.Vector.dll
+E:\projects\isometric\ServerUi\bin\Debug\RandomExtensions.pdb
+E:\projects\isometric\ServerUi\bin\Debug\Isometric.Vector.pdb

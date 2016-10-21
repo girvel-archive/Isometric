@@ -34,7 +34,7 @@
       <HintPath>..\..\tools\Girvel.Graph\Library\bin\Release\Girvel.Graph.dll</HintPath>
     </Reference>
     <Reference Include="RandomExtensions">
-      <HintPath>..\Client\bin\Debug\RandomExtensions.dll</HintPath>
+      <HintPath>..\..\tools\CsTools\RandomExtensions\bin\Release\RandomExtensions.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />

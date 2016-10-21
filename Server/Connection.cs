@@ -9,6 +9,7 @@ using Isometric.Core.Modules;
 using Isometric.Core.Modules.PlayerModule;
 using Isometric.Server.Modules.CommandModule.Connection;
 using Isometric.Server.Modules.SpamModule;
+using Newtonsoft.Json;
 using SocketExtensions;
 
 namespace Isometric.Server
@@ -107,14 +108,9 @@ namespace Isometric.Server
                     }
 #if !DEBUG
 
-                    catch (Exception e)
+                    catch (Exception ex) when (!(ex is SocketException || ex is ThreadAbortException))
                     {
-                        if (e is SocketException || e is ThreadAbortException)
-                        {
-                            throw;
-                        }
-
-                        GlobalData.Instance.OnUnknownException?.Invoke(e);
+                        ErrorReporter.Instance.ReportError($"Error during {nameof(Connection)}.{nameof(_loop)}", ex);
                     }
 
 #endif
@@ -143,7 +139,11 @@ namespace Isometric.Server
 
         internal void SendResources(Player owner)
         {
-            Send("resources".CreateCommand(owner.CurrentResources.Serialize(Encoding)));
+            Send(
+                "resources".CreateCommand(
+                    JsonConvert.SerializeObject(
+                        owner.CurrentResources, 
+                        Formatting.None)));
         }
     }
 }

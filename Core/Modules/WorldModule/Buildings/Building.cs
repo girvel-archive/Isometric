@@ -4,7 +4,7 @@ using Isometric.CommonStructures;
 using Isometric.Core.Modules.PlayerModule;
 using Isometric.Core.Modules.TickModule;
 using Isometric.Core.Modules.WorldModule.Land;
-using VectorNet;
+using Isometric.Vector;
 
 namespace Isometric.Core.Modules.WorldModule.Buildings
 {

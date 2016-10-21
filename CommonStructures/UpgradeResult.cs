@@ -1,5 +1,5 @@
 ﻿using System;
-using VectorNet;
+using Isometric.Vector;
 
 namespace Isometric.CommonStructures
 {

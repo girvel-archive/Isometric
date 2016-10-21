@@ -12,6 +12,7 @@ using Isometric.Core.Modules.WorldModule;
 using Isometric.Core.Modules.WorldModule.Buildings;
 using Isometric.Server.Modules.CommandModule.Server;
 using Isometric.Server.Modules.SpamModule;
+using Newtonsoft.Json.Linq;
 using SocketExtensions;
 
 namespace Isometric.Server
@@ -178,9 +179,9 @@ namespace Isometric.Server
                 }
 
 #if !DEBUG
-                catch (Exception e)
+                catch (Exception ex)
                 {
-                    GlobalData.Instance.OnUnknownException?.Invoke(e);
+                    ErrorReporter.Instance.ReportError($"Error during loop in {nameof(Server)}.{nameof(Start)}", ex);
                 }
 #endif
             }

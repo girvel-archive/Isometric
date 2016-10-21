@@ -1,5 +1,4 @@
-﻿using Isometric.CommonStructures;
-using Isometric.Core.Modules.WorldModule;
+﻿using Isometric.Core.Modules.WorldModule;
 using Isometric.Core.Modules.WorldModule.Land;
 using Newtonsoft.Json.Linq;
 

@@ -47,10 +47,6 @@
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
-    <Reference Include="VectorNet, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\tools\VectorNet\Library\bin\Release\VectorNet.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CommonAccount.cs" />
@@ -65,6 +61,12 @@
     <Compile Include="AccountCreatingResult.cs" />
     <Compile Include="NetData.cs" />
     <Compile Include="UpgradeResult.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Vector\Isometric.Vector.csproj">
+      <Project>{e9dd0f81-d1fb-44bd-ade2-f1a80fec431a}</Project>
+      <Name>Isometric.Vector</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

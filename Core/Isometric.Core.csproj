@@ -36,10 +36,6 @@
     <Reference Include="EnumerableExtensions">
       <HintPath>..\..\CsTools\EnumerableExtensions\bin\Release\EnumerableExtensions.dll</HintPath>
     </Reference>
-    <Reference Include="VectorNet, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\tools\VectorNet\Library\bin\Release\VectorNet.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Modules\ErrorReporter.cs" />
@@ -81,6 +77,10 @@
     <ProjectReference Include="..\CommonStructures\Isometric.CommonStructures.csproj">
       <Project>{64EE5B69-4B32-4080-82A7-9E5F419DAFAA}</Project>
       <Name>Isometric.CommonStructures</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Vector\Isometric.Vector.csproj">
+      <Project>{e9dd0f81-d1fb-44bd-ade2-f1a80fec431a}</Project>
+      <Name>Isometric.Vector</Name>
     </ProjectReference>
   </ItemGroup>
 </Project>

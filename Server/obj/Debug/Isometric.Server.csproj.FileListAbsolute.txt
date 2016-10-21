@@ -21,3 +21,5 @@ E:\projects\isometric\Server\bin\Debug\EnumerableExtensions.pdb
 E:\projects\isometric\Server\bin\Debug\Newtonsoft.Json.dll
 E:\projects\isometric\Server\bin\Debug\Newtonsoft.Json.pdb
 E:\projects\isometric\Server\bin\Debug\Newtonsoft.Json.xml
+E:\projects\isometric\Server\bin\Debug\Isometric.Vector.dll
+E:\projects\isometric\Server\bin\Debug\Isometric.Vector.pdb

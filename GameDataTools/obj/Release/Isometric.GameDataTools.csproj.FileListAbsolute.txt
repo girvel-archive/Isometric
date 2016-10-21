@@ -1,0 +1,17 @@
+E:\projects\isometric\GameDataTools\obj\Release\Isometric.GameDataTools.csprojResolveAssemblyReference.cache
+E:\projects\isometric\GameDataTools\bin\Release\Isometric.GameDataTools.dll
+E:\projects\isometric\GameDataTools\bin\Release\Isometric.GameDataTools.pdb
+E:\projects\isometric\GameDataTools\bin\Release\Girvel.Graph.dll
+E:\projects\isometric\GameDataTools\bin\Release\Isometric.Core.dll
+E:\projects\isometric\GameDataTools\bin\Release\RandomExtensions.dll
+E:\projects\isometric\GameDataTools\bin\Release\Isometric.CommonStructures.dll
+E:\projects\isometric\GameDataTools\bin\Release\Isometric.Core.pdb
+E:\projects\isometric\GameDataTools\bin\Release\Girvel.Graph.pdb
+E:\projects\isometric\GameDataTools\bin\Release\RandomExtensions.pdb
+E:\projects\isometric\GameDataTools\obj\Release\Isometric.GameDataTools.dll
+E:\projects\isometric\GameDataTools\obj\Release\Isometric.GameDataTools.pdb
+E:\projects\isometric\GameDataTools\bin\Release\Isometric.Vector.dll
+E:\projects\isometric\GameDataTools\bin\Release\Newtonsoft.Json.dll
+E:\projects\isometric\GameDataTools\bin\Release\Isometric.Vector.pdb
+E:\projects\isometric\GameDataTools\bin\Release\Newtonsoft.Json.pdb
+E:\projects\isometric\GameDataTools\bin\Release\Newtonsoft.Json.xml

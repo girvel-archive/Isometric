@@ -1,0 +1,5 @@
+D:\projects\CsTools\VectorNet\bin\Unity\VectorNet.dll
+D:\projects\CsTools\VectorNet\bin\Unity\EnumerableExtensions.dll
+D:\projects\CsTools\VectorNet\bin\Unity\EnumerableExtensions.pdb
+D:\projects\CsTools\VectorNet\obj\Unity\VectorNet.csprojResolveAssemblyReference.cache
+D:\projects\CsTools\VectorNet\obj\Unity\VectorNet.dll

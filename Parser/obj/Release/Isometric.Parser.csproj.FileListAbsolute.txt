@@ -1,0 +1,17 @@
+E:\projects\isometric\Parser\bin\Release\Isometric.Parser.dll
+E:\projects\isometric\Parser\bin\Release\Isometric.Parser.pdb
+E:\projects\isometric\Parser\bin\Release\Isometric.CommonStructures.dll
+E:\projects\isometric\Parser\bin\Release\Isometric.Core.dll
+E:\projects\isometric\Parser\bin\Release\RandomExtensions.dll
+E:\projects\isometric\Parser\bin\Release\Girvel.Graph.dll
+E:\projects\isometric\Parser\bin\Release\Isometric.Core.pdb
+E:\projects\isometric\Parser\bin\Release\RandomExtensions.pdb
+E:\projects\isometric\Parser\bin\Release\Girvel.Graph.pdb
+E:\projects\isometric\Parser\obj\Release\Isometric.Parser.csprojResolveAssemblyReference.cache
+E:\projects\isometric\Parser\obj\Release\Isometric.Parser.dll
+E:\projects\isometric\Parser\obj\Release\Isometric.Parser.pdb
+E:\projects\isometric\Parser\bin\Release\Isometric.Vector.dll
+E:\projects\isometric\Parser\bin\Release\Newtonsoft.Json.dll
+E:\projects\isometric\Parser\bin\Release\Isometric.Vector.pdb
+E:\projects\isometric\Parser\bin\Release\Newtonsoft.Json.pdb
+E:\projects\isometric\Parser\bin\Release\Newtonsoft.Json.xml

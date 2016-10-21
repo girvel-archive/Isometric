@@ -1,0 +1,7 @@
+E:\projects\isometric\Vector\bin\Release\Isometric.Vector.dll
+E:\projects\isometric\Vector\bin\Release\Isometric.Vector.pdb
+E:\projects\isometric\Vector\bin\Release\Newtonsoft.Json.dll
+E:\projects\isometric\Vector\bin\Release\Newtonsoft.Json.pdb
+E:\projects\isometric\Vector\bin\Release\Newtonsoft.Json.xml
+E:\projects\isometric\Vector\obj\Release\Isometric.Vector.dll
+E:\projects\isometric\Vector\obj\Release\Isometric.Vector.pdb

@@ -1,0 +1,8 @@
+/media/nik/Doc/projects/isogame/Visual/VectorNet/bin/Debug/VectorNet.dll
+/media/nik/Doc/projects/isogame/Visual/VectorNet/obj/Debug/VectorNet.dll
+/media/nik/Doc/projects/isogame/Visual/VectorNet/bin/Debug/EnumerableExtensions.dll
+/media/nik/Doc/projects/isogame/Visual/VectorNet/obj/Debug/.NETFramework,Version=v4.5.1.AssemblyAttribute.cs
+/media/nik/Doc/projects/isogame/Visual/VectorNet/bin/Debug/VectorNet.dll.mdb
+/media/nik/Doc/projects/isogame/Visual/VectorNet/obj/Debug/VectorNet.dll.mdb
+/media/nik/Doc/projects/isogame/Visual/VectorNet/bin/Debug/EnumerableExtensions.dll.mdb
+/media/nik/Doc/projects/isogame/Visual/VectorNet/obj/Debug/.NETFramework,Version=v4.5.AssemblyAttribute.cs

@@ -17,3 +17,8 @@ E:\projects\isometric\Server\bin\Release\VectorNet.pdb
 E:\projects\isometric\Server\bin\Release\EnumerableExtensions.pdb
 E:\projects\isometric\Server\obj\Release\Isometric.Server.dll
 E:\projects\isometric\Server\obj\Release\Isometric.Server.pdb
+E:\projects\isometric\Server\bin\Release\Newtonsoft.Json.dll
+E:\projects\isometric\Server\bin\Release\Newtonsoft.Json.pdb
+E:\projects\isometric\Server\bin\Release\Newtonsoft.Json.xml
+E:\projects\isometric\Server\bin\Release\Isometric.Vector.dll
+E:\projects\isometric\Server\bin\Release\Isometric.Vector.pdb

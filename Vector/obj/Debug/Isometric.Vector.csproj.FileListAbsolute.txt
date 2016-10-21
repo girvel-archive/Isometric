@@ -1,0 +1,8 @@
+E:\projects\isometric\Vector\bin\Debug\Isometric.Vector.dll
+E:\projects\isometric\Vector\bin\Debug\Isometric.Vector.pdb
+E:\projects\isometric\Vector\bin\Debug\Newtonsoft.Json.dll
+E:\projects\isometric\Vector\bin\Debug\Newtonsoft.Json.pdb
+E:\projects\isometric\Vector\bin\Debug\Newtonsoft.Json.xml
+E:\projects\isometric\Vector\obj\Debug\Isometric.Vector.csprojResolveAssemblyReference.cache
+E:\projects\isometric\Vector\obj\Debug\Isometric.Vector.dll
+E:\projects\isometric\Vector\obj\Debug\Isometric.Vector.pdb
