@@ -167,6 +167,11 @@ namespace Isometric.CommonStructures
             return !ResourcesArray.Where((t, i) => t != r2.ResourcesArray[i]).Any();
         }
 
+        public override int GetHashCode()
+        {
+            return base.GetHashCode();
+        }
+
         public static bool operator ==(Resources r1, Resources r2) => r1.Equals(r2);
 
         public static bool operator !=(Resources r1, Resources r2) => !(r1 == r2);

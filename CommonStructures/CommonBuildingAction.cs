@@ -7,17 +7,14 @@ namespace Isometric.CommonStructures
     {
         public bool Active { get; set; }
         public string Name { get; set; }
-        public CommonBuilding Subject { get; set; }
         public int UpgradeTo { get; set; }
 
 
 
-        public CommonBuildingAction(
-                bool active, string name, CommonBuilding subject, int upgradeTo)
+        public CommonBuildingAction(bool active, string name, int upgradeTo)
         {
             Active = active;
             Name = name;
-            Subject = subject;
             UpgradeTo = upgradeTo;
         }
     }

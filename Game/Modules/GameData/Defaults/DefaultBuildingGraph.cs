@@ -34,6 +34,8 @@ namespace Isometric.Game.Modules.GameData.Defaults
 
             house1.AddChild(plain);
             house2.AddChild(plain);
+
+            house1.AddChild(house2);
         }
     }
 }

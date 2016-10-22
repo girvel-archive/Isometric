@@ -59,7 +59,7 @@ namespace Isometric.Server.Modules.CommandModule.Connection
         {
             netArgs.Send(
                 "set-territory".CreateCommand(
-                    netArgs.Connection.Account.Player.Area.ToCommon()));
+                    netArgs.Connection.Account.Player.Area.ToJson().ToString()));
 
             return CommandResult.Successful;
         }
@@ -68,10 +68,9 @@ namespace Isometric.Server.Modules.CommandModule.Connection
         // @building
         private CommandResult _getBuildingContextActions(Dictionary<string, string> args, NetArgs netArgs)
         {
-            var commonBuilding = args["building"]
-                .Deserialize<CommonBuilding>(netArgs.Connection.Encoding);
+            var position = JObject.Parse(args["building"])["Position"].ToObject<IntVector>();
 
-            var building = netArgs.Connection.Account.Player.Area[commonBuilding.Position];
+            var building = netArgs.Connection.Account.Player.Area[position];
 
             var pattern = building.Pattern;
             var patternNode = _connection.ParentServer.Graph.FirstOrDefault(node => node.Value == pattern);
@@ -80,19 +79,23 @@ namespace Isometric.Server.Modules.CommandModule.Connection
             {
                 netArgs.Send(
                     "set-building-actions".CreateCommand(
-                        patternNode
-                            .GetChildren()
-                            .Select(
-                                c => new CommonBuildingAction(
-                                    c.Value.UpgradePossible(
-                                        netArgs.Connection.Account.Player.CurrentResources,
-                                        pattern,
-                                        building),
-                                    $"Upgrade to {c.Value.Name}",
-                                    new CommonBuilding(commonBuilding.Position),
-                                    c.Value.Id))
-                            .ToList()
-                            .Serialize(netArgs.Connection.Encoding)));
+                        new JObject
+                        {
+                            ["Actions"] = new JArray(
+                                patternNode
+                                    .GetChildren()
+                                    .Select(
+                                        c => new JObject
+                                        {
+                                            ["Possible"] = c.Value.UpgradePossible(
+                                                netArgs.Connection.Account.Player.CurrentResources,
+                                                pattern,
+                                                building),
+                                            ["Text"] = $"Upgrade to {c.Value.Name}",
+                                            ["To"] = c.Value.Id,
+                                        }))
+                        }.ToString()));
+
             }
 
             return CommandResult.Successful;

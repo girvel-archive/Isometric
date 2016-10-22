@@ -89,7 +89,7 @@
     <Compile Include="Modules\SpamModule\SpamFilterData.cs" />
     <Compile Include="Modules\SpamModule\FilterResult.cs" />
     <Compile Include="Modules\SmtpManager.cs" />
-    <Compile Include="Extensions\CommonExtensions.cs" />
+    <Compile Include="Extensions\CommonHelper.cs" />
     <Compile Include="Extensions\ArrayExtensions.cs" />
     <Compile Include="Modules\CommandModule\Connection\NetArgs.cs" />
     <Compile Include="Modules\CommandModule\Server\NetArgs.cs" />

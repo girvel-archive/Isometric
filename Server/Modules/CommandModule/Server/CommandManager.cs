@@ -11,6 +11,7 @@ using Isometric.Core.Modules;
 using Isometric.Core.Modules.PlayerModule;
 using Isometric.Core.Modules.WorldModule;
 using Isometric.Server.Modules.SpamModule;
+using Newtonsoft.Json.Linq;
 using SocketExtensions;
 using _Connection = Isometric.Server.Connection;
 
@@ -40,24 +41,24 @@ namespace Isometric.Server.Modules.CommandModule.Server
             Interface = new Interface<NetArgs, CommandResult>(
                 new Command<NetArgs, CommandResult>(
                     "login",
-                    new[] { "account" },
+                    new[] {"account"},
                     _login),
 
-                new Command<NetArgs, CommandResult>( // TODO F Unity email-send-code
+                new Command<NetArgs, CommandResult>(
                     "email-send-code",
-                    new[] { "email" },
+                    new[] {"email"},
                     _emailSendCode))
             {
                 UnactiveCommands = new ICommand<NetArgs, CommandResult>[]
                 {
                     new Command<NetArgs, CommandResult>(
                         "code-set",
-                        new[] { "code" },
+                        new[] {"code"},
                         _codeSet),
 
                     new Command<NetArgs, CommandResult>(
                         "account-set",
-                        new[] { "login", "account" },
+                        new[] {"login", "account"},
                         _accountSet),
                 }
             };
@@ -67,11 +68,11 @@ namespace Isometric.Server.Modules.CommandModule.Server
 
         private CommandResult _login(Dictionary<string, string> args, NetArgs netArgs)
         {
-            var receivedAccount = args["account"].Deserialize<CommonAccount>(netArgs.Encoding);
+            var receivedAccount = JObject.Parse(args["account"]);
             
             var suitableAccounts = netArgs.Server.Accounts.Where(
-                a => a.Email == receivedAccount.Email
-                     && a.Password == receivedAccount.Password).ToArray();
+                a => a.Email == receivedAccount["Email"].ToString()
+                     && a.Password == receivedAccount["Password"].ToString()).ToArray();
 
             var successful = suitableAccounts.Any();
             LoginResult result;
@@ -95,7 +96,7 @@ namespace Isometric.Server.Modules.CommandModule.Server
 
             netArgs.Send("login-result".CreateCommand(((byte)result).ToString()));
 
-            OnLoginAttempt?.Invoke(receivedAccount.Email, result);
+            OnLoginAttempt?.Invoke(receivedAccount["Email"].ToString(), result);
 
             if (!successful)
             {
