@@ -120,10 +120,7 @@ namespace Isometric.Server.Modules.CommandModule.Connection
             {
                 netArgs.Send(
                     "upgrade-result".CreateCommand(
-                        new UpgradeResult(
-                            subject.Pattern.Id,
-                            subject.Position)
-                            .Serialize(netArgs.Encoding)));
+                        CommonHelper.CreateUpgradeData(upgrade.Id, subject.Position).ToString()));
 
                 SendResources(netArgs);
             }

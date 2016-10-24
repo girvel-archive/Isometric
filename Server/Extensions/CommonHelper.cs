@@ -2,6 +2,7 @@
 using Isometric.Core.Modules.WorldModule;
 using Isometric.Core.Modules.WorldModule.Buildings;
 using Isometric.Core.Modules.WorldModule.Land;
+using Isometric.Vector;
 using Newtonsoft.Json.Linq;
 
 namespace Isometric.Server.Extensions
@@ -15,6 +16,17 @@ namespace Isometric.Server.Extensions
                 ["Building grid"] = new JArray(area.BuildingGrid.Cast<Building>().Select(b => b.Pattern.Id)),
                 ["Grid width"] = World.AreaSize,
                 ["Grid height"] = World.AreaSize,
+            };
+        }
+
+
+
+        public static JObject CreateUpgradeData(int id, IntVector position)
+        {
+            return new JObject
+            {
+                ["To"] = id,
+                ["Position"] = JObject.FromObject(position),
             };
         }
     }
