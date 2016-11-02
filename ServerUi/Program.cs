@@ -124,12 +124,12 @@ namespace Isometric.Client
         {
             try
             {
-                SmtpManager.Instance.Connect(
+                SingleMailManager.Instance.Connect(
                     "smtp.gmail.com", 25, true,
-                    ConsoleDecorator.GetLine("Mail login:    #"),
+                    ConsoleDecorator.GetLine(    "Mail login:    #"),
                     ConsoleDecorator.GetPassword("Mail password: #"));
 
-                Log.Instance.Write("Initialized SmtpManager successfully");
+                Log.Instance.Write("Initialized DefaultMailManager successfully");
             }
             catch (Exception ex)
             {

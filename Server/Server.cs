@@ -53,6 +53,10 @@ namespace Isometric.Server
 
 
 
+
+
+        internal IMailManager MailManager { get; set; }
+
         internal IRequestManager RequestManager { get; set; }
 
         internal World World { get; set; }
@@ -71,9 +75,7 @@ namespace Isometric.Server
 
 
 
-        static Server() {}
-
-        public Server(World world, PlayersManager playersManager, Graph<BuildingPattern> graph)
+        public Server(World world, PlayersManager playersManager, IMailManager mailManager, Graph<BuildingPattern> graph)
         {
             World = world;
             PlayersManager = playersManager;

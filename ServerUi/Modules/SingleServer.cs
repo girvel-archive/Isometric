@@ -1,44 +1,36 @@
 ﻿using System;
 using Isometric.Game.Modules;
+using _Server = Isometric.Server.Server;
 
 namespace Isometric.Client.Modules
 {
     public class SingleServer
     {
-        #region Singleton
+        private static _Server _instance;
 
-        [Obsolete("using backing field")]
-        private static Server.Server _instance;
-
-        #pragma warning disable 618
-
-        public static Server.Server Instance
+        public static _Server Instance
         {
             get
             {
                 return _instance ?? (_instance
-                    = new Server.Server(
+                    = new _Server(
                         SingleWorld.Instance,
                         SinglePlayersManager.Instance,
+                        SingleMailManager.Instance,
                         SingleBuildingGraph.Instance));
             }
 
             set
             {
-                #if DEBUG
+#if DEBUG
                 if (_instance != null)
                 {
-                    throw new ArgumentException("Instance is already set");
+                    throw new NotImplementedException("SingleServer.Instance is already set");
                 }
-                #endif
-
+#endif
                 _instance = value;
             }
         }
-
-        #pragma warning restore 618
-
-        #endregion
     }
 }
 
