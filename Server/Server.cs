@@ -58,8 +58,6 @@ namespace Isometric.Server
 
         internal IRequestManager RequestManager { get; set; }
 
-        internal World World { get; set; }
-
         internal PlayersManager PlayersManager { get; set; }
 
         internal Graph<BuildingPattern> Graph { get; set; }
@@ -74,9 +72,8 @@ namespace Isometric.Server
 
 
 
-        public Server(World world, PlayersManager playersManager, IMailManager mailManager, IRequestManager requestManager, Graph<BuildingPattern> graph)
+        public Server(PlayersManager playersManager, IMailManager mailManager, IRequestManager requestManager, Graph<BuildingPattern> graph)
         {
-            World = world;
             PlayersManager = playersManager;
             Graph = graph;
             MailManager = mailManager;
@@ -88,7 +85,7 @@ namespace Isometric.Server
 
             Accounts = new List<Account> 
             {
-                new Account("", "", "", new Player("", World, PlayersManager)),
+                new Account("", "", ""),
             };
 
             #endif

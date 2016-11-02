@@ -29,7 +29,7 @@ namespace Isometric.Client.Modules
 
         public delegate void LoginEvent(string email, LoginResult result);
 
-        public static event LoginEvent OnLoginAttempt;
+        public event LoginEvent OnLoginAttempt;
 
 
 
@@ -37,12 +37,12 @@ namespace Isometric.Client.Modules
         {
             _commands = new Dictionary<string, Request>
             {
+                ["Sign in"] = _login,
+                ["Sign up"] = _accountSet,
                 ["Get resources"] = _sendResources,
                 ["Get area"] = _getArea,
                 ["Get building actions"] = _getBuildingContextActions,
                 ["Upgrade building"] = _upgrade,
-                ["Sign in"] = _login,
-                ["Sign up"] = _accountSet,
             };
         }
 
@@ -84,6 +84,9 @@ namespace Isometric.Client.Modules
             }
 
             connection.Account = account;
+
+            SinglePlayersManager.Instance.Players.First(p => p.Name == connection.Account.Login).OnTick +=
+                connection.SendResources;
 
             return true;
         }
@@ -137,7 +140,10 @@ namespace Isometric.Client.Modules
         {
             connection.Send(
                 "set-territory".CreateCommand(
-                    connection.Account.Player.Area.ToJson().ToString()));
+                    SinglePlayersManager.Instance.Players
+                        .First(p => p.Name == connection.Account.Login)
+                        .Area.ToJson()
+                        .ToString()));
 
             return true;
         }
@@ -147,7 +153,8 @@ namespace Isometric.Client.Modules
         {
             var position = request["Args"]["Position"].ToObject<IntVector>();
 
-            var building = connection.Account.Player.Area[position];
+            var player = SinglePlayersManager.Instance.Players.First(p => p.Name == connection.Account.Login);
+            var building = player.Area[position];
 
             var pattern = building.Pattern;
             var patternNode = SingleBuildingGraph.Instance.FirstOrDefault(node => node.Value == pattern);
@@ -159,7 +166,7 @@ namespace Isometric.Client.Modules
                         CommonHelper.CreateContextActionsData(
                             children: patternNode.GetChildren(),
                             possibleSelector: c => c.Value.UpgradePossible(
-                                connection.Account.Player.CurrentResources,
+                                player.CurrentResources,
                                 pattern,
                                 building),
                             textSelector: c => $"Upgrade to {c.Value.Name}",
@@ -175,13 +182,14 @@ namespace Isometric.Client.Modules
         private bool _upgrade(JObject request, Connection connection)
         {
             var action = request["Args"];
+            var player = SinglePlayersManager.Instance.Players.First(p => p.Name == connection.Account.Login);
 
             var subject =
-                connection.Account.Player.Area[
+                player.Area[
                     JsonConvert.DeserializeObject<IntVector>(action["Position"].ToString())];
             var upgrade = BuildingPattern.Find(int.Parse(action["Upgrade to"].ToString()));
 
-            var result = subject.TryUpgrade(upgrade, connection.Account.Player);
+            var result = subject.TryUpgrade(upgrade, player);
 
             if (result)
             {
@@ -201,9 +209,9 @@ namespace Isometric.Client.Modules
 
 
 
-        protected void SendResources(Connection connection)
+        internal void SendResources(Connection connection)
         {
-            connection.SendResources(connection.Account.Player);
+            connection.SendResources(SinglePlayersManager.Instance.Players.First(p => p.Name == connection.Account.Login));
         }
     }
 }

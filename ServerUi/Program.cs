@@ -6,6 +6,7 @@ using System.Threading;
 using Isometric.Client.Modules;
 using Isometric.Client.Modules.LogModule;
 using Isometric.Client.Tools;
+using Isometric.Core.Modules.PlayerModule;
 using Isometric.Core.Modules.WorldModule.Land;
 using Isometric.Game;
 using Isometric.Game.Modules;
@@ -63,6 +64,10 @@ namespace Isometric.Client
             SelectIp();
             SmtpInitialize();
             StartThreads();
+
+#if DEBUG
+            SinglePlayersManager.Instance.Players.Add(new Player("", SingleWorld.Instance, SinglePlayersManager.Instance));
+#endif
 
             LogEvents.Init();
 

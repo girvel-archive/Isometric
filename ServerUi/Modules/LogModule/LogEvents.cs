@@ -14,7 +14,7 @@ namespace Isometric.Client.Modules.LogModule
             Reporter.Instance.OnError += _reportError;
 
             SingleServer.Instance.OnAcceptedConnection += _onAcceptedConnection;
-            SingleRequestManager.OnLoginAttempt += _onLoginAttempt;
+            SingleRequestManager.Instance.OnLoginAttempt += _onLoginAttempt;
 
             Connection.OnConnectionEnd += _onConnectionEnd;
             Connection.OnConnectionAbort += _onConnectionAbort;
@@ -97,7 +97,7 @@ namespace Isometric.Client.Modules.LogModule
 
         private static void _onWrongCommand(string data, Account account)
         {
-            Log.Instance.Write($"Wrong command received by {account.Login}.\n{data}");
+            Log.Instance.Write($"Wrong command received by {account.Login ?? "<anon>"}.\n{data}");
         }
     
         #endregion

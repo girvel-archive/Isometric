@@ -13,8 +13,6 @@ namespace Isometric.Server
 
         public string Email { get; set; }
 
-        public Player Player { get; set; }
-
 
 
         /// <summary>
@@ -22,22 +20,18 @@ namespace Isometric.Server
         /// </summary>
         public Account() {}
 
-        public Account(string login, string password, string email, Player player)
+        public Account(string login, string password, string email)
         {
             Login = login;
             Password = password;
             Email = email;
-
-            Player = player;
         }
 
-        public Account(string login, CommonAccount common, Player player)
+        public Account(string login, CommonAccount common)
         {
             Login = login;
             Email = common.Email;
             Password = common.Password;
-
-            Player = player;
         }
 
 

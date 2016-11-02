@@ -17,25 +17,7 @@ namespace Isometric.Server
     {
        public Server Server { get; set; }
 
-        public Account Account
-        {
-            get { return _account; }
-            set
-            {
-                if (_account != null)
-                {
-                    _account.Player.OnTick -= SendResources;
-                }
-
-                if (value != null)
-                {
-                    value.Player.OnTick += SendResources;
-                }
-
-                _account = value;
-            }
-        }
-        private Account _account;
+        public Account Account { get; set; }
 
         public Encoding Encoding => Server.Encoding;
 
@@ -74,10 +56,6 @@ namespace Isometric.Server
         public void Close()
         {
             Socket.Close();
-            if (Account != null)
-            {
-                Account.Player.OnTick -= SendResources;
-            }
 
             _thread.Abort();
         }

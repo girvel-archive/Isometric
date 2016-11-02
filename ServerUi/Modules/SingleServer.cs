@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Linq;
 using Isometric.Game.Modules;
+using Isometric.Server;
 using _Server = Isometric.Server.Server;
 
 namespace Isometric.Client.Modules
@@ -14,7 +16,6 @@ namespace Isometric.Client.Modules
             {
                 return _instance ?? (_instance
                     = new _Server(
-                        SingleWorld.Instance,
                         SinglePlayersManager.Instance,
                         SingleMailManager.Instance,
                         SingleRequestManager.Instance,
@@ -31,6 +32,16 @@ namespace Isometric.Client.Modules
 #endif
                 _instance = value;
             }
+        }
+
+        static SingleServer() {
+            Connection.OnConnectionEnd += _connectionEnd;
+        }
+
+        private static void _connectionEnd(Connection connection)
+        {
+            SinglePlayersManager.Instance.Players.First(p => p.Name == connection.Account.Login).OnTick -=
+                connection.SendResources;
         }
     }
 }
