@@ -1,9 +1,12 @@
-﻿using System.Net.Sockets;
+﻿#if !DEBUG
+using System;
+using Isometric.Core.Modules;
+#endif
+using System.Net.Sockets;
 using System.Text;
 using System.Threading;
 using CommandInterface.Extensions;
 using Isometric.Core.Modules.PlayerModule;
-using Isometric.Server.Modules.CommandModule;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using SocketExtensions;
@@ -48,9 +51,7 @@ namespace Isometric.Server
         public static event ConnectionEvent OnConnectionEnd;
         public static event ConnectionEvent OnConnectionAbort;
 
-
-
-        private readonly CommandManager _commandManager;
+        
 
         private readonly Thread _thread;
 
@@ -63,8 +64,6 @@ namespace Isometric.Server
 
             _thread = new Thread(_loop);
             _thread.Start();
-
-            _commandManager = new CommandManager();
         }
 
         ~Connection()
@@ -104,7 +103,7 @@ namespace Isometric.Server
 
                         OnDataReceived?.Invoke(receivedString, Account);
                         
-                        if (!_commandManager.Execute(JObject.Parse(receivedString), this))
+                        if (!Server.RequestManager.Execute(JObject.Parse(receivedString), this))
                         {
                             OnWrongCommand?.Invoke(receivedString, Account);
                         }

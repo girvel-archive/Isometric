@@ -27,9 +27,7 @@ E:\projects\isometric\Editor\obj\Release\CustomControls\ResourcesTextBox.baml
 E:\projects\isometric\Editor\obj\Release\CustomControls\LabeledTextBox.g.cs
 E:\projects\isometric\Editor\obj\Release\CustomControls\LabeledTextBox.baml
 E:\projects\isometric\Editor\bin\Release\Isometric.GameDataTools.dll
-E:\projects\isometric\Editor\bin\Release\Isometric.Parser.dll
 E:\projects\isometric\Editor\bin\Release\Isometric.GameDataTools.pdb
-E:\projects\isometric\Editor\bin\Release\Isometric.Parser.pdb
 E:\projects\isometric\Editor\bin\Release\Isometric.Vector.dll
 E:\projects\isometric\Editor\bin\Release\Newtonsoft.Json.dll
 E:\projects\isometric\Editor\bin\Release\Isometric.Vector.pdb

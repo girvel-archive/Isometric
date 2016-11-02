@@ -3,7 +3,8 @@ using Isometric.CommonStructures;
 using Isometric.Core.Modules;
 using Isometric.Game.Modules;
 using Isometric.Server;
-using Isometric.Server.Modules.CommandModule;
+using Isometric.Server.Modules;
+using Isometric.Server.Modules.RequestManaging;
 
 namespace Isometric.Client.Modules.LogModule
 {
@@ -14,8 +15,7 @@ namespace Isometric.Client.Modules.LogModule
             Reporter.Instance.OnError += _reportError;
 
             SingleServer.Instance.OnAcceptedConnection += _onAcceptedConnection;
-            SingleServer.Instance.OnWrongCommand += _onWrongCommand;
-            CommandManager.OnLoginAttempt += _onLoginAttempt;
+            DefaultRequestManager.OnLoginAttempt += _onLoginAttempt;
 
             Connection.OnConnectionEnd += _onConnectionEnd;
             Connection.OnConnectionAbort += _onConnectionAbort;
@@ -75,11 +75,6 @@ namespace Isometric.Client.Modules.LogModule
             }
 
             Log.Instance.Write(message + $"\n\tEmail: {email}");
-        }
-
-        private static void _onWrongCommand(string command)
-        {
-            Log.Instance.Write(command);
         }
 
         #endregion

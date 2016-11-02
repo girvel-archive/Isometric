@@ -9,9 +9,9 @@ using Isometric.Vector;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
-namespace Isometric.Server.Modules.CommandModule
+namespace Isometric.Server.Modules.RequestManaging
 {
-    public class CommandManager
+    public class DefaultRequestManager : IRequestManager
     {
         private delegate bool Request(JObject request, Connection connection);
 
@@ -25,7 +25,7 @@ namespace Isometric.Server.Modules.CommandModule
 
 
 
-        public CommandManager()
+        public DefaultRequestManager()
         {
             _commands = new Dictionary<string, Request>
             {
@@ -33,7 +33,8 @@ namespace Isometric.Server.Modules.CommandModule
                 ["Get area"] = _getArea,
                 ["Get building actions"] = _getBuildingContextActions,
                 ["Upgrade building"] = _upgrade,
-                ["Sign in"] = _accountSet,
+                ["Sign in"] = _login,
+                ["Sign up"] = _accountSet,
             };
         }
 

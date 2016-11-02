@@ -1,4 +1,7 @@
-﻿using System;
+﻿#if !DEBUG
+using Isometric.Core.Modules;
+#endif
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -8,6 +11,8 @@ using Girvel.Graph;
 using Isometric.Core.Modules.PlayerModule;
 using Isometric.Core.Modules.WorldModule;
 using Isometric.Core.Modules.WorldModule.Buildings;
+using Isometric.Server.Modules;
+using Isometric.Server.Modules.RequestManaging;
 
 namespace Isometric.Server
 {
@@ -47,6 +52,9 @@ namespace Isometric.Server
         public const int ServerPort = 8005;
 
 
+
+        internal IRequestManager RequestManager { get; set; }
+
         internal World World { get; set; }
 
         internal PlayersManager PlayersManager { get; set; }
@@ -60,8 +68,6 @@ namespace Isometric.Server
 
         
         public event Action OnAcceptedConnection;
-
-        public event Action<string> OnWrongCommand;
 
 
 
@@ -77,15 +83,10 @@ namespace Isometric.Server
 
             #if DEBUG
 
-            string name;
-            var banned = new Account(name = "banned", "", "-", AccountPermission.User, new Player(name, World, PlayersManager));
             Accounts = new List<Account> 
             {
-                new Account(name = "usr", "1", "", AccountPermission.User, new Player(name, World, PlayersManager)),
-                banned,
+                new Account("", "", "", new Player("", World, PlayersManager)),
             };
-
-            banned.PermanentlyBanned = true;
 
             #endif
         }
