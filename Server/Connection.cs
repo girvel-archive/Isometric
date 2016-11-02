@@ -134,7 +134,7 @@ namespace Isometric.Server
         /// <summary>
         /// Method for Player.OnTick event
         /// </summary>
-        internal void SendResources(Player player)
+        public void SendResources(Player player)
         {
             Send("resources".CreateCommand(
                 JsonConvert.SerializeObject(

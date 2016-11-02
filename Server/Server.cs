@@ -12,7 +12,6 @@ using Isometric.Core.Modules.PlayerModule;
 using Isometric.Core.Modules.WorldModule;
 using Isometric.Core.Modules.WorldModule.Buildings;
 using Isometric.Server.Modules;
-using Isometric.Server.Modules.RequestManaging;
 
 namespace Isometric.Server
 {
@@ -75,11 +74,13 @@ namespace Isometric.Server
 
 
 
-        public Server(World world, PlayersManager playersManager, IMailManager mailManager, Graph<BuildingPattern> graph)
+        public Server(World world, PlayersManager playersManager, IMailManager mailManager, IRequestManager requestManager, Graph<BuildingPattern> graph)
         {
             World = world;
             PlayersManager = playersManager;
             Graph = graph;
+            MailManager = mailManager;
+            RequestManager = requestManager;
 
             CurrentConnections = new HashSet<Connection>();
 

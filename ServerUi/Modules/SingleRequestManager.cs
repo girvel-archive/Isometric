@@ -4,15 +4,23 @@ using System.Text.RegularExpressions;
 using CommandInterface.Extensions;
 using Isometric.CommonStructures;
 using Isometric.Core.Modules.WorldModule.Buildings;
+using Isometric.Game.Modules;
+using Isometric.Server;
 using Isometric.Server.Extensions;
+using Isometric.Server.Modules;
 using Isometric.Vector;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
-namespace Isometric.Server.Modules.RequestManaging
+namespace Isometric.Client.Modules
 {
-    public class DefaultRequestManager : IRequestManager
+    public class SingleRequestManager : IRequestManager
     {
+        private static SingleRequestManager _instance;
+        public static SingleRequestManager Instance => _instance ?? (_instance = new SingleRequestManager());
+
+
+
         private delegate bool Request(JObject request, Connection connection);
 
         private readonly Dictionary<string, Request> _commands;
@@ -25,7 +33,7 @@ namespace Isometric.Server.Modules.RequestManaging
 
 
 
-        public DefaultRequestManager()
+        public SingleRequestManager()
         {
             _commands = new Dictionary<string, Request>
             {
@@ -51,9 +59,9 @@ namespace Isometric.Server.Modules.RequestManaging
                 return false;
             }
         }
-        
 
-        
+
+
         private bool _login(JObject request, Connection connection)
         {
             var args = request["Args"];
@@ -79,7 +87,7 @@ namespace Isometric.Server.Modules.RequestManaging
 
             return true;
         }
-        
+
 
         private bool _accountSet(JObject request, Connection connection)
         {
@@ -124,7 +132,7 @@ namespace Isometric.Server.Modules.RequestManaging
             return true;
         }
 
-        
+
         private bool _getArea(JObject request, Connection connection)
         {
             connection.Send(
@@ -133,7 +141,7 @@ namespace Isometric.Server.Modules.RequestManaging
 
             return true;
         }
-        
+
 
         private bool _getBuildingContextActions(JObject request, Connection connection)
         {
@@ -142,7 +150,7 @@ namespace Isometric.Server.Modules.RequestManaging
             var building = connection.Account.Player.Area[position];
 
             var pattern = building.Pattern;
-            var patternNode = connection.Server.Graph.FirstOrDefault(node => node.Value == pattern);
+            var patternNode = SingleBuildingGraph.Instance.FirstOrDefault(node => node.Value == pattern);
 
             if (patternNode != null)
             {
@@ -162,7 +170,7 @@ namespace Isometric.Server.Modules.RequestManaging
 
             return true;
         }
-        
+
 
         private bool _upgrade(JObject request, Connection connection)
         {
@@ -187,7 +195,7 @@ namespace Isometric.Server.Modules.RequestManaging
             {
                 connection.Send("upgrade-result".CreateCommand("-1"));
             }
-            
+
             return result;
         }
 
@@ -199,4 +207,3 @@ namespace Isometric.Server.Modules.RequestManaging
         }
     }
 }
-

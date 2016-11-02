@@ -4,7 +4,6 @@ using Isometric.Core.Modules;
 using Isometric.Game.Modules;
 using Isometric.Server;
 using Isometric.Server.Modules;
-using Isometric.Server.Modules.RequestManaging;
 
 namespace Isometric.Client.Modules.LogModule
 {
@@ -15,17 +14,15 @@ namespace Isometric.Client.Modules.LogModule
             Reporter.Instance.OnError += _reportError;
 
             SingleServer.Instance.OnAcceptedConnection += _onAcceptedConnection;
-            DefaultRequestManager.OnLoginAttempt += _onLoginAttempt;
+            SingleRequestManager.OnLoginAttempt += _onLoginAttempt;
 
             Connection.OnConnectionEnd += _onConnectionEnd;
             Connection.OnConnectionAbort += _onConnectionAbort;
             Connection.OnDataReceived += _onDataReceived;
             Connection.OnWrongCommand += _onWrongCommand;
 
-            SerializationManager.OnSuccessfulSaving +=
-                () => _onSuccessfulAction("Saved");
-            SerializationManager.OnSuccessfulOpening +=
-                () => _onSuccessfulAction("Opened");
+            SerializationManager.OnSuccessfulSaving += () => _onSuccessfulAction("Saved");
+            SerializationManager.OnSuccessfulOpening += () => _onSuccessfulAction("Opened");
 
             SerializationManager.OnSavingException +=
                 ex => _onSerializationException("Saving", ex);

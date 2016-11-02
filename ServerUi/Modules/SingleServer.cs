@@ -17,6 +17,7 @@ namespace Isometric.Client.Modules
                         SingleWorld.Instance,
                         SinglePlayersManager.Instance,
                         SingleMailManager.Instance,
+                        SingleRequestManager.Instance,
                         SingleBuildingGraph.Instance));
             }
 

@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json.Linq;
 
-namespace Isometric.Server.Modules.RequestManaging
+namespace Isometric.Server.Modules
 {
     public interface IRequestManager
     {
