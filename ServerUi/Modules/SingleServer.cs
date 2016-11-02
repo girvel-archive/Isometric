@@ -16,10 +16,8 @@ namespace Isometric.Client.Modules
             {
                 return _instance ?? (_instance
                     = new _Server(
-                        SinglePlayersManager.Instance,
                         SingleMailManager.Instance,
-                        SingleRequestManager.Instance,
-                        SingleBuildingGraph.Instance));
+                        SingleRequestManager.Instance));
             }
 
             set
@@ -32,16 +30,6 @@ namespace Isometric.Client.Modules
 #endif
                 _instance = value;
             }
-        }
-
-        static SingleServer() {
-            Connection.OnConnectionEnd += _connectionEnd;
-        }
-
-        private static void _connectionEnd(Connection connection)
-        {
-            SinglePlayersManager.Instance.Players.First(p => p.Name == connection.Account.Login).OnTick -=
-                connection.SendResources;
         }
     }
 }

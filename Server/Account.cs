@@ -1,6 +1,4 @@
 ﻿using System;
-using Isometric.CommonStructures;
-using Isometric.Core.Modules.PlayerModule;
 
 namespace Isometric.Server
 {
@@ -25,13 +23,6 @@ namespace Isometric.Server
             Login = login;
             Password = password;
             Email = email;
-        }
-
-        public Account(string login, CommonAccount common)
-        {
-            Login = login;
-            Email = common.Email;
-            Password = common.Password;
         }
 
 

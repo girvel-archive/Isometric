@@ -1,12 +1,14 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
 using CommandInterface.Extensions;
+using Isometric.Client.Extensions;
 using Isometric.CommonStructures;
+using Isometric.Core.Modules.PlayerModule;
 using Isometric.Core.Modules.WorldModule.Buildings;
 using Isometric.Game.Modules;
 using Isometric.Server;
-using Isometric.Server.Extensions;
 using Isometric.Server.Modules;
 using Isometric.Vector;
 using Newtonsoft.Json;
@@ -66,6 +68,8 @@ namespace Isometric.Client.Modules
         {
             var args = request["Args"];
 
+            var player = SinglePlayersManager.Instance.Players.First(p => p.Name == connection.Account.Login);
+
             var account = connection.Server.Accounts
                 .FirstOrDefault(a => a.Email == args["Email"].ToString()
                                      && a.Password == args["Password"].ToString());
@@ -85,8 +89,9 @@ namespace Isometric.Client.Modules
 
             connection.Account = account;
 
-            SinglePlayersManager.Instance.Players.First(p => p.Name == connection.Account.Login).OnTick +=
-                connection.SendResources;
+            Action<Player> sending = p => SendResources(connection, p);
+            player.OnTick += sending;
+            connection.OnEnd += () => player.OnTick -= sending;
 
             return true;
         }
@@ -131,7 +136,9 @@ namespace Isometric.Client.Modules
 
         private bool _sendResources(JObject request, Connection connection)
         {
-            SendResources(connection);
+            SendResources(
+                connection,
+                SinglePlayersManager.Instance.Players.First(p => p.Name == connection.Account.Login));
             return true;
         }
 
@@ -197,7 +204,7 @@ namespace Isometric.Client.Modules
                     "upgrade-result".CreateCommand(
                         CommonHelper.CreateUpgradeData(upgrade.Id, subject.Position).ToString()));
 
-                SendResources(connection);
+                SendResources(connection, player);
             }
             else
             {
@@ -209,9 +216,12 @@ namespace Isometric.Client.Modules
 
 
 
-        internal void SendResources(Connection connection)
+        internal void SendResources(Connection connection, Player player)
         {
-            connection.SendResources(SinglePlayersManager.Instance.Players.First(p => p.Name == connection.Account.Login));
+            connection.Send("resources".CreateCommand(
+                JsonConvert.SerializeObject(
+                    player.CurrentResources,
+                    Formatting.None)));
         }
     }
 }

@@ -1,12 +1,11 @@
 ﻿#if !DEBUG
 using System;
-using Isometric.Core.Modules;
 #endif
+using System;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading;
 using CommandInterface.Extensions;
-using Isometric.Core.Modules.PlayerModule;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using SocketExtensions;
@@ -33,6 +32,8 @@ namespace Isometric.Server
         public static event ConnectionEvent OnConnectionEnd;
         public static event ConnectionEvent OnConnectionAbort;
 
+        public event Action OnEnd;
+
         
 
         private readonly Thread _thread;
@@ -55,6 +56,7 @@ namespace Isometric.Server
         
         public void Close()
         {
+            OnEnd?.Invoke();
             Socket.Close();
 
             _thread.Abort();
@@ -89,7 +91,8 @@ namespace Isometric.Server
 #if !DEBUG
                     catch (Exception ex) when (!(ex is SocketException || ex is ThreadAbortException))
                     {
-                        Reporter.Instance.ReportError($"Error during {nameof(Connection)}.{nameof(_loop)}", ex);
+                        //Reporter.Instance.ReportError($"Error during {nameof(Connection)}.{nameof(_loop)}", ex);
+                        // TODO ServerUi.Reporter
                     }
 #endif
 
@@ -105,19 +108,6 @@ namespace Isometric.Server
             {
                 OnConnectionAbort?.Invoke(this);
             }
-        }
-        
-
-
-        /// <summary>
-        /// Method for Player.OnTick event
-        /// </summary>
-        public void SendResources(Player player)
-        {
-            Send("resources".CreateCommand(
-                JsonConvert.SerializeObject(
-                    player.CurrentResources,
-                    Formatting.None)));
         }
     }
 }

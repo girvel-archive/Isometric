@@ -1,16 +1,9 @@
-﻿#if !DEBUG
-using Isometric.Core.Modules;
-#endif
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
-using Girvel.Graph;
-using Isometric.Core.Modules.PlayerModule;
-using Isometric.Core.Modules.WorldModule;
-using Isometric.Core.Modules.WorldModule.Buildings;
 using Isometric.Server.Modules;
 
 namespace Isometric.Server
@@ -58,10 +51,6 @@ namespace Isometric.Server
 
         internal IRequestManager RequestManager { get; set; }
 
-        internal PlayersManager PlayersManager { get; set; }
-
-        internal Graph<BuildingPattern> Graph { get; set; }
-
 
 
         [NonSerialized] private Socket _listenSocket;
@@ -72,10 +61,8 @@ namespace Isometric.Server
 
 
 
-        public Server(PlayersManager playersManager, IMailManager mailManager, IRequestManager requestManager, Graph<BuildingPattern> graph)
+        public Server(IMailManager mailManager, IRequestManager requestManager)
         {
-            PlayersManager = playersManager;
-            Graph = graph;
             MailManager = mailManager;
             RequestManager = requestManager;
 
@@ -144,7 +131,7 @@ namespace Isometric.Server
 #if !DEBUG
                 catch (Exception ex)
                 {
-                    Reporter.Instance.ReportError($"Error during loop in {nameof(Server)}.{nameof(Start)}", ex);
+                    // Reporter.Instance.ReportError($"Error during loop in {nameof(Server)}.{nameof(Start)}", ex);
                 }
 #endif
             }

@@ -53,6 +53,7 @@
     <Reference Include="Microsoft.CSharp" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Extensions\CommonHelper.cs" />
     <Compile Include="Modules\SingleMailManager.cs" />
     <Compile Include="Modules\SingleRequestManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -70,6 +71,10 @@
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
+    <ProjectReference Include="..\CommonStructures\Isometric.CommonStructures.csproj">
+      <Project>{64EE5B69-4B32-4080-82A7-9E5F419DAFAA}</Project>
+      <Name>Isometric.CommonStructures</Name>
+    </ProjectReference>
     <ProjectReference Include="..\GameDataTools\Isometric.GameDataTools.csproj">
       <Project>{9B90CA08-E75E-4A95-BB3B-EAB83579E18A}</Project>
       <Name>Isometric.GameDataTools</Name>
@@ -81,10 +86,6 @@
     <ProjectReference Include="..\Server\Isometric.Server.csproj">
       <Project>{DCAE2467-5ADF-4B9F-AAD6-E2323F50D94C}</Project>
       <Name>Isometric.Server</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\CommonStructures\Isometric.CommonStructures.csproj">
-      <Project>{64EE5B69-4B32-4080-82A7-9E5F419DAFAA}</Project>
-      <Name>Isometric.CommonStructures</Name>
     </ProjectReference>
     <ProjectReference Include="..\Core\Isometric.Core.csproj">
       <Project>{5E853DD8-DDC3-4F8C-9966-52CA5881CBCE}</Project>
