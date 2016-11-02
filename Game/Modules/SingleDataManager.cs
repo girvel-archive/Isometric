@@ -22,7 +22,7 @@ namespace Isometric.Game.Modules
             DefaultBuildingGraph.Instance.Initialize();
             SingleBuildingGraph.Instance = DefaultBuildingGraph.Instance.Graph;
             
-            foreach (var property in GameConstantAttribute.GetProperties())
+            foreach (var property in GameConstantAttribute.GetProperties(typeof(Core.Core).Assembly))
             {
                 if (DefaultConstants.Instance.ConstantValues.ContainsKey(property.Name))
                 {

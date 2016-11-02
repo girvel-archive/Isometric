@@ -1,18 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Isometric.Core.Modules.TickModule;
 
 namespace Isometric.Core.Modules.PlayerModule
 {
     public class PlayersManager : IIndependentChanging
     {
-        public List<Player> Players { get; set; }
+        public HashSet<Player> Players { get; set; }
 
 
 
         public PlayersManager()
         {
-            Players = new List<Player>();
+            Players = new HashSet<Player>();
         }
 
 

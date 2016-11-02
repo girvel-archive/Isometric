@@ -1,6 +1,5 @@
 ﻿using System.Windows.Controls;
 using System.Windows.Media;
-using Isometric.Editor.CustomControls;
 
 namespace Isometric.Editor.Extensions
 {

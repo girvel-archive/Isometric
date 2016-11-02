@@ -38,7 +38,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Modules\ErrorReporter.cs" />
+    <Compile Include="Modules\Reporter.cs" />
     <Compile Include="Modules\BuildingPatternList.cs" />
     <Compile Include="Modules\SettingsModule\GameConstantAttribute.cs" />
     <Compile Include="Modules\WorldModule\Buildings\BuildingPatternCollection.cs" />

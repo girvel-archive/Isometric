@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Threading;
-using Isometric.Core.Modules.PlayerModule;
 using Isometric.Core.Modules.SettingsModule;
-using Isometric.Core.Modules.WorldModule;
 
 namespace Isometric.Core.Modules.TickModule
 {

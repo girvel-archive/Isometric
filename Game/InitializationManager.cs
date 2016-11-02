@@ -1,7 +1,5 @@
 ﻿using System.IO;
-using Isometric.Core.Modules.TickModule;
 using Isometric.Game.Modules;
-using Isometric.Game.Modules.GameData;
 using Isometric.GameDataTools.Exceptions;
 
 namespace Isometric.Game

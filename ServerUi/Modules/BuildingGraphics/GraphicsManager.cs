@@ -16,22 +16,7 @@ namespace Isometric.Client.Modules.BuildingGraphics
 
         #pragma warning disable 618
 
-        public GraphicsManager Instance
-        {
-            get { return _instance ?? (_instance = new GraphicsManager()); }
-
-            set
-            {
-                #if DEBUG
-                if (_instance != null)
-                {
-                    throw new ArgumentException("Instance is already set");
-                }
-                #endif
-
-                _instance = value;
-            }
-        }
+        public GraphicsManager Instance => _instance ?? (_instance = new GraphicsManager());
 
         #pragma warning restore 618
 

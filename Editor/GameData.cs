@@ -6,12 +6,10 @@ using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
 using Girvel.Graph;
 using Isometric.Core.Modules.SettingsModule;
-using Isometric.Core.Modules.WorldModule;
 using Isometric.Core.Modules.WorldModule.Buildings;
 using Isometric.Editor.Containers;
 using Isometric.GameDataTools;
 using Isometric.GameDataTools.Exceptions;
-using RandomExtensions;
 
 namespace Isometric.Editor
 {
@@ -38,7 +36,7 @@ namespace Isometric.Editor
             BuildingGraph = new Graph<BuildingPattern>();
             Constants = new Dictionary<string, ConstantContainer>();
 
-            foreach (var property in GameConstantAttribute.GetProperties())
+            foreach (var property in GameConstantAttribute.GetProperties(typeof (Core.Core).Assembly))
             {
                 Type type;
 
@@ -71,7 +69,7 @@ namespace Isometric.Editor
             BuildingPatterns = new BuildingPatternCollection(container.Patterns);
             BuildingGraph = container.BuildingGraph;
 
-            var properties = GameConstantAttribute.GetProperties();
+            var properties = GameConstantAttribute.GetProperties(typeof(Core.Core).Assembly);
             if (!Constants.All(constant => properties.Any(property => property.Name == constant.Key)))
             {
                 throw new InvalidGameDataException("Game data does not contain all constants");

@@ -1,5 +1,4 @@
-﻿using System;
-using Isometric.Core.Modules;
+﻿using Isometric.Core.Modules;
 using Isometric.Core.Modules.WorldModule;
 
 namespace Isometric.Game.Modules

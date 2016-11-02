@@ -4,16 +4,10 @@ using System.Linq;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
-using CommandInterface;
 using Girvel.Graph;
-using Isometric.Core.Modules;
 using Isometric.Core.Modules.PlayerModule;
 using Isometric.Core.Modules.WorldModule;
 using Isometric.Core.Modules.WorldModule.Buildings;
-using Isometric.Server.Modules.CommandModule.Server;
-using Isometric.Server.Modules.SpamModule;
-using Newtonsoft.Json.Linq;
-using SocketExtensions;
 
 namespace Isometric.Server
 {
@@ -26,7 +20,7 @@ namespace Isometric.Server
 
 
         [NonSerialized]
-        public List<Connection> CurrentConnections;
+        public HashSet<Connection> CurrentConnections;
 
         public Encoding Encoding { get; } = Encoding.GetEncoding(1251);
 
@@ -62,13 +56,11 @@ namespace Isometric.Server
 
 
         [NonSerialized] private Socket _listenSocket;
-
-        [NonSerialized] private readonly CommandManager _commandManager;
         
 
         
         public event Action OnAcceptedConnection;
-        public event Action OnWrongIp;
+
         public event Action<string> OnWrongCommand;
 
 
@@ -81,8 +73,7 @@ namespace Isometric.Server
             PlayersManager = playersManager;
             Graph = graph;
 
-            CurrentConnections = new List<Connection>();
-            _commandManager = new CommandManager(this);
+            CurrentConnections = new HashSet<Connection>();
 
             #if DEBUG
 
@@ -99,7 +90,7 @@ namespace Isometric.Server
             #endif
         }
 
-
+        
 
         public bool TryToAutoConnect()
         {
@@ -114,42 +105,28 @@ namespace Isometric.Server
             .Any(TryToConnect);
         }
 
-        public bool TryToConnect(string address)
-        {
-            IPAddress ip;
-
-            if (IPAddress.TryParse(address, out ip))
-            {
-                return TryToConnect(ip);
-            }
-
-            OnWrongIp?.Invoke();
-            return false;
-        }
-
         public bool TryToConnect(IPAddress ip)
         {
-            var ipPoint = new IPEndPoint(ip, ServerPort);
+            _listenSocket = new Socket(ip.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
 
-            _listenSocket = new Socket(ipPoint.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
-
-            _listenSocket.Bind(ipPoint);
-            _listenSocket.Listen(10); // TODO increase if there will be a lot of players
+            _listenSocket.Bind(new IPEndPoint(ip, ServerPort));
+            _listenSocket.Listen(10);
 
             Connected = true;
             ServerAddress = ip;
 
             return true;
         }
-
-
+        
         public void Start()
         {
+#if DEBUG
             if (!Connected)
             {
                 throw new InvalidOperationException(
                     "Server is not connected. Use TryToAutoConnect() and TryToConnect()");
             }
+#endif
 
             while (true)
             {
@@ -160,28 +137,13 @@ namespace Isometric.Server
                     var socket = _listenSocket.Accept();
                     OnAcceptedConnection?.Invoke();
 
-                    string data;
-                    Executor<CommandResult> executor;
-
-                    if (_commandManager.Interface.TryGetExecutor(
-                        data = socket.ReceiveAll(Encoding),
-                        new NetArgs(socket, this),
-                        out executor))
-                    {
-                        executor();
-                    }
-                    else
-                    {
-                        OnWrongCommand?.Invoke(data);
-                    }
-
-                    // TODO 1.1 spamfilter using
+                    CurrentConnections.Add(new Connection(socket, this));
                 }
 
 #if !DEBUG
                 catch (Exception ex)
                 {
-                    ErrorReporter.Instance.ReportError($"Error during loop in {nameof(Server)}.{nameof(Start)}", ex);
+                    Reporter.Instance.ReportError($"Error during loop in {nameof(Server)}.{nameof(Start)}", ex);
                 }
 #endif
             }

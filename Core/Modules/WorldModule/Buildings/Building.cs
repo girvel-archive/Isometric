@@ -31,12 +31,11 @@ namespace Isometric.Core.Modules.WorldModule.Buildings
 
         public bool Ready { get; set; }
 
-        public DateTime UpgradeBeginTime { get; private set; }
-
-        public TimeSpan UpgradeDuration { get; private set; }
 
 
-
+        /// <summary>
+        /// Serialization & testing ctor
+        /// </summary>
         public Building() {}
 
         public Building(IntVector position, Player owner, Area territory, BuildingPattern pattern)
@@ -54,9 +53,9 @@ namespace Isometric.Core.Modules.WorldModule.Buildings
             }
         }
 
-        ~Building()
+        public void Remove()
         {
-            if (Owner.GetOwnedBuildings()?.Contains(this) ?? false)
+            if (Owner?.GetOwnedBuildings()?.Contains(this) ?? false)
             {
                 Owner.RemoveOwnedBuilding(this);
             }

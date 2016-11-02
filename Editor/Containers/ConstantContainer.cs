@@ -1,6 +1,4 @@
 ﻿using System;
-using Isometric.Editor.Extensions;
-using Isometric.Parser;
 
 namespace Isometric.Editor.Containers
 {

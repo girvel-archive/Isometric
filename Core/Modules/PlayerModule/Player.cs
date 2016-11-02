@@ -50,27 +50,32 @@ namespace Isometric.Core.Modules.PlayerModule
         {
             #pragma warning disable 618
 
-            Nature = new Player() { Name = "nature", };
-            Enemy = new Player() { Name = "enemy", };
+            Nature = new Player { Name = "nature", };
+            Enemy = new Player { Name = "enemy", };
 
             #pragma warning restore 618
         }
 
-        [Obsolete("using serialization ctor")]
-        public Player() 
+        /// <summary>
+        /// Serialization and testing ctor
+        /// </summary>
+        public Player()
         {
+            _ownedBuildings = new List<Building>();
             IndependentSubjects = new List<IIndependentChanging>();
             ResourceSubjects = new List<IResourcesChanging>();
             ResourceBonusSubjects = new List<IResourcesBonusChanging>();
+            CurrentResources = new Resources();
         }
 
 
 
-        #pragma warning disable 618 // closing is inside
+#pragma warning disable 618 // closing is inside
 
         public Player(string name, World world, PlayersManager manager) : this()
         {
-            #pragma warning restore 618
+
+#pragma warning restore 618
 
             Name = name;
             _ownedBuildings = new List<Building>();
@@ -83,7 +88,8 @@ namespace Isometric.Core.Modules.PlayerModule
 
 
 
-        public void Tick()
+        // `virtual` for testing
+        public virtual void Tick()
         {
             foreach (var subject in IndependentSubjects)
             {
@@ -108,7 +114,7 @@ namespace Isometric.Core.Modules.PlayerModule
             }
             catch (Exception ex)
             {
-                ErrorReporter.Instance.ReportError($"Unknown error during {nameof(OnTick)}", ex);
+                Reporter.Instance.ReportError($"Unknown error during {nameof(OnTick)}", ex);
             }
         }
 

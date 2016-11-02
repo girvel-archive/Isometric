@@ -1,28 +1,42 @@
-﻿using System;
-using System.Net.Sockets;
+﻿using System.Net.Sockets;
 using System.Text;
 using System.Threading;
-using BinarySerializationExtensions;
-using CommandInterface;
 using CommandInterface.Extensions;
-using Isometric.Core.Modules;
 using Isometric.Core.Modules.PlayerModule;
-using Isometric.Server.Modules.CommandModule.Connection;
-using Isometric.Server.Modules.SpamModule;
+using Isometric.Server.Modules.CommandModule;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using SocketExtensions;
 
 namespace Isometric.Server
 {
     public class Connection
     {
-        public bool Active { get; set; }
+       public Server Server { get; set; }
 
-        public Server ParentServer { get; set; }
+        public Account Account
+        {
+            get { return _account; }
+            set
+            {
+                if (_account != null)
+                {
+                    _account.Player.OnTick -= SendResources;
+                }
 
-        public Account Account { get; set; }
+                if (value != null)
+                {
+                    value.Player.OnTick += SendResources;
+                }
 
-        public Encoding Encoding => ParentServer.Encoding;
+                _account = value;
+            }
+        }
+        private Account _account;
+
+        public Encoding Encoding => Server.Encoding;
+
+        internal readonly Socket Socket;
 
 
 
@@ -36,48 +50,45 @@ namespace Isometric.Server
 
 
 
-        private readonly Socket _socket;
-
         private readonly CommandManager _commandManager;
 
-        private Thread _thread;
+        private readonly Thread _thread;
 
 
 
-        #region Ctors, finalizers
-
-        public Connection(Socket socket, Account account, Server server)
+        public Connection(Socket socket, Server server)
         {
-            _socket = socket;
-            Account = account;
-            ParentServer = server;
-            _commandManager = new CommandManager(this);
+            Socket = socket;
+            Server = server;
+
+            _thread = new Thread(_loop);
+            _thread.Start();
+
+            _commandManager = new CommandManager();
         }
 
         ~Connection()
         {
-            Stop();
+            Close();
         }
-
-        #endregion
-
-
-
-        public void Start()
+        
+        public void Close()
         {
-            _thread = new Thread(_loop);
-            _thread.Start();
-
-            Account.Player.OnTick += SendResources;
-        }
-
-        public void Stop()
-        {
-            _socket.Close();
-            Account.Player.OnTick -= SendResources;
+            Socket.Close();
+            if (Account != null)
+            {
+                Account.Player.OnTick -= SendResources;
+            }
 
             _thread.Abort();
         }
+
+        public void Send(string message)
+        {
+            Socket.Send(Encoding.GetBytes(message));
+        }
+
+
 
         private void _loop()
         {
@@ -86,64 +97,50 @@ namespace Isometric.Server
                 while (true)
                 {
 #if !DEBUG
-
                     try
-
 #endif
                     {
-                        var receivedString = _socket.ReceiveAll(ParentServer.Encoding);
+                        var receivedString = Socket.ReceiveAll(Server.Encoding);
 
                         OnDataReceived?.Invoke(receivedString, Account);
-
-                        Executor<CommandResult> cmdUse;
-                        if (_commandManager.CommandInterface.TryGetExecutor(
-                                receivedString, new NetArgs(_socket, this), out cmdUse))
-                        {
-                            cmdUse();
-                        }
-                        else
+                        
+                        if (!_commandManager.Execute(JObject.Parse(receivedString), this))
                         {
                             OnWrongCommand?.Invoke(receivedString, Account);
                         }
                     }
 #if !DEBUG
-
                     catch (Exception ex) when (!(ex is SocketException || ex is ThreadAbortException))
                     {
-                        ErrorReporter.Instance.ReportError($"Error during {nameof(Connection)}.{nameof(_loop)}", ex);
+                        Reporter.Instance.ReportError($"Error during {nameof(Connection)}.{nameof(_loop)}", ex);
                     }
-
 #endif
+
                 }
             }
             catch (SocketException)
             {
                 OnConnectionEnd?.Invoke(this);
-                ParentServer.CurrentConnections.Remove(this);
-                Stop();
+                Server.CurrentConnections.Remove(this);
+                Close();
             }
             catch (ThreadAbortException)
             {
                 OnConnectionAbort?.Invoke(this);
             }
         }
+        
 
 
-
-        protected void Send(string message)
+        /// <summary>
+        /// Method for Player.OnTick event
+        /// </summary>
+        internal void SendResources(Player player)
         {
-            _socket.Send(Encoding.GetBytes(message));
-        }
-
-
-
-        internal void SendResources(Player owner)
-        {
-            Send(
-                "resources".CreateCommand(
-                    JsonConvert.SerializeObject(
-                        owner.CurrentResources, 
-                        Formatting.None)));
+            Send("resources".CreateCommand(
+                JsonConvert.SerializeObject(
+                    player.CurrentResources,
+                    Formatting.None)));
         }
     }
 }

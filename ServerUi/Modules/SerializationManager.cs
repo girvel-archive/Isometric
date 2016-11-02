@@ -2,7 +2,6 @@
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using CustomProperty.Dynamic;
-using Isometric.Core.Modules.WorldModule;
 
 namespace Isometric.Client.Modules
 {

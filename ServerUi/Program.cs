@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Threading;
 using Isometric.Client.Modules;
 using Isometric.Client.Modules.LogModule;
@@ -85,7 +86,7 @@ namespace Isometric.Client
                 {
                     var ip = ConsoleDecorator.GetLine("Write your IP: ");
 
-                    if (SingleServer.Instance.TryToConnect(ip))
+                    if (SingleServer.Instance.TryToConnect(IPAddress.Parse(ip)))
                     {
                         break;
                     }

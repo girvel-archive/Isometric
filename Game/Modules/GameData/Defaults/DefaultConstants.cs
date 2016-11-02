@@ -68,7 +68,7 @@ namespace Isometric.Game.Modules.GameData.Defaults
 #if DEBUG
                     throw new NotImplementedException(iMaxErrorMessage);
 #else
-                    ErrorReporter.Instance.ReportError(iMaxErrorMessage);
+                    Reporter.Instance.ReportError(iMaxErrorMessage);
 #endif
                 }
 

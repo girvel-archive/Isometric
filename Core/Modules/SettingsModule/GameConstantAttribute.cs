@@ -1,16 +1,15 @@
 ﻿using System;
 using System.Linq;
 using System.Reflection;
-using Isometric.Core.Modules.WorldModule;
 
 namespace Isometric.Core.Modules.SettingsModule
 {
     [AttributeUsage(AttributeTargets.Property)]
     public sealed class GameConstantAttribute : Attribute
     {
-        public static PropertyInfo[] GetProperties()
+        public static PropertyInfo[] GetProperties(Assembly assembly)
         {
-            return typeof (World).Assembly
+            return assembly
                 .GetTypes()
                 .SelectMany(type => 
                     type.GetProperties(

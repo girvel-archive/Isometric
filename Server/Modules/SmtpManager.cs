@@ -82,10 +82,10 @@ namespace Isometric.Server.Modules
         public void Connect(string host, int port, bool enableSsl, string email, string password)
         {
             Client = new SmtpClient(host, port)
-                {
-                    EnableSsl = enableSsl,
-                    Credentials = new NetworkCredential(email, password),
-                };
+            {
+                EnableSsl = enableSsl,
+                Credentials = new NetworkCredential(email, password),
+            };
             From = email;
 
             try

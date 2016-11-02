@@ -1,8 +1,7 @@
-﻿using System.Windows.Controls;
+﻿using System;
+using System.Windows.Controls;
 using System.Windows.Media;
 using Isometric.CommonStructures;
-using Isometric.Editor.Extensions;
-using Isometric.Parser;
 
 namespace Isometric.Editor.CustomControls
 {
@@ -40,14 +39,15 @@ namespace Isometric.Editor.CustomControls
 
             object resources;
 
-            if (Text.TryParse(typeof(Resources), null, out resources))
-            {
-                GameResources = (Resources) resources;
-            }
-            else
-            {
-                Background = Brushes.MistyRose;
-            }
+            throw new NotImplementedException();
+            //if (Text.TryParse(typeof(Resources), null, out resources))
+            //{
+            //    GameResources = (Resources) resources;
+            //}
+            //else
+            //{
+            //    Background = Brushes.MistyRose;
+            //}
         }
     }
 }

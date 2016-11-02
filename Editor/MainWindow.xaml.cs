@@ -1,25 +1,15 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Diagnostics;
-using System.Globalization;
 using System.Linq;
 using System.Windows;
-using System.Windows.Automation.Peers;
 using System.Windows.Controls;
-using System.Windows.Input;
 using System.Windows.Media;
-using EnumerableExtensions;
 using Girvel.Graph;
-using Isometric.CommonStructures;
 using Isometric.Core.Modules.SettingsModule;
 using Isometric.Core.Modules.WorldModule.Buildings;
-using Isometric.Editor.Containers;
 using Isometric.Editor.CustomControls;
 using Isometric.Editor.Extensions;
 using Isometric.GameDataTools.Exceptions;
-using Isometric.Parser;
 using Microsoft.Win32;
 
 namespace Isometric.Editor
@@ -59,7 +49,7 @@ namespace Isometric.Editor
             SaveFileDialog.Filter = DefaultFilter;
             OpenFileDialog.Filter = DefaultFilter;
 
-            var properties = GameConstantAttribute.GetProperties();
+            var properties = GameConstantAttribute.GetProperties(typeof(Core.Core).Assembly);
             _constantTextBoxes = new LabeledTextBox[properties.Length];
 
             var i = 0;
@@ -152,8 +142,9 @@ namespace Isometric.Editor
             NameTextBox.Text = SelectedPattern.Name;
             IdTextBox.Text = SelectedPattern.Id.ToString();
             BuildingTypeComboBox.SelectedItem = SelectedPattern.Type.ToString();
-            ResourcesTextBox.Text = SelectedPattern.Resources.GetValueString(typeof(Resources));
-            PriceTextBox.Text = SelectedPattern.Price.GetValueString(typeof(Resources));
+            //ResourcesTextBox.Text = SelectedPattern.Resources.GetValueString(typeof(Resources));
+            //PriceTextBox.Text = SelectedPattern.Price.GetValueString(typeof(Resources));
+            throw new NotImplementedException();
 
             UpgradesComboBox.Items.Clear();
             UpgradesListBox.Items.Clear();
@@ -358,7 +349,10 @@ namespace Isometric.Editor
 
             foreach (var constantPair in GameData.Instance.Constants)
             {
-                _constantTextBoxes.First(box => box.LabelText == constantPair.Key).Text = constantPair.Value.Value.GetValueString(constantPair.Value.Type);
+                throw new NotImplementedException();
+                //_constantTextBoxes
+                //    .First(box => box.LabelText == constantPair.Key)
+                //    .Text = constantPair.Value.Value.GetValueString(constantPair.Value.Type);
             }
 
             SortBuildings();

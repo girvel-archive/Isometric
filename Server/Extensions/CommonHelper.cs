@@ -1,4 +1,7 @@
-﻿using System.Linq;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using Girvel.Graph;
 using Isometric.Core.Modules.WorldModule;
 using Isometric.Core.Modules.WorldModule.Buildings;
 using Isometric.Core.Modules.WorldModule.Land;
@@ -27,6 +30,28 @@ namespace Isometric.Server.Extensions
             {
                 ["To"] = id,
                 ["Position"] = JObject.FromObject(position),
+            };
+        }
+
+
+
+        public static JObject CreateContextActionsData(
+            IEnumerable<GraphNode<BuildingPattern>> children,
+            Func<GraphNode<BuildingPattern>, bool> possibleSelector,
+            Func<GraphNode<BuildingPattern>, string> textSelector,
+            Func<GraphNode<BuildingPattern>, int> idSelector)
+        {
+            return new JObject
+            {
+                ["Actions"] = new JArray(
+                    children
+                        .Select(
+                            c => new JObject
+                            {
+                                ["Possible"] = possibleSelector(c),
+                                ["Text"] = textSelector(c),
+                                ["To"] = idSelector(c),
+                            }))
             };
         }
     }

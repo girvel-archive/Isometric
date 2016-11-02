@@ -13,11 +13,9 @@ E:\projects\isometric\Editor\obj\Debug\Isometric.Editor.exe
 E:\projects\isometric\Editor\obj\Debug\Isometric.Editor.pdb
 E:\projects\isometric\Editor\bin\Debug\Isometric.CommonStructures.dll
 E:\projects\isometric\Editor\bin\Debug\Isometric.Core.dll
-E:\projects\isometric\Editor\bin\Debug\VectorNet.dll
 E:\projects\isometric\Editor\bin\Debug\EnumerableExtensions.dll
 E:\projects\isometric\Editor\bin\Debug\Isometric.CommonStructures.pdb
 E:\projects\isometric\Editor\bin\Debug\Isometric.Core.pdb
-E:\projects\isometric\Editor\bin\Debug\VectorNet.pdb
 E:\projects\isometric\Editor\obj\Debug\Isometric.Editor_MarkupCompile.lref
 E:\projects\isometric\Editor\obj\Debug\CustomControls\ResourcesTextBox.g.cs
 E:\projects\isometric\Editor\obj\Debug\CustomControls\ResourcesTextBox.baml
@@ -29,7 +27,10 @@ E:\projects\isometric\Editor\bin\Debug\RandomExtensions.pdb
 E:\projects\isometric\Editor\bin\Debug\EnumerableExtensions.pdb
 E:\projects\isometric\Editor\obj\Debug\CustomControls\LabeledTextBox.g.cs
 E:\projects\isometric\Editor\obj\Debug\CustomControls\LabeledTextBox.baml
-E:\projects\isometric\Editor\bin\Debug\Isometric.Parser.dll
-E:\projects\isometric\Editor\bin\Debug\Isometric.Parser.pdb
 E:\projects\isometric\Editor\bin\Debug\Isometric.GameDataTools.dll
 E:\projects\isometric\Editor\bin\Debug\Isometric.GameDataTools.pdb
+E:\projects\isometric\Editor\bin\Debug\Isometric.Vector.dll
+E:\projects\isometric\Editor\bin\Debug\Newtonsoft.Json.dll
+E:\projects\isometric\Editor\bin\Debug\Isometric.Vector.pdb
+E:\projects\isometric\Editor\bin\Debug\Newtonsoft.Json.pdb
+E:\projects\isometric\Editor\bin\Debug\Newtonsoft.Json.xml

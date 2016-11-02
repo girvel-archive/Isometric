@@ -1,10 +1,9 @@
 ﻿using System;
 using Isometric.CommonStructures;
 using Isometric.Core.Modules;
-using Isometric.Core.Modules.TickModule;
 using Isometric.Game.Modules;
 using Isometric.Server;
-using ServerCommandManager = Isometric.Server.Modules.CommandModule.Server.CommandManager;
+using Isometric.Server.Modules.CommandModule;
 
 namespace Isometric.Client.Modules.LogModule
 {
@@ -12,11 +11,11 @@ namespace Isometric.Client.Modules.LogModule
     {
         internal static void Init()
         {
-            ErrorReporter.Instance.OnError += _reportError;
+            Reporter.Instance.OnError += _reportError;
 
             SingleServer.Instance.OnAcceptedConnection += _onAcceptedConnection;
             SingleServer.Instance.OnWrongCommand += _onWrongCommand;
-            ServerCommandManager.OnLoginAttempt += _onLoginAttempt;
+            CommandManager.OnLoginAttempt += _onLoginAttempt;
 
             Connection.OnConnectionEnd += _onConnectionEnd;
             Connection.OnConnectionAbort += _onConnectionAbort;
@@ -101,7 +100,7 @@ namespace Isometric.Client.Modules.LogModule
 
         private static void _onDataReceived(string data, Account account)
         {
-            Log.Instance.Write($"Data received by {account.Login}.\n\n{data}\n");
+            Log.Instance.Write($"Data received by {account?.Login ?? "<anon>"}.\n\n{data}\n");
         }
 
         private static void _onWrongCommand(string data, Account account)
