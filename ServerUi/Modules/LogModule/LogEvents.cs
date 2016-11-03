@@ -97,7 +97,7 @@ namespace Isometric.Client.Modules.LogModule
 
         private static void _onWrongCommand(string data, Account account)
         {
-            Log.Instance.Write($"Wrong command received by {account.Login ?? "<anon>"}.\n{data}");
+            Log.Instance.Write($"Wrong command received by {account?.Login ?? "<anon>"}.\n{data}");
         }
     
         #endregion

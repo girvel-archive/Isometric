@@ -16,9 +16,9 @@ namespace Isometric.Client.Extensions
         {
             return new JObject
             {
-                ["Building grid"] = new JArray(area.BuildingGrid.Cast<Building>().Select(b => b.Pattern.Id)),
-                ["Grid width"] = World.AreaSize,
-                ["Grid height"] = World.AreaSize,
+                ["Grid"] = new JArray(area.BuildingGrid.Cast<Building>().Select(b => b.Pattern.Id)),
+                ["Width"] = World.AreaSize,
+                ["Height"] = World.AreaSize,
             };
         }
 
